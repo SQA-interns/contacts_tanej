@@ -1,0 +1,65 @@
+{
+  "app": {
+    "name": "Contact Groups",
+    "tagline": "Your group's contacts in one place."
+  },
+  "nav": {
+    "groups": "Groups",
+    "deletedGroups": "Deleted groups",
+    "account": "Account"
+  },
+  "header": {
+    "language": "Language",
+    "menu": "Menu",
+    "userMenu": "User menu",
+    "search": "Search"
+  },
+  "language": {
+    "sl": "Slovenščina",
+    "en": "English"
+  },
+  "footer": {
+    "text": "Contact Groups"
+  },
+  "state": {
+    "loading": "Loading …",
+    "empty": "Nothing here yet.",
+    "error": "Something went wrong. Please try again.",
+    "retry": "Try again"
+  },
+  "home": {
+    "title": "Welcome",
+    "intro": "Sign in to see your groups."
+  },
+  "notFound": {
+    "title": "Not found",
+    "text": "This page does not exist or you have no access to it.",
+    "back": "Back to groups"
+  },
+  "error": {
+    "UNAUTHENTICATED": "Sign in to continue.",
+    "EMAIL_NOT_VERIFIED": "Verify your e-mail address.",
+    "RECENT_LOGIN_REQUIRED": "Sign in again to do this.",
+    "FORBIDDEN": "You may not do this.",
+    "NOT_FOUND": "Not found.",
+    "METHOD_NOT_ALLOWED": "This action is not allowed.",
+    "CONFLICT": "This contact was changed by someone else.",
+    "ALREADY_IN_TRASH": "It is already in Trash.",
+    "NOT_IN_TRASH": "It is not in Trash.",
+    "CONTACT_IN_TRASH": "The contact is in Trash.",
+    "GROUP_IN_TRASH": "The group is in Trash.",
+    "LAST_OWNER": "A group needs at least one Owner.",
+    "SOLE_OWNER": "You are the only Owner of a group.",
+    "GROUP_NAME_TAKEN": "You already have a group with this name.",
+    "ALREADY_MEMBER": "This person is already a member of the group.",
+    "INVITATION_PENDING": "An invitation for this address is already pending.",
+    "INVITATION_LIMIT": "The limit of 20 pending invitations is reached.",
+    "TAG_NAME_TAKEN": "A tag with this name already exists.",
+    "NOTHING_TO_CHANGE": "There is nothing to change.",
+    "PAYLOAD_TOO_LARGE": "The request is too large.",
+    "RATE_LIMITED": "Too many requests. Try again in a moment.",
+    "VALIDATION_FAILED": "The data is not valid.",
+    "INTERNAL_ERROR": "Something went wrong. Please try again.",
+    "UNAVAILABLE": "The service is not available right now."
+  }
+}

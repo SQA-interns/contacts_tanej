@@ -1,0 +1,65 @@
+{
+  "app": {
+    "name": "Skupine kontaktov",
+    "tagline": "Kontakti vaše skupine na enem mestu."
+  },
+  "nav": {
+    "groups": "Skupine",
+    "deletedGroups": "Izbrisane skupine",
+    "account": "Račun"
+  },
+  "header": {
+    "language": "Jezik",
+    "menu": "Meni",
+    "userMenu": "Uporabniški meni",
+    "search": "Iskanje"
+  },
+  "language": {
+    "sl": "Slovenščina",
+    "en": "English"
+  },
+  "footer": {
+    "text": "Skupine kontaktov"
+  },
+  "state": {
+    "loading": "Nalaganje …",
+    "empty": "Tukaj še ni ničesar.",
+    "error": "Prišlo je do napake. Poskusite znova.",
+    "retry": "Poskusi znova"
+  },
+  "home": {
+    "title": "Dobrodošli",
+    "intro": "Prijavite se, da si ogledate svoje skupine."
+  },
+  "notFound": {
+    "title": "Ni najdeno",
+    "text": "Te strani ni ali do nje nimate dostopa.",
+    "back": "Nazaj na skupine"
+  },
+  "error": {
+    "UNAUTHENTICATED": "Prijavite se za nadaljevanje.",
+    "EMAIL_NOT_VERIFIED": "Potrdite svoj e-poštni naslov.",
+    "RECENT_LOGIN_REQUIRED": "Za to dejanje se morate znova prijaviti.",
+    "FORBIDDEN": "Tega dejanja ne smete izvesti.",
+    "NOT_FOUND": "Ni najdeno.",
+    "METHOD_NOT_ALLOWED": "Dejanje ni dovoljeno.",
+    "CONFLICT": "Ta kontakt je spremenil nekdo drug.",
+    "ALREADY_IN_TRASH": "Že je v košu.",
+    "NOT_IN_TRASH": "Ni v košu.",
+    "CONTACT_IN_TRASH": "Kontakt je v košu.",
+    "GROUP_IN_TRASH": "Skupina je v košu.",
+    "LAST_OWNER": "Skupina mora imeti vsaj enega lastnika.",
+    "SOLE_OWNER": "Ste edini lastnik skupine.",
+    "GROUP_NAME_TAKEN": "Skupino s tem imenom že imate.",
+    "ALREADY_MEMBER": "Ta oseba je že članica skupine.",
+    "INVITATION_PENDING": "Vabilo za ta naslov že čaka.",
+    "INVITATION_LIMIT": "Dosežena je omejitev 20 čakajočih vabil.",
+    "TAG_NAME_TAKEN": "Oznaka s tem imenom že obstaja.",
+    "NOTHING_TO_CHANGE": "Ni ničesar za spremeniti.",
+    "PAYLOAD_TOO_LARGE": "Zahteva je prevelika.",
+    "RATE_LIMITED": "Preveč zahtev. Poskusite čez nekaj trenutkov.",
+    "VALIDATION_FAILED": "Podatki niso veljavni.",
+    "INTERNAL_ERROR": "Prišlo je do napake. Poskusite znova.",
+    "UNAVAILABLE": "Storitev trenutno ni na voljo."
+  }
+}
