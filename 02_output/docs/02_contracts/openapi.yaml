@@ -1,0 +1,614 @@
+openapi: 3.1.0
+info:
+  title: Contact Groups API
+  version: 0.1.0
+  description: >
+    The REST API of the web app (US-017). Every operation except the health check needs a Firebase ID
+    token (R-017-01). The group is read only from the path (R-017-04, AR-04). A non-member, a missing
+    group, a malformed id and (for non-Owners) a group in Trash all give the same 404 (R-017-05, SR-03).
+    Every failure has the ErrorResponse format (R-017-10). The backend serves this description at
+    /v3/api-docs; a test compares it with this file (AR-13).
+servers:
+  - url: /api
+    description: Same origin as the web app (nginx, or the Vite proxy in development).
+security:
+  - bearerAuth: []
+tags:
+  - { name: Health }
+  - { name: Account }
+  - { name: Groups }
+  - { name: Members }
+  - { name: Invitations }
+  - { name: Contacts }
+  - { name: Tags }
+  - { name: Export }
+  - { name: History }
+  - { name: Versions }
+  - { name: Duplicates }
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      operationId: getHealth
+      summary: Health check without authentication (R-017-12)
+      security: []
+      responses:
+        '200': { description: The system and its database work., content: { application/json: { schema: { $ref: './schemas.yaml#/Health' } } } }
+        '503': { description: The database is not reachable., content: { application/json: { schema: { $ref: './schemas.yaml#/Health' } } } }
+
+  /me:
+    get:
+      tags: [Account]
+      operationId: getMe
+      summary: The signed-in user; creates the user and accepts matching invitations on the first request (R-003-05, D-20)
+      responses:
+        '200': { description: The user., content: { application/json: { schema: { $ref: './schemas.yaml#/User' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    delete:
+      tags: [Account]
+      operationId: deleteAccount
+      summary: Delete the account's data in the product (US-016); the web app then deletes the Firebase account
+      description: Needs a sign-in of the last 5 minutes (RECENT_LOGIN_REQUIRED, R-016-07). Refused with SOLE_OWNER, naming the groups, when the user is the only Owner of a group, also one in Trash (R-016-02, EX-016-01).
+      responses:
+        '204': { description: 'Memberships removed, e-mail removed from History entries, account id recorded as deleted.' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups:
+    get:
+      tags: [Groups]
+      operationId: listGroups
+      summary: The user's groups with the role, not in Trash (R-002-04)
+      responses:
+        '200': { description: The groups., content: { application/json: { schema: { type: array, items: { $ref: './schemas.yaml#/GroupSummary' } } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    post:
+      tags: [Groups]
+      operationId: createGroup
+      summary: Create a group; the user becomes its Owner (R-002-01)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/GroupNameRequest' } } } }
+      responses:
+        '201': { description: Created., content: { application/json: { schema: { $ref: './schemas.yaml#/GroupSummary' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /deleted-groups:
+    get:
+      tags: [Groups]
+      operationId: listDeletedGroups
+      summary: Groups in Trash of which the user is an Owner, with the days left (R-015-04)
+      responses:
+        '200': { description: The groups in Trash., content: { application/json: { schema: { type: array, items: { $ref: './schemas.yaml#/DeletedGroup' } } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
+  /groups/{groupId}:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [Groups]
+      operationId: getGroup
+      summary: One group with the user's role (R-002-06, R-002-07)
+      responses:
+        '200': { description: The group., content: { application/json: { schema: { $ref: './schemas.yaml#/GroupSummary' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      tags: [Groups]
+      operationId: renameGroup
+      summary: Rename the group, Owner only; appends a History entry (R-002-08)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/GroupNameRequest' } } } }
+      responses:
+        '200': { description: Renamed., content: { application/json: { schema: { $ref: './schemas.yaml#/GroupSummary' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /groups/{groupId}/trash:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Groups]
+      operationId: trashGroup
+      summary: Move the group to Trash after the exact name is typed, Owner only (R-015-01, R-015-02)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/GroupTrashRequest' } } } }
+      responses:
+        '204': { description: In Trash. }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/restore:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Groups]
+      operationId: restoreGroup
+      summary: Restore a group from Trash, Owner only; refused when it would clash with the Owner's names (R-015-05, R-015-10)
+      description: The one operation that sees a group in Trash, and only for its Owners (D-17). Everyone else, and a group not in Trash, gets 404.
+      responses:
+        '204': { description: Restored. }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/members:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [Members]
+      operationId: listMembers
+      summary: The members with name, e-mail and role, for every member (R-004-01)
+      responses:
+        '200': { description: The members., content: { application/json: { schema: { type: array, items: { $ref: './schemas.yaml#/Member' } } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/members/{userId}:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/UserId' }
+    put:
+      tags: [Members]
+      operationId: changeRole
+      summary: Change a member's role, Owner only (R-004-02)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/RoleRequest' } } } }
+      responses:
+        '200': { description: The member after the change., content: { application/json: { schema: { $ref: './schemas.yaml#/Member' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+    delete:
+      tags: [Members]
+      operationId: removeMember
+      summary: Remove a member, Owner only; the last Owner cannot be removed (R-004-04, R-004-07)
+      responses:
+        '204': { description: Removed. }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/leave:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Members]
+      operationId: leaveGroup
+      summary: Leave the group, treated as a removal of the member by the member (R-004-06)
+      responses:
+        '204': { description: Left. }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/invitations:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [Invitations]
+      operationId: listInvitations
+      summary: Pending invitations, Owner only (R-003-08)
+      responses:
+        '200': { description: The pending invitations., content: { application/json: { schema: { type: array, items: { $ref: './schemas.yaml#/Invitation' } } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    post:
+      tags: [Invitations]
+      operationId: createInvitation
+      summary: Invite an e-mail address with a role, Owner only; the product sends no e-mail (R-003-01, R-003-09)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/InvitationRequest' } } } }
+      responses:
+        '201': { description: Pending invitation., content: { application/json: { schema: { $ref: './schemas.yaml#/Invitation' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /groups/{groupId}/invitations/{invitationId}:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { name: invitationId, in: path, required: true, schema: { type: string, format: uuid } }
+    delete:
+      tags: [Invitations]
+      operationId: cancelInvitation
+      summary: Cancel a pending invitation, Owner only (R-003-07)
+      responses:
+        '204': { description: Cancelled. }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/contacts:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Contacts]
+      operationId: createContact
+      summary: Create a contact, Owner or Editor (R-005-01)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/ContactRequest' } } } }
+      responses:
+        '201': { description: Created with version 1., content: { application/json: { schema: { $ref: './schemas.yaml#/Contact' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /groups/{groupId}/contacts/search:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Contacts]
+      operationId: searchContacts
+      summary: The list with search text, conditions, sort and page, for every member (R-009-01 to R-009-10, R-010-01 to R-010-11)
+      description: A POST so that search text and filter never appear in a URL (SR-20). It changes nothing.
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/ContactSearchRequest' } } } }
+      responses:
+        '200': { description: 'One page, 25 rows.', content: { application/json: { schema: { $ref: './schemas.yaml#/ContactPage' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /groups/{groupId}/contacts/{contactId}:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/ContactId' }
+    get:
+      tags: [Contacts]
+      operationId: getContact
+      summary: Open a contact with its fields, tags and attributes, for every member (R-005-06)
+      responses:
+        '200': { description: 'The contact (also one in Trash, for Owners and Editors).', content: { application/json: { schema: { $ref: './schemas.yaml#/Contact' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    put:
+      tags: [Contacts]
+      operationId: saveContact
+      summary: Save a contact with the revision as opened, Owner or Editor (R-005-07, R-005-08)
+      description: A save without a change writes nothing (EX-005-09). 409 CONFLICT carries the current contact (R-017-15); 409 CONTACT_IN_TRASH for a contact in Trash (R-005-10).
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/ContactRequest' } } } }
+      responses:
+        '200': { description: The saved contact., content: { application/json: { schema: { $ref: './schemas.yaml#/Contact' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+    delete:
+      tags: [Contacts]
+      operationId: eraseContact
+      summary: Delete forever, Owner only, a contact in Trash (R-012-04)
+      responses:
+        '204': { description: Erased with its personal data; History anonymised (BR-06). }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/contacts/{contactId}/trash:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/ContactId' }
+    post:
+      tags: [Contacts]
+      operationId: trashContact
+      summary: Move a contact to Trash, Owner or Editor (R-012-01)
+      responses:
+        '204': { description: In Trash for 30 days. }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/contacts/{contactId}/restore:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/ContactId' }
+    post:
+      tags: [Contacts]
+      operationId: restoreContact
+      summary: Restore a contact from Trash, Owner or Editor (R-012-03)
+      responses:
+        '204': { description: Restored; no new version (EX-019-02). }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/trash-contacts:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [Contacts]
+      operationId: listTrashedContacts
+      summary: The Trash view with the days left, Owner or Editor (R-012-02)
+      parameters: [{ $ref: '#/components/parameters/Page' }]
+      responses:
+        '200': { description: One page., content: { application/json: { schema: { $ref: './schemas.yaml#/TrashedContactPage' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/tags:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [Tags]
+      operationId: listTags
+      summary: The tags of the group with their contact count, for suggestions and Manage tags (R-006-10, US-007)
+      parameters: [{ name: q, in: query, schema: { type: string }, description: 'Part of the tag name, ignoring case.' }]
+      responses:
+        '200': { description: The tags., content: { application/json: { schema: { type: array, items: { $ref: './schemas.yaml#/Tag' } } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/tags/{tagId}:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { name: tagId, in: path, required: true, schema: { type: string, format: uuid } }
+    patch:
+      tags: [Tags]
+      operationId: renameTag
+      summary: Rename a tag on every contact of the group, also in Trash; Owner or Editor (R-007-01)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/TagRequest' } } } }
+      responses:
+        '200': { description: The tag., content: { application/json: { schema: { $ref: './schemas.yaml#/Tag' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+    delete:
+      tags: [Tags]
+      operationId: deleteTag
+      summary: Delete a tag from every contact of the group, no contact is deleted; Owner or Editor (R-007-05)
+      responses:
+        '204': { description: Deleted. }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/attribute-keys:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [Contacts]
+      operationId: listAttributeKeys
+      summary: Attribute keys used in the group, for suggestions (R-008-05)
+      parameters: [{ name: q, in: query, schema: { type: string } }]
+      responses:
+        '200': { description: The keys., content: { application/json: { schema: { $ref: './schemas.yaml#/Suggestions' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/companies:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [Contacts]
+      operationId: listCompanies
+      summary: Companies used in the group, for the company condition (R-010-07)
+      parameters: [{ name: q, in: query, schema: { type: string } }]
+      responses:
+        '200': { description: The companies., content: { application/json: { schema: { $ref: './schemas.yaml#/Suggestions' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/exports:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Export]
+      operationId: exportContacts
+      summary: Export the ticked contacts to an .xlsx file, Owner or Editor; appends a History entry (R-011-04, R-013-04)
+      description: Refused with 400 VALIDATION_FAILED and the field error TOO_MANY_CONTACTS above 10,000 contacts, creating no file (R-011-09). The file name is in Content-Disposition (R-011-06).
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/ExportRequest' } } } }
+      responses:
+        '200':
+          description: The workbook.
+          headers:
+            Content-Disposition: { schema: { type: string }, description: 'attachment; filename*=UTF-8''<group name>_<YYYY-MM-DD>.xlsx' }
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: { schema: { type: string, format: binary } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /groups/{groupId}/history:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [History]
+      operationId: listGroupHistory
+      summary: The group-wide History, newest first, 25 per page, Owner or Editor (R-014-01 to R-014-08)
+      parameters:
+        - { $ref: '#/components/parameters/Page' }
+        - { name: actorId, in: query, schema: { type: string }, description: Only entries made by this person (R-014-02). }
+        - { name: types, in: query, style: form, explode: false, schema: { type: array, items: { $ref: './schemas.yaml#/HistoryEventType' } }, description: Only these event types (R-014-03). }
+        - { name: from, in: query, schema: { type: string, format: date }, description: 'First day, in the project time zone (R-014-04).' }
+        - { name: to, in: query, schema: { type: string, format: date }, description: 'Last day, inclusive; before the first day gives 400 INVALID_DATE_RANGE (EX-014-02).' }
+      responses:
+        '200': { description: One page., content: { application/json: { schema: { $ref: './schemas.yaml#/HistoryPage' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/history/actors:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    get:
+      tags: [History]
+      operationId: listHistoryActors
+      summary: People with entries in the group, also those who left, for the person filter (EX-014-03)
+      responses:
+        '200': { description: The people., content: { application/json: { schema: { type: array, items: { $ref: './schemas.yaml#/HistoryActor' } } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/contacts/{contactId}/history:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/ContactId' }
+    get:
+      tags: [History]
+      operationId: listContactHistory
+      summary: The History tab of a contact, newest first, with the History of merged-away contacts linked in (R-013-09, R-022-06)
+      parameters: [{ $ref: '#/components/parameters/Page' }]
+      responses:
+        '200': { description: One page., content: { application/json: { schema: { $ref: './schemas.yaml#/HistoryPage' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/contacts/{contactId}/versions:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/ContactId' }
+    get:
+      tags: [Versions]
+      operationId: listVersions
+      summary: The versions of a contact, newest first, Owner or Editor (R-019-06, R-020-01)
+      responses:
+        '200': { description: The versions., content: { application/json: { schema: { type: array, items: { $ref: './schemas.yaml#/Version' } } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/contacts/{contactId}/versions/{number}:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/ContactId' }
+      - { name: number, in: path, required: true, schema: { type: integer, minimum: 1 } }
+    get:
+      tags: [Versions]
+      operationId: getVersion
+      summary: One version with its snapshot, read-only (R-020-02)
+      responses:
+        '200': { description: The version., content: { application/json: { schema: { $ref: './schemas.yaml#/VersionDetail' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/contacts/{contactId}/versions/{number}/restore:
+    parameters:
+      - { $ref: '#/components/parameters/GroupId' }
+      - { $ref: '#/components/parameters/ContactId' }
+      - { name: number, in: path, required: true, schema: { type: integer, minimum: 1 } }
+    post:
+      tags: [Versions]
+      operationId: restoreVersion
+      summary: Restore a version as a new version, Owner or Editor (R-020-04)
+      description: NOTHING_TO_CHANGE (409) when the version equals the current contact (R-020-06); CONTACT_IN_TRASH (409) in Trash (R-020-05); CONFLICT (409) when the revision is stale (R-020-08).
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/RestoreVersionRequest' } } } }
+      responses:
+        '200': { description: The contact after the restore., content: { application/json: { schema: { $ref: './schemas.yaml#/Contact' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /groups/{groupId}/duplicates/search:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Duplicates]
+      operationId: findDuplicates
+      summary: Find duplicate sets in the whole group when the user starts it, Owner or Editor (R-021-01)
+      description: Changes nothing and creates no version (R-021-08).
+      responses:
+        '200': { description: 'The sets, possibly none.', content: { application/json: { schema: { $ref: './schemas.yaml#/DuplicateSearchResult' } } } }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /groups/{groupId}/duplicates/dismissals:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Duplicates]
+      operationId: dismissDuplicates
+      summary: Mark a set "not a duplicate"; changes no contact and creates no version (R-021-09)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/DismissalRequest' } } } }
+      responses:
+        '204': { description: Marked. }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /groups/{groupId}/merges:
+    parameters: [{ $ref: '#/components/parameters/GroupId' }]
+    post:
+      tags: [Duplicates]
+      operationId: mergeContacts
+      summary: Merge two or more contacts into the oldest, Owner or Editor (R-022-05)
+      description: The oldest contact (lower id when equal) survives with the chosen values, the combined tags and the combined attributes; the others go to Trash; one History entry and one version on the survivor.
+      requestBody: { required: true, content: { application/json: { schema: { $ref: './schemas.yaml#/MergeRequest' } } } }
+      responses:
+        '200': { description: The survivor., content: { application/json: { schema: { $ref: './schemas.yaml#/Contact' } } } }
+        '400': { $ref: '#/components/responses/Validation' }
+        '401': { $ref: '#/components/responses/Unauthenticated' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '409': { $ref: '#/components/responses/Conflict' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Firebase ID token
+  parameters:
+    GroupId: { name: groupId, in: path, required: true, schema: { type: string, format: uuid }, description: The only place a group id is read (R-017-04). }
+    ContactId: { name: contactId, in: path, required: true, schema: { type: string, format: uuid } }
+    UserId: { name: userId, in: path, required: true, schema: { type: string } }
+    Page: { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+  responses:
+    Unauthenticated:
+      description: Token missing, malformed, expired, of another Firebase project, or of a deleted account (R-017-02, R-016-06).
+      content: { application/json: { schema: { $ref: './schemas.yaml#/ErrorResponse' } } }
+    Forbidden:
+      description: E-mail not verified (EMAIL_NOT_VERIFIED, R-017-03) or the role does not allow the operation (FORBIDDEN, R-017-06).
+      content: { application/json: { schema: { $ref: './schemas.yaml#/ErrorResponse' } } }
+    NotFound:
+      description: Not a member, no such group, malformed id, or a group in Trash for a non-Owner; the same response in every case (R-017-05, SR-03).
+      content: { application/json: { schema: { $ref: './schemas.yaml#/ErrorResponse' } } }
+    Validation:
+      description: A rule of a story is broken (R-017-07); the fields are named.
+      content: { application/json: { schema: { $ref: './schemas.yaml#/ErrorResponse' } } }
+    Conflict:
+      description: A state conflict; the code says which one (CONFLICT, LAST_OWNER, SOLE_OWNER, GROUP_NAME_TAKEN, ALREADY_MEMBER, INVITATION_PENDING, INVITATION_LIMIT, TAG_NAME_TAKEN, ALREADY_IN_TRASH, NOT_IN_TRASH, CONTACT_IN_TRASH, NOTHING_TO_CHANGE).
+      content: { application/json: { schema: { $ref: './schemas.yaml#/ErrorResponse' } } }
+    TooLarge:
+      description: Body above 1 MB (R-017-09).
+      content: { application/json: { schema: { $ref: './schemas.yaml#/ErrorResponse' } } }
+    RateLimited:
+      description: More than the allowed requests in a minute (R-017-08).
+      headers: { Retry-After: { schema: { type: integer }, description: Seconds until the minute ends. } }
+      content: { application/json: { schema: { $ref: './schemas.yaml#/ErrorResponse' } } }
