@@ -1,0 +1,530 @@
+# Schemas of the REST API contract (openapi.yaml). Names follow the glossary (ES-13).
+# Field limits repeat business-rules.md (Data model); that file is the source.
+Role:
+  type: string
+  enum: [OWNER, EDITOR, VIEWER]
+
+ErrorCode:
+  type: string
+  description: Machine-readable code (specification, Error model). The web app maps each to a text in the active language.
+  enum:
+    - UNAUTHENTICATED
+    - EMAIL_NOT_VERIFIED
+    - RECENT_LOGIN_REQUIRED
+    - FORBIDDEN
+    - NOT_FOUND
+    - METHOD_NOT_ALLOWED
+    - CONFLICT
+    - ALREADY_IN_TRASH
+    - NOT_IN_TRASH
+    - CONTACT_IN_TRASH
+    - GROUP_IN_TRASH
+    - LAST_OWNER
+    - SOLE_OWNER
+    - GROUP_NAME_TAKEN
+    - ALREADY_MEMBER
+    - INVITATION_PENDING
+    - INVITATION_LIMIT
+    - TAG_NAME_TAKEN
+    - NOTHING_TO_CHANGE
+    - PAYLOAD_TOO_LARGE
+    - RATE_LIMITED
+    - VALIDATION_FAILED
+    - INTERNAL_ERROR
+    - UNAVAILABLE
+
+FieldErrorCode:
+  type: string
+  description: Code of the broken rule of one field (R-017-07).
+  enum:
+    - REQUIRED
+    - REQUIRED_ONE_OF
+    - TOO_SHORT
+    - TOO_LONG
+    - INVALID_FORMAT
+    - INVALID_CHARACTERS
+    - UNKNOWN_COUNTRY
+    - TOO_MANY
+    - DUPLICATE_KEY
+    - INVALID_DATE_RANGE
+    - NAME_MISMATCH
+    - TOO_MANY_CONTACTS
+    - TOO_FEW_CONTACTS
+    - ATTRIBUTE_CHOICE_REQUIRED
+    - UNKNOWN_VALUE
+
+FieldError:
+  type: object
+  required: [field, code, message]
+  properties:
+    field: { type: string, examples: [email] }
+    code: { $ref: '#/FieldErrorCode' }
+    message: { type: string }
+
+ErrorResponse:
+  type: object
+  required: [status, code, message]
+  properties:
+    status: { type: integer, examples: [404] }
+    code: { $ref: '#/ErrorCode' }
+    message: { type: string, description: 'Short English text, no stack trace, class name or SQL (SR-10).' }
+    errors:
+      type: array
+      description: One entry per refused field (EX-005-10); present for VALIDATION_FAILED.
+      items: { $ref: '#/FieldError' }
+    groups:
+      type: array
+      description: The groups that block an account deletion (SOLE_OWNER, R-016-02).
+      items: { $ref: '#/GroupName' }
+    current:
+      description: The current contact, present for CONFLICT (R-017-15).
+      allOf: [{ $ref: '#/Contact' }]
+
+GroupName:
+  type: object
+  required: [id, name]
+  properties:
+    id: { type: string, format: uuid }
+    name: { type: string }
+
+Health:
+  type: object
+  required: [status]
+  properties:
+    status: { type: string, enum: [UP, DOWN] }
+
+User:
+  type: object
+  required: [id, name, email]
+  properties:
+    id: { type: string }
+    name: { type: string, minLength: 1, maxLength: 100 }
+    email: { type: string }
+
+GroupSummary:
+  type: object
+  required: [id, name, role]
+  properties:
+    id: { type: string, format: uuid }
+    name: { type: string, minLength: 1, maxLength: 100 }
+    role: { $ref: '#/Role' }
+
+DeletedGroup:
+  type: object
+  required: [id, name, trashedAt, daysLeft]
+  properties:
+    id: { type: string, format: uuid }
+    name: { type: string }
+    trashedAt: { type: string, format: date-time }
+    daysLeft: { type: integer, minimum: 0, maximum: 30 }
+
+GroupNameRequest:
+  type: object
+  required: [name]
+  properties:
+    name: { type: string, description: Trimmed; 1 to 100 characters (R-002-02). }
+
+GroupTrashRequest:
+  type: object
+  required: [name]
+  properties:
+    name: { type: string, description: 'The exact group name, case-sensitive, trimmed before comparing (R-015-02, EX-015-04).' }
+
+Member:
+  type: object
+  required: [userId, name, email, role]
+  properties:
+    userId: { type: string }
+    name: { type: string }
+    email: { type: string }
+    role: { $ref: '#/Role' }
+
+RoleRequest:
+  type: object
+  required: [role]
+  properties:
+    role: { $ref: '#/Role' }
+
+Invitation:
+  type: object
+  required: [id, email, role, createdAt, expiresAt]
+  properties:
+    id: { type: string, format: uuid }
+    email: { type: string }
+    role: { $ref: '#/Role' }
+    createdAt: { type: string, format: date-time }
+    expiresAt: { type: string, format: date-time, description: 14 days after createdAt (R-003-06). }
+
+InvitationRequest:
+  type: object
+  required: [email, role]
+  properties:
+    email: { type: string, maxLength: 255 }
+    role: { $ref: '#/Role' }
+
+Attribute:
+  type: object
+  required: [key, value]
+  properties:
+    key: { type: string, minLength: 1, maxLength: 50 }
+    value: { type: string, maxLength: 255, description: May be empty (R-008-03). }
+
+ContactFields:
+  type: object
+  description: The 11 predefined fields (glossary), tags and attributes. Absent and empty text are the same.
+  properties:
+    firstName: { type: string, maxLength: 255 }
+    lastName: { type: string, maxLength: 255 }
+    email: { type: string, maxLength: 255, description: Stored in lowercase (R-005-04). }
+    phone: { type: string, maxLength: 30, description: 'Digits, spaces and + ( ) - . / only.' }
+    company: { type: string, maxLength: 255 }
+    jobTitle: { type: string, maxLength: 255 }
+    street: { type: string, maxLength: 255 }
+    postalCode: { type: string, maxLength: 255 }
+    city: { type: string, maxLength: 255 }
+    country: { type: string, pattern: '^[A-Z]{2}$', description: ISO 3166-1 alpha-2 code. }
+    notes: { type: string, maxLength: 5000 }
+    tags:
+      type: array
+      maxItems: 50
+      items: { type: string, minLength: 1, maxLength: 50 }
+    attributes:
+      type: array
+      maxItems: 50
+      items: { $ref: '#/Attribute' }
+
+ContactRequest:
+  description: Create (no revision) or save (revision of the contact as opened, AR-14).
+  allOf:
+    - $ref: '#/ContactFields'
+    - type: object
+      properties:
+        revision: { type: integer, format: int64, minimum: 1 }
+
+ContactState:
+  type: string
+  enum: [ACTIVE, TRASHED]
+
+Contact:
+  allOf:
+    - $ref: '#/ContactFields'
+    - type: object
+      required: [id, state, revision, versionNumber, createdAt, tags, attributes]
+      properties:
+        id: { type: string, format: uuid }
+        state: { $ref: '#/ContactState' }
+        trashedAt: { type: string, format: date-time }
+        daysLeft: { type: integer, minimum: 0, maximum: 30 }
+        createdAt: { type: string, format: date-time }
+        revision:
+          type: integer
+          format: int64
+          description: Change counter carried by every save (AR-14, D-19); grows with a version and with a group-wide tag rename or delete.
+        versionNumber: { type: integer, minimum: 1, description: Current version number (US-019). }
+
+ContactRow:
+  type: object
+  required: [id, tags]
+  properties:
+    id: { type: string, format: uuid }
+    lastName: { type: string }
+    firstName: { type: string }
+    email: { type: string }
+    phone: { type: string }
+    company: { type: string }
+    city: { type: string }
+    country: { type: string }
+    tags:
+      type: array
+      items: { type: string }
+
+SortField:
+  type: string
+  enum: [lastName, firstName, email, phone, company, city, country]
+
+Sort:
+  type: object
+  required: [field, direction]
+  properties:
+    field: { $ref: '#/SortField' }
+    direction: { type: string, enum: [ASC, DESC] }
+
+Condition:
+  description: One filter condition (R-010-01 to R-010-07). All conditions and the search text combine with AND (R-010-08).
+  oneOf:
+    - type: object
+      required: [type, tags]
+      properties:
+        type: { const: TAGS_ALL }
+        tags: { type: array, minItems: 1, items: { type: string } }
+    - type: object
+      required: [type, tags]
+      properties:
+        type: { const: TAGS_ANY }
+        tags: { type: array, minItems: 1, items: { type: string } }
+    - type: object
+      required: [type, tag]
+      properties:
+        type: { const: TAG_NOT }
+        tag: { type: string }
+    - type: object
+      required: [type, key, value]
+      properties:
+        type: { const: ATTRIBUTE_EQUALS }
+        key: { type: string }
+        value: { type: string }
+    - type: object
+      required: [type, key]
+      properties:
+        type: { const: ATTRIBUTE_EXISTS }
+        key: { type: string }
+    - type: object
+      required: [type, country]
+      properties:
+        type: { const: COUNTRY }
+        country: { type: string, pattern: '^[A-Z]{2}$' }
+    - type: object
+      required: [type, company]
+      properties:
+        type: { const: COMPANY }
+        company: { type: string }
+  discriminator: { propertyName: type }
+
+ContactFilter:
+  type: object
+  properties:
+    q: { type: string, description: Search text; only spaces count as empty (EX-009-04). }
+    conditions:
+      type: array
+      items: { $ref: '#/Condition' }
+
+ContactSearchRequest:
+  allOf:
+    - $ref: '#/ContactFilter'
+    - type: object
+      properties:
+        sort: { $ref: '#/Sort' }
+        page: { type: integer, minimum: 1, default: 1 }
+
+ContactPage:
+  type: object
+  required: [items, total, page, pageSize]
+  properties:
+    items:
+      type: array
+      items: { $ref: '#/ContactRow' }
+    total: { type: integer, minimum: 0 }
+    page: { type: integer, minimum: 1, description: The page returned; a page beyond the last gives the last (EX-009-09). }
+    pageSize: { type: integer, const: 25 }
+
+TrashedContactPage:
+  type: object
+  required: [items, total, page, pageSize]
+  properties:
+    items:
+      type: array
+      items:
+        type: object
+        required: [id, trashedAt, daysLeft]
+        properties:
+          id: { type: string, format: uuid }
+          firstName: { type: string }
+          lastName: { type: string }
+          email: { type: string }
+          company: { type: string }
+          trashedAt: { type: string, format: date-time }
+          daysLeft: { type: integer, minimum: 0, maximum: 30 }
+    total: { type: integer, minimum: 0 }
+    page: { type: integer, minimum: 1 }
+    pageSize: { type: integer, const: 25 }
+
+Tag:
+  type: object
+  required: [id, name, contactCount]
+  properties:
+    id: { type: string, format: uuid }
+    name: { type: string }
+    contactCount: { type: integer, minimum: 1, description: 'Contacts of the group with the tag, also in Trash (EX-007-02).' }
+
+TagRequest:
+  type: object
+  required: [name]
+  properties:
+    name: { type: string }
+
+Suggestions:
+  type: array
+  items: { type: string }
+
+Language:
+  type: string
+  enum: [sl, en]
+
+ExportRequest:
+  type: object
+  required: [language]
+  description: Either the ticked contact ids or the current filter ("select all N results"); not both.
+  properties:
+    language: { $ref: '#/Language' }
+    sort: { $ref: '#/Sort' }
+    contactIds:
+      type: array
+      items: { type: string, format: uuid }
+    filter: { $ref: '#/ContactFilter' }
+
+HistoryEventType:
+  type: string
+  enum:
+    - CONTACT_CREATED
+    - CONTACT_EDITED
+    - CONTACT_DELETED
+    - CONTACT_RESTORED
+    - CONTACT_ERASED
+    - TAG_CHANGED
+    - ATTRIBUTE_CHANGED
+    - TAG_RENAMED
+    - TAG_DELETED
+    - EXPORTED
+    - MEMBER_INVITED
+    - INVITATION_CANCELLED
+    - ROLE_CHANGED
+    - MEMBER_REMOVED
+    - GROUP_RENAMED
+    - GROUP_DELETED
+    - GROUP_RESTORED
+    - CONTACTS_MERGED
+    - VERSION_RESTORED
+
+HistoryChange:
+  type: object
+  required: [field]
+  properties:
+    field: { type: string, description: 'Predefined field name, "tag", "attribute:<key>", "name" (group) or "contacts" (export count).' }
+    oldValue: { type: string }
+    newValue: { type: string }
+
+HistoryEntry:
+  type: object
+  required: [id, changeSetId, eventType, actor, createdAt, erased, changes]
+  properties:
+    id: { type: string, format: uuid }
+    changeSetId: { type: string, format: uuid, description: Entries of one save share it and are shown together (R-013-07). }
+    eventType: { $ref: '#/HistoryEventType' }
+    contactId: { type: string, format: uuid }
+    contactLabel: { type: string, description: Name of the contact; absent after an erasure. }
+    actor:
+      type: object
+      required: [name]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string, description: Removed after the actor's account deletion (D-16). }
+    subjectName: { type: string, description: 'The member of a role change or removal, by name only (D-16).' }
+    role: { $ref: '#/Role' }
+    createdAt: { type: string, format: date-time }
+    erased:
+      type: boolean
+      description: True when the contact was erased; the old and new values are then absent and the web app shows the erasure marker in the active language (BR-06).
+    linkedFrom: { type: string, format: uuid, description: Id of the merged-away contact this entry belonged to (R-022-06). }
+    changes:
+      type: array
+      items: { $ref: '#/HistoryChange' }
+
+HistoryPage:
+  type: object
+  required: [items, total, page, pageSize]
+  properties:
+    items:
+      type: array
+      items: { $ref: '#/HistoryEntry' }
+    total: { type: integer, minimum: 0 }
+    page: { type: integer, minimum: 1 }
+    pageSize: { type: integer, const: 25 }
+
+HistoryActor:
+  type: object
+  required: [id, name]
+  properties:
+    id: { type: string }
+    name: { type: string }
+
+Version:
+  type: object
+  required: [number, userName, createdAt]
+  properties:
+    number: { type: integer, minimum: 1 }
+    userName: { type: string }
+    createdAt: { type: string, format: date-time }
+
+VersionDetail:
+  allOf:
+    - $ref: '#/Version'
+    - type: object
+      required: [snapshot]
+      properties:
+        snapshot: { $ref: '#/ContactFields' }
+
+RestoreVersionRequest:
+  type: object
+  required: [revision]
+  properties:
+    revision: { type: integer, format: int64, description: The revision of the contact as the Versions tab opened it (R-020-08). }
+
+DuplicateSet:
+  type: object
+  required: [kind, reasons, contacts]
+  properties:
+    kind: { type: string, enum: [CERTAIN, PROBABLE] }
+    reasons:
+      type: array
+      items: { type: string, enum: [SAME_EMAIL, SAME_NAME_AND_COMPANY, SAME_NAME_AND_PHONE] }
+    contacts:
+      type: array
+      minItems: 2
+      items:
+        allOf:
+          - $ref: '#/ContactRow'
+          - type: object
+            required: [createdAt]
+            properties:
+              createdAt: { type: string, format: date-time }
+
+DuplicateSearchResult:
+  type: object
+  required: [sets]
+  properties:
+    sets:
+      type: array
+      items: { $ref: '#/DuplicateSet' }
+
+DismissalRequest:
+  type: object
+  required: [contactIds]
+  properties:
+    contactIds:
+      type: array
+      minItems: 2
+      items: { type: string, format: uuid }
+
+MergeRequest:
+  type: object
+  required: [contacts, fields]
+  properties:
+    contacts:
+      type: array
+      minItems: 2
+      description: The picked contacts with the revision of each as the merge screen opened it (R-022-12).
+      items:
+        type: object
+        required: [id, revision]
+        properties:
+          id: { type: string, format: uuid }
+          revision: { type: integer, format: int64 }
+    fields:
+      description: The chosen value of each predefined field (R-022-02).
+      allOf:
+        - $ref: '#/ContactFields'
+    attributeChoices:
+      type: array
+      description: The chosen value for each key that has different values (R-022-04); tags and the other attributes are combined by the server.
+      items: { $ref: '#/Attribute' }
