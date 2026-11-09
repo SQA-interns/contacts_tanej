@@ -159,7 +159,7 @@
 - Session: S2 clarify (`/clarify D-04: 1`)
 - Class: open
 - Type: non-blocking
-- Trigger: many story questions read "OPEN — confirmed by the developer; the customer still has to confirm" (OQ-P-03, OQ-P-09, OQ-002-01, OQ-002-02, OQ-003-01, OQ-004-02, OQ-005-01, OQ-006-01, OQ-010-01, OQ-011-01, OQ-012-01, OQ-013-01, OQ-015-01, OQ-020-01, OQ-022-01). Others are "needs customer" and due before delivery (OQ-001-02, OQ-005-03, OQ-012-03, OQ-017-01, OQ-P-04 to OQ-P-08, OQ-P-10, OQ-P-11), and the numbers of `quality-requirements.md` and the ASVS level of `security-requirements.md` are developer proposals. `OQ-P-03` and the stories name the developer's answer as the working reading; `security-requirements.md` (Personal data) leaves legal matters to the customer outside the software.
+- Trigger: many story questions read "OPEN — confirmed by the developer; the customer still has to confirm" (OQ-P-03, OQ-P-09, OQ-002-01, OQ-002-02, OQ-003-01, OQ-004-01 (D-15), OQ-004-02, OQ-016-01 (D-15), OQ-005-01, OQ-006-01, OQ-010-01, OQ-011-01, OQ-012-01, OQ-013-01, OQ-015-01, OQ-020-01, OQ-022-01). Others are "needs customer" and due before delivery (OQ-001-02, OQ-005-03, OQ-012-03, OQ-017-01, OQ-P-04 to OQ-P-08, OQ-P-10, OQ-P-11), and the numbers of `quality-requirements.md` and the ASVS level of `security-requirements.md` are developer proposals. `OQ-P-03` and the stories name the developer's answer as the working reading; `security-requirements.md` (Personal data) leaves legal matters to the customer outside the software.
 - Options: 1. (proposed) Build on the developer-confirmed readings; carry this list into `docs/06_verification-report.md` and `release-notes.md` as "to be confirmed by the customer before delivery"; design uses a neutral working name until OQ-P-08 is answered. 2. Wait for the customer before `/plan` (blocks the run).
 - Human response: none
 - Resolution: option 1, pending review
@@ -172,8 +172,8 @@
 - Type: blocking
 - Trigger: `OQ-004-01` (US-004: roles and member rules, rights) and `OQ-016-01` (US-016: keeping the user's name in the History after account deletion, personal data and legal basis) read "OPEN — needs customer", while every other Block question in the stories is "confirmed by the developer". DoR-S-07 allows no OPEN item on a Block topic. The permission matrix (BR-02) and R-016-03 already state one reading each.
 - Options: 1. (proposed) You confirm both as written (the matrix and member rules of BR-02 and US-004; name kept and e-mail removed, R-016-03), like the other Block topics; the customer's confirmation goes on the D-14 list. 2. You name a change (which rule, which new reading). 3. Hold US-004 and US-016 until the customer answers.
-- Human response: none
-- Resolution: pending
+- Human response: "1 - confirmed by the developer like the other Block questions; add both to the D-14 list for the customer to confirm" (via `/clarify D-15: 1 ...`, 2026-11-09)
+- Resolution: option 1. OQ-004-01 (matrix and member rules of BR-02 and US-004) and OQ-016-01 (name kept, e-mail removed, R-016-03) are confirmed by the developer as written; both are added to the D-14 list "to be confirmed by the customer before delivery". US-004 and US-016 no longer fail DoR-S-07.
 - Overrides: none
 
 ## D-16: What group-level History entries hold about other people
@@ -183,8 +183,8 @@
 - Type: blocking
 - Trigger: R-013-05 writes a group-level entry for an invitation, a cancellation, a role change and a removal, and R-013-07 names only the actor's name and e-mail. No rule says what the entry holds about the other person (the invited e-mail address; the name and e-mail of the member whose role changed or who was removed). Three inputs pull apart: (a) `security-requirements.md` (Personal data) keeps the invitation e-mail only until accepted, cancelled or expired, and shows it to Owners only, while the group-wide History (R-014-01) is shown to Editors too and kept as long as the group exists; (b) R-016-03 anonymises only entries the deleted user caused, so an entry "Ana removed Marko" or "Ana invited marko@example.com" keeps Marko's e-mail after his account is deleted; (c) BR-06 anonymises contact data only. Personal data of people who are not contacts would stay in the History after they ask for deletion.
 - Options: 1. (proposed) The entry holds the event type, the actor (name, e-mail) and the subject's role; the subject is named by name for a member and by e-mail address for an invitation; when an account is deleted, its e-mail is removed from every entry where it is the actor or the subject (the name stays), and the invited e-mail stays in the entry for the life of the group (a documented exception to the retention table, visible to Owners and Editors). 2. As option 1, but entries about an invitation hold only the role and the event, never the invited e-mail (Owners see the e-mail only in the pending list). 3. Entries never name the subject; only actor, event type and role (weakest audit).
-- Human response: none
-- Resolution: pending
+- Human response: "2 - invitation entries hold only the event and the role, never the invited e-mail; members are named by name; when an account is deleted its e-mail is removed from every entry where it is the actor or the subject and the name stays" (via `/clarify D-16: 2 ...`, 2026-11-09)
+- Resolution: option 2. A group-level entry holds the event type, the actor (name, e-mail) and the role. An invitation entry never holds the invited e-mail (Owners see it only in the pending list, so the retention table holds). A member who is the subject (role change, removal) is named by name only. When an account is deleted, its e-mail is removed from every entry where it is the actor or the subject; the name stays. No documented exception to the retention table is needed.
 - Overrides: none
 
 ## D-17: What an Owner may see and do in a group in Trash
@@ -194,8 +194,8 @@
 - Type: blocking
 - Trigger: BR-01 and R-015-03 treat a group in Trash as not existing for members who are not Owners; R-015-04 and R-015-05 give Owners "Deleted groups" and restore; R-015-08 refuses changes. No rule says what an Owner's other requests get (open the group, list contacts, read History, export). SR-03 and EX-017-06 define the 404 only for non-Owners. Reading it wrongly gives access to personal data of a group that was deleted, or breaks the restore screen.
 - Options: 1. (proposed) An Owner of a group in Trash can see only its name, deletion time and days left in "Deleted groups" and can restore it; every other request about the group (contacts, History, members, export, invitations) answers 404 until it is restored. 2. An Owner can open the group read-only (contacts, History, members), no export, until restore or purge. 3. Another rule you name.
-- Human response: none
-- Resolution: pending
+- Human response: "1" (via `/clarify D-17: 1 ...`, 2026-11-09)
+- Resolution: option 1. An Owner of a group in Trash sees only its name, deletion time and days left in "Deleted groups" and can restore it; every other request about the group (contacts, History, members, export, invitations) answers 404 until it is restored.
 - Overrides: none
 
 ## D-18: US-007 is in no end-to-end scenario (DoR-R-04)
@@ -205,9 +205,9 @@
 - Type: blocking
 - Trigger: DoR-R-04 needs every MVP story in at least one scenario. `e2e-scenarios.md` leaves out US-007 (rename and delete tags); US-018 is left out by the file's own note (language switch covered by acceptance tests, Q-35h). The file is an input and fixes "exactly one test per scenario, none merged or split", so only you can change it.
 - Options: 1. (proposed) Approve US-007 as verified by its acceptance tests (AC-007-01 to AC-007-08), like US-018; the file stays unchanged and this is recorded as an approved exception to DoR-R-04 for US-007 and US-018. 2. You add US-007 to a scenario (for example the tag rename to E2E-03) in `01_input/`, then start `/clarify` again.
-- Human response: none
-- Resolution: pending
-- Overrides: none
+- Human response: "1 - approved exception for US-007 and US-018, verified by their acceptance tests" (via `/clarify D-18: 1 ...`, 2026-11-09)
+- Resolution: option 1. US-007 and US-018 are approved as verified by their acceptance tests (AC-007-01 to AC-007-08, AC-018-01 to AC-018-07); `e2e-scenarios.md` stays unchanged. Approved exception to DoR-R-04 for these two stories.
+- Overrides: DoR-R-04 (US-007, US-018; approved by the human)
 
 ## D-19: A stale save after a group-wide tag rename or delete
 - Timestamp: 2026-11-09
