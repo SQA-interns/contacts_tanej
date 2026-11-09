@@ -1,1 +1,23 @@
+# Secrets and local configuration (ES-02)
 .env
+.env.*
+!.env.example
+
+# Held-out tests: the implementer never sees them (AGENTS.md)
+02_output/hidden-tests/
+
+# Build output and dependencies (ES-03)
+node_modules/
+target/
+dist/
+coverage/
+reports/
+test-results/
+playwright-report/
+.stryker-tmp/
+*.tsbuildinfo
+
+# Scratch output of tools (logs are kept, tool caches are not)
+02_output/logs/**/node_modules/
+02_output/logs/dependency-check/
+02_output/logs/screenshots/*.tmp
