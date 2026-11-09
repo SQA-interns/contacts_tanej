@@ -372,7 +372,96 @@ Measured on the deployed (Compose) system with seeded data, results written to `
 
 Quality gate (`quality-requirements.md`): line coverage at least 95 %, adjusted mutation score at least 90 %, per component, measured in phase 5.
 
-<!-- next: 9. User interface -->
+## 9. User interface
+
+Follows `general/design/ui-baseline.md` (UI-01 to UI-30) with one override from `ui-design.md`: UI-08 is designed desktop first and responsive to 320 px (NFR-08). Working title "Contact Groups" / "Skupine kontaktov" lives in the language files only (OQ-P-08, D-14). The wireframes (`/wireframes`) draw every screen below at the three widths of UI-22 (mobile 375, tablet 768, desktop 1440) before any screen is built.
+
+### 9.1 Tokens and components
+
+- **Tokens** in `src/styles/tokens.wireframe.css` (greys, dashed 1 px borders, no shadow or animation, UI-26) and `tokens.final.css` (neutral greys, indigo accent, light and dark by system setting, UI-04, UI-05); the active set is `data-theme` on `<html>` (`wireframe` now, `final` after the last increment, UI-03). Semantic names: background, surface, surface-raised, border, text, text-muted, primary, primary-foreground, success, warning, danger, focus-ring. Type 12/14/16/20/24/32 px, body 16 px, weights 400 and 600, system font stack (UI-06); spacing on a 4 px grid, radius 8 px controls and 12 px cards, one shadow level (UI-07); breakpoints 640, 768, 1024, 1280 px, content at most 1200 px (UI-08, UI-09).
+- **Components** (`components/ui`, shadcn/ui on Radix, Lucide icons, UI-01): `Button` (primary, secondary, ghost; hover, active, focus, disabled, busy, UI-12), `Input`, `Label`, `Card`, `Skeleton`, `StatePanel` (loading, empty, error, UI-14); to be added by the stories that need them, each as its own file: `Dialog`, `Select`, `Tabs`, `Table` (stacked cards below 768 px, UI-16), `Checkbox`, `Toast`, `Badge` (tag chip), `Pagination`, `DropdownMenu`. Icons always carry a text label or accessible name (UI-17).
+- **Layout** (`AppShell`): header with logo placeholder, product name, navigation, language switch; one `main`; footer (UI-10, UI-19, UI-27). Mobile: one column, navigation collapses into a menu button, primary action reachable without scrolling or as a sticky bar, forms one field per row (UI-23); tablet two columns where content allows (UI-24); desktop multi-column with all table columns (UI-25).
+- **States.** Every screen that loads data has loading, empty, error and success states (UI-14); destructive actions ask for confirmation (UI-15); forms show a label, hint, required marker and an inline error announced to assistive technology, and keep the entered values on error (UI-13); dates, times and numbers by `business-rules.md` (UI-18); every text from `src/locales` (UI-30).
+
+### 9.2 Navigation
+
+Header navigation: Groups (`/`), Deleted groups (`/deleted-groups`, shown to a user who owns a group in Trash), Account (`/account`); language switch (SL, EN). Inside a group the page title shows the group name with a tab bar: Contacts, Trash, Tags, History, Members, Duplicates; Owner and Editor see all, a Viewer sees Contacts and Members (tabs the role cannot use are not shown, and the API refuses them anyway, SR-16). A contact opens at `/groups/:groupId/contacts/:contactId` with tabs Details, History, Versions (History and Versions not shown to Viewers).
+
+### 9.3 Screen inventory per story
+
+| Story | Screens and states (each at the three widths of UI-22) |
+|---|---|
+| US-001 | Sign in (e-mail, password, "Sign in with Google", "Forgot password", link to register); Register (name, e-mail, password with rule hint); Verify your e-mail (send again, sign out); Reset password confirmation; empty state "Create a group". States: busy, error from Firebase |
+| US-002 | Groups list (name, role); Create group dialog; Rename group dialog; Group not found page. States: loading, empty (US-001), error |
+| US-003 | Invite form (e-mail, role) and pending invitations list with expiry and cancel, on the Members tab (Owner only). States: empty list, limit reached, errors |
+| US-004 | Members tab (name, e-mail, role; role select, remove and leave controls by role); confirmation dialogs; last-Owner message |
+| US-005 | Contact screen with form of the 11 predefined fields, Save, Cancel; conflict screen "this contact was changed by someone else" with the new values; Viewer read-only view; trashed contact notice |
+| US-006 | Tag input with suggestions and chips on the contact form; read-only chips for Viewers |
+| US-007 | Manage tags (name, number of contacts, rename, delete) with confirmation |
+| US-008 | Attribute rows (key with suggestions, value, remove) on the contact form; read-only for Viewers |
+| US-009 | Contacts list: search box, sortable columns, tags column, paging (25), total, empty group state, no-match state with "Clear filters"; stacked cards below 768 px |
+| US-010 | Filter dialog (seven conditions only) and active-condition chips with remove, "Clear filters" |
+| US-011 | Tick boxes, select-all on page and select-all N results, selection count, Export button (disabled without a tick), too-many message, download |
+| US-012 | Trash tab (contact, days left, restore, Delete forever for Owners); delete confirmation; Delete forever confirmation |
+| US-013 | History tab of a contact (newest first, change sets, old and new value, erasure marker in the active language) |
+| US-014 | Group History screen (person, event types, date range, paging, no-match state) |
+| US-015 | Delete group dialog with typed name; Deleted groups list (days left, restore); restore name-clash message |
+| US-016 | Account screen: delete account with confirmation, sole-Owner refusal listing the groups, re-sign-in prompt |
+| US-017 | No screen of its own; error and not-found pages, rate-limit and unavailable messages |
+| US-018 | Language switch in the header on every screen |
+| US-019 | None (recording only) |
+| US-020 | Versions tab (number, who, when), version view read-only, compare view with highlighted differences, restore confirmation, nothing-to-change message |
+| US-021 | Duplicates tab: "Find duplicates", list of sets marked certain or probable with the reason, "not a duplicate", "No duplicates found" |
+| US-022 | Merge screen: contacts side by side, field choices, combined tags, attribute conflicts, hint on reverting, Confirm disabled until choices are made, limit message |
+
+Wireframes are an input of `/implement`: a screen is done when it matches its approved wireframe at the three widths, has all four states, passes the accessibility scan with no Critical or Serious violation and shows no overflow (UI baseline, "Done for a screen").
+
+## 10. Traceability
+
+Every id of the inputs maps to the section that implements or checks it; `02_output/scripts/check-traceability.mjs` expands these ranges and fails on any id that is missing (log: `out/logs/traceability-check.log`). Tests name the ids they prove in their display names (phase 3 and 4).
+
+### 10.1 Stories: rules, criteria, edge cases
+
+| R / AC / EX | Section |
+|---|---|
+| R-001-01..09, AC-001-01..08, EX-001-01..07 | 4.1 |
+| R-002-01..08, AC-002-01..10, EX-002-01..05 | 4.2 |
+| R-003-01..11, AC-003-01..10, EX-003-01..08 | 4.3 |
+| R-004-01..09, AC-004-01..08, EX-004-01..05 | 4.4 |
+| R-005-01..10, AC-005-01..10, EX-005-01..12 | 4.5 |
+| R-006-01..10, AC-006-01..08, EX-006-01..08 | 4.6 |
+| R-007-01..08, AC-007-01..08, EX-007-01..05 | 4.7 |
+| R-008-01..08, AC-008-01..07, EX-008-01..06 | 4.8 |
+| R-009-01..10, AC-009-01..11, EX-009-01..09 | 4.9 |
+| R-010-01..11, AC-010-01..10, EX-010-01..08 | 4.10 |
+| R-011-01..12, AC-011-01..13, EX-011-01..08 | 4.11 |
+| R-012-01..09, AC-012-01..09, EX-012-01..08 | 4.12 |
+| R-013-01..13, AC-013-01..12, EX-013-01..08 | 4.13 |
+| R-014-01..08, AC-014-01..08, EX-014-01..05 | 4.14 |
+| R-015-01..10, AC-015-01..08, EX-015-01..06 | 4.15 |
+| R-016-01..07, AC-016-01..06, EX-016-01..05 | 4.16 |
+| R-017-01..15, AC-017-01..14, EX-017-01..09 | 4.17 |
+| R-018-01..08, AC-018-01..07, EX-018-01..04 | 4.18 |
+| R-019-01..08, AC-019-01..08, EX-019-01..04 | 4.19 |
+| R-020-01..09, AC-020-01..09, EX-020-01..06 | 4.20 |
+| R-021-01..12, AC-021-01..13, EX-021-01..08 | 4.21 |
+| R-022-01..14, AC-022-01..14, EX-022-01..08 | 4.22 |
+
+### 10.2 Shared rules, security, quality
+
+| Id | Section |
+|---|---|
+| BR-01 | 4.2, 4.15, 5 (`NOT_FOUND`), 6 (SR-02, SR-03) |
+| BR-02 | 6 (SR-16), 4.3 to 4.8, 4.11 to 4.16, 4.19 to 4.22 (role per operation) |
+| BR-03 | 4.1, 4.3, 4.17, 5 (`EMAIL_NOT_VERIFIED`) |
+| BR-04 | 4.12, 4.15, ADR-08 |
+| BR-05 | 3.1, 4.5, 4.22 |
+| BR-06 | 4.12, 4.13, ADR-05 |
+| BR-07 | 3.1, 4.9, 4.10, 4.21, ADR-04 |
+| SB-01..14 | 6 (first table) |
+| SR-01..20 | 6 (second table), 7 |
+| NFR-01..15 | 8 |
+
 
 
 
