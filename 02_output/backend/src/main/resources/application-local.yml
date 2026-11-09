@@ -1,0 +1,11 @@
+# Profile "local" (docker compose on a developer machine): defaults allowed for local and test
+# (environments.md, Configuration). Production never sets this profile.
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/contacts}
+    username: ${DB_USER:contacts}
+
+app:
+  firebase-project-id: ${FIREBASE_PROJECT_ID:demo-contacts}
+  firebase-auth-emulator-host: ${FIREBASE_AUTH_EMULATOR_HOST:localhost:9099}
+  allowed-origin: ${APP_ALLOWED_ORIGIN:http://localhost:5173}
