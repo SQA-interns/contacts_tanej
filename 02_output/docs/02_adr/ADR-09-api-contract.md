@@ -18,7 +18,7 @@ Option 2.
 
 - `docs/02_contracts/openapi.yaml` (+ `schemas.yaml`) is the agreed interface. It is validated by a parser (`npm run contracts:validate`, log in `out/logs/contracts-validation.log`).
 - `springdoc-openapi-starter-webmvc-ui` serves the description of the running code at `/v3/api-docs` (R-017-11); the Swagger UI is switched off.
-- **Drift test** (task T-03, `OpenApiContractIT`): fetches `/v3/api-docs` and compares, per path and method, the operationId, parameters, request schema, response statuses and schema property names with the contract; any difference fails the build. This is the check for AR-13 "generated from the code" in both directions.
+- **Drift test** (task T-06, `OpenApiContractIT`): fetches `/v3/api-docs` and compares, per path and method, the operationId, parameters, request schema, response statuses and schema property names with the contract; any difference fails the build. This is the check for AR-13 "generated from the code" in both directions.
 - **Web app types** are generated from the contract with `openapi-typescript` (`npm run api:types`) into `src/lib/api/schema.d.ts` (committed, not formatted or linted); CI regenerates them and fails when `git diff` shows a change.
 - **Isolation tests** (AC-017-07, DoD-P05) read the contract: every operation whose path contains `{groupId}` is called by a non-member and must answer 404; the test list is generated from the same file, so a new endpoint cannot be forgotten.
 - A contract change is a commit of its own and comes before the code that needs it.

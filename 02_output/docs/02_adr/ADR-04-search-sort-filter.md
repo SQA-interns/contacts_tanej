@@ -28,4 +28,4 @@ Option 3 (V1 migration creates `unaccent`, `pg_trgm`, `f_fold`, `contacts.search
 
 - Needs `CREATE EXTENSION` rights at the first start (the official `postgres:17.6` image's user has them; a managed database must allow `unaccent` and `pg_trgm`; the install guide says so).
 - The migration test proves `f_fold('ŠKERLJ') = 'skerlj'` and the Slovenian order Cerar, Čuk, Sever, Šuster, Zupan (`SkeletonIT`).
-- NFR-01 is verified by the timing test of task T-NFR-1 on 10,000 seeded contacts; if the 95th percentile is over 1 s the first remedy is an index, not a change of approach.
+- NFR-01 is verified by the timing test of task T-N01 on 10,000 seeded contacts; if the 95th percentile is over 1 s the first remedy is an index, not a change of approach.

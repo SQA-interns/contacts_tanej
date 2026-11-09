@@ -83,7 +83,7 @@ Dependencies point downwards only: `api → service → repository → domain`; 
 | survivor | `MergeService` | the oldest picked contact | `contact_merges.survivor_id` | response of `mergeContacts` |
 | conflict | `ErrorCode.CONFLICT` | 409 with the current contact | — | `CONFLICT` |
 
-Language checks: code, API, tables and tests use these words; the Do-not-use words of the glossary appear nowhere (a lint test greps the sources for them, task T-02).
+Language checks: code, API, tables and tests use these words; the Do-not-use words of the glossary appear nowhere (a lint test greps the sources for them, task T-X01).
 
 ## 3. Data model and validation
 

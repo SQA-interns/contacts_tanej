@@ -28,4 +28,4 @@ Option 2.
 
 - No Google secret in the backend; the Compose setup needs only the project id and the web API key.
 - If the Firebase deletion fails after the backend deletion, the user can retry; a later sign-in with the same account creates a fresh user record without memberships. Accepted and documented in the user guide.
-- An emulator host left set in production would accept forged tokens. Mitigation: the startup check refuses `FIREBASE_AUTH_EMULATOR_HOST` when the profile is not `local` or `test` (task T-01).
+- An emulator host left set in production would accept forged tokens. Mitigation: the startup check refuses `FIREBASE_AUTH_EMULATOR_HOST` when the profile is not `local` or `test` (task T-03).
