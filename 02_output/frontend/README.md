@@ -8,18 +8,18 @@ Node 24.13.0 and npm 11.6.2 (decision D-01). Install with `npm ci` (versions are
 
 ## Commands (ES-05)
 
-| Task | Command |
-|---|---|
-| build | `npm run build` |
-| test (unit and component, with coverage) | `npm test` |
-| check (format, lint, type check, duplication) | `npm run check` |
-| run (development, API proxied from `/api` to `localhost:8080`) | `npm run dev` |
-| browser tests (Chromium, Firefox, WebKit, screenshots in `../logs/screenshots`) | `npm run test:e2e` |
-| format | `npm run format` |
-| API types from the contract | `npm run api:types` |
-| validate every contract | `npm run contracts:validate` |
-| dependency scan (allow-list: D-08) | `npm run scan` |
-| mutation (phase 5) | `npm run mutation` |
+| Task                                                                            | Command                      |
+| ------------------------------------------------------------------------------- | ---------------------------- |
+| build                                                                           | `npm run build`              |
+| test (unit and component, with coverage)                                        | `npm test`                   |
+| check (format, lint, type check, duplication)                                   | `npm run check`              |
+| run (development, API proxied from `/api` to `localhost:8080`)                  | `npm run dev`                |
+| browser tests (Chromium, Firefox, WebKit, screenshots in `../logs/screenshots`) | `npm run test:e2e`           |
+| format                                                                          | `npm run format`             |
+| API types from the contract                                                     | `npm run api:types`          |
+| validate every contract                                                         | `npm run contracts:validate` |
+| dependency scan (allow-list: D-08)                                              | `npm run scan`               |
+| mutation (phase 5)                                                              | `npm run mutation`           |
 
 ## Configuration
 
