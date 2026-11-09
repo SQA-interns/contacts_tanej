@@ -1,0 +1,380 @@
+[
+ {
+  "id": "org.springframework.boot:spring-boot-starter-web",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.springframework.boot:spring-boot-starter-jdbc",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.springframework.boot:spring-boot-starter-validation",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.springframework.boot:spring-boot-starter-security",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.springframework.boot:spring-boot-starter-oauth2-resource-server",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.springframework.boot:spring-boot-starter-actuator",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": "GHSA-8hfc-fq58-r658 GHSA-mgvc-8q2h-5pgc"
+ },
+ {
+  "id": "org.springframework.boot:spring-boot-starter-logging",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.postgresql:postgresql",
+  "eco": "maven",
+  "ver": "42.7.8",
+  "ok": true,
+  "vuln": "GHSA-98qh-xjc8-98pq GHSA-j92g-9f8w-j867"
+ },
+ {
+  "id": "org.flywaydb:flyway-core",
+  "eco": "maven",
+  "ver": "11.13.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.flywaydb:flyway-database-postgresql",
+  "eco": "maven",
+  "ver": "11.13.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.apache.poi:poi-ooxml",
+  "eco": "maven",
+  "ver": "5.4.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.springdoc:springdoc-openapi-starter-webmvc-ui",
+  "eco": "maven",
+  "ver": "2.8.13",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "com.bucket4j:bucket4j_jdk17-core",
+  "eco": "maven",
+  "ver": "8.14.0",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.springframework.boot:spring-boot-starter-test",
+  "eco": "maven",
+  "ver": "3.5.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.testcontainers:postgresql",
+  "eco": "maven",
+  "ver": "1.21.3",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.testcontainers:junit-jupiter",
+  "eco": "maven",
+  "ver": "1.21.3",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "react",
+  "eco": "npm",
+  "ver": "19.1.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "react-dom",
+  "eco": "npm",
+  "ver": "19.1.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "react-router",
+  "eco": "npm",
+  "ver": "7.9.3",
+  "ok": true,
+  "vuln": "GHSA-2j2x-hqr9-3h42 GHSA-2w69-qvjg-hvjx GHSA-337j-9hxr-rhxg GHSA-49rj-9fvp-4h2h GHSA-8646-j5j9-6r62 GHSA-8v8x-cx79-35w7 GHSA-8x6r-g9mw-2r78 GHSA-9jcx-v3wj-wh4m GHSA-chx6-hx7r-mcp5 GHSA-f22v-gfqf-p8f3 GHSA-h5cw-625j-3rxh GHSA-rxv8-25v2-qmq8 GHSA-wrjc-x8rr-h8h6"
+ },
+ {
+  "id": "@tanstack/react-query",
+  "eco": "npm",
+  "ver": "5.90.2",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "firebase",
+  "eco": "npm",
+  "ver": "12.3.0",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "i18next",
+  "eco": "npm",
+  "ver": "25.5.2",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "react-i18next",
+  "eco": "npm",
+  "ver": "16.0.0",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "tailwindcss",
+  "eco": "npm",
+  "ver": "4.1.13",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "@tailwindcss/vite",
+  "eco": "npm",
+  "ver": "4.1.13",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "radix-ui",
+  "eco": "npm",
+  "ver": "1.4.3",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "lucide-react",
+  "eco": "npm",
+  "ver": "0.544.0",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "class-variance-authority",
+  "eco": "npm",
+  "ver": "0.7.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "clsx",
+  "eco": "npm",
+  "ver": "2.1.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "tailwind-merge",
+  "eco": "npm",
+  "ver": "3.3.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "vitest",
+  "eco": "npm",
+  "ver": "3.2.4",
+  "ok": true,
+  "vuln": "GHSA-5xrq-8626-4rwp GHSA-82fw-gwwq-j7x9"
+ },
+ {
+  "id": "@testing-library/react",
+  "eco": "npm",
+  "ver": "16.3.0",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "@vitest/coverage-v8",
+  "eco": "npm",
+  "ver": "3.2.4",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "@playwright/test",
+  "eco": "npm",
+  "ver": "1.55.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "@axe-core/playwright",
+  "eco": "npm",
+  "ver": "4.10.2",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "vite",
+  "eco": "npm",
+  "ver": "7.1.7",
+  "ok": true,
+  "vuln": "GHSA-4w7w-66w2-5vf9 GHSA-587h-7wmj-h5pm GHSA-698v-4r3x-3vcv GHSA-93m4-6634-74q7 GHSA-9jrq-w75r-8gcw GHSA-fx2h-pf6j-xcff GHSA-p9ff-h696-f583 GHSA-r825-w8mm-5pxw GHSA-rq7h-c2jc-7f22 GHSA-v2wj-q39q-566r GHSA-v6wh-96g9-6wx3"
+ },
+ {
+  "id": "@vitejs/plugin-react",
+  "eco": "npm",
+  "ver": "5.0.4",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "typescript",
+  "eco": "npm",
+  "ver": "5.9.2",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "firebase-tools",
+  "eco": "npm",
+  "ver": "14.19.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "maven",
+  "eco": "maven",
+  "ver": "3.9.11",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "com.diffplug.spotless:spotless-maven-plugin",
+  "eco": "maven",
+  "ver": "2.46.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.apache.maven.plugins:maven-pmd-plugin",
+  "eco": "maven",
+  "ver": "3.27.0",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.apache.maven.plugins:maven-surefire-plugin",
+  "eco": "maven",
+  "ver": "3.5.4",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.apache.maven.plugins:maven-failsafe-plugin",
+  "eco": "maven",
+  "ver": "3.5.4",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.jacoco:jacoco-maven-plugin",
+  "eco": "maven",
+  "ver": "0.8.13",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.pitest:pitest-maven",
+  "eco": "maven",
+  "ver": "1.20.4",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "org.owasp:dependency-check-maven",
+  "eco": "maven",
+  "ver": "12.1.6",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "eslint",
+  "eco": "npm",
+  "ver": "9.36.0",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "typescript-eslint",
+  "eco": "npm",
+  "ver": "8.44.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "eslint-plugin-jsx-a11y",
+  "eco": "npm",
+  "ver": "6.10.2",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "prettier",
+  "eco": "npm",
+  "ver": "3.6.2",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "@stryker-mutator/core",
+  "eco": "npm",
+  "ver": "9.1.1",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "npm",
+  "eco": "npm",
+  "ver": "10.9.3",
+  "ok": true,
+  "vuln": ""
+ },
+ {
+  "id": "jscpd",
+  "eco": "npm",
+  "ver": "4.0.5",
+  "ok": true,
+  "vuln": ""
+ }
+]
