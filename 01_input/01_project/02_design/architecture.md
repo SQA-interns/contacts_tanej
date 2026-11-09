@@ -13,7 +13,7 @@ components:
     folder: 02_output/backend
     platform: java
     build: maven
-    bootstrap: Spring Boot project generated with the Spring Initializr dependency set listed in tech-stack.md (or a hand-written pom.xml with exactly those entries); root package app.contactgroups. [ASSUMPTION] package name
+    bootstrap: Spring Boot project generated with the Spring Initializr dependency set listed in tech-stack.md (or a hand-written pom.xml with exactly those entries); root package app.contactgroups (confirmed by the developer)
     commands:          # ES-05; filled in phase 2 if left empty
       build:
       test:

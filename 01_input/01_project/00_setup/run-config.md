@@ -4,10 +4,10 @@
 
 Settings of the run. How to fill each line: the table below. Start each session with the agent, model and effort of its row; never switch the model inside a session.
 
-- Run label:
+- Run label: tanej_sdd-workflow_contacts_v001
 - Agent: claude
 - Permission mode: default
-- Design round: ask
+- Design round: skip
 - Hidden vault:
 
 | Line | What to write |

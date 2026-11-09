@@ -26,8 +26,8 @@ The customer must confirm the level (listed in the review checklist).
 |---|---|---|---|
 | Contact: 11 predefined fields (names, e-mail, phone, company, job title, address, country, notes), tags, attributes | The customer's contact list | Until the contact is erased: 30 days in Trash, or "Delete forever" (BR-04, BR-06); deleted with the group | Members of the group by role (Viewers see contact data); Owners and Editors by export |
 | Versions of a contact | Compare and restore | As long as the contact exists; erased with it | Owners and Editors |
-| History entries (actor name and e-mail, old and new values of contact data) | Audit trail | As long as the group exists; contact values replaced by "[erased]" after erasure; actor e-mail removed after account deletion, the name stays (Q-20b) | Owners and Editors |
-| User name and e-mail | Identify who made a change; invitations | Kept by Firebase until the account is deleted; name stays in History after deletion | Shown in the History and member list to Owners and Editors |
+| History entries (actor name and e-mail, old and new values of contact data) | Audit trail | As long as the group exists; contact values replaced by "[izbrisano]" or "[erased]" (active UI language) after erasure; actor e-mail removed after account deletion, the name stays (Q-20b) | Owners and Editors |
+| User name and e-mail | Identify who made a change; invitations | Kept by Firebase until the account is deleted; name stays in History after deletion | Shown in the History to Owners and Editors, and in the member list to all members |
 | Invitation e-mail address | Match an invited person | Until accepted, cancelled or expired (14 days); removed with the group | Owners |
 | Logs | Operation and security | The logs hold no contact data, tokens or passwords (SR-11) | The operator |
 | Backups of the database | Recovery | 14 days (NFR-06); hold data erased in the meantime until they expire | The operator |
@@ -46,7 +46,7 @@ Legal matters (controller or processor role, privacy notice, consent, hosting re
 | SR-06 | The web app and API shall set the standard security headers (Content-Security-Policy without inline scripts, X-Content-Type-Options, frame-ancestors/X-Frame-Options, Referrer-Policy, Permissions-Policy). Check: header test on both. |
 | SR-07 | Every input shall be validated on the server by the rules of the stories; all SQL shall use parameterised queries (Spring JDBC); search, filter and sort inputs shall never be inserted into SQL as text, and sort columns shall come from a fixed list. Check: tests with injection strings (EX-009-03, EX-010-06), static analysis for string-built SQL. |
 | SR-08 | The Excel export shall write cells starting with `=`, `+`, `-` or `@` as plain text. Check: AC-011-08. |
-| SR-09 | The API shall limit each user to 100 requests per minute and each request to 1 MB. Check: AC-017-08, AC-017-09. |
+| SR-09 | The API shall limit each user to a configurable number of requests per minute (default 100; answered with 429 and `Retry-After` above it) and each request body to 1 MB (answered with 413). Check: AC-017-08, AC-017-09. |
 | SR-10 | Errors shall use one format with a code and a short message and shall show no stack trace, class name or SQL. Check: AC-017-10; a test provoking an internal error. |
 | SR-11 | The server shall log failed token checks, 401, 403 and 404 responses and rate-limit hits, and shall never log contact data, tokens, passwords or full request bodies. Check: a test with known values in the request shows none of them in the log output. |
 | SR-12 | Secrets (database password, Firebase settings) shall live only in environment variables or the `.env` file; none shall be in the repository, images, logs or the chat. Check: secret scan in phase 6. |

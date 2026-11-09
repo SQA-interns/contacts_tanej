@@ -8,7 +8,7 @@ Adds to `general/quality/` (definition of done, test strategy, severity scale); 
 
 | ID | Category (performance, availability, accessibility, localisation, usability, …) | Requirement | How it is checked |
 |---|---|---|---|
-| NFR-01 | Performance | The list, search and filter (US-009, US-010) answer in under 1 second (95th percentile [ASSUMPTION]) for a group of up to 10,000 contacts, with 20 users working at the same time. | Automated timing test on the deployed system with 10,000 seeded contacts and 20 parallel virtual users; the result is recorded in the verification report. |
+| NFR-01 | Performance | The list, search and filter (US-009, US-010) answer in under 1 second (95th percentile, confirmed by the developer) for a group of up to 10,000 contacts, with 20 users working at the same time. | Automated timing test on the deployed system with 10,000 seeded contacts and 20 parallel virtual users; the result is recorded in the verification report. |
 | NFR-02 | Performance | Opening a contact (US-005) takes under 500 ms (95th percentile). | Same timing test on the deployed system. |
 | NFR-03 | Performance | An export of 1,000 contacts (US-011) is ready in under 10 seconds. | Timing test on the deployed system with 1,000 contacts with tags and attributes. |
 | NFR-04 | Capacity | The whole system serves up to 100 registered users, 20 at the same time, and groups of up to 10,000 contacts. | The load of NFR-01 plus a data set of 100 users and several groups; no error responses. |

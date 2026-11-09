@@ -32,7 +32,7 @@ The smallest useful set, in priority order (Q-07a; the stories with `mvp: true`)
 - Sign-in and groups: US-001, US-002, US-003, US-004 (sign-in, create group, invite, roles).
 - Contacts: US-005, US-006, US-007, US-008 (contact, tags, tag management, attributes).
 - Finding and export: US-009, US-010, US-011 (list and search, filters, export).
-- Safety: US-012 (Trash), US-017 (secured API and OpenAPI), US-013, US-014 (History), US-015 (delete and restore a group), US-016 (delete own account), US-019 (record versions; placed in the MVP so versions exist from the first save, [ASSUMPTION]), US-018 (language).
+- Safety: US-012 (Trash), US-017 (secured API and OpenAPI), US-013, US-014 (History), US-015 (delete and restore a group), US-016 (delete own account), US-019 (record versions; placed in the MVP so versions exist from the first save; confirmed by the developer, only the screens US-020 come later), US-018 (language).
 
 Second increment (the customer accepts the product only when it works too, Q-19): US-020 (view, compare, restore versions), US-021 (find duplicates), US-022 (merge).
 
@@ -55,7 +55,7 @@ In scope (story ids):
 
 ## Non-goals (out of scope)
 
-From Q-32 (the customer must confirm): (1) sending e-mails or notifications to contacts or users, apart from Firebase's own; (2) direct use of the REST API by other tools and API keys for them; (3) import from Excel or any other file; (4) saved filters; (5) multi-factor authentication and sign-in providers other than e-mail/password and Google; (6) fuzzy duplicate matching and undoing a "not a duplicate" mark; (7) History export; (8) an in-app system administrator, billing and plans; (9) typed attribute values and several e-mails or phones per contact; (10) a mobile app; (11) export to CSV; (12) usual CRM features: tasks, deals, a notes timeline, calendar, pipelines; (13) real-time collaboration and offline use; (14) contact data from external sources. Also: bulk actions on several contacts besides export (Q-22b); deployment to the customer's production (Q-17a); reuse of any code from the SCM example (Q-04, Q-16d).
+From Q-32 (confirmed by the developer; the customer must still confirm; renaming a group is not out of scope, it is in the MVP, US-002 R-002-08): (1) sending e-mails or notifications to contacts or users, apart from Firebase's own; (2) direct use of the REST API by other tools and API keys for them; (3) import from Excel or any other file; (4) saved filters; (5) multi-factor authentication and sign-in providers other than e-mail/password and Google; (6) fuzzy duplicate matching and undoing a "not a duplicate" mark; (7) History export; (8) an in-app system administrator, billing and plans; (9) typed attribute values and several e-mails or phones per contact; (10) a mobile app; (11) export to CSV; (12) usual CRM features: tasks, deals, a notes timeline, calendar, pipelines; (13) real-time collaboration and offline use; (14) contact data from external sources. Also: bulk actions on several contacts besides export (Q-22b); deployment to the customer's production (Q-17a); reuse of any code from the SCM example (Q-04, Q-16d).
 
 ## Product principles
 
@@ -74,16 +74,16 @@ Product-level questions; story-level questions are in the story. Every answer ma
 
 | ID | Question | Owner | Due | Answer |
 |---|---|---|---|---|
-| OQ-P-01 | Success criteria and acceptance list (Q-03, Q-36) are developer proposals. Does the customer accept them? | Customer | before the run | OPEN — needs customer |
-| OQ-P-02 | Does the customer confirm that SCM is inspiration only and not an acceptance check (Q-04)? | Customer | before the run | OPEN — needs customer |
-| OQ-P-03 | Block (rights, personal data, deletion, destructive, legal): the roles, invitations, 30-day Trash, anonymised History, account deletion and merge are developer proposals. | Customer | before the stories are built | OPEN — needs customer (see the stories' open questions) |
+| OQ-P-01 | Success criteria and acceptance list (Q-03, Q-36) are developer proposals. Does the customer accept them? | Customer | before the run | Confirmed by the developer. |
+| OQ-P-02 | Does the customer confirm that SCM is inspiration only and not an acceptance check (Q-04)? | Customer | before the run | Confirmed by the developer. |
+| OQ-P-03 | Block (rights, personal data, deletion, destructive, legal): the roles, invitations, 30-day Trash, anonymised History, account deletion and merge are developer proposals. | Customer | before the stories are built | OPEN — confirmed by the developer; the customer still has to confirm (Block topics; see the stories' open questions) |
 | OQ-P-04 | Hosting region (EU?), countries of the contacts, special categories of data; Firebase Authentication processes e-mails at Google (Q-33). | Customer | before delivery | OPEN — needs customer |
 | OQ-P-05 | Production Firebase project: exists, owner, Google sign-in set-up (Q-14b). | Customer | before delivery | OPEN — needs customer |
 | OQ-P-06 | Production host, domain, budget, whether their infrastructure runs containers (Q-17). | Customer | before delivery | OPEN — needs customer |
 | OQ-P-07 | Customers come from Excel sheets and e-mail lists, yet there is no import and existing contacts are entered by hand (Q-22a). Accept this risk? | Customer | before the run | OPEN — needs customer |
 | OQ-P-08 | Product name, brand, colours, logo; which SCM screens the customer likes and what they dislike in competing CRMs (Q-34, Q-34a, Q-34b). | Customer | before the design phase | OPEN — needs customer |
-| OQ-P-09 | Licence rules with listed exceptions and "no Google service other than Firebase Authentication" (Q-16c, Q-16d). | Customer | before preflight | OPEN — needs customer |
-| OQ-P-10 | Cost of the current way of working is unknown (Q-01); no baseline for "ease of use". | Customer | later | OPEN — deferred, no baseline |
+| OQ-P-09 | Licence rules with listed exceptions and "no Google service other than Firebase Authentication" (Q-16c, Q-16d). | Customer | before preflight | OPEN — confirmed by the developer (the licence rule of Q-16c and Q-16d is applied); the customer still has to confirm (legal) |
+| OQ-P-10 | Cost of the current way of working is unknown (Q-01); no baseline for "ease of use". | Customer | later | OPEN — deferred, no baseline (accepted by the developer; the customer to answer) |
 | OQ-P-11 | Backups kept 14 days still hold contacts erased after 30 days; who owns the 99 % availability when the customer runs production (Q-15b). | Customer | before delivery | OPEN — needs customer |
 
 ## Project Definition of Done

@@ -10,16 +10,16 @@ Facts that hold for the whole project, written once. Stories, rules and tests us
 
 | Fact | Value | Source |
 |---|---|---|
-| Time zone | All times are stored in UTC and shown in `Europe/Ljubljana` (CET/CEST, with summer time) for every user. [ASSUMPTION] The customer's country was not stated; the customer text is Slovenian. Dates (day boundaries, file name date, History date filter) use this zone. | Q-26, Q-11b |
+| Time zone | All times are stored in UTC and shown in `Europe/Ljubljana` (CET/CEST, with summer time) for every user. Confirmed by the developer (the customer's country was not stated; the customer text is Slovenian). Dates (day boundaries, file name date, History date filter) use this zone. | Q-26, Q-11b |
 | Currency | None. The product handles no money. | Q-11a |
 | Tax (included in prices or not, rate) | None. The product handles no prices or tax. | Q-11a |
 | Date and time format | Slovenian UI: `d. M. yyyy` and `HH:mm` (24 hours). English UI: `yyyy-MM-dd` and `HH:mm`. | Q-11a |
-| Number format | Slovenian UI: decimal comma. English UI: decimal point. [ASSUMPTION] English decimal point (not stated; the product shows few numbers, e.g. counts). | Q-11a |
+| Number format | Slovenian UI: decimal comma. English UI: decimal point. English decimal point (confirmed by the developer). | Q-11a |
 | Languages of the product | Slovenian (default) and English, switch in the header; API field names in English; formal "vi" in Slovenian texts. Excel headers and country names follow the active UI language. | Q-11, Q-34a |
 | Text encoding | UTF-8 everywhere, including the API and the Excel file. | default, Q-11a |
 | Units of measure | None. | — |
 | Other: sorting and matching | Sorting follows Slovenian rules (č, š, ž after c, s, z). Search ignores case and accents. | Q-11a, Q-23 |
-| Other: country list | The ISO 3166-1 list of countries, names in the active language. [ASSUMPTION] The interview asks for "a standard country list" and does not name one (Q-08b). | Q-08b |
+| Other: country list | The ISO 3166-1 list of countries, names in the active language. Confirmed by the developer (Q-08b). | Q-08b |
 | Other: retention in Trash | 30 days for a contact and for a group (BR-04). | Q-06c, Q-06f |
 | Other: page size | 25 rows per page in lists. | Q-23b |
 
@@ -30,10 +30,10 @@ Facts that hold for the whole project, written once. Stories, rules and tests us
 | BR-01 | The system shall return to a user data of a group only when the user is a member of the group; for a group where the user is not a member, or which does not exist, the system shall answer "not found" and shall reveal nothing about it. A group in Trash counts as not existing for members who are not Owners of it. | US-002, US-003, US-004, US-005, US-009, US-010, US-011, US-012, US-015, US-016, US-017, US-021 | Q-13, Q-12, Q-32a |
 | BR-02 | The system shall allow an operation only to the roles marked in the permission matrix below; if a member's role is not marked, then the system shall refuse it (403); the role is checked at every request. | US-003 to US-007, US-008, US-011 to US-015, US-017, US-019 to US-022 | Q-06, Q-06b, Q-06d |
 | BR-03 | While a user's e-mail is not verified, the system shall give the user access to no group and no contact, and shall match no invitation. | US-001, US-002, US-003, US-017 | Q-20 |
-| BR-04 | The system shall keep a contact or a group in Trash for 30 days from the moment it was moved there and shall restore it on request until then; once the 30 days are over the system shall delete it permanently, with its personal data, at the next run of its cleanup, which runs at least once a day. [ASSUMPTION] "at least daily". | US-012, US-015, US-022 | Q-06c, Q-06f |
+| BR-04 | The system shall keep a contact or a group in Trash for 30 days from the moment it was moved there and shall restore it on request until then; once the 30 days are over the system shall delete it permanently, with its personal data, at the next run of its cleanup, which runs at least once a day. Confirmed by the developer: "at least daily". | US-012, US-015, US-022 | Q-06c, Q-06f |
 | BR-05 | If a contact breaks a constraint of the data model for a contact (formats, limits, required one-of-four, country list), then the system shall refuse the whole save and store nothing. | US-003, US-005, US-022 | Q-08a, Q-08b |
 | BR-06 | When a contact is erased permanently (after 30 days in Trash or by "Delete forever"), the system shall delete the contact with its tags, attributes and versions, and shall keep its History entries with the contact's personal data replaced by the erasure marker. | US-012, US-013, US-019, US-022 | Q-06c, Q-06e, Q-29b |
-| BR-07 | The system shall compare texts in two ways: *ignoring case* (tag names, attribute keys, e-mail addresses of invitations and duplicates) and *ignoring case and accents* (search, attribute values and company in filters, names and company in duplicate detection). | US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-021, US-022 | Q-10, Q-23, Q-27 |
+| BR-07 | The system shall compare texts in two ways: *ignoring case* (group names per Owner, tag names, attribute keys, e-mail addresses of invitations and duplicates) and *ignoring case and accents* (search, attribute values and company in filters, names and company in duplicate detection). | US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-021, US-022 | Q-10, Q-23, Q-27 |
 
 ### Permission matrix (BR-02)
 
@@ -51,7 +51,9 @@ O = Owner, E = Editor, V = Viewer. A member's role is per group. "—" = not all
 | See a contact's History and the group-wide History | yes | yes | — |
 | See, compare and restore versions | yes | yes | — |
 | Find duplicates; mark "not a duplicate"; merge | yes | yes | — |
-| See the member list; invite; cancel an invitation; change a role; remove a member | yes | — | — |
+| See the member list (name, e-mail, role) | yes | yes | yes |
+| Invite; cancel an invitation; see pending invitations; change a role; remove a member | yes | — | — |
+| Rename the group | yes | — | — |
 | Leave the group (not the last Owner) | yes | yes | yes |
 | Delete the group; see "Deleted groups"; restore a group | yes | — | — |
 
@@ -65,7 +67,7 @@ Types are logical; the plan decides the storage. "Personal data" marks data abou
 | User | name | text | yes | 1 to 100 characters | yes |
 | User | email | text | yes | valid e-mail, lowercase; removed from History entries on account deletion | yes |
 | Group | id | generated id | yes | unique | no |
-| Group | name | text | yes | 1 to 100 characters after trimming [ASSUMPTION]; not unique | no |
+| Group | name | text | yes | 1 to 100 characters after trimming; checked on creating, renaming and restoring (developer answer): no Owner of the group may own two groups not in Trash with the same name ignoring case ("Acme" and "ACME"); different Owners may use the same name; promoting a member to Owner is never refused for a name, so a same-name pair can then exist | no |
 | Group | state | active or in Trash | yes | see lifecycle | no |
 | Group | trashed_at | UTC timestamp | when in Trash | — | no |
 | Group | created_at, created_by | UTC timestamp, User id | yes | — | no |
@@ -75,7 +77,7 @@ Types are logical; the plan decides the storage. "Personal data" marks data abou
 | Contact | id, group | ids | yes | the group never changes | no |
 | Contact | first_name, last_name | text | no | at most 255 characters | yes |
 | Contact | email | text | no | valid e-mail format when present, stored in lowercase, one address, at most 255 characters; not unique in the group | yes |
-| Contact | phone | text | no | stored as typed; only digits, spaces and `+ ( ) - . /`, at most 30 characters [ASSUMPTION]; one phone | yes |
+| Contact | phone | text | no | stored as typed; only digits, spaces and `+ ( ) - . /`, at most 30 characters (confirmed by the developer); one phone | yes |
 | Contact | company, job_title | text | no | at most 255 characters | yes |
 | Contact | street, postal_code, city | text | no | at most 255 characters each | yes |
 | Contact | country | ISO 3166-1 country code | no | chosen from the country list | yes |
@@ -123,7 +125,7 @@ The ubiquitous language of the project (`general/requirements-standard.md`): eve
 | Trash | The state of a deleted contact or group during its 30 days, restorable. | `TRASHED` (state), `trashedAt` | recycle bin, archive, soft delete |
 | Delete forever | The Owner's immediate permanent erasure of a contact in Trash. | `eraseContact` | purge (by hand), hard delete |
 | erasure | Permanent deletion of a contact's data, leaving the anonymised History. | `erase` | removal, wipe |
-| erasure marker | The text "[erased]" in History values of an erased contact. | `ERASED_MARKER` | placeholder, redacted |
+| erasure marker | The text shown instead of the personal data in History values of an erased contact, in the active UI language: "[izbrisano]" (Slovenian) or "[erased]" (English). | `ERASED_MARKER` | placeholder, redacted |
 | selection | The contacts ticked in the list for export. | `Selection` | basket, cart |
 | export | The Excel (.xlsx) file of the ticked contacts. | `Export` | download, report |
 | duplicate set | Contacts reported as probably the same person, marked certain or probable. | `DuplicateSet` | duplicate group, cluster |
