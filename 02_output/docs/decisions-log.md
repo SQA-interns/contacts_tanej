@@ -304,6 +304,17 @@
 - Type: approval
 - Trigger: 19 wireframes (`docs/wireframes/WF-01` to `WF-19`; each has `_mobile.png`, `_tablet.png`, `_desktop.png` beside its `.html`, shared `wireframe.css`) cover every screen of specification 9.3 at the three widths (UI-22). Choices inside them: no global search in the header (no story needs it); tablet puts the navigation behind the Menu button and hides phone, city and country in the contacts list.
 - Options: 1. (proposed) Approved with the customer. 2. Approved by the developer only. 3. Change (say what, per `WF-nn`).
-- Human response: none
-- Resolution: pending review
+- Human response: option 2, approved by the developer only; the customer has not seen the wireframes (2026-11-09, `/wireframes D-26: 2`)
+- Resolution: option 2
+- Overrides: none
+
+## D-27: Tab row on mobile is cut off in the wireframes
+- Timestamp: 2026-11-09
+- Session: W wireframes
+- Class: open
+- Type: non-blocking
+- Trigger: note from the developer with the answer to D-26: at 375 px the tab row (Contacts, Trash, Tags, History, Members, Duplicates) is cut off at the right edge in the wireframes. The wireframes stay as approved (D-26); the note binds the build (`/implement`, `/design`).
+- Options: 1. (proposed) The real screen wraps the tabs onto a second line, so nothing is hidden. 2. The real screen scrolls the tab row sideways with a visible hint that more tabs follow. Either satisfies the developer's note; the choice is made once, in the shared tab component, and applies at every width where the row does not fit.
+- Human response: the developer's note allows either option (2026-11-09)
+- Resolution: option 1, pending review
 - Overrides: none
