@@ -18,5 +18,14 @@
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] }
   },
-  "include": ["src", "e2e", "scripts", "vite.config.ts", "playwright.config.ts", "stryker.config.json"]
+  "include": [
+    "src",
+    "checks",
+    "acceptance",
+    "e2e",
+    "scripts",
+    "vite.config.ts",
+    "playwright.config.ts",
+    "stryker.config.json"
+  ]
 }

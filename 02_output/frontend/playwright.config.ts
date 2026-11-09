@@ -1,16 +1,24 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Browser tests (NFR-07: Chromium, Firefox, WebKit). Screenshots at the three widths of UI-22 are
- * written by the tests to ../logs/screenshots. The skeleton runs against the built app (vite preview);
- * the end-to-end scenarios of e2e-scenarios.md run against the Compose stack (PLAYWRIGHT_BASE_URL).
+ * Browser tests (NFR-07: Chromium, Firefox, WebKit). Three kinds, by folder:
+ * - checks/      the skeleton and screen checks (three widths of UI-22, accessibility); screenshots are
+ *                written to ../logs/screenshots. They run against the built app (vite preview).
+ * - acceptance/  the browser acceptance tests of the stories (phase 3, frozen).
+ * - e2e/         the end-to-end tests of e2e-scenarios.md, one per scenario (phase 3, frozen).
+ * acceptance/ and e2e/ run against the real local stack (docker compose up, see acceptance/support.ts):
+ * set PLAYWRIGHT_BASE_URL to the web app of the stack (http://localhost:5173). They share one database, so
+ * they run one at a time.
  */
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:4173';
 
 export default defineConfig({
-  testDir: './e2e',
+  testDir: '.',
+  testMatch: ['checks/**/*.spec.ts', 'acceptance/**/*.spec.ts', 'e2e/**/*.spec.ts'],
   outputDir: './test-results',
   reporter: [['list']],
+  workers: 1,
+  fullyParallel: false,
   use: { baseURL, trace: 'retain-on-failure' },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
