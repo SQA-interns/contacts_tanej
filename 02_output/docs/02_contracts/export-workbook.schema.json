@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contact-groups.example/schemas/export-workbook.schema.json",
+  "title": "Model of the exported .xlsx file (interface: Excel export, US-011)",
+  "description": "A logical model of the workbook the backend writes: tests read the file back and compare it with this model (DoD-P04). Columns, in this order: the 11 predefined fields, Tags, then one column per attribute key used in the selection (keys compared ignoring case, alphabetical, spelling of the first contact in export order, D-21). Headers and country names use the language of the request. Every cell is text; a text starting with = + - or @ is written as plain text (SR-08, R-011-08). Header row bold and frozen (R-011-07). File name <group name>_<YYYY-MM-DD>.xlsx, date in Europe/Ljubljana, characters \\ / : * ? \" < > | and control characters replaced by _ (R-011-06, D-21).",
+  "type": "object",
+  "required": ["fileName", "sheet"],
+  "properties": {
+    "fileName": { "type": "string", "pattern": "^[^\\\\/:*?\"<>|\\u0000-\\u001f]+_\\d{4}-\\d{2}-\\d{2}\\.xlsx$" },
+    "sheet": {
+      "type": "object",
+      "required": ["headers", "frozenHeaderRows", "rows"],
+      "properties": {
+        "headers": {
+          "type": "array",
+          "prefixItems": [
+            { "enum": ["Ime", "First name"] },
+            { "enum": ["Priimek", "Last name"] },
+            { "enum": ["E-pošta", "E-mail"] },
+            { "enum": ["Telefon", "Phone"] },
+            { "enum": ["Podjetje", "Company"] },
+            { "enum": ["Delovno mesto", "Job title"] },
+            { "enum": ["Ulica in hišna številka", "Street and house number"] },
+            { "enum": ["Poštna številka", "Postal code"] },
+            { "enum": ["Kraj", "City"] },
+            { "enum": ["Država", "Country"] },
+            { "enum": ["Opombe", "Notes"] },
+            { "enum": ["Oznake", "Tags"] }
+          ],
+          "items": { "type": "string", "description": "Attribute keys after the twelfth header." },
+          "minItems": 12
+        },
+        "frozenHeaderRows": { "const": 1 },
+        "rows": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": { "type": "array", "items": { "type": "string" }, "description": "One row per ticked contact in the order of the current list sort; tags joined by comma and space, sorted by Slovenian rules (AC-011-03, D-21); no contact in Trash or of another group." }
+        }
+      }
+    }
+  }
+}
