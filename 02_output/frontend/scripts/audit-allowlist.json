@@ -1,0 +1,7 @@
+[
+  {
+    "advisory": "GHSA-m9gg-hp2v-232j",
+    "decision": "D-08",
+    "reason": "@grpc/grpc-js through @firebase/firestore: Firestore is never imported and is not in the production bundle; recorded as Medium and re-checked by /verify on the built bundle."
+  }
+]
