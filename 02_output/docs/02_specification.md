@@ -128,4 +128,64 @@ The contact rules are one class (`ContactRules.validate(ContactInput)`) used by 
 
 Lifecycles are as in `business-rules.md`: Group active → in Trash → active or gone; Contact active → in Trash → active or gone; Invitation pending → accepted or cancelled (row deleted) or expired; Membership created on acceptance or group creation, removed by Owner, leaving, account deletion; the last Owner cannot be removed. History entries are written once and only anonymised.
 
-<!-- next: 4. Behaviour per story -->
+## 4. Behaviour per story
+
+Each subsection says which module implements which rule. A rule that joins several statements is split into clauses and each clause has its own test (F-16). "History" means a call of `HistoryRecorder` in the same transaction (AR-09); "version" means `VersionService.record`. Increment 1 holds US-001 to US-019, increment 2 holds US-020 to US-022.
+
+### 4.1 US-001 Register and sign in (frontend `features/auth`, Firebase SDK)
+
+- R-001-01 `SignInPage` offers e-mail/password and "Sign in with Google" (`signInWithEmailAndPassword`, `signInWithPopup(GoogleAuthProvider)`); no other provider, no MFA. R-001-02 `RegisterPage` requires a name of 1 to 100 characters, then `updateProfile({displayName})` (the name reaches the token's `name` claim after a token refresh, which the page forces); Google uses the account name; a Google account with no or an over-long name is handled by the backend (D-20). R-001-03 password under 8 characters is refused by the form before Firebase is called. R-001-04 `sendEmailVerification` after `createUserWithEmailAndPassword`. R-001-05 `VerifyEmailPage` (send again, sign out) is the only screen while `emailVerified` is false; the guard blocks every group route; the API independently answers 403 `EMAIL_NOT_VERIFIED` (BR-03). R-001-06 `sendPasswordResetEmail`. R-001-07 Firebase's error is shown with the text of `auth.<firebase code>` in the language files; nothing opens. R-001-08 `browserLocalPersistence` (the SDK's own store, SR-20); "Sign out" calls `signOut` and routes to `/sign-in`. R-001-09 a verified user whose `GET /groups` is empty sees the empty state with one button "Create a group".
+- Covers: R-001-01..09, AC-001-01..08, EX-001-01..07. Tests: Vitest component tests with a fake `Auth`; E2E-01 against the emulator.
+
+### 4.2 US-002 Create a group and list my groups (`GroupController`, `GroupService`, `AccessService`)
+
+- R-002-01 `GroupService.create`: verified user, valid name → insert `groups` and an OWNER `memberships` row in one transaction, return the group. R-002-02 `ContactRules`-style `GroupName` rule (trim, 1 to 100). R-002-03 name rule: under the advisory locks of ADR-03, refuse (409 `GROUP_NAME_TAKEN`) when any Owner of the group has another group not in Trash with an equal name (`lower()`); applied on create (the creator), rename (every Owner, the group itself excluded, so a capitalisation change passes) and restore (R-015-10); promotion never calls it. R-002-04 `GroupRepository.findByMember(userId)` returns groups with state `ACTIVE` and the user's role. R-002-05 no limit. R-002-06, R-002-07 `GET /groups/{groupId}` and every other group route start with `AccessService`: a non-member gets the one 404. R-002-08 `PATCH /groups/{groupId}`: Owner only (403 else), same rules, refused for a group in Trash (D-20 reading 3: the group is invisible to non-Owners and the Owner is refused with 404 `NOT_FOUND`, because only restore is allowed for a trashed group, D-17); History `GROUP_RENAMED` with old and new name.
+- Covers: R-002-01..08, AC-002-01..10, EX-002-01..05.
+
+### 4.3 US-003 Invite people to a group (`InvitationController`, `InvitationService`)
+
+- R-003-01 `POST /invitations` (Owner): insert row (lowercase e-mail, role any of three). R-003-02 e-mail rule of section 3.1. R-003-03 refuse 409 `ALREADY_MEMBER` (e-mail of a member, compared `lower()` with `users.email`) and 409 `INVITATION_PENDING`. R-003-04 count of pending (not expired) rows at 20 → 409 `INVITATION_LIMIT`; counted under the group row lock so two requests cannot pass at 19. R-003-05 `InvitationService.acceptFor(user)` runs at the start of `GET /me` and `GET /groups` for a user with verified e-mail: for each pending, non-expired invitation with the user's e-mail, create the membership with the invited role and delete the invitation (D-20 reading 4); a user already a member keeps the existing role and the invitation is deleted. R-003-06 pending means `created_at > now - 14 days` (ADR-08). R-003-07 `DELETE` removes the row. R-003-08 `GET /invitations` (Owner) lists e-mail, role, `expiresAt`. R-003-09 no mail code exists (SR-17; a dependency test). R-003-10 the verified-e-mail filter stops everything before `acceptFor`. R-003-11 403 for non-Owners; History `MEMBER_INVITED` and `INVITATION_CANCELLED` come with US-013.
+- Covers: R-003-01..11, AC-003-01..10, EX-003-01..08.
+
+### 4.4 US-004 Manage members and roles (`MemberController`, `MemberService`)
+
+- R-004-01 `GET /members` for every member (name, e-mail, role). R-004-02 `PUT /members/{userId}` (Owner): update role; applies at the next request because the role is read per request; same role is a no-op. R-004-03 several Owners are allowed. R-004-04 `DELETE /members/{userId}` removes the membership only; contacts and History keep the name. R-004-05 afterwards `AccessService` answers 404. R-004-06 `POST /leave` is a removal of oneself by oneself. R-004-07 inside the group row lock, count Owners after the change; zero → 409 `LAST_OWNER`; two parallel requests serialise on the lock so one fails (AC-004-06). R-004-08 403 for non-Owners. R-004-09 no system administrator: no endpoint lists other users' groups. History `ROLE_CHANGED`, `MEMBER_REMOVED` (a leaving recorded as a removal by the member) come with US-013.
+- Covers: R-004-01..09, AC-004-01..08, EX-004-01..05.
+
+### 4.5 US-005 Create, view and edit a contact (`ContactController`, `ContactService`, `ContactRules`)
+
+- R-005-01 `POST /contacts` (Owner, Editor): validate, insert, record version 1, History `CONTACT_CREATED`. R-005-02 one-of-four. R-005-03 all broken fields in one 400 (EX-005-10). R-005-04 lowercase e-mail. R-005-05 no uniqueness. R-005-06 `GET /contacts/{id}` for every member returns fields, tags, attributes, `revision`, `versionNumber`. R-005-07 `PUT` saves with the revision (ADR-03): row lock, state check, revision check, no-op check, update, `revision + 1`, version, History, one transaction. R-005-08 a different revision → 409 `CONFLICT` with the current contact and nothing written (also for a stale save after a group-wide tag change, D-19). R-005-09 403 for Viewers on create and save. R-005-10 a contact in Trash → 409 `CONTACT_IN_TRASH` (EX-005-12). A contact of another group or a malformed id → 404 (EX-005-11).
+- Covers: R-005-01..10, AC-005-01..10, EX-005-01..12.
+
+### 4.6 US-006 Tag contacts (`ContactService` save path, `TagService`)
+
+- R-006-01, R-006-02 the save takes tag names; `TagService.resolve(groupId, names)` finds tags by `lower(name)` or creates with the typed spelling; duplicates on one contact collapse (EX-006-05). R-006-03, R-006-04 `TagName` rule and 50 limit, refusing the whole save. R-006-05 tags are per group by the foreign key and every query filters by group. R-006-06 tags missing from the saved list are detached from this contact only. R-006-07 after every save, trash erasure and tag operation, tags with no `contact_tags` row are deleted. R-006-08 no code reads tags except display, search, filters, export (no behaviour, AC-006-08). R-006-09 Viewers read tags; saving is 403. R-006-10 `GET /tags?q=` suggests tags of the group, never forced. History `TAG_CHANGED` per added or removed tag (US-013); version recorded when the tag set changes (US-019).
+- Covers: R-006-01..10, AC-006-01..08, EX-006-01..08.
+
+### 4.7 US-007 Rename and delete tags (`TagController`, `TagService`)
+
+- R-007-01 `PATCH /tags/{tagId}` (Owner, Editor): rename the tag row, which renames it on every contact including those in Trash. R-007-02 another tag with an equal lower-case name → 409 `TAG_NAME_TAKEN`. R-007-03 capitalisation-only change updates the spelling. R-007-04 `TagName` rule. R-007-05 `DELETE` removes the tag and its links; no contact is deleted. R-007-06 no version; `revision` of each affected contact is incremented (D-19). R-007-07 403 for Viewers. R-007-08 one History entry per affected contact (`TAG_RENAMED`, `TAG_DELETED`) with the names, written in the same transaction (ADR-05). EX-007-01 same name exactly: nothing changes, no entry.
+- Covers: R-007-01..08, AC-007-01..08, EX-007-01..05.
+
+### 4.8 US-008 Attributes (`ContactService` save path)
+
+- R-008-01 saved with the contact. R-008-02 duplicate key per contact ignoring case → `DUPLICATE_KEY`. R-008-03 key 1 to 50 after trimming, value up to 255, empty value allowed. R-008-04 at most 50. R-008-05 `GET /attribute-keys?q=` suggests keys of the group. R-008-06 values are text only. R-008-07 attributes absent from the saved list are removed from this contact only. R-008-08 Viewers read them; saving is 403. History `ATTRIBUTE_CHANGED`; version on change.
+- Covers: R-008-01..08, AC-008-01..07, EX-008-01..06.
+
+### 4.9 US-009 List and search (`SearchController`, `SearchService`)
+
+- R-009-01 `POST /contacts/search`: active contacts of the group, 25 per page, default sort last name then first name with `COLLATE "sl-SI-x-icu"`, total of matches; a page past the last returns the last (EX-009-09). R-009-02 sortable columns last name, first name, e-mail, phone, company, city, country, both directions, from the fixed list (SR-07); empty last name sorts last ascending (EX-009-07). R-009-03 every word contained in a folded field, tag or attribute value (ADR-04); several words must all match. R-009-04 phone and notes never searched. R-009-05 the response has `total: 0`; the web app shows "No contacts match" and "Clear filters". R-009-06 empty group: empty state, "Add contact" only for Owner and Editor (the web app knows the role from `GET /groups/{id}`). R-009-07 no Trash, no other group. R-009-08 the web app keeps search text and filters while paging or sorting (it sends them in every request). R-009-09 a row opens the contact screen. R-009-10 same endpoint and result for Viewers.
+- Covers: R-009-01..10, AC-009-01..11, EX-009-01..09.
+
+### 4.10 US-010 Filters (`SearchService`)
+
+- R-010-01 `TAGS_ALL`, R-010-02 `TAGS_ANY`, R-010-03 `TAG_NOT` (includes untagged contacts), R-010-04 `ATTRIBUTE_EQUALS` (key `lower`, value folded), R-010-05 `ATTRIBUTE_EXISTS` (also an empty value), R-010-06 `COUNTRY`, R-010-07 `COMPANY` (folded equality; `GET /companies?q=` suggests). R-010-08 all conditions and the search text combine with AND in one parameterised query. R-010-09 the contract has no other condition type and no saved filter. R-010-10 the web app re-sends the list request when a condition is removed or cleared. R-010-11 active conditions are shown as removable chips. Unknown tag names match nothing (EX-010-02, EX-010-05).
+- Covers: R-010-01..11, AC-010-01..10, EX-010-01..08.
+
+### 4.11 US-011 Export (`ExportController`, `ExportService`)
+
+- R-011-01 the list shows tick boxes, "select all on this page" and "select all N results" for Owner and Editor only. R-011-02 selection survives paging and sorting and is cleared when search text or filter changes (web app `Selection` state). R-011-03 Export disabled without a tick. R-011-04 one sheet, header plus one row per contact in the current sort, own group only. R-011-05 columns, headers, country names in the request language, alphabetical attribute keys (D-21). R-011-06 file name and characters (D-21). R-011-07 header bold and frozen, e-mail and phone cells as text. R-011-08 a value starting `=`, `+`, `-`, `@` is stored as a string with the quote-prefix style. R-011-09 over 10,000 → 400 `TOO_MANY_CONTACTS`, no file. R-011-10 403 for Viewers, no tick box or button. R-011-11 UTF-8 package. R-011-12 only active contacts of the group. History `EXPORTED` with the count (R-013-04).
+- Covers: R-011-01..12, AC-011-01..13, EX-011-01..08.
+
+<!-- next: 4.12 -->
+
