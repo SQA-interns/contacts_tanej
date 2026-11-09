@@ -1,0 +1,5 @@
+Stories: 22; tasks: 66; ids defined in stories: 582
+Every R, AC and EX of every story is covered by a task.
+Every story is in exactly one increment.
+Every story has at least one task.
+No story has more than six tasks.
