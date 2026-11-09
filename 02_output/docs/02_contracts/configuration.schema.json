@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contact-groups.example/schemas/configuration.schema.json",
+  "title": "Configuration of the system by environment variable (NFR-12, ES-01, AR-12)",
+  "description": "One property per environment variable. `required` lists the variables with no default in production; the backend refuses to start when one is missing. Secrets are listed in project/00_setup/secrets.env.example. Defaults for test and local come from the Spring profile `local` and from docker-compose.yml, never from code.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["DB_URL", "DB_USER", "DB_PASSWORD", "FIREBASE_PROJECT_ID", "FIREBASE_WEB_API_KEY", "FIREBASE_AUTH_DOMAIN", "APP_ALLOWED_ORIGIN"],
+  "properties": {
+    "DB_URL": { "type": "string", "pattern": "^jdbc:postgresql://", "description": "JDBC URL of PostgreSQL. backend." },
+    "DB_USER": { "type": "string", "minLength": 1, "description": "Database user. backend." },
+    "DB_PASSWORD": { "type": "string", "minLength": 1, "description": "Database password. Secret. backend and the database image." },
+    "FIREBASE_PROJECT_ID": { "type": "string", "minLength": 1, "description": "Expected issuer and audience of ID tokens (SR-01); also read by the web app. `demo-contacts` for the emulator." },
+    "FIREBASE_WEB_API_KEY": { "type": "string", "minLength": 1, "description": "Web app key of the Firebase project; `fake-api-key` with the emulator. Secret-like, listed in secrets.env.example. frontend container." },
+    "FIREBASE_AUTH_DOMAIN": { "type": "string", "minLength": 1, "description": "Auth domain of the Firebase project. frontend container." },
+    "FIREBASE_AUTH_EMULATOR_HOST": { "type": "string", "default": "", "pattern": "^$|^[^:/]+:[0-9]+$", "description": "host:port of the Authentication Emulator; accepts its unsigned tokens in the backend. Must be empty in production." },
+    "FIREBASE_AUTH_EMULATOR_URL": { "type": "string", "default": "", "pattern": "^$|^https?://", "description": "URL of the emulator as the browser reaches it. frontend container; empty in production." },
+    "APP_ALLOWED_ORIGIN": { "type": "string", "format": "uri", "description": "The one CORS origin (SR-05). backend." },
+    "TRASH_CLEANUP_CRON": { "type": "string", "default": "0 30 3 * * *", "description": "Spring six-field cron of the trash cleanup (AR-10); at least once a day (BR-04)." },
+    "RATE_LIMIT_PER_MINUTE": { "type": "integer", "minimum": 1, "default": 100, "description": "Requests per user and minute (SR-09, R-017-08)." },
+    "LOG_LEVEL": { "type": "string", "enum": ["TRACE", "DEBUG", "INFO", "WARN", "ERROR"], "default": "INFO" },
+    "SPRING_PROFILES_ACTIVE": { "type": "string", "description": "`local` only on a developer machine; never in production." }
+  }
+}
