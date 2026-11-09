@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contact-groups.example/schemas/id-token-claims.schema.json",
+  "title": "Claims of the Firebase ID token the backend relies on (interface: token verification, SR-01)",
+  "description": "The backend verifies signature (Google's published keys), issuer, audience and expiry, then reads only these claims. Membership and role are never read from the token (security-requirements.md). The Authentication Emulator issues the same claims in an unsigned token, accepted only when FIREBASE_AUTH_EMULATOR_HOST is set.",
+  "type": "object",
+  "required": ["iss", "aud", "sub", "exp", "iat", "auth_time", "email", "email_verified"],
+  "properties": {
+    "iss": { "type": "string", "pattern": "^https://securetoken\\.google\\.com/.+$", "description": "https://securetoken.google.com/<FIREBASE_PROJECT_ID>" },
+    "aud": { "type": "string", "description": "FIREBASE_PROJECT_ID" },
+    "sub": { "type": "string", "minLength": 1, "description": "Firebase user id (User.id). A user id in deleted_accounts is refused with 401 (R-016-06)." },
+    "exp": { "type": "integer" },
+    "iat": { "type": "integer" },
+    "auth_time": { "type": "integer", "description": "Time of the last sign-in, seconds; an account deletion needs it within 5 minutes (R-016-07)." },
+    "email": { "type": "string", "description": "Stored in lowercase as User.email." },
+    "email_verified": { "type": "boolean", "description": "False gives 403 EMAIL_NOT_VERIFIED on every endpoint except /health (R-017-03, BR-03)." },
+    "name": { "type": "string", "description": "Display name. Empty or missing: the part of the e-mail before the at sign; longer than 100 characters: cut to 100 (D-20)." }
+  }
+}
