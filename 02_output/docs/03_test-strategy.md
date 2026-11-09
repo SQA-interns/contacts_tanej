@@ -76,7 +76,46 @@ Run command (from the project root; the file `hidden-tests/hidden.json` holds it
 
 ## First run of the frozen tests (before any implementation)
 
-(filled below after the run)
+Run on the skeleton (components and contracts of phase 2, no story built). Logs: `out/logs/s4-backend-frozen-run.log` (backend, 326 tests), `out/logs/s4-browser-first-run.md` (browser, 104 tests). A test counts as failed for a behavioural reason when it stops at an assertion or at a missing element or endpoint of the story, never at a build or harness error; the harness itself was proved on the skeleton first (a valid emulator token is accepted: the unmapped endpoints answer 500 `INTERNAL_ERROR`, not 401; `/health`, the 401 for a missing token and the security headers of `SkeletonIT` pass).
+
+| Story or group | Tests | Failed | Reason (one line per group) |
+|---|---|---|---|
+| US-002 groups | 15 | 15 | `POST /groups` does not exist (500 `INTERNAL_ERROR` on an unmapped path) |
+| US-003 invitations | 18 | 18 | no group endpoints, so the scene cannot be set; invitations do not exist |
+| US-004 members | 13 | 13 | as US-003 |
+| US-005 contacts | 22 | 22 | as US-003 (group and contact endpoints missing) |
+| US-006 tags | 16 | 16 | as US-003 |
+| US-007 tag administration | 13 | 13 | as US-003 |
+| US-008 attributes | 13 | 13 | as US-003 |
+| US-009 list and search | 19 | 19 | as US-003 |
+| US-010 filters | 17 | 17 | as US-003 |
+| US-011 export | 17 | 17 | as US-003 |
+| US-012 Trash | 16 | 16 | as US-003 |
+| US-013 History | 20 | 20 | as US-003 |
+| US-014 group-wide History | 13 | 13 | as US-003 |
+| US-015 group Trash | 14 | 14 | as US-003 |
+| US-016 account | 10 | 10 | `DELETE /me` and the group endpoints do not exist |
+| US-017 secured API | 21 | 21 | group and contract endpoints missing; `/v3/api-docs` lacks `/health`; the health check does not answer 503 with the database paused (the request times out) |
+| US-017 rate limit | 2 | 2 | no rate limiter: no 429 and no `Retry-After` |
+| US-019 versions | 12 | 12 | as US-003 |
+| US-020 version restore | 14 | 14 | as US-003 |
+| US-021 duplicates | 21 | 21 | as US-003 |
+| US-022 merge | 19 | 19 | as US-003 |
+| Large group (EX-009-08, EX-010-07, AC-011-09, EX-011-01) | 4 | 4 | the shared set-up (a group of 10,001 contacts) fails at `POST /groups`; the runner reports it as one error for the class |
+| Backend acceptance, total | 326 (+3 not run singly) | 326 (+3) | |
+| Browser: US-001 sign in and register | 15 | 15 | no sign-in, register or verify screens: the shell shows only "Dobrodošli" (14 stop at the missing form fields or buttons, 1 at the Google popup) |
+| Browser: US-018 language | 10 | 10 | AC-018-01 and EX-018-01 passed on the skeleton because the shell already opens in Slovenian; the test was strengthened (the first visit must be the sign-in screen with one e-mail field) and now fails at "expected 1 text box, found 0"; the others need screens that do not exist |
+| Browser: groups, members, account | 18 | 18 | the scene needs `POST /groups` (500) |
+| Browser: contact form, tags, attributes | 13 | 13 | as above |
+| Browser: list, filter, export | 14 | 14 | as above |
+| Browser: Trash and History | 13 | 13 | as above |
+| Browser: versions, duplicates, merge | 13 | 13 | as above |
+| End-to-end E2E-01 to E2E-08 | 8 | 8 | E2E-01 stops at the missing register form; the others at the scene (`POST /groups` 500) |
+| Browser, total (Chromium) | 104 | 104 (after the fix of AC-018-01) | first run: 103 failed, 1 passed |
+
+Tests that passed on the skeleton before they were strengthened: AC-018-01 / EX-018-01 (browser), EX-017-01 and EX-017-09 (backend: a Basic header gives 401 and the health check needs no token, both already true in the skeleton). The two backend tests now also call `GET /groups` with a valid token, which fails until US-002 exists, so that they fail for the behaviour of the story. The hidden suite: see below.
+
+Hidden suite, run once through `hidden.json`: 251 cases (216 backend, 35 browser), 251 failed, 0 passed; the JUnit report `hidden-tests/report/junit.xml` was written. Categories: boundary 35, combination 83, invalid 14, other 94, role 25. The failures are the same behavioural ones as above (215 backend cases stop at `POST /groups`, one at the `/v3/api-docs` paths; the browser cases at the missing screens or at the scene). Three browser cases (R-018-01 to R-018-03) first passed on the skeleton's language switch; they were strengthened to need the sign-in screen and failed on the second run. The browser part of the first run could not start (a module-format error of the hidden Playwright configuration); that harness defect was fixed and the whole suite was run again, which is the run recorded here.
 
 ## Test measures (phase 5)
 
