@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- tech-stack.md: PMD with the quickstart rule set. Exclusions are listed with their reason. -->
+<ruleset name="contact-groups" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+  <description>PMD quickstart rule set</description>
+  <rule ref="rulesets/java/quickstart.xml">
+    <!-- SLF4J parameterised calls cost nothing when the level is off; a guard is noise. -->
+    <exclude name="GuardLogStatement"/>
+    <!-- The Spring Boot entry point must be instantiable by the framework. -->
+    <exclude name="UseUtilityClass"/>
+  </rule>
+</ruleset>
