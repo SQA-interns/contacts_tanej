@@ -263,4 +263,163 @@ class Us022MergeAcceptanceIT extends AcceptanceBase {
     assertThat(now(p[1]).path("state").asText()).isEqualTo("ACTIVE");
     assertThat(search(MARKO, gid, "").at("/total").asInt()).isEqualTo(2);
   }
+
+  @Test
+  void EX_022_01_withThreeContactsTheOldestSurvivesAndTwoGoToTrash() {
+    JsonNode a = contact("lastName", "Novak", "email", "x@example.com");
+    JsonNode b = contact("lastName", "Novak", "email", "x@example.com");
+    JsonNode c = contact("lastName", "Novak", "email", "x@example.com");
+    merge(
+            MARKO,
+            List.of(pick(c), pick(a), pick(b)),
+            chosen("lastName", "Novak", "email", "x@example.com"),
+            null)
+        .expect(200)
+        .at("/id");
+    assertThat(now(a).path("state").asText()).isEqualTo("ACTIVE");
+    assertThat(now(b).path("state").asText()).isEqualTo("TRASHED");
+    assertThat(now(c).path("state").asText()).isEqualTo("TRASHED");
+    assertThat(search(MARKO, gid, "").at("/total").asInt()).isEqualTo(1);
+  }
+
+  @Test
+  void EX_022_02_sameKeyAndSameValueNeedsNoChoiceAndGivesOneAttribute() {
+    JsonNode a =
+        contact(
+            "lastName",
+            "Novak",
+            "email",
+            "x@example.com",
+            "attributes",
+            arr(attr("kompetenca", "java")));
+    JsonNode b =
+        contact(
+            "lastName",
+            "Novak",
+            "email",
+            "x@example.com",
+            "attributes",
+            arr(attr("Kompetenca", "java")));
+    Res r =
+        merge(
+                MARKO,
+                List.of(pick(a), pick(b)),
+                chosen("lastName", "Novak", "email", "x@example.com"),
+                null)
+            .expect(200);
+    assertThat(r.at("/attributes")).hasSize(1);
+    assertThat(r.at("/attributes/0/value").asText()).isEqualTo("java");
+  }
+
+  @Test
+  void EX_022_03_withTheSameCreationTimeTheContactWithTheLowerIdSurvives() {
+    JsonNode a = contact("lastName", "Novak", "email", "x@example.com");
+    JsonNode b = contact("lastName", "Novak", "email", "x@example.com");
+    jdbc.update("UPDATE contacts SET created_at = (SELECT min(created_at) FROM contacts)");
+    String lower =
+        jdbc.queryForObject("SELECT id::text FROM contacts ORDER BY id LIMIT 1", String.class);
+    Res r =
+        merge(
+                MARKO,
+                List.of(pick(a), pick(b)),
+                chosen("lastName", "Novak", "email", "x@example.com"),
+                null)
+            .expect(200);
+    assertThat(r.at("/id").asText()).isEqualTo(lower);
+  }
+
+  @Test
+  void EX_022_04_aMergedAwayContactNotRestoredWithin30DaysIsErased() {
+    JsonNode[] p = pair();
+    merge(MARKO, List.of(pick(p[0]), pick(p[1])), chosen("lastName", "Novak"), null).expect(200);
+    clock.advance(Duration.ofDays(30).plusMinutes(1));
+    eventually(
+        () ->
+            get(MARKO, "/groups/" + gid + "/contacts/" + p[1].path("id").asText()).status() == 404,
+        "the merged-away contact is erased by the cleanup");
+    assertThat(now(p[0]).path("state").asText()).isEqualTo("ACTIVE");
+  }
+
+  @Test
+  void EX_022_05_theSameContactTwiceIsRefused() {
+    JsonNode a = contact("lastName", "Novak");
+    merge(MARKO, List.of(pick(a), pick(a)), chosen("lastName", "Novak"), null).expect(400);
+    assertThat(now(a).path("state").asText()).isEqualTo("ACTIVE");
+  }
+
+  @Test
+  void EX_022_06_aContactAlreadyInTrashIsRefused() {
+    JsonNode[] p = pair();
+    ObjectNode a = pick(p[0]);
+    ObjectNode b = pick(p[1]);
+    trash(MARKO, gid, p[1].path("id").asText());
+    merge(MARKO, List.of(a, b), chosen("lastName", "Novak"), null).expect(400);
+    assertThat(now(p[0]).path("state").asText()).isEqualTo("ACTIVE");
+  }
+
+  @Test
+  void EX_022_07_aChosenValueThatBreaksTheRulesIsRefusedByTheDataRules() {
+    JsonNode[] p = pair();
+    merge(
+            MARKO,
+            List.of(pick(p[0]), pick(p[1])),
+            chosen("lastName", "Novak", "email", "ana@"),
+            null)
+        .expectFieldError("email", "INVALID_FORMAT");
+    assertThat(now(p[1]).path("state").asText()).isEqualTo("ACTIVE");
+  }
+
+  @Test
+  void EX_022_08_chosenValuesEqualToTheSurvivorsStillConfirmAndRecordNoVersion() {
+    JsonNode a = contact("firstName", "Ana", "lastName", "Novak", "email", "x@example.com");
+    JsonNode b = contact("lastName", "Nova", "email", "x@example.com");
+    int version = now(a).path("versionNumber").asInt();
+    Res r =
+        merge(
+                MARKO,
+                List.of(pick(a), pick(b)),
+                chosen("firstName", "Ana", "lastName", "Novak", "email", "x@example.com"),
+                null)
+            .expect(200);
+    assertThat(r.at("/versionNumber").asInt()).isEqualTo(version);
+    assertThat(now(b).path("state").asText()).isEqualTo("TRASHED");
+  }
+
+  @Test
+  void AC_022_03_aKeyWithDifferentValuesNeedsAChoiceBeforeTheServerConfirms() {
+    JsonNode a =
+        contact(
+            "lastName",
+            "Novak",
+            "email",
+            "x@example.com",
+            "attributes",
+            arr(attr("kompetenca", "java")));
+    JsonNode b =
+        contact(
+            "lastName",
+            "Novak",
+            "email",
+            "x@example.com",
+            "attributes",
+            arr(attr("Kompetenca", "python")));
+    Res without =
+        merge(
+            MARKO,
+            List.of(pick(a), pick(b)),
+            chosen("lastName", "Novak", "email", "x@example.com"),
+            null);
+    without.expectError(400, "VALIDATION_FAILED");
+    assertThat(without.text()).contains("ATTRIBUTE_CHOICE_REQUIRED");
+    Res with =
+        merge(
+                MARKO,
+                List.of(pick(a), pick(b)),
+                chosen("lastName", "Novak", "email", "x@example.com"),
+                arr(attr("kompetenca", "python")))
+            .expect(200);
+    assertThat(with.at("/attributes")).hasSize(1);
+    assertThat(with.at("/attributes/0/value").asText()).isEqualTo("python");
+    assertThat(UUID.fromString(with.at("/id").asText())).isNotNull();
+  }
 }
