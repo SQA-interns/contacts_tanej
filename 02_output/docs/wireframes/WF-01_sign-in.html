@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF-01 Sign in – Contact Groups (wireframe)</title><link rel="stylesheet" href="wireframe.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <span class="logo" role="img" aria-label="Logo placeholder">Logo</span><a class="brand" href="#">Contact Groups</a>
+  <div class="header-tools">
+    
+    <div class="lang" role="group" aria-label="Language"><button type="button" class="btn" aria-pressed="false">SL</button><button type="button" class="btn" aria-pressed="true">EN</button></div>
+    
+  </div></div></header>
+<main id="main" class="wrap">
+
+<div class="pagehead"><h1>Sign in</h1></div>
+
+<div class="narrow card plain"><form class="form" aria-label="Sign in">
+    <div class="field "><label for="f1">E-mail <span class="req">(required)</span></label><input id="f1" type="email"  class=""   autocomplete="email"></div>
+    <div class="field "><label for="f2">Password <span class="req">(required)</span></label><input id="f2" type="password"  class=""   autocomplete="current-password"></div>
+    <button type="button" class="btn primary" >Sign in</button>
+    <button type="button" class="btn secondary" >Sign in with Google</button>
+    <p class="small"><a href="#">Forgot password?</a></p>
+    <p class="small">No account yet? <a href="#">Register</a></p>
+  </form></div>
+<section class="state" aria-label="State: Busy"><span class="tag">State: Busy</span><div class="narrow card plain"><form class="form"><div class="field "><label for="f3">E-mail <span class="req">(required)</span></label><input id="f3" type="email"  class=""   ></div><div class="field "><label for="f4">Password <span class="req">(required)</span></label><input id="f4" type="password"  class=""   ></div><button type="button" class="btn primary busy" aria-busy="true" disabled>Signing in …</button></form></div></section>
+<section class="state" aria-label="State: Error from Firebase (values kept)"><span class="tag">State: Error from Firebase (values kept)</span><div class="narrow card plain"><form class="form"><div class="notice strong" role="alert"><span class="ico" aria-hidden="true"></span><div>E-mail or password is not correct.</div></div><div class="field "><label for="f5">E-mail <span class="req">(required)</span></label><input id="f5" type="email"  aria-describedby="f5e" aria-invalid="true" class="invalid"   ><p class="err" id="f5e" role="alert">Check your e-mail address.</p></div><div class="field "><label for="f6">Password <span class="req">(required)</span></label><input id="f6" type="password"  class=""   ></div><button type="button" class="btn primary" >Sign in</button></form></div></section>
+<section class="state" aria-label="State: Forgot password"><span class="tag">State: Forgot password</span><div class="narrow card plain"><form class="form"><h2>Reset your password</h2><p class="muted">We send a link to this address.</p><div class="field "><label for="f7">E-mail <span class="req">(required)</span></label><input id="f7" type="email"  class=""   ></div><button type="button" class="btn primary" >Send link</button><button type="button" class="btn ghost" >Back to sign in</button></form></div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><span>Contact Groups</span><span>Slovenščina · English</span></div></footer></body></html>

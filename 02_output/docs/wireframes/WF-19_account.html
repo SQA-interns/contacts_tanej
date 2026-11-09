@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF-19 Account – Contact Groups (wireframe)</title><link rel="stylesheet" href="wireframe.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <span class="logo" role="img" aria-label="Logo placeholder">Logo</span><a class="brand" href="#">Contact Groups</a><nav class="nav" aria-label="Main"><a href="#">Groups</a><a href="#">Deleted groups</a><a href="#" aria-current="page">Account</a></nav>
+  <div class="header-tools">
+    <button type="button" class="btn secondary menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <div class="lang" role="group" aria-label="Language"><button type="button" class="btn" aria-pressed="false">SL</button><button type="button" class="btn" aria-pressed="true">EN</button></div>
+    <button type="button" class="btn secondary" aria-haspopup="menu">User menu</button>
+  </div></div></header>
+<main id="main" class="wrap">
+
+<div class="pagehead"><h1>Account</h1></div>
+
+<div class="stack narrow" style="margin:0"><section class="card plain" aria-labelledby="ad"><h2 id="ad">Your account</h2><div class="field"><span class="lbl">Name</span><span><span class="bar m" role="img" aria-label="Name"></span></span></div><div class="field"><span class="lbl">E-mail</span><span><span class="bar l" role="img" aria-label="E-mail"></span></span></div></section>
+  <section class="card plain" aria-labelledby="dd"><h2 id="dd">Delete account</h2><p>Your account is deleted and your name in the History is anonymised. This cannot be undone.</p><button type="button" class="btn secondary" >Delete account</button></section></div>
+<section class="state" aria-label="State: Dialog: Delete account"><span class="tag">State: Dialog: Delete account</span><div class="dialog " role="dialog" aria-modal="true" aria-label="Delete account"><h2>Delete account</h2><p>This deletes your account and removes you from all your groups. This cannot be undone.</p><div class="dlg-actions"><button type="button" class="btn secondary" >Cancel</button><button type="button" class="btn primary" >Delete account</button></div></div></section>
+<section class="state" aria-label="State: Refused: sole Owner"><span class="tag">State: Refused: sole Owner</span><div class="stack"><div class="notice strong" role="alert"><span class="ico" aria-hidden="true"></span><div>You are the only Owner of these groups. Make another member an Owner or delete the group first.</div></div><ul class="list"><li><span><span class="bar l" role="img" aria-label="Group name"></span></span><span class="badge">Only Owner</span></li><li><span><span class="bar m" role="img" aria-label="Group name"></span></span><span class="badge">Only Owner</span></li></ul></div></section>
+<section class="state" aria-label="State: Sign in again"><span class="tag">State: Sign in again</span><div class="dialog " role="dialog" aria-modal="true" aria-label="Sign in again to do this"><h2>Sign in again to do this</h2><p>For your safety we ask you to sign in again before deleting the account.</p><div class="dlg-actions"><button type="button" class="btn secondary" >Cancel</button><button type="button" class="btn primary" >Sign in</button></div></div></section>
+<section class="state" aria-label="State: Deleting"><span class="tag">State: Deleting</span><div class="panel" role="status" aria-busy="true"><button type="button" class="btn primary busy" disabled>Deleting …</button></div></section>
+<section class="state" aria-label="State: Error"><span class="tag">State: Error</span><div class="panel" role="alert"><h2>Could not load</h2><p>Something went wrong. Please try again.</p><button type="button" class="btn secondary" >Try again</button></div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><span>Contact Groups</span><span>Slovenščina · English</span></div></footer></body></html>

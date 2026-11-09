@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF-16 Duplicates – Contact Groups (wireframe)</title><link rel="stylesheet" href="wireframe.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <span class="logo" role="img" aria-label="Logo placeholder">Logo</span><a class="brand" href="#">Contact Groups</a><nav class="nav" aria-label="Main"><a href="#" aria-current="page">Groups</a><a href="#">Deleted groups</a><a href="#">Account</a></nav>
+  <div class="header-tools">
+    <button type="button" class="btn secondary menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <div class="lang" role="group" aria-label="Language"><button type="button" class="btn" aria-pressed="false">SL</button><button type="button" class="btn" aria-pressed="true">EN</button></div>
+    <button type="button" class="btn secondary" aria-haspopup="menu">User menu</button>
+  </div></div></header>
+<main id="main" class="wrap">
+
+<div class="pagehead"><h1><span class="bar title" role="img" aria-label="Group name"></span> <span class="badge">Owner</span></h1><div class="actions"><button type="button" class="btn primary" >Find duplicates</button></div></div>
+<nav class="tabs" aria-label="Group"><a href="#">Contacts</a><a href="#">Trash</a><a href="#">Tags</a><a href="#">History</a><a href="#">Members</a><a href="#" aria-current="page">Duplicates</a></nav>
+<ul class="list" aria-label="Duplicate sets"><li><div class="grow"><div><span class="badge">Certain</span> <span class="small">Same e-mail address</span></div><div class="chips"><span class="chip"><span class="bar m" aria-hidden="true"></span></span><span class="chip"><span class="bar m" aria-hidden="true"></span></span></div></div><div class="row-actions"><button type="button" class="btn secondary" >Merge</button><button type="button" class="btn ghost" >Not a duplicate</button></div></li><li><div class="grow"><div><span class="badge">Probable</span> <span class="small">Same name and company</span></div><div class="chips"><span class="chip"><span class="bar m" aria-hidden="true"></span></span><span class="chip"><span class="bar m" aria-hidden="true"></span></span></div></div><div class="row-actions"><button type="button" class="btn secondary" >Merge</button><button type="button" class="btn ghost" >Not a duplicate</button></div></li><li><div class="grow"><div><span class="badge">Probable</span> <span class="small">Same name and phone</span></div><div class="chips"><span class="chip"><span class="bar m" aria-hidden="true"></span></span><span class="chip"><span class="bar m" aria-hidden="true"></span></span></div></div><div class="row-actions"><button type="button" class="btn secondary" >Merge</button><button type="button" class="btn ghost" >Not a duplicate</button></div></li></ul>
+<section class="state" aria-label="State: Not searched yet"><span class="tag">State: Not searched yet</span><div class="panel"><h2>Find duplicates</h2><p>Search this group for contacts that are probably the same person.</p><button type="button" class="btn primary" >Find duplicates</button></div></section>
+<section class="state" aria-label="State: Searching"><span class="tag">State: Searching</span><div class="panel" role="status" aria-busy="true"><button type="button" class="btn primary busy" disabled>Searching …</button></div></section>
+<section class="state" aria-label="State: No duplicates found"><span class="tag">State: No duplicates found</span><div class="panel"><h2>No duplicates found</h2><p>Every contact in this group looks different.</p></div></section>
+<section class="state" aria-label="State: Error"><span class="tag">State: Error</span><div class="panel" role="alert"><h2>Could not load</h2><p>Something went wrong. Please try again.</p><button type="button" class="btn secondary" >Try again</button></div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><span>Contact Groups</span><span>Slovenščina · English</span></div></footer></body></html>

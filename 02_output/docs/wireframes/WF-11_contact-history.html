@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF-11 Contact History – Contact Groups (wireframe)</title><link rel="stylesheet" href="wireframe.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <span class="logo" role="img" aria-label="Logo placeholder">Logo</span><a class="brand" href="#">Contact Groups</a><nav class="nav" aria-label="Main"><a href="#" aria-current="page">Groups</a><a href="#">Deleted groups</a><a href="#">Account</a></nav>
+  <div class="header-tools">
+    <button type="button" class="btn secondary menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <div class="lang" role="group" aria-label="Language"><button type="button" class="btn" aria-pressed="false">SL</button><button type="button" class="btn" aria-pressed="true">EN</button></div>
+    <button type="button" class="btn secondary" aria-haspopup="menu">User menu</button>
+  </div></div></header>
+<main id="main" class="wrap">
+<p class="crumb"><a href="#">Contacts</a> / Contact</p>
+<div class="pagehead"><h1><span class="bar title" role="img" aria-label="Contact name"></span></h1></div>
+<nav class="tabs" aria-label="Contact"><a href="#">Details</a><a href="#" aria-current="page">History</a><a href="#">Versions</a></nav>
+<ul class="timeline" aria-label="History, newest first"><li><div class="meta"><span><span class="bar m" role="img" aria-label="Person"></span></span><time><span class="bar m" aria-hidden="true"></span></time><span class="badge">Changed</span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="bar m" aria-hidden="true"></span></span><span class="new"><span class="bar m" aria-hidden="true"></span></span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="bar m" aria-hidden="true"></span></span><span class="new"><span class="bar l" aria-hidden="true"></span></span></div></li><li><div class="meta"><span><span class="bar m" role="img" aria-label="Person"></span></span><time><span class="bar m" aria-hidden="true"></span></time><span class="badge">Changed</span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="bar m" aria-hidden="true"></span></span><span class="new"><span class="bar m" aria-hidden="true"></span></span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="bar m" aria-hidden="true"></span></span><span class="new"><span class="bar l" aria-hidden="true"></span></span></div></li><li><div class="meta"><span><span class="bar m" role="img" aria-label="Person"></span></span><time><span class="bar m" aria-hidden="true"></span></time><span class="badge">Changed</span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="bar m" aria-hidden="true"></span></span><span class="new"><span class="bar m" aria-hidden="true"></span></span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="bar m" aria-hidden="true"></span></span><span class="new"><span class="bar l" aria-hidden="true"></span></span></div></li></ul><nav class="pager" aria-label="Paging"><span class="muted">Newest first</span><div class="pages"><button type="button" class="btn secondary" disabled>Previous</button><button type="button" class="btn secondary" aria-current="page">1</button><button type="button" class="btn secondary" >2</button><button type="button" class="btn secondary" >3</button><button type="button" class="btn secondary" >Next</button></div></nav>
+<section class="state" aria-label="State: Loading"><span class="tag">State: Loading</span><div class="stack" role="status" aria-label="Loading …"><div class="skel"></div><div class="skel"></div><div class="skel"></div><p class="muted">Loading …</p></div></section>
+<section class="state" aria-label="State: Empty"><span class="tag">State: Empty</span><div class="panel"><h2>No History yet</h2><p>Changes to this contact appear here.</p></div></section>
+<section class="state" aria-label="State: Error"><span class="tag">State: Error</span><div class="panel" role="alert"><h2>Could not load</h2><p>Something went wrong. Please try again.</p><button type="button" class="btn secondary" >Try again</button></div></section>
+<section class="state" aria-label="State: Erasure marker (data of an erased contact)"><span class="tag">State: Erasure marker (data of an erased contact)</span><ul class="timeline"><li><div class="meta"><span><span class="bar m" role="img" aria-label="Person"></span></span><time><span class="bar m" aria-hidden="true"></span></time><span class="badge">Changed</span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="chip">[erased]</span></span><span class="new"><span class="chip">[erased]</span></span></div>
+  <div class="change"><span class="lbl small"><span class="bar s" aria-hidden="true"></span> Field</span><span class="old"><span class="bar m" aria-hidden="true"></span></span><span class="new"><span class="bar l" aria-hidden="true"></span></span></div></li></ul></section>
+</main>
+<footer class="site-footer"><div class="wrap"><span>Contact Groups</span><span>Slovenščina · English</span></div></footer></body></html>

@@ -296,3 +296,14 @@
 - Human response: none
 - Resolution: option 1, pending review
 - Overrides: none
+
+## D-26: Approve wireframes
+- Timestamp: 2026-11-09
+- Session: W wireframes
+- Class: block
+- Type: approval
+- Trigger: 19 wireframes (`docs/wireframes/WF-01` to `WF-19`; each has `_mobile.png`, `_tablet.png`, `_desktop.png` beside its `.html`, shared `wireframe.css`) cover every screen of specification 9.3 at the three widths (UI-22). Choices inside them: no global search in the header (no story needs it); tablet puts the navigation behind the Menu button and hides phone, city and country in the contacts list.
+- Options: 1. (proposed) Approved with the customer. 2. Approved by the developer only. 3. Change (say what, per `WF-nn`).
+- Human response: none
+- Resolution: pending review
+- Overrides: none

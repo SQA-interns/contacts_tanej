@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF-09 Filter dialog – Contact Groups (wireframe)</title><link rel="stylesheet" href="wireframe.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <span class="logo" role="img" aria-label="Logo placeholder">Logo</span><a class="brand" href="#">Contact Groups</a><nav class="nav" aria-label="Main"><a href="#" aria-current="page">Groups</a><a href="#">Deleted groups</a><a href="#">Account</a></nav>
+  <div class="header-tools">
+    <button type="button" class="btn secondary menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <div class="lang" role="group" aria-label="Language"><button type="button" class="btn" aria-pressed="false">SL</button><button type="button" class="btn" aria-pressed="true">EN</button></div>
+    <button type="button" class="btn secondary" aria-haspopup="menu">User menu</button>
+  </div></div></header>
+<main id="main" class="wrap">
+
+<div class="pagehead"><h1><span class="bar title" role="img" aria-label="Group name"></span> <span class="badge">Owner</span></h1><div class="actions"><button type="button" class="btn primary" >Add contact</button></div></div>
+<nav class="tabs" aria-label="Group"><a href="#" aria-current="page">Contacts</a><a href="#">Trash</a><a href="#">Tags</a><a href="#">History</a><a href="#">Members</a><a href="#">Duplicates</a></nav>
+<div class="dialog wide" role="dialog" aria-modal="true" aria-label="Filter contacts"><h2>Filter contacts</h2><p class="muted">All conditions and the search text must match. Choose a condition.</p>
+  <div class="field"><label for="cond">Condition</label><select id="cond"><option>Has all of these tags</option><option>Has any of these tags</option><option>Does not have tag</option><option>Attribute key equals value</option><option>Attribute key exists</option><option>Country</option><option>Company</option></select></div>
+  <div class="form two"><div class="field "><label for="f1">Tags</label><input id="f1" type="text"  aria-describedby="f1h" class=""   ><p class="hint" id="f1h">Type a tag name; suggestions appear.</p></div><div class="field "><label for="f2">Tag</label><input id="f2" type="text"  class=""   ></div></div>
+  <div class="form two"><div class="field "><label for="f3">Attribute key</label><input id="f3" type="text"  aria-describedby="f3h" class=""   ><p class="hint" id="f3h">Suggestions from this group.</p></div><div class="field "><label for="f4">Attribute value</label><input id="f4" type="text"  class=""   ></div></div>
+  <div class="form two"><div class="field "><label for="f5">Country</label><select id="f5"  class=""><option>Choose …</option></select></div><div class="field "><label for="f6">Company</label><input id="f6" type="text"  aria-describedby="f6h" class=""   ><p class="hint" id="f6h">Suggestions from this group.</p></div></div><div class="dlg-actions"><button type="button" class="btn secondary" >Cancel</button><button type="button" class="btn primary" >Add condition</button></div></div>
+  <p class="muted" style="margin-top:16px">The dialog opens over the contacts list (WF-08). Seven conditions only; filters cannot be saved.</p>
+<section class="state" aria-label="State: Active conditions as chips"><span class="tag">State: Active conditions as chips</span><div class="toolbar"><span class="small">Filters:</span><span class="chips"><span class="chip">Has all of: x, y<button type="button" aria-label="Remove condition">×</button></span><span class="chip">Does not have tag: z<button type="button" aria-label="Remove condition">×</button></span><span class="chip">Key k equals v<button type="button" aria-label="Remove condition">×</button></span></span><button type="button" class="btn ghost" >Clear filters</button></div></section>
+<section class="state" aria-label="State: Validation error (values kept)"><span class="tag">State: Validation error (values kept)</span><div class="dialog " role="dialog" aria-modal="true" aria-label="Filter contacts"><h2>Filter contacts</h2><div class="field"><label for="c2">Condition</label><select id="c2"><option>Attribute key exists</option></select></div><div class="field "><label for="f7">Attribute key <span class="req">(required)</span></label><input id="f7" type="text"  aria-describedby="f7e" aria-invalid="true" class="invalid"   ><p class="err" id="f7e" role="alert">Enter a key.</p></div><div class="dlg-actions"><button type="button" class="btn secondary" >Cancel</button><button type="button" class="btn primary" >Add condition</button></div></div></section>
+<section class="state" aria-label="State: No match"><span class="tag">State: No match</span><div class="panel"><h2>No contacts match</h2><p>Change the search text or the filters.</p><button type="button" class="btn secondary" >Clear filters</button></div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><span>Contact Groups</span><span>Slovenščina · English</span></div></footer></body></html>

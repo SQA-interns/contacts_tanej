@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF-02 Register – Contact Groups (wireframe)</title><link rel="stylesheet" href="wireframe.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <span class="logo" role="img" aria-label="Logo placeholder">Logo</span><a class="brand" href="#">Contact Groups</a>
+  <div class="header-tools">
+    
+    <div class="lang" role="group" aria-label="Language"><button type="button" class="btn" aria-pressed="false">SL</button><button type="button" class="btn" aria-pressed="true">EN</button></div>
+    
+  </div></div></header>
+<main id="main" class="wrap">
+
+<div class="pagehead"><h1>Register</h1></div>
+
+<div class="narrow card plain"><form class="form" aria-label="Register">
+    <div class="field "><label for="f1">Name <span class="req">(required)</span></label><input id="f1" type="text"  aria-describedby="f1h" class=""   autocomplete="name"><p class="hint" id="f1h">Up to 100 characters.</p></div>
+    <div class="field "><label for="f2">E-mail <span class="req">(required)</span></label><input id="f2" type="email"  class=""   autocomplete="email"></div>
+    <div class="field "><label for="f3">Password <span class="req">(required)</span></label><input id="f3" type="password"  aria-describedby="f3h" class=""   autocomplete="new-password"><p class="hint" id="f3h">At least 8 characters.</p></div>
+    <button type="button" class="btn primary" >Register</button>
+    <button type="button" class="btn secondary" >Sign in with Google</button>
+    <p class="small">Already have an account? <a href="#">Sign in</a></p>
+  </form></div>
+<section class="state" aria-label="State: Busy"><span class="tag">State: Busy</span><div class="narrow card plain"><form class="form"><div class="field "><label for="f4">Name <span class="req">(required)</span></label><input id="f4" type="text"  class=""   ></div><div class="field "><label for="f5">E-mail <span class="req">(required)</span></label><input id="f5" type="email"  class=""   ></div><div class="field "><label for="f6">Password <span class="req">(required)</span></label><input id="f6" type="password"  class=""   ></div><button type="button" class="btn primary busy" disabled aria-busy="true">Registering …</button></form></div></section>
+<section class="state" aria-label="State: Validation errors (values kept)"><span class="tag">State: Validation errors (values kept)</span><div class="narrow card plain"><form class="form"><div class="field "><label for="f7">Name <span class="req">(required)</span></label><input id="f7" type="text"  aria-describedby="f7e" aria-invalid="true" class="invalid"   ><p class="err" id="f7e" role="alert">Enter your name.</p></div><div class="field "><label for="f8">E-mail <span class="req">(required)</span></label><input id="f8" type="email"  aria-describedby="f8e" aria-invalid="true" class="invalid"   ><p class="err" id="f8e" role="alert">Check your e-mail address.</p></div><div class="field "><label for="f9">Password <span class="req">(required)</span></label><input id="f9" type="password"  aria-describedby="f9h f9e" aria-invalid="true" class="invalid"   ><p class="hint" id="f9h">At least 8 characters.</p><p class="err" id="f9e" role="alert">The password needs at least 8 characters.</p></div><button type="button" class="btn primary" >Register</button></form></div></section>
+<section class="state" aria-label="State: Error from Firebase"><span class="tag">State: Error from Firebase</span><div class="narrow card plain"><form class="form"><div class="notice strong" role="alert"><span class="ico" aria-hidden="true"></span><div>An account with this e-mail address already exists.</div></div><button type="button" class="btn secondary" >Sign in</button></form></div></section>
+</main>
+<footer class="site-footer"><div class="wrap"><span>Contact Groups</span><span>Slovenščina · English</span></div></footer></body></html>
