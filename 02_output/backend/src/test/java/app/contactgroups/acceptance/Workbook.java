@@ -69,7 +69,8 @@ public final class Workbook implements AutoCloseable {
     if (r == null) {
       return out;
     }
-    int width = r.getLastCellNum();
+    // a row may stop after its last filled cell: read it as wide as the header
+    int width = Math.max(r.getLastCellNum(), sheet().getRow(0).getLastCellNum());
     for (int c = 0; c < width; c++) {
       out.add(text(index, c));
     }

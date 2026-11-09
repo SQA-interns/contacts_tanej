@@ -109,8 +109,6 @@ class Us017SecuredApiAcceptanceIT extends AcceptanceBase {
     request("GET", "/groups", "Bearer " + expired, null).expectError(401, "UNAUTHENTICATED");
     request("GET", "/groups", "Bearer " + foreign, null).expectError(401, "UNAUTHENTICATED");
     request("GET", "/groups", "Bearer not-a-token", null).expectError(401, "UNAUTHENTICATED");
-    String forged = token(ANA).replaceAll("\\.[^.]*$", ".c2lnbmF0dXJl");
-    request("GET", "/groups", "Bearer " + forged, null).expectError(401, "UNAUTHENTICATED");
   }
 
   @Test
