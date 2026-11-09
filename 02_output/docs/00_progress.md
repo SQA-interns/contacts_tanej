@@ -5,17 +5,23 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S1 preflight D-12: 2 (vitest 4.1.11, Stryker 10.0.0), D-13: 1 (Tomcat 10.1.59, Jackson 2.21.7)
-- Result: done
-- Gate: phase 0 passed
-- Notes for the next session: Final versions differ from `tech-stack.md` per `decisions-log.md` (D-04 to D-09, D-12, D-13). Product poms must set `tomcat.version` 10.1.59 and `jackson-bom.version` 2.21.7 (Boot 3.5.16). Two Critical in spring-webmvc 6.2.19 (GHSA-j9f9-w8pj-32f8, GHSA-pc63-qcmh-9cmg) are accepted as not reachable (D-13): no SSE, no `XsltView`; `/verify` re-checks. firebase High recorded as Medium (D-08), `/verify` re-checks the bundle. Maven runs in a container (D-10); OWASP scan did not run (NVD), OSV is the Maven scan. Input manifest written (73 files).
+- Session: S2 clarify D-04: 1 (developer has no objection)
+- Result: blocked
+- Gate: phase 1 not passed (D-15 to D-18 open; US-003, US-004, US-013, US-014, US-015, US-016, US-017 not ready; DoR-R-04 fails for US-007)
+- Notes for the next session: D-04 answered (option 1). Report is `docs/01_requirements-check.md` (findings F-01 to F-23). Non-blocking, pending review: D-14, D-19 to D-23 (proposed defaults recorded; `/plan` uses them). Blocking, each with a proposed default: D-15 (confirm OQ-004-01 and OQ-016-01), D-16 (what group-level History entries hold about other people), D-17 (Owner access to a group in Trash), D-18 (US-007 in no scenario). Answer with `/clarify D-15: 1, D-16: 1, D-17: 1, D-18: 1` (or other options). Spring Boot 3.5.16 and postgresql 42.7.14 stay (D-04); vitest is 4.1.11 (D-12).
 
 ## Next
-- Command: /clarify
-- Waiting for: nothing (D-04 non-blocking, pending review)
+- Command: /clarify D-15: 1, D-16: 1, D-17: 1, D-18: 1
+- Waiting for: D-15, D-16, D-17, D-18
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
 |---|---|---|---|
-| US-001 to US-019 | 1 (MVP) | ready | |
+| US-001, US-002, US-005 to US-012, US-018, US-019 | 1 (MVP) | ready | |
+| US-003 | 1 (MVP) | not ready (D-16) | |
+| US-004 | 1 (MVP) | not ready (D-15, D-16) | |
+| US-013, US-014 | 1 (MVP) | not ready (D-16) | |
+| US-015 | 1 (MVP) | not ready (D-17) | |
+| US-016 | 1 (MVP) | not ready (D-15, D-16) | |
+| US-017 | 1 (MVP) | not ready (D-17) | |
 | US-020 to US-022 | 2 | ready | |

@@ -46,8 +46,8 @@
   - `vitest` 3.2.4 (GHSA-5xrq-8626-4rwp, Critical; fixed in 3.2.6) -> 3.2.7; one Moderate remains (GHSA-82fw-gwwq-j7x9, fixed only in 4.x).
   - `@vitest/coverage-v8` 3.2.4 -> 3.2.7 (kept equal to vitest; `npm audit` fix target).
 - Options: 1. (proposed, applied) Use these patch versions in the manifests; `/plan` and `/implement` take them from here. 2. Keep the old pins (not possible: High/Critical open).
-- Human response: none
-- Resolution: option 1, pending review
+- Human response: "1 (developer has no objection)" (via `/clarify D-04: 1`, 2026-11-09)
+- Resolution: option 1 confirmed. The patch versions stay (Spring Boot 3.5.16, postgresql 42.7.14); the vitest entries are superseded by D-12 (4.1.11).
 - Overrides: tech-stack.md dependencies `spring-boot-starter-*` (3.5.6 -> 3.5.16), `org.postgresql:postgresql` (42.7.8 -> 42.7.14), `vitest` and `@vitest/coverage-v8` (3.2.4 -> 3.2.7)
 
 ## D-05: react-router 7.9.3 has High findings; the fix is another minor line
@@ -153,3 +153,113 @@
 - Human response: "1 - override Tomcat 10.1.59 and Jackson 2.21.7; keep Spring Framework 6.2.19 with the two Critical findings recorded as not reachable (no server-sent events, no XsltView), rechecked by /verify; if a 6.2.x release that fixes them exists, use it instead" (via `/preflight D-13: 1 ...`, 2026-11-09)
 - Resolution: option 1 applied. No 6.2.x release after 6.2.19 exists on Maven Central (latest `spring-webmvc` 6.2.19), so Spring stays at 6.2.19. Scratch pom (`out/logs/preflight-scan-maven/pom.xml`, Boot parent 3.5.16 with `tomcat.version` 10.1.59 and `jackson-bom.version` 2.21.7) resolves 130 artifacts (`deps2.txt`) with Tomcat 10.1.59 and Jackson databind and core 2.21.7. OSV re-scan: no finding left on Tomcat or Jackson. Open: `spring-webmvc` 6.2.19 GHSA-j9f9-w8pj-32f8 and GHSA-pc63-qcmh-9cmg, Critical, recorded as not reachable on the human's approval (no SSE, no `XsltView`; `/verify` re-checks, and `/implement` must not add either). Moderate, not blocking: `commons-lang3` 3.17.0, `log4j-api` 2.24.3. The product pom must set `tomcat.version` 10.1.59 and `jackson-bom.version` 2.21.7.
 - Overrides: tech-stack.md dependencies (adds exact-version transitive overrides: tomcat-embed-core 10.1.59, jackson-databind and jackson-core 2.21.7)
+
+## D-14: Customer confirmations still outstanding
+- Timestamp: 2026-11-09
+- Session: S2 clarify (`/clarify D-04: 1`)
+- Class: open
+- Type: non-blocking
+- Trigger: many story questions read "OPEN — confirmed by the developer; the customer still has to confirm" (OQ-P-03, OQ-P-09, OQ-002-01, OQ-002-02, OQ-003-01, OQ-004-02, OQ-005-01, OQ-006-01, OQ-010-01, OQ-011-01, OQ-012-01, OQ-013-01, OQ-015-01, OQ-020-01, OQ-022-01). Others are "needs customer" and due before delivery (OQ-001-02, OQ-005-03, OQ-012-03, OQ-017-01, OQ-P-04 to OQ-P-08, OQ-P-10, OQ-P-11), and the numbers of `quality-requirements.md` and the ASVS level of `security-requirements.md` are developer proposals. `OQ-P-03` and the stories name the developer's answer as the working reading; `security-requirements.md` (Personal data) leaves legal matters to the customer outside the software.
+- Options: 1. (proposed) Build on the developer-confirmed readings; carry this list into `docs/06_verification-report.md` and `release-notes.md` as "to be confirmed by the customer before delivery"; design uses a neutral working name until OQ-P-08 is answered. 2. Wait for the customer before `/plan` (blocks the run).
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none
+
+## D-15: Two Block topics still marked "needs customer"
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: block
+- Type: blocking
+- Trigger: `OQ-004-01` (US-004: roles and member rules, rights) and `OQ-016-01` (US-016: keeping the user's name in the History after account deletion, personal data and legal basis) read "OPEN — needs customer", while every other Block question in the stories is "confirmed by the developer". DoR-S-07 allows no OPEN item on a Block topic. The permission matrix (BR-02) and R-016-03 already state one reading each.
+- Options: 1. (proposed) You confirm both as written (the matrix and member rules of BR-02 and US-004; name kept and e-mail removed, R-016-03), like the other Block topics; the customer's confirmation goes on the D-14 list. 2. You name a change (which rule, which new reading). 3. Hold US-004 and US-016 until the customer answers.
+- Human response: none
+- Resolution: pending
+- Overrides: none
+
+## D-16: What group-level History entries hold about other people
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: block
+- Type: blocking
+- Trigger: R-013-05 writes a group-level entry for an invitation, a cancellation, a role change and a removal, and R-013-07 names only the actor's name and e-mail. No rule says what the entry holds about the other person (the invited e-mail address; the name and e-mail of the member whose role changed or who was removed). Three inputs pull apart: (a) `security-requirements.md` (Personal data) keeps the invitation e-mail only until accepted, cancelled or expired, and shows it to Owners only, while the group-wide History (R-014-01) is shown to Editors too and kept as long as the group exists; (b) R-016-03 anonymises only entries the deleted user caused, so an entry "Ana removed Marko" or "Ana invited marko@example.com" keeps Marko's e-mail after his account is deleted; (c) BR-06 anonymises contact data only. Personal data of people who are not contacts would stay in the History after they ask for deletion.
+- Options: 1. (proposed) The entry holds the event type, the actor (name, e-mail) and the subject's role; the subject is named by name for a member and by e-mail address for an invitation; when an account is deleted, its e-mail is removed from every entry where it is the actor or the subject (the name stays), and the invited e-mail stays in the entry for the life of the group (a documented exception to the retention table, visible to Owners and Editors). 2. As option 1, but entries about an invitation hold only the role and the event, never the invited e-mail (Owners see the e-mail only in the pending list). 3. Entries never name the subject; only actor, event type and role (weakest audit).
+- Human response: none
+- Resolution: pending
+- Overrides: none
+
+## D-17: What an Owner may see and do in a group in Trash
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: block
+- Type: blocking
+- Trigger: BR-01 and R-015-03 treat a group in Trash as not existing for members who are not Owners; R-015-04 and R-015-05 give Owners "Deleted groups" and restore; R-015-08 refuses changes. No rule says what an Owner's other requests get (open the group, list contacts, read History, export). SR-03 and EX-017-06 define the 404 only for non-Owners. Reading it wrongly gives access to personal data of a group that was deleted, or breaks the restore screen.
+- Options: 1. (proposed) An Owner of a group in Trash can see only its name, deletion time and days left in "Deleted groups" and can restore it; every other request about the group (contacts, History, members, export, invitations) answers 404 until it is restored. 2. An Owner can open the group read-only (contacts, History, members), no export, until restore or purge. 3. Another rule you name.
+- Human response: none
+- Resolution: pending
+- Overrides: none
+
+## D-18: US-007 is in no end-to-end scenario (DoR-R-04)
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: block
+- Type: blocking
+- Trigger: DoR-R-04 needs every MVP story in at least one scenario. `e2e-scenarios.md` leaves out US-007 (rename and delete tags); US-018 is left out by the file's own note (language switch covered by acceptance tests, Q-35h). The file is an input and fixes "exactly one test per scenario, none merged or split", so only you can change it.
+- Options: 1. (proposed) Approve US-007 as verified by its acceptance tests (AC-007-01 to AC-007-08), like US-018; the file stays unchanged and this is recorded as an approved exception to DoR-R-04 for US-007 and US-018. 2. You add US-007 to a scenario (for example the tag rename to E2E-03) in `01_input/`, then start `/clarify` again.
+- Human response: none
+- Resolution: pending
+- Overrides: none
+
+## D-19: A stale save after a group-wide tag rename or delete
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: open
+- Type: non-blocking
+- Trigger: R-005-08 refuses a save when the contact "was changed by someone else"; the contact number is its version number (US-005 Definitions). A tag rename or delete changes the contact's tags but records no version (R-007-06, R-019-03). A user who opened a contact before the rename and saves afterwards would put the old tag name back on that contact (R-006-01 creates the tag again) and no conflict would show. PP-02: nothing is silently overwritten.
+- Options: 1. (proposed, most conservative) A group-wide tag rename or delete counts as a change of the contact for the conflict check (a stale save is refused with the conflict rule), although it records no version; the plan chooses the mechanism (for example a separate change counter). 2. Version number only; the old tag name comes back on that contact.
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none
+
+## D-20: Format and boundary readings (e-mail, Google name, trashed group rename, invitation matching)
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: open
+- Type: non-blocking
+- Trigger: (1) "valid e-mail format" (R-003-02, R-005-03, data model) is defined nowhere, and an invitation e-mail has no length limit (the AC examples are only `ana.novak@` and `marko@@example`). (2) R-001-02: a Google account may have no name or one longer than 100 characters, while User.name is required, 1 to 100. (3) R-002-08 and R-015-08 do not say whether an Owner may rename a group that is in Trash. (4) R-003-05 matches an invitation "when a user signs in"; the backend sees only requests with a token, and a user who is already signed in when invited sees the group at some request.
+- Options: 1. (proposed, most conservative) (1) valid = one `@`, a non-empty local part, a domain with at least one "." and no empty label, no spaces, at most 255 characters (also for invitations); (2) Google name: use the part of the e-mail before `@` if the name is empty, cut to 100 characters if longer; (3) refuse the rename of a group in Trash; (4) match pending invitations whenever the user requests the groups list (this includes the request after sign-in), only with a verified e-mail. 2. You name other readings.
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none
+
+## D-21: Export file details
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: open
+- Type: non-blocking
+- Trigger: R-011-05 and R-011-06 leave open: (1) which characters are "not allowed in file names"; (2) the header spelling of an attribute column when keys differ only in case (EX-011-03); (3) the order of tags in the Tags cell; (4) an attribute key equal to a predefined header (for example `Tags`). AC-011-03 shows `a, b` (comma and space), which settles the separator.
+- Options: 1. (proposed) (1) backslash, slash, colon, asterisk, question mark, double quote, less-than, greater-than, pipe and control characters; (2) the spelling of the first contact in the export order; (3) tag names sorted by Slovenian rules; (4) the attribute column keeps its own header and is a separate column after the predefined ones. 2. You name other readings.
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none
+
+## D-22: History and version readings
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: open
+- Type: non-blocking
+- Trigger: (1) R-022-05 and R-019-04 record one version on the survivor, while EX-022-08 and R-019-02 say no version when nothing on the survivor changed. (2) R-013-05 lists the group-level events and leaves out "a member joined by invitation (R-003-05)" and "a group was created". (3) US-002 (R-002-08), US-007 (R-007-08), US-012 (R-012-09) and US-015 (R-015-09) require History entries, but US-013, which defines History, depends on them (INVEST: independent).
+- Options: 1. (proposed) (1) no version when the survivor's content is unchanged (EX-022-08 and R-019-02 win); (2) the list of R-013-05 is complete: no entry for joining or creating a group; (3) `/plan` makes the History append capability the first task before the first story that writes an entry, each of those stories verifies its own History criteria with it, and US-013 covers the History tab, the content rules and the group-wide events. 2. You name other readings.
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none
+
+## D-23: Glossary homonyms
+- Timestamp: 2026-11-09
+- Session: S2 clarify
+- Class: open
+- Type: non-blocking
+- Trigger: US-013 defines "Save group" (the entries of one save, shown together), which uses the glossary word `group` with another meaning; US-005 defines "Contact number" (the current version number), which reads like a phone number. A new domain term goes through a decision (`requirements-standard.md`).
+- Options: 1. (proposed) Code and UI use `ChangeSet` for "Save group" and `contact version number` for "Contact number"; the inputs stay unchanged. 2. Keep the story terms.
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none
