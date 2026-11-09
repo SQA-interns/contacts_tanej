@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+@import './tokens.wireframe.css';
+@import './tokens.final.css';
+
+/* Semantic tokens (UI-04) become utilities: bg-background, bg-surface, text-text, border-border ... */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-focus-ring: var(--focus-ring);
+
+  /* UI-06: one system sans-serif family; scale 12 / 14 / 16 / 20 / 24 / 32 px */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+
+  /* UI-07: 8 px controls, 12 px cards, one subtle shadow level */
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --shadow-card: var(--card-shadow);
+
+  /* UI-08: breakpoints 640, 768, 1024, 1280 px (Tailwind defaults) */
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    background: var(--background);
+    color: var(--text);
+  }
+  /* UI-20: a visible focus ring on every interactive element */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+}
