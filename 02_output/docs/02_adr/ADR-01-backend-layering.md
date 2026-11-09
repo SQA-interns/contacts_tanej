@@ -27,4 +27,4 @@ Option 2. Packages under `app.contactgroups`: `api` (controllers, request and re
 
 - One place to review the access rule; a test per OpenAPI operation with a non-member (AC-017-07) is generated from the contract and proves it.
 - Slightly more classes than option 1. Accepted: ES-11 asks for one responsibility per module.
-- Rate limiting and body-size limiting are servlet filters in `config`, before the controllers (ADR-07).
+- Rate limiting and body-size limiting are servlet filters in `config`, before the controllers (ADR-06).
