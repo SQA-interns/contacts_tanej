@@ -5,14 +5,14 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: T to-spec resume
-- Result: done
-- Gate: intake (DoR-S, DoR-R) passed; open items are listed in the review checklist, not resolved
-- Notes for the next session: All project files in `project/` are filled (intent, 22 stories, business rules, e2e scenarios, design, setup). `project/00_intake/review-checklist.md` lists every `[ASSUMPTION]`, `OPEN` and developer-sourced item; Block topics stay `OPEN — needs customer`. Tech-stack versions are unverified (`/preflight` verifies). The developer review (with `/run`) comes before `/preflight`.
+- Session: S1 preflight
+- Result: blocked
+- Gate: phase 0 not passed (host Node/npm major mismatch D-01; dependency scan and most dependency resolution not yet run)
+- Notes for the next session: Done and passing: `.env` keys non-empty, working tree clean, Docker daemon up, images postgres/temurin/nginx/gitleaks resolve, react resolves. Host: Java 21.0.11 Oracle, Node 24.13.0, npm 11.6.2, Docker 29.9.3; no host postgres. Remaining: Maven Central and npm pins, Playwright screenshot, dependency scan, input manifest. Details in `docs/00_preflight-report.md`, decisions D-01 to D-03.
 
 ## Next
-- Command: /preflight
-- Waiting for: review of `project/00_intake/review-checklist.md`
+- Command: /preflight D-01: <1|2|3>
+- Waiting for: D-01 (blocking); D-02, D-03 (non-blocking, pending review)
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
