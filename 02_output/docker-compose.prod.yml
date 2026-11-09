@@ -1,0 +1,72 @@
+# Delivered stack (Q-17a, ADR-10): no emulator; the customer's Firebase project; TLS in `proxy`.
+# Start:  docker compose -f docker-compose.prod.yml --env-file ../.env up -d
+# Needs in .env: DB_PASSWORD, FIREBASE_PROJECT_ID, FIREBASE_WEB_API_KEY, FIREBASE_AUTH_DOMAIN, APP_ALLOWED_ORIGIN
+# Needs in ./certs: tls.crt and tls.key (the install guide says how to get them).
+# A customer who runs their own HTTPS front proxy deletes `proxy` and publishes `frontend` behind theirs.
+name: contact-groups
+
+services:
+  db:
+    image: postgres:17.6
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: contacts
+      POSTGRES_USER: contacts
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+    volumes:
+      - contacts-db:/var/lib/postgresql/data
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U contacts -d contacts"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/contacts
+      DB_USER: contacts
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:?FIREBASE_PROJECT_ID is required}
+      FIREBASE_AUTH_EMULATOR_HOST: ""
+      APP_ALLOWED_ORIGIN: ${APP_ALLOWED_ORIGIN:?APP_ALLOWED_ORIGIN is required}
+      TRASH_CLEANUP_CRON: ${TRASH_CLEANUP_CRON:-0 30 3 * * *}
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-100}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    networks: [internal]
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      backend: { condition: service_healthy }
+    environment:
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:?FIREBASE_PROJECT_ID is required}
+      FIREBASE_WEB_API_KEY: ${FIREBASE_WEB_API_KEY:?FIREBASE_WEB_API_KEY is required}
+      FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN:?FIREBASE_AUTH_DOMAIN is required}
+      FIREBASE_AUTH_EMULATOR_URL: ""
+      CSP_CONNECT_EXTRA: ""
+    networks: [internal]
+
+  proxy:
+    image: nginx:1.29.1
+    restart: unless-stopped
+    depends_on:
+      frontend: { condition: service_healthy }
+    ports:
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      - ./docker/proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    networks: [internal]
+
+networks:
+  internal:
+
+volumes:
+  contacts-db:

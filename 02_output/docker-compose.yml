@@ -1,0 +1,57 @@
+# Local stack (environments.md): backend, web app, PostgreSQL and the Firebase Authentication Emulator.
+# Start:  docker compose --env-file ../.env up --build
+# Values come from .env (secrets.env.example lists the keys); nothing secret is in this file.
+name: contact-groups
+
+services:
+  db:
+    image: postgres:17.6
+    environment:
+      POSTGRES_DB: contacts
+      POSTGRES_USER: contacts
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required in .env}
+    volumes:
+      - contacts-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U contacts -d contacts"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  emulator:
+    build: ./docker/emulator
+    ports:
+      - "127.0.0.1:9099:9099"
+
+  backend:
+    build: ./backend
+    depends_on:
+      db: { condition: service_healthy }
+      emulator: { condition: service_healthy }
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      DB_URL: jdbc:postgresql://db:5432/contacts
+      DB_USER: contacts
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required in .env}
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-demo-contacts}
+      FIREBASE_AUTH_EMULATOR_HOST: emulator:9099
+      APP_ALLOWED_ORIGIN: http://localhost:5173
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend: { condition: service_healthy }
+    environment:
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-demo-contacts}
+      FIREBASE_WEB_API_KEY: ${FIREBASE_WEB_API_KEY:-fake-api-key}
+      FIREBASE_AUTH_DOMAIN: localhost
+      FIREBASE_AUTH_EMULATOR_URL: http://localhost:9099
+      CSP_CONNECT_EXTRA: http://localhost:9099 http://127.0.0.1:9099
+    ports:
+      - "127.0.0.1:5173:8080"
+
+volumes:
+  contacts-db:
