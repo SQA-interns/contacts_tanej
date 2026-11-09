@@ -1,0 +1,4 @@
+OK   openapi.yaml: 40 operations, unique operationIds
+OK   configuration.schema.json: compiles; valid example accepted, invalid refused
+OK   id-token-claims.schema.json: compiles; valid example accepted, invalid refused
+OK   export-workbook.schema.json: compiles; valid example accepted, invalid refused
