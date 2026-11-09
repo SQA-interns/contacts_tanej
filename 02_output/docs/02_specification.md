@@ -242,6 +242,137 @@ Each subsection says which module implements which rule. A rule that joins sever
 - ADR-11, split into two sessions (F-15). R-022-01 the merge screen shows the picked contacts side by side. R-022-02 first non-empty value of the oldest contact first, then the next. R-022-03 tags combined, each once. R-022-04 attributes combined; a key with different values needs a choice and "Confirm" stays disabled until chosen; the server answers 400 `ATTRIBUTE_CHOICE_REQUIRED` otherwise. R-022-05 survivor updated, others to Trash, one History entry, one version if changed. R-022-06 survivor's History includes merged-away contacts' entries (`contact_merges`). R-022-07 restoring a merged-away contact touches only it. R-022-08 the screen says the survivor can be reverted by restoring an earlier version. R-022-09 result validated by `ContactRules` (50 tags, 50 attributes, formats). R-022-10 fewer than two, repeated id, a contact in Trash → 400 `TOO_FEW_CONTACTS`; another group's id → 404. R-022-11 never automatic. R-022-12 stale revision → 409 `CONFLICT`. R-022-13 403 for Viewers. R-022-14 cancel changes nothing.
 - Covers: R-022-01..14, AC-022-01..14, EX-022-01..08.
 
-<!-- next: 5. Error model -->
+## 5. Error model
+
+One format for every failure (`ErrorResponse`, contract `schemas.yaml`): `{status, code, message, errors?, groups?, current?}`; no stack trace, class name or SQL (SR-10, R-017-10). The web app shows the text of `error.<code>` in the active language (EX-018-02); `errors[].code` selects the field message.
+
+| Code | Status | When | Extra | Rules |
+|---|---|---|---|---|
+| `UNAUTHENTICATED` | 401 | token missing, malformed, not Bearer, expired, foreign project, or of a deleted account | — | R-017-01, R-017-02, R-016-06, EX-017-01 |
+| `EMAIL_NOT_VERIFIED` | 403 | valid token, e-mail not verified; every endpoint except `/health` | — | R-017-03, BR-03 |
+| `RECENT_LOGIN_REQUIRED` | 403 | account deletion without a sign-in of the last 5 minutes | — | R-016-07 |
+| `FORBIDDEN` | 403 | member's role does not allow the operation | — | R-017-06, BR-02 |
+| `NOT_FOUND` | 404 | not a member, no such group or id, malformed id, group in Trash for a non-Owner (and for Owners except restore, D-17), contact or version of another group | none: same body in every case | R-017-05, SR-03, BR-01 |
+| `METHOD_NOT_ALLOWED` | 405 | wrong HTTP method on a path | — | EX-017-07 |
+| `VALIDATION_FAILED` | 400 | a rule of a story is broken | `errors[]` with field, rule code, message | R-017-07, BR-05 |
+| `CONFLICT` | 409 | stale `revision` on save, version restore, merge | `current` = the contact | R-005-08, R-017-15, R-020-08, R-022-12 |
+| `ALREADY_IN_TRASH`, `NOT_IN_TRASH`, `CONTACT_IN_TRASH`, `GROUP_IN_TRASH` | 409 | state does not fit the operation | — | EX-012-03, R-005-10, R-020-05, EX-015-05 |
+| `LAST_OWNER` | 409 | removal, demotion or leaving would leave no Owner | — | R-004-07 |
+| `SOLE_OWNER` | 409 | account deletion while sole Owner of a group | `groups[]` | R-016-02 |
+| `GROUP_NAME_TAKEN` | 409 | name rule on create, rename, restore | — | R-002-03, R-015-10 |
+| `ALREADY_MEMBER`, `INVITATION_PENDING`, `INVITATION_LIMIT` | 409 | invitation rules | — | R-003-03, R-003-04 |
+| `TAG_NAME_TAKEN` | 409 | rename onto another tag's name | — | R-007-02 |
+| `NOTHING_TO_CHANGE` | 409 | restore of a version equal to the current contact | — | R-020-06 |
+| `PAYLOAD_TOO_LARGE` | 413 | body over 1 MB | — | R-017-09 |
+| `RATE_LIMITED` | 429 | more than the configured requests a minute | header `Retry-After` | R-017-08 |
+| `INTERNAL_ERROR` | 500 | anything unexpected; fixed message, class name only in the log | — | R-017-10 |
+| `UNAVAILABLE` | 503 | `/health` when the database does not answer | — | R-017-12 |
+
+Field rule codes (`errors[].code`): `REQUIRED`, `REQUIRED_ONE_OF`, `TOO_SHORT`, `TOO_LONG`, `INVALID_FORMAT`, `INVALID_CHARACTERS`, `UNKNOWN_COUNTRY`, `TOO_MANY`, `DUPLICATE_KEY`, `INVALID_DATE_RANGE`, `NAME_MISMATCH`, `TOO_MANY_CONTACTS`, `TOO_FEW_CONTACTS`, `ATTRIBUTE_CHOICE_REQUIRED`, `UNKNOWN_VALUE`. Check order inside one request: authentication (401) → verified e-mail (403) → rate limit (429) and body size (413) → path and membership (404) → role (403) → body validation (400) → state and concurrency (409).
+
+## 6. Security controls
+
+| Control | Where | Check |
+|---|---|---|
+| SB-01 input validated on the server | `ContactRules`, `GroupName`, `TagName`, `EmailAddress`, field rules of every request record; the database CHECKs repeat them | unit tests per rule; BR-05 tests with the web app bypassed |
+| SB-02 authentication and authorisation on every non-public operation | `SecurityConfig` (`/health` only is public), `AccessService` per group request | AC-017-01, AC-017-07, one role test per permission-matrix row |
+| SB-03 credentials | Firebase stores passwords; the product stores none; the only secrets are `DB_PASSWORD` and the web API key in `.env` | no password field in the schema; secret scan |
+| SB-04 TLS | `docker-compose.prod.yml` proxy with certificate, HTTP redirects to HTTPS; plain HTTP only on localhost (SR-04) | header and redirect test against the prod Compose set-up |
+| SB-05 output encoded, queries parameterised | React escapes output; no `dangerouslySetInnerHTML` (lint rule); JDBC named parameters only; the export writes strings | static analysis; EX-009-03, EX-010-06 |
+| SB-06 rate limit | `RateLimitFilter` per user, configurable; the only public endpoint is `/health` | AC-017-08 |
+| SB-07 no internals in errors or logs | `ApiExceptionHandler`, `RequestLogFilter` | AC-017-10; log test with known values (SR-11) |
+| SB-08 dependency scan | `dependency-check-maven`, `npm audit` via `scripts/audit.mjs`; D-08, D-13 recorded | CI jobs |
+| SB-09 static analysis and secret scan | PMD, ESLint with `jsx-a11y`, gitleaks | CI jobs |
+| SB-10 security headers | `SecurityConfig` for the API; nginx for the web app | header tests (SR-06) |
+| SB-11 least privilege | non-root users in all images (uid 10001 backend, 101 nginx, `node` emulator) | image inspection test |
+| SB-12 data minimisation | only the fields of `business-rules.md`; no analytics | SR-20 code search |
+| SB-13 purpose and retention | table "Personal data" of `security-requirements.md`; BR-04, ADR-08 | cleanup tests |
+| SB-14 consent | none collected by the product; legal matters are the customer's (D-14) | — |
+
+| SR | Control | Where and check |
+|---|---|---|
+| SR-01 | token verification | `FirebaseJwtDecoders`; tests with missing, expired, tampered, foreign-project tokens (AC-017-01, AC-017-02) |
+| SR-02 | group id and membership in the same query | every repository method takes `groupId`; AC-017-07; E2E-04; AR-03 architecture test |
+| SR-03 | one 404 | `AccessService.notFound()`; test compares raw responses (AC-017-04, EX-017-02, EX-017-06) |
+| SR-04 | HTTPS only, HSTS | prod proxy (ADR-10); install guide; test against the prod Compose set-up |
+| SR-05 | CORS to one origin | `SecurityConfig.cors`; request with another `Origin` gets no CORS header |
+| SR-06 | security headers | `SecurityConfig` and nginx template; header tests on both |
+| SR-07 | parameterised SQL, fixed sort list | `SearchService` builder; injection-string tests (EX-009-03, EX-010-06); static analysis for string-built SQL |
+| SR-08 | export formula safety | `ExportService` quote-prefix cells; AC-011-08 |
+| SR-09 | rate and size limits | `RateLimitFilter`, `BodySizeLimitFilter`; AC-017-08, AC-017-09 |
+| SR-10 | one error format | `ApiExceptionHandler`; AC-017-10 |
+| SR-11 | log content | `RequestLogFilter`; known values absent from logs |
+| SR-12 | secrets only in environment or `.env` | `.gitignore`, Compose `${VAR:?}`; gitleaks |
+| SR-13 | encryption at rest by the hosting | install guide statement (phase 7) |
+| SR-14 | History cannot be changed | no endpoint; triggers; test over every operation of the contract; AC-013-09 |
+| SR-15 | no personal data after erasure or purge | `TrashService`, `TrashCleanupService`; database inspection test after AC-012-03 and AC-015-05 |
+| SR-16 | roles on the server | `AccessService.require(role)`; one test per matrix row and role (AC-005-08, AC-011-10, AC-012-04, AC-013-08) |
+| SR-17 | no mail sent | no mail dependency; test over the dependency list; AC-003-01 |
+| SR-18 | tests use the emulator and fixed users | test configuration; secret scan |
+| SR-19 | no open Critical or High without a decision | dependency scans; decisions D-08, D-13 list the exceptions |
+| SR-20 | no token or contact data in URLs, storage or analytics | search and filter use POST; code search; network trace in the main flows |
+
+## 7. Threat model (STRIDE)
+
+Interfaces: **I1** web app → API (REST, bearer token); **I2** web app → Firebase Authentication; **I3** API → Google public keys; **I4** API → PostgreSQL; **I5** Excel export → browser; **I6** health check; **I7** browser UI. A threat without a control is an `[ASSUMPTION]`.
+
+| Threat (STRIDE) | Interface or data | Control |
+|---|---|---|
+| Spoofing: forged or foreign token | I1 | SR-01 signature, issuer, audience, expiry; emulator tokens accepted only when the emulator host is set (ADR-02); startup refuses the host outside local and test |
+| Spoofing: token of a deleted account | I1 | `deleted_accounts` check (R-016-06) |
+| Spoofing: unverified e-mail claims an invitation | I1 | BR-03, R-003-10, `VerifiedEmailFilter` |
+| Tampering: group id or role in the body | I1 | AR-04, SR-02; role read from the database per request (SR-16) |
+| Tampering: SQL injection through search, filter, sort | I1, I4 | SR-07; fixed sort list; bind parameters |
+| Tampering: change or delete of a History entry | I1, I4 | SR-14; append-only triggers |
+| Tampering: lost update of a contact | I1 | AR-14 revision check; row locks (ADR-03) |
+| Tampering: formula in an exported cell | I5 | SR-08 |
+| Repudiation: a change cannot be attributed | I1 | History in the same transaction (AR-09); actor name stays after account deletion (D-16) |
+| Information disclosure: reading another group's data | I1, I4 | BR-01, SR-02, SR-03 (identical 404), PP-01, AC-017-07 |
+| Information disclosure: existence of a group probed by id | I1 | SR-03 identical 404 for non-member, missing, malformed, Trash |
+| Information disclosure: personal data in logs, errors, URLs | I1 | SR-10, SR-11, SR-20 |
+| Information disclosure: invited e-mail seen by Editors or kept in History | History, invitations | D-16: invitation entries hold role only; invitations visible to Owners only; row deleted on accept, cancel, expiry |
+| Information disclosure: erased contact's data in History, tables, backups | History, versions | BR-06, SR-15; backups keep it up to 14 days (accepted, OQ-P-11, install guide) |
+| Information disclosure: export by a Viewer | I5 | R-011-10, SR-16; every export logged (R-013-04) |
+| Information disclosure: token or contact data in browser storage | I2, I7 | SR-20: only the Firebase SDK's own store and the language choice |
+| Denial of service: request flood, large bodies, 10,000-contact export | I1, I5 | SR-09 rate limit and 1 MB; export capped at 10,000 and streamed (ADR-12) |
+| Denial of service: expensive duplicate search | I1 | read-only, Owner or Editor, linear hash-map algorithm, rate limit |
+| Elevation: Editor acts as Owner (invite, Delete forever, group delete) | I1 | SR-16 permission-matrix tests |
+| Elevation: last Owner removed by two parallel requests | I1 | row lock (R-004-07) |
+| Elevation: a removed member keeps using an old token | I1 | membership read per request (EX-017-03, EX-004-03) |
+| Elevation: container breakout through a root process | deployment | SB-11 non-root images |
+| Spoofing or tampering: emulator reachable in production | I2, I3 | production Compose has no emulator; startup guard; `FIREBASE_AUTH_EMULATOR_HOST` empty |
+| Information disclosure: health check reveals internals | I6 | answers status only, `show-details: never` |
+| Cross-site scripting through contact text | I7 | React output encoding; CSP without inline script (SR-06); no `dangerouslySetInnerHTML` |
+| Clickjacking | I7 | `frame-ancestors 'none'` |
+| Personal data items: contact fields, tags, attributes, notes | contacts | access by role (BR-02); retention BR-04; export logged; notes may hold special categories — `[ASSUMPTION]` the customer accepts this and handles legal matters outside the software (OQ-005-03, OQ-P-04) |
+| Personal data items: user name and e-mail | users, History | member list to members, History to Owner and Editor; e-mail removed on account deletion (D-16) |
+| Personal data items: versions | `contact_versions` | Owner and Editor only (R-019-06); erased with the contact |
+
+## 8. NFR checks
+
+Measured on the deployed (Compose) system with seeded data, results written to `docs/06_verification-report.md`; scripts live in `02_output/scripts/` and `backend/src/test` (tasks T-N01 to T-N12).
+
+| NFR | How it is checked | Pass value |
+|---|---|---|
+| NFR-01 | Timing test: 10,000 seeded contacts, 20 parallel virtual users, list, search and the filters of US-010 | 95th percentile under 1,000 ms |
+| NFR-02 | Same test opens contacts (`GET /contacts/{id}`) | 95th percentile under 500 ms |
+| NFR-03 | Export of 1,000 contacts with tags and attributes | ready in under 10 s |
+| NFR-04 | Load of NFR-01 plus 100 users and several groups | no 5xx and no 429 at normal load; 100 users and 20 at once |
+| NFR-05 | Write data, restart the containers, read it back; call `/health` | data intact; `/health` 200; 99 % target written in the install guide |
+| NFR-06 | Scripted backup, restore into a clean Compose stack and data comparison; daily backup and 14-day retention documented | identical row counts and checksums; log in `out/logs/` |
+| NFR-07 | Playwright main flows in Chromium, Firefox and WebKit; manual Safari and Edge check once | all pass |
+| NFR-08 | Screenshots at 320, 768 and 1280 px for list, filter, contact screens; assertion on horizontal scroll | no horizontal scroll at 320 px |
+| NFR-09 | axe scan (WCAG 2.1 AA tags) per main screen in both themes and languages; keyboard-only run of the main flows | no Critical or Serious violation; visible focus |
+| NFR-10 | `locales.test.ts` key parity; language switch on each screen of the main flows | same keys; no key shown |
+| NFR-11 | Review of empty and error state screenshots against the wireframes; DoD-P02 timing | every screen has the states; first contact in under 120 s of script time |
+| NFR-12 | Start the delivered Compose set-up on a clean host with only `.env`; E2E-01 | passes |
+| NFR-13 | Start on an empty database and on the previous release's database; list the migrations | both start; migrations versioned, forward only |
+| NFR-14 | Licence scan, dependency list review, search for `hibernate`, `jakarta.persistence`, SCM code, Google services other than Authentication | none forbidden; `ArchitectureTest` AR-02 |
+| NFR-15 | Export of 10,000 contacts | completes with no error and no out-of-memory; time recorded |
+
+Quality gate (`quality-requirements.md`): line coverage at least 95 %, adjusted mutation score at least 90 %, per component, measured in phase 5.
+
+<!-- next: 9. User interface -->
+
 
 
