@@ -136,6 +136,7 @@
     "tabs": {
       "label": "Group",
       "contacts": "Contacts",
+      "tags": "Tags",
       "members": "Members"
     },
     "noContacts": {
@@ -243,5 +244,18 @@
       "text": "You lose access to this group.",
       "action": "Leave group"
     }
+  },
+  "tags": {
+    "column": "Tag",
+    "contacts": "Contacts",
+    "rename": "Rename",
+    "delete": "Delete",
+    "renameTitle": "Rename tag",
+    "name": "Tag name",
+    "nameHint": "Letters, digits, - and _; up to 50 characters.",
+    "deleteTitle": "Delete tag",
+    "deleteText": "The tag is removed from its contacts. The contacts stay.",
+    "deleteConfirm": "Delete tag",
+    "empty": "No tags yet. Tags you add to contacts appear here."
   }
 }

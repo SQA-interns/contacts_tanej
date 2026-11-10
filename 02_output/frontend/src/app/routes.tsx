@@ -9,6 +9,7 @@ import { ContactPage } from '@/features/contacts/ContactPage';
 import { ContactsTab, GroupPage } from '@/features/groups/GroupPage';
 import { GroupsHome } from '@/features/groups/GroupsHome';
 import { MembersTab } from '@/features/members/MembersTab';
+import { ManageTagsPage } from '@/features/tags/ManageTagsPage';
 import { PublicOnly, RequireSession, SessionRoot } from './guards';
 
 function NotFoundPage() {
@@ -52,6 +53,7 @@ export const routes: RouteObject[] = [
                 element: <GroupPage />,
                 children: [
                   { index: true, element: <ContactsTab /> },
+                  { path: 'tags', element: <ManageTagsPage /> },
                   { path: 'members', element: <MembersTab /> },
                   { path: 'contacts/new', element: <ContactPage /> },
                   { path: 'contacts/:contactId', element: <ContactPage /> },

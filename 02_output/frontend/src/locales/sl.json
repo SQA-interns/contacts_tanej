@@ -136,6 +136,7 @@
     "tabs": {
       "label": "Skupina",
       "contacts": "Kontakti",
+      "tags": "Oznake",
       "members": "Člani"
     },
     "noContacts": {
@@ -243,5 +244,18 @@
       "text": "Izgubite dostop do te skupine.",
       "action": "Zapusti skupino"
     }
+  },
+  "tags": {
+    "column": "Oznaka",
+    "contacts": "Kontakti",
+    "rename": "Preimenuj",
+    "delete": "Izbriši",
+    "renameTitle": "Preimenuj oznako",
+    "name": "Ime oznake",
+    "nameHint": "Črke, števke, - in _; do 50 znakov.",
+    "deleteTitle": "Izbriši oznako",
+    "deleteText": "Oznaka se odstrani z njenih kontaktov. Kontakti ostanejo.",
+    "deleteConfirm": "Izbriši oznako",
+    "empty": "Še ni oznak. Oznake, ki jih dodate kontaktom, se prikažejo tukaj."
   }
 }
