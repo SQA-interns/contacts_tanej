@@ -472,3 +472,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-42: US-015 readings (delete and restore a group)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-015
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) What delete and restore answer for the roles and states the contract leaves open. (2) Restore after day 30 and before the cleanup. (3) The enabled state of "Delete group" in the dialog. (4) Order of the cleanup steps. (5) The 429 missing in the code of `POST /groups/{groupId}/exports` (drift test). (6) Screen code and its tests written in the same step (as in D-33 to D-41).
+- Options: (1) Delete: a non-Owner gets 403 for an active group and 404 for one in Trash; an Owner who meets a group already in Trash gets 409 `GROUP_IN_TRASH` (EX-015-05); a non-member gets 404. Restore: 404 for everyone except an Owner of a group in Trash (D-17: "a group not in Trash gets 404"), so the 403 of the contract is not produced. (2) Allowed, as ADR-08 says for contacts. (3) The button is enabled when something is typed; the server compares (case-sensitive, trimmed), so the frozen browser test AC-015-02 can click it and see the refusal. (4) The cleanup erases expired contacts first, then purges expired groups, each in its own transaction, so a contact's own 30 days (EX-015-06) run on their own. (5) The annotation list of `ExportController` got the 429 of the contract (one line; the drift test failed since US-011). (6) `GroupTrashIT`, `DeletedGroupTest` and `group-trash.test.tsx` were written with the code.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
