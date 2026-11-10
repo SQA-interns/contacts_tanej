@@ -1,0 +1,25 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:apply (default-cli) @ contact-groups-backend ---
+[INFO] File stored in the index does not exist: src/test/java/app/contactgroups/hidden/HiddenApiIT.java
+[INFO] File stored in the index does not exist: src/test/java/app/contactgroups/hidden/HiddenContactsIT.java
+[INFO] File stored in the index does not exist: src/test/java/app/contactgroups/hidden/HiddenGroupsIT.java
+[INFO] File stored in the index does not exist: src/test/java/app/contactgroups/hidden/HiddenHistoryIT.java
+[INFO] File stored in the index does not exist: src/test/java/app/contactgroups/hidden/HiddenListIT.java
+[INFO] File stored in the index does not exist: src/test/java/app/contactgroups/hidden/HiddenRateLimitIT.java
+[INFO] File stored in the index does not exist: src/test/java/app/contactgroups/hidden/HiddenVersionsDuplicatesIT.java
+[INFO] clean file: /w/src/main/java/app/contactgroups/config/SecurityConfig.java
+[INFO] clean file: /w/src/test/java/app/contactgroups/config/EmulatorHostGuardTest.java
+[INFO] clean file: /w/src/test/java/app/contactgroups/it/IdentityIT.java
+[INFO] Spotless.Java is keeping 55 files clean - 3 were changed to be clean, 13 were already clean, 39 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.103 s
+[INFO] Finished at: 2026-11-10T08:06:30Z
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,18 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:apply (default-cli) @ contact-groups-backend ---
+[INFO] clean file: /w/src/main/java/app/contactgroups/config/FirebaseJwtDecoders.java
+[INFO] clean file: /w/src/main/java/app/contactgroups/config/RateLimiter.java
+[INFO] clean file: /w/src/main/java/app/contactgroups/config/RateLimitFilter.java
+[INFO] Spotless.Java is keeping 66 files clean - 3 were changed to be clean, 5 were already clean, 58 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.467 s
+[INFO] Finished at: 2026-11-10T08:10:45Z
+[INFO] ------------------------------------------------------------------------

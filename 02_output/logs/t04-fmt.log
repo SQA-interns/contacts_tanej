@@ -1,0 +1,19 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:apply (default-cli) @ contact-groups-backend ---
+[INFO] clean file: /w/src/main/java/app/contactgroups/api/ApiExceptionHandler.java
+[INFO] clean file: /w/src/main/java/app/contactgroups/api/ErrorResponse.java
+[INFO] clean file: /w/src/test/java/app/contactgroups/api/ApiExceptionHandlerTest.java
+[INFO] clean file: /w/src/test/java/app/contactgroups/it/RequestLogIT.java
+[INFO] Spotless.Java is keeping 60 files clean - 4 were changed to be clean, 4 were already clean, 52 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.626 s
+[INFO] Finished at: 2026-11-10T08:07:59Z
+[INFO] ------------------------------------------------------------------------

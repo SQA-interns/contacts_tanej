@@ -1,0 +1,238 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 16 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 32 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.config.EmulatorHostGuardTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.081 s -- in app.contactgroups.config.EmulatorHostGuardTest
+[INFO] Running app.contactgroups.domain.DisplayNameTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s -- in app.contactgroups.domain.DisplayNameTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] Building jar: /w/target/contact-groups-backend.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.it.IdentityIT
+08:02:52.451 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.it.IdentityIT]: IdentityIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+08:02:53.902 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.IdentityIT
+08:02:57.759 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+08:02:57.809 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+08:02:57.873 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+08:03:03.460 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+08:03:03.476 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+08:03:03.593 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+08:03:04.723 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+08:03:04.827 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+08:03:05.942 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 40a159950bcbdfeea98ea458d795155e9364011f2c9350e8c74520023f5204b7
+08:03:07.584 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT2.861288995S
+08:03:07.622 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+08:03:07.622 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+08:03:07.627 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+08:03:07.628 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+08:03:07.848 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: 7f3ef7dd116783d2eb0463d55f8564af937fd2c3b355157cf7ea28ba84f0fbcc
+08:03:13.797 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT6.168846141S
+08:03:13.798 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:49553/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T08:03:17.262Z  INFO 161 --- [contact-groups-backend] [           main] app.contactgroups.it.IdentityIT          : Starting IdentityIT using Java 21.0.9 with PID 161 (started by root in /w)
+2026-11-10T08:03:17.267Z  INFO 161 --- [contact-groups-backend] [           main] app.contactgroups.it.IdentityIT          : The following 1 profile is active: "test"
+2026-11-10T08:03:31.128Z  INFO 161 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T08:03:31.218Z  INFO 161 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T08:03:31.219Z  INFO 161 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T08:03:31.537Z  INFO 161 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T08:03:31.538Z  INFO 161 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 14116 ms
+2026-11-10T08:03:37.014Z  INFO 161 --- [contact-groups-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path ''
+2026-11-10T08:03:40.772Z  INFO 161 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T08:03:42.220Z  INFO 161 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3bf306d3
+2026-11-10T08:03:42.235Z  INFO 161 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T08:03:42.395Z  INFO 161 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:49553/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T08:03:42.721Z  INFO 161 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T08:03:42.743Z  INFO 161 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.189s)
+2026-11-10T08:03:42.836Z  INFO 161 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T08:03:43.065Z  INFO 161 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T08:03:43.172Z  INFO 161 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T08:03:43.635Z  INFO 161 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.378s)
+2026-11-10T08:03:44.866Z  INFO 161 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 35617 (http) with context path '/'
+2026-11-10T08:03:44.900Z  INFO 161 --- [contact-groups-backend] [           main] app.contactgroups.it.IdentityIT          : Started IdentityIT in 30.705 seconds (process running for 57.505)
+2026-11-10T08:03:52.191Z  INFO 161 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T08:03:52.191Z  INFO 161 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T08:03:52.194Z  INFO 161 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-10T08:03:53.363Z ERROR 161 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: NoResourceFoundException
+2026-11-10T08:03:54.482Z ERROR 161 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: NoResourceFoundException
+2026-11-10T08:03:54.587Z ERROR 161 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: NoResourceFoundException
+2026-11-10T08:03:54.702Z ERROR 161 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: NoResourceFoundException
+2026-11-10T08:03:54.814Z ERROR 161 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: NoResourceFoundException
+2026-11-10T08:03:54.920Z ERROR 161 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: NoResourceFoundException
+[ERROR] Tests run: 6, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 63.45 s <<< FAILURE! -- in app.contactgroups.it.IdentityIT
+[ERROR] app.contactgroups.it.IdentityIT.aDeletedAccountGets401WithItsOldToken -- Time elapsed: 9.108 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.it.IdentityIT.aDeletedAccountGets401WithItsOldToken(IdentityIT.java:62)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.it.IdentityIT.anUnverifiedEmailGets403AndNoRecordIsCreated -- Time elapsed: 0.118 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 403
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Res.expectError(Res.java:44)
+	at app.contactgroups.it.IdentityIT.anUnverifiedEmailGets403AndNoRecordIsCreated(IdentityIT.java:56)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.it.IdentityIT.theEmailIsStoredInLowercaseAndTheRecordFollowsTheToken -- Time elapsed: 0.100 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.it.IdentityIT.theEmailIsStoredInLowercaseAndTheRecordFollowsTheToken(IdentityIT.java:33)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.it.IdentityIT.anOverLongNameIsCutTo100Characters -- Time elapsed: 0.118 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.it.IdentityIT.anOverLongNameIsCutTo100Characters(IdentityIT.java:50)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.it.IdentityIT.meReturnsTheUserAndCreatesTheRecord -- Time elapsed: 0.104 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.it.IdentityIT.meReturnsTheUserAndCreatesTheRecord(IdentityIT.java:24)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.it.IdentityIT.aTokenWithoutANameUsesTheEmailPart -- Time elapsed: 0.103 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.it.IdentityIT.aTokenWithoutANameUsesTheEmailPart(IdentityIT.java:44)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   IdentityIT.aDeletedAccountGets401WithItsOldToken:62 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   IdentityIT.aTokenWithoutANameUsesTheEmailPart:44 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   IdentityIT.anOverLongNameIsCutTo100Characters:50 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   IdentityIT.anUnverifiedEmailGets403AndNoRecordIsCreated:56 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 403
+ but was: 500
+[ERROR]   IdentityIT.meReturnsTheUserAndCreatesTheRecord:24 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   IdentityIT.theEmailIsStoredInLowercaseAndTheRecordFollowsTheToken:33 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[INFO] 
+[ERROR] Tests run: 6, Failures: 6, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:50 min
+[INFO] Finished at: 2026-11-10T08:03:56Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
