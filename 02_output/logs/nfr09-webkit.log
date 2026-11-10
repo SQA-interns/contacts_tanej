@@ -1,0 +1,52 @@
+
+Running 6 tests using 1 worker
+
+  ok 1 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, light (45.3s)
+  ok 2 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, dark (44.3s)
+  ok 3 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, light (44.5s)
+  ok 4 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, dark (43.7s)
+  x  5 [webkit] › e2e\accessibility.spec.ts:49:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus (10.6s)
+  ok 6 [webkit] › e2e\accessibility.spec.ts:108:1 › NFR-09 a dialog traps the focus and Escape closes it (8.1s)
+
+
+  1) [webkit] › e2e\accessibility.spec.ts:49:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus 
+
+    Error: focus visible at tab stop 4
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      67 |   for (let i = 0; i < 40 && !reached; i++) {
+      68 |     await page.keyboard.press('Tab');
+    > 69 |     expect(await focusVisible(), `focus visible at tab stop ${i + 1}`).toBe(true);
+         |                                                                        ^
+      70 |     reached = await page.evaluate(() => document.activeElement?.textContent?.includes('Konferenca 2026') ?? false);
+      71 |   }
+      72 |   expect(reached).toBe(true);
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\accessibility.spec.ts:69:72
+
+    Error Context: test-results\e2e-accessibility-NFR-09-k-34d45-ontact-with-a-visible-focus-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-accessibility-NFR-09-k-34d45-ontact-with-a-visible-focus-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-accessibility-NFR-09-k-34d45-ontact-with-a-visible-focus-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [webkit] › e2e\accessibility.spec.ts:49:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus 
+  5 passed (3.4m)
+(node:35268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+exit 1

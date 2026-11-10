@@ -538,3 +538,14 @@
 - Human response: none
 - Resolution: (1), pending review. The MIT licences of fuzzy and valid-url are not read from a file in the repository: please confirm them in `/review`.
 - Overrides: none
+
+## D-48: NFR run findings that need a fix session (T-N05 to T-N09)
+- Timestamp: 2026-11-10
+- Session: S5 implement T-N04 to T-N12
+- Class: approval
+- Type: non-blocking
+- Trigger: Run against the rebuilt stack (`out/logs/nfr07-e2e-browsers.log`, `nfr-specs-*.log`, `nfr08-responsive-320.log`, `nfr09-webkit.log`). (1) The frozen E2E-01, 02, 03, 06 and 08 fail identically in Chromium, Firefox and WebKit, so the cause is the app or the tests, not a browser; NFR-07 is not met for these scenarios. E2E-01 and E2E-03 never see "The contact was saved." after Save (a new contact opens its own page, no confirmation text found); E2E-02 `getByLabel('Role')` matches two controls because the members table uses `aria-label` "Role of {name}" (the substring rule in the progress notes); E2E-03 and E2E-06 then do not find the "Group" navigation; E2E-08 does not find the heading "Group not found". (2) NFR-08: at 320 px the groups, contacts, filter, members, history and Trash screens scroll horizontally (groups table 343 px, contacts table 504 px, group tab row about 400 px; D-27 knew of the tab row); the contact form fits. (3) NFR-09 in WebKit: the keyboard run finds a Tab stop without a visible focus (stop 4). axe (WCAG 2.1 A and AA) is clean on all screens in Slovenian and English, light and dark, in all three engines, but only the wireframe theme is tested; run NFR-09 again after `/design`.
+- Options: (1) A `/fix` session after `/review INC-1` (proposed); suggested severities: High for (2) and for E2E-01, 02, 03, 06, 08; Medium for the WebKit focus. (2) Change the frozen E2E tests where they are wrong (approval decision of the human, as in D-44).
+- Human response: none
+- Resolution: open. NFR-10 (language switch on the main screens), NFR-11 and DoD-P02 (first contact in 2.7 s, empty and error states, screenshots in `out/logs/screenshots/states`) and the dialog focus check pass in Chromium (the four new specs also in Firefox and WebKit, except as listed).
+- Overrides: none

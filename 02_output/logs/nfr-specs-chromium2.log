@@ -1,0 +1,64 @@
+
+Running 9 tests using 1 worker
+
+  ok 1 [chromium] › e2e\language.spec.ts:51:1 › NFR-10 the switch changes every signed-out screen (2.6s)
+  ok 2 [chromium] › e2e\language.spec.ts:60:1 › NFR-10 the switch changes every screen of the main flows (10.8s)
+  ok 3 [chromium] › e2e\language.spec.ts:79:3 › reload › NFR-10 the language survives a reload on a signed-in screen (3.7s)
+  ok 4 [chromium] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 320 px have no horizontal scroll (2.1s)
+  x  5 [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll (3.8s)
+  ok 6 [chromium] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 768 px have no horizontal scroll (2.4s)
+  ok 7 [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 768 px have no horizontal scroll (9.9s)
+  ok 8 [chromium] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 1280 px have no horizontal scroll (2.2s)
+  ok 9 [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 1280 px have no horizontal scroll (10.1s)
+
+
+  1) [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+
+    Error: groups at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "table.w-full text-left right=343",[39m
+    [31m+   "thead. right=343",[39m
+    [31m+   "tr.border-b border-border right=343",[39m
+    [31m+   "th.px-4 py-3 right=343",[39m
+    [31m+   "tbody. right=343",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect(await overflow(page), `${screen.name} at ${width}`).toEqual([]);
+         |                                                                  ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:66
+
+    Error Context: test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+  8 passed (54.3s)
+(node:4348) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4348) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+exit 1

@@ -1,0 +1,140 @@
+
+Running 19 tests using 1 worker
+
+  ok  1 [chromium] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, light (18.9s)
+  ok  2 [chromium] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, dark (18.0s)
+  ok  3 [chromium] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, light (18.2s)
+  ok  4 [chromium] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, dark (17.8s)
+  ok  5 [chromium] › e2e\accessibility.spec.ts:48:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus (4.4s)
+  ok  6 [chromium] › e2e\accessibility.spec.ts:107:1 › NFR-09 a dialog traps the focus and Escape closes it (3.9s)
+DoD-P02 first contact after 2.7 s
+  ok  7 [chromium] › e2e\first-contact.spec.ts:10:1 › DoD-P02 a new person creates a group and the first contact in under 120 seconds (3.7s)
+  ok  8 [chromium] › e2e\first-contact.spec.ts:44:1 › DoD-P02 registering, verifying and signing in leads to the first group without help (2.8s)
+  ok  9 [chromium] › e2e\first-contact.spec.ts:67:1 › NFR-11 every screen has an empty state (4.9s)
+  ok 10 [chromium] › e2e\first-contact.spec.ts:103:1 › NFR-11 an error is shown as a clear message with a way to try again (3.6s)
+  ok 11 [chromium] › e2e\language.spec.ts:44:1 › NFR-10 the switch changes every signed-out screen (2.2s)
+  x  12 [chromium] › e2e\language.spec.ts:53:1 › NFR-10 the switch changes every screen of the main flows (30.3s)
+  x  13 [chromium] › e2e\language.spec.ts:65:1 › NFR-10 the language survives a reload on a signed-in screen (9.0s)
+  ok 14 [chromium] › e2e\responsive.spec.ts:27:3 › NFR-08 signed-out screens at 320 px have no horizontal scroll (2.5s)
+  x  15 [chromium] › e2e\responsive.spec.ts:44:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll (3.8s)
+  ok 16 [chromium] › e2e\responsive.spec.ts:27:3 › NFR-08 signed-out screens at 768 px have no horizontal scroll (2.3s)
+  ok 17 [chromium] › e2e\responsive.spec.ts:44:3 › NFR-08 signed-in screens at 768 px have no horizontal scroll (9.7s)
+  ok 18 [chromium] › e2e\responsive.spec.ts:27:3 › NFR-08 signed-out screens at 1280 px have no horizontal scroll (2.2s)
+  ok 19 [chromium] › e2e\responsive.spec.ts:44:3 › NFR-08 signed-in screens at 1280 px have no horizontal scroll (10.2s)
+
+
+  1) [chromium] › e2e\language.spec.ts:53:1 › NFR-10 the switch changes every screen of the main flows 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'EN', exact: true })[22m
+
+
+      29 |
+      30 | async function checkSwitch(page: Page, name: string): Promise<void> {
+    > 31 |   await english(page).click();
+         |                       ^
+      32 |   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+      33 |   const inEnglish = await readable(page);
+      34 |   await slovenian(page).click();
+        at checkSwitch (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\language.spec.ts:31:23)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\language.spec.ts:54:11
+
+    Error Context: test-results\e2e-language-NFR-10-the-sw-e06c7-ry-screen-of-the-main-flows-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-language-NFR-10-the-sw-e06c7-ry-screen-of-the-main-flows-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-language-NFR-10-the-sw-e06c7-ry-screen-of-the-main-flows-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › e2e\language.spec.ts:65:1 › NFR-10 the language survives a reload on a signed-in screen 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveAttribute[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'SL', exact: true })
+    Expected string: [32m"[7mtru[27me"[39m
+    Received string: [31m"[7mfals[27me"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveAttribute" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'SL', exact: true })[22m
+    [2m    9 × locator resolved to <button lang="sl" aria-pressed="false" class="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface">SL</button>[22m
+    [2m      - unexpected value "false"[22m
+
+
+      61 |   await slovenian(page).click();
+      62 |   await page.reload();
+    > 63 |   await expect(slovenian(page)).toHaveAttribute('aria-pressed', 'true');
+         |                                 ^
+      64 |   await expect(page.locator('html')).toHaveAttribute('lang', 'sl');
+      65 | });
+      66 |
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\language.spec.ts:63:33
+
+    Error Context: test-results\e2e-language-NFR-10-the-la-253a1-eload-on-a-signed-in-screen-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-language-NFR-10-the-la-253a1-eload-on-a-signed-in-screen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-language-NFR-10-the-la-253a1-eload-on-a-signed-in-screen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › e2e\responsive.spec.ts:44:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+
+    Error: groups at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      36 |     for (const screen of mainScreens(groupId, contactId)) {
+      37 |       await openScreen(page, screen);
+    > 38 |       expect(await noHorizontalScroll(page), `${screen.name} at ${width}`).toBe(true);
+         |                                                                            ^
+      39 |       await page.screenshot({
+      40 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      41 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:38:76
+
+    Error Context: test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › e2e\language.spec.ts:53:1 › NFR-10 the switch changes every screen of the main flows 
+    [chromium] › e2e\language.spec.ts:65:1 › NFR-10 the language survives a reload on a signed-in screen 
+    [chromium] › e2e\responsive.spec.ts:44:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+  16 passed (3.0m)
+(node:18676) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18676) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+exit 1

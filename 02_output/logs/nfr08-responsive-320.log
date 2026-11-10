@@ -1,0 +1,175 @@
+
+Running 3 tests using 1 worker
+
+  x  1 [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll (10.0s)
+  ok 2 [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 768 px have no horizontal scroll (10.0s)
+  ok 3 [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 1280 px have no horizontal scroll (10.0s)
+
+
+  1) [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+
+    Error: groups at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "table.w-full text-left right=343",[39m
+    [31m+   "thead. right=343",[39m
+    [31m+   "tr.border-b border-border right=343",[39m
+    [31m+   "th.px-4 py-3 right=343",[39m
+    [31m+   "tbody. right=343",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: contacts at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+   "tr.border-b border-border right=504",[39m
+    [31m+   "th.px-3 py-2 right=342",[39m
+    [31m+   "button.flex min-h-11 w-full items-center gap-1 text-left font-semib right=330",[39m
+    [31m+   "span. right=330",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: filter at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+   "tr.border-b border-border right=504",[39m
+    [31m+   "th.px-3 py-2 right=342",[39m
+    [31m+   "button.flex min-h-11 w-full items-center gap-1 text-left font-semib right=330",[39m
+    [31m+   "span. right=330",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: members at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 border-b-2 border-primary fo right=400",[39m
+    [31m+   "table.w-full text-left right=386",[39m
+    [31m+   "thead. right=386",[39m
+    [31m+   "tr.border-b border-border right=386",[39m
+    [31m+   "th.px-4 py-3 right=386",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: history at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=400",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: trash at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error Context: test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+  2 passed (36.6s)
+(node:28724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+exit 1

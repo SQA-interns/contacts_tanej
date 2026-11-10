@@ -1,0 +1,545 @@
+
+Running 24 tests using 1 worker
+
+  x   1 [chromium] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use (8.6s)
+  x   2 [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work (2.3s)
+  x   3 [chromium] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export (30.2s)
+  ok  4 [chromium] › e2e\e2e-04-isolation.spec.ts:9:1 › E2E-04 J4 Isolation (9.4s)
+  ok  5 [chromium] › e2e\e2e-05-conflict-and-trash.spec.ts:9:1 › E2E-05 J5 Conflict and Trash (8.1s)
+  x   6 [chromium] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge (30.1s)
+  ok  7 [chromium] › e2e\e2e-07-leaving.spec.ts:9:1 › E2E-07 J7 Leaving (6.7s)
+  x   8 [chromium] › e2e\e2e-08-group-deletion.spec.ts:7:1 › E2E-08 J8 Group deletion (7.9s)
+  x   9 [firefox] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use (9.3s)
+  x  10 [firefox] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work (2.8s)
+  x  11 [firefox] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export (30.6s)
+  ok 12 [firefox] › e2e\e2e-04-isolation.spec.ts:9:1 › E2E-04 J4 Isolation (6.8s)
+  ok 13 [firefox] › e2e\e2e-05-conflict-and-trash.spec.ts:9:1 › E2E-05 J5 Conflict and Trash (6.0s)
+  x  14 [firefox] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge (30.7s)
+  ok 15 [firefox] › e2e\e2e-07-leaving.spec.ts:9:1 › E2E-07 J7 Leaving (8.5s)
+  x  16 [firefox] › e2e\e2e-08-group-deletion.spec.ts:7:1 › E2E-08 J8 Group deletion (8.2s)
+  x  17 [webkit] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use (17.2s)
+  x  18 [webkit] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work (8.3s)
+  x  19 [webkit] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export (35.1s)
+  ok 20 [webkit] › e2e\e2e-04-isolation.spec.ts:9:1 › E2E-04 J4 Isolation (8.4s)
+  ok 21 [webkit] › e2e\e2e-05-conflict-and-trash.spec.ts:9:1 › E2E-05 J5 Conflict and Trash (23.6s)
+  x  22 [webkit] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge (35.1s)
+  ok 23 [webkit] › e2e\e2e-07-leaving.spec.ts:9:1 › E2E-07 J7 Leaving (14.6s)
+  ok 24 [webkit] › e2e\e2e-08-group-deletion.spec.ts:7:1 › E2E-08 J8 Group deletion (12.0s)
+
+
+  1) [chromium] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ───────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByText('The contact was saved.')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('The contact was saved.')[22m
+
+
+      38 |   await page.getByLabel('Value').last().fill('spletnoProgramiranje');
+      39 |   await page.getByRole('button', { name: 'Save', exact: true }).click();
+    > 40 |   await expect(page.getByText('The contact was saved.')).toBeVisible();
+         |                                                          ^
+      41 |
+      42 |   await openTab(page, 'Contacts');
+      43 |   await page.getByLabel('Search').fill('udelez');
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-01-first-use.spec.ts:40:58
+
+    Error Context: test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ───────────────────────────
+
+    Error: locator.selectOption: Error: strict mode violation: getByLabel('Role') resolved to 2 elements:
+        1) <select aria-label="Role of Ana Novak" class="min-h-11 rounded-control border border-border bg-surface px-2">…</select> aka getByLabel('Role of Ana Novak')
+        2) <select id="«r4»-role" class="min-h-11 w-full rounded-control border border-border bg-background px-3 text-base text-text">…</select> aka getByLabel('Role (required)')
+
+    Call log:
+    [2m  - waiting for getByLabel('Role')[22m
+
+
+      33 |   ] as const) {
+      34 |     await page.getByLabel('E-mail').fill(email);
+    > 35 |     await page.getByLabel('Role').selectOption({ label: role });
+         |                                   ^
+      36 |     await page.getByRole('button', { name: 'Invite' }).click();
+      37 |     await expect(row(page, email)).toBeVisible();
+      38 |   }
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-02-team-work.spec.ts:35:35
+
+    Error Context: test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export ──────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('navigation', { name: 'Group' }).getByRole('link', { name: 'Contacts' })[22m
+
+
+       at acceptance\support.ts:249
+
+      247 |
+      248 | export async function openTab(page: Page, name: string): Promise<void> {
+    > 249 |   await tab(page, name).click();
+          |                         ^
+      250 | }
+      251 |
+      252 | export function dialog(page: Page): Locator {
+        at openTab (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:249:25)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-03-tags-and-export.spec.ts:29:11
+
+    Error Context: test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge ─────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('navigation', { name: 'Group' }).getByRole('link', { name: 'Duplicates' })[22m
+
+
+       at acceptance\support.ts:249
+
+      247 |
+      248 | export async function openTab(page: Page, name: string): Promise<void> {
+    > 249 |   await tab(page, name).click();
+          |                         ^
+      250 | }
+      251 |
+      252 | export function dialog(page: Page): Locator {
+        at openTab (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:249:25)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-06-duplicates-and-merge.spec.ts:27:9
+
+    Error Context: test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › e2e\e2e-08-group-deletion.spec.ts:7:1 › E2E-08 J8 Group deletion ─────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('heading', { name: 'Group not found' }).first()
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Group not found' }).first()[22m
+
+
+      20 |   await expect(marko.getByRole('link', { name: 'Konferenca 2026' })).toHaveCount(0);
+      21 |   await marko.goto(`/groups/${groupId}`);
+    > 22 |   await expect(marko.getByRole('heading', { name: 'Group not found' }).first()).toBeVisible();
+         |                                                                                 ^
+      23 |
+      24 |   await page.getByRole('link', { name: 'Deleted groups' }).click();
+      25 |   await expect(row(page, 'Konferenca 2026')).toBeVisible();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-08-group-deletion.spec.ts:22:81
+
+    Error Context: test-results\e2e-e2e-08-group-deletion-E2E-08-J8-Group-deletion-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-08-group-deletion-E2E-08-J8-Group-deletion-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-08-group-deletion-E2E-08-J8-Group-deletion-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [firefox] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByText('The contact was saved.')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('The contact was saved.')[22m
+
+
+      38 |   await page.getByLabel('Value').last().fill('spletnoProgramiranje');
+      39 |   await page.getByRole('button', { name: 'Save', exact: true }).click();
+    > 40 |   await expect(page.getByText('The contact was saved.')).toBeVisible();
+         |                                                          ^
+      41 |
+      42 |   await openTab(page, 'Contacts');
+      43 |   await page.getByLabel('Search').fill('udelez');
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-01-first-use.spec.ts:40:58
+
+    Error Context: test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-firefox\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [firefox] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ────────────────────────────
+
+    Error: locator.selectOption: Error: strict mode violation: getByLabel('Role') resolved to 2 elements:
+        1) <select aria-label="Role of Ana Novak" class="min-h-11 rounded-control border border-border bg-surface px-2">…</select> aka getByLabel('Role of Ana Novak')
+        2) <select id="«r4»-role" class="min-h-11 w-full rounded-control border border-border bg-background px-3 text-base text-text">…</select> aka getByLabel('Role (required)')
+
+    Call log:
+    [2m  - waiting for getByLabel('Role')[22m
+
+
+      33 |   ] as const) {
+      34 |     await page.getByLabel('E-mail').fill(email);
+    > 35 |     await page.getByLabel('Role').selectOption({ label: role });
+         |                                   ^
+      36 |     await page.getByRole('button', { name: 'Invite' }).click();
+      37 |     await expect(row(page, email)).toBeVisible();
+      38 |   }
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-02-team-work.spec.ts:35:35
+
+    Error Context: test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-firefox\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [firefox] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export ───────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('navigation', { name: 'Group' }).getByRole('link', { name: 'Contacts' })[22m
+
+
+       at acceptance\support.ts:249
+
+      247 |
+      248 | export async function openTab(page: Page, name: string): Promise<void> {
+    > 249 |   await tab(page, name).click();
+          |                         ^
+      250 | }
+      251 |
+      252 | export function dialog(page: Page): Locator {
+        at openTab (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:249:25)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-03-tags-and-export.spec.ts:29:11
+
+    Error Context: test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-firefox\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [firefox] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge ──────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('navigation', { name: 'Group' }).getByRole('link', { name: 'Duplicates' })[22m
+
+
+       at acceptance\support.ts:249
+
+      247 |
+      248 | export async function openTab(page: Page, name: string): Promise<void> {
+    > 249 |   await tab(page, name).click();
+          |                         ^
+      250 | }
+      251 |
+      252 | export function dialog(page: Page): Locator {
+        at openTab (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:249:25)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-06-duplicates-and-merge.spec.ts:27:9
+
+    Error Context: test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-firefox\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [firefox] › e2e\e2e-08-group-deletion.spec.ts:7:1 › E2E-08 J8 Group deletion ─────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('heading', { name: 'Group not found' }).first()
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Group not found' }).first()[22m
+
+
+      20 |   await expect(marko.getByRole('link', { name: 'Konferenca 2026' })).toHaveCount(0);
+      21 |   await marko.goto(`/groups/${groupId}`);
+    > 22 |   await expect(marko.getByRole('heading', { name: 'Group not found' }).first()).toBeVisible();
+         |                                                                                 ^
+      23 |
+      24 |   await page.getByRole('link', { name: 'Deleted groups' }).click();
+      25 |   await expect(row(page, 'Konferenca 2026')).toBeVisible();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-08-group-deletion.spec.ts:22:81
+
+    Error Context: test-results\e2e-e2e-08-group-deletion-E2E-08-J8-Group-deletion-firefox\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-08-group-deletion-E2E-08-J8-Group-deletion-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-08-group-deletion-E2E-08-J8-Group-deletion-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [webkit] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByText('The contact was saved.')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('The contact was saved.')[22m
+
+
+      38 |   await page.getByLabel('Value').last().fill('spletnoProgramiranje');
+      39 |   await page.getByRole('button', { name: 'Save', exact: true }).click();
+    > 40 |   await expect(page.getByText('The contact was saved.')).toBeVisible();
+         |                                                          ^
+      41 |
+      42 |   await openTab(page, 'Contacts');
+      43 |   await page.getByLabel('Search').fill('udelez');
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-01-first-use.spec.ts:40:58
+
+    Error Context: test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [webkit] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ────────────────────────────
+
+    Error: locator.selectOption: Error: strict mode violation: getByLabel('Role') resolved to 2 elements:
+        1) <select aria-label="Role of Ana Novak" class="min-h-11 rounded-control border border-border bg-surface px-2">…</select> aka getByLabel('Role of Ana Novak')
+        2) <select id="«r4»-role" class="min-h-11 w-full rounded-control border border-border bg-background px-3 text-base text-text">…</select> aka getByLabel('Role (required)')
+
+    Call log:
+    [2m  - waiting for getByLabel('Role')[22m
+
+
+      33 |   ] as const) {
+      34 |     await page.getByLabel('E-mail').fill(email);
+    > 35 |     await page.getByLabel('Role').selectOption({ label: role });
+         |                                   ^
+      36 |     await page.getByRole('button', { name: 'Invite' }).click();
+      37 |     await expect(row(page, email)).toBeVisible();
+      38 |   }
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-02-team-work.spec.ts:35:35
+
+    Error Context: test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [webkit] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export ───────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('navigation', { name: 'Group' }).getByRole('link', { name: 'Contacts' })[22m
+
+
+       at acceptance\support.ts:249
+
+      247 |
+      248 | export async function openTab(page: Page, name: string): Promise<void> {
+    > 249 |   await tab(page, name).click();
+          |                         ^
+      250 | }
+      251 |
+      252 | export function dialog(page: Page): Locator {
+        at openTab (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:249:25)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-03-tags-and-export.spec.ts:29:11
+
+    Error Context: test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-03-tags-and-export-E2E-03-J3-Tags-and-export-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [webkit] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge ──────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('navigation', { name: 'Group' }).getByRole('link', { name: 'Duplicates' })[22m
+
+
+       at acceptance\support.ts:249
+
+      247 |
+      248 | export async function openTab(page: Page, name: string): Promise<void> {
+    > 249 |   await tab(page, name).click();
+          |                         ^
+      250 | }
+      251 |
+      252 | export function dialog(page: Page): Locator {
+        at openTab (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:249:25)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-06-duplicates-and-merge.spec.ts:27:9
+
+    Error Context: test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-06-duplicates-and--202df--06-J6-Duplicates-and-merge-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14 failed
+    [chromium] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ────────────────────────────
+    [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ────────────────────────────
+    [chromium] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export ───────────────
+    [chromium] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge ──────
+    [chromium] › e2e\e2e-08-group-deletion.spec.ts:7:1 › E2E-08 J8 Group deletion ──────────────────
+    [firefox] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ─────────────────────────────
+    [firefox] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ─────────────────────────────
+    [firefox] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export ────────────────
+    [firefox] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge ───────
+    [firefox] › e2e\e2e-08-group-deletion.spec.ts:7:1 › E2E-08 J8 Group deletion ───────────────────
+    [webkit] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ──────────────────────────────
+    [webkit] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ──────────────────────────────
+    [webkit] › e2e\e2e-03-tags-and-export.spec.ts:10:1 › E2E-03 J3 Tags and export ─────────────────
+    [webkit] › e2e\e2e-06-duplicates-and-merge.spec.ts:9:1 › E2E-06 J6 Duplicates and merge ────────
+  10 passed (6.5m)
+(node:2604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35832) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35832) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+exit 1

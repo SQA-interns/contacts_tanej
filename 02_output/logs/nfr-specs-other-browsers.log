@@ -1,0 +1,552 @@
+
+Running 38 tests using 1 worker
+
+  ok  1 [firefox] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, light (29.2s)
+  ok  2 [firefox] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, dark (28.0s)
+  ok  3 [firefox] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, light (27.0s)
+  ok  4 [firefox] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, dark (27.0s)
+  ok  5 [firefox] › e2e\accessibility.spec.ts:48:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus (4.9s)
+  ok  6 [firefox] › e2e\accessibility.spec.ts:107:1 › NFR-09 a dialog traps the focus and Escape closes it (3.6s)
+DoD-P02 first contact after 2.1 s
+  ok  7 [firefox] › e2e\first-contact.spec.ts:10:1 › DoD-P02 a new person creates a group and the first contact in under 120 seconds (4.2s)
+  ok  8 [firefox] › e2e\first-contact.spec.ts:44:1 › DoD-P02 registering, verifying and signing in leads to the first group without help (3.4s)
+  ok  9 [firefox] › e2e\first-contact.spec.ts:67:1 › NFR-11 every screen has an empty state (6.3s)
+  ok 10 [firefox] › e2e\first-contact.spec.ts:103:1 › NFR-11 an error is shown as a clear message with a way to try again (3.6s)
+  ok 11 [firefox] › e2e\language.spec.ts:51:1 › NFR-10 the switch changes every signed-out screen (2.7s)
+  ok 12 [firefox] › e2e\language.spec.ts:60:1 › NFR-10 the switch changes every screen of the main flows (13.7s)
+  ok 13 [firefox] › e2e\language.spec.ts:79:3 › reload › NFR-10 the language survives a reload on a signed-in screen (4.2s)
+  ok 14 [firefox] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 320 px have no horizontal scroll (2.2s)
+  x  15 [firefox] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll (13.4s)
+  ok 16 [firefox] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 768 px have no horizontal scroll (6.5s)
+  ok 17 [firefox] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 768 px have no horizontal scroll (12.2s)
+  ok 18 [firefox] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 1280 px have no horizontal scroll (2.4s)
+  ok 19 [firefox] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 1280 px have no horizontal scroll (11.8s)
+  x  20 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, light (32.1s)
+  x  21 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, dark (33.1s)
+  x  22 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, light (33.1s)
+  x  23 [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, dark (31.6s)
+  x  24 [webkit] › e2e\accessibility.spec.ts:48:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus (11.3s)
+  ok 25 [webkit] › e2e\accessibility.spec.ts:107:1 › NFR-09 a dialog traps the focus and Escape closes it (8.4s)
+DoD-P02 first contact after 4.9 s
+  ok 26 [webkit] › e2e\first-contact.spec.ts:10:1 › DoD-P02 a new person creates a group and the first contact in under 120 seconds (6.2s)
+  ok 27 [webkit] › e2e\first-contact.spec.ts:44:1 › DoD-P02 registering, verifying and signing in leads to the first group without help (5.6s)
+  ok 28 [webkit] › e2e\first-contact.spec.ts:67:1 › NFR-11 every screen has an empty state (10.1s)
+  ok 29 [webkit] › e2e\first-contact.spec.ts:103:1 › NFR-11 an error is shown as a clear message with a way to try again (6.6s)
+  ok 30 [webkit] › e2e\language.spec.ts:51:1 › NFR-10 the switch changes every signed-out screen (5.1s)
+  ok 31 [webkit] › e2e\language.spec.ts:60:1 › NFR-10 the switch changes every screen of the main flows (21.4s)
+  ok 32 [webkit] › e2e\language.spec.ts:79:3 › reload › NFR-10 the language survives a reload on a signed-in screen (6.2s)
+  ok 33 [webkit] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 320 px have no horizontal scroll (2.6s)
+  x  34 [webkit] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll (19.3s)
+  ok 35 [webkit] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 768 px have no horizontal scroll (4.0s)
+  ok 36 [webkit] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 768 px have no horizontal scroll (16.7s)
+  ok 37 [webkit] › e2e\responsive.spec.ts:33:3 › NFR-08 signed-out screens at 1280 px have no horizontal scroll (3.8s)
+  ok 38 [webkit] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 1280 px have no horizontal scroll (17.6s)
+
+
+  1) [firefox] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+
+    Error: groups at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "table.w-full text-left right=343",[39m
+    [31m+   "thead. right=343",[39m
+    [31m+   "tr.border-b border-border right=343",[39m
+    [31m+   "th.px-4 py-3 right=343",[39m
+    [31m+   "tbody. right=343",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: contacts at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+   "tr.border-b border-border right=504",[39m
+    [31m+   "th.px-3 py-2 right=342",[39m
+    [31m+   "button.flex min-h-11 w-full items-center gap-1 text-left font-semib right=330",[39m
+    [31m+   "span. right=330",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: filter at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+   "tr.border-b border-border right=504",[39m
+    [31m+   "th.px-3 py-2 right=342",[39m
+    [31m+   "button.flex min-h-11 w-full items-center gap-1 text-left font-semib right=330",[39m
+    [31m+   "span. right=330",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: members at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 border-b-2 border-primary fo right=400",[39m
+    [31m+   "table.w-full text-left right=384",[39m
+    [31m+   "thead. right=384",[39m
+    [31m+   "tr.border-b border-border right=384",[39m
+    [31m+   "th.px-4 py-3 right=384",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: history at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=400",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: trash at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error Context: test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-firefox\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, light ────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: page.goto: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - navigating to "http://localhost:5173/groups/b46ea9f2-99ac-4a38-ae60-bf789a58a0d2/history", waiting until "load"[22m
+
+
+       at e2e\nfr-support.ts:65
+
+      63 |
+      64 | export async function openScreen(page: Page, screen: Screen): Promise<void> {
+    > 65 |   await page.goto(screen.path ?? '/');
+         |              ^
+      66 |   await page.getByRole('main').waitFor();
+      67 |   await page.waitForLoadState('networkidle');
+      68 |   await screen.open?.(page);
+        at openScreen (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\nfr-support.ts:65:14)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\accessibility.spec.ts:37:15
+
+    Error Context: test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-sl-light-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-sl-light-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-sl-light-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, dark ─────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: page.goto: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - navigating to "http://localhost:5173/groups/12bb1ed5-87a6-4e81-83d5-f199c5f93288/history", waiting until "load"[22m
+
+
+       at e2e\nfr-support.ts:65
+
+      63 |
+      64 | export async function openScreen(page: Page, screen: Screen): Promise<void> {
+    > 65 |   await page.goto(screen.path ?? '/');
+         |              ^
+      66 |   await page.getByRole('main').waitFor();
+      67 |   await page.waitForLoadState('networkidle');
+      68 |   await screen.open?.(page);
+        at openScreen (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\nfr-support.ts:65:14)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\accessibility.spec.ts:37:15
+
+    Error Context: test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-sl-dark-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-sl-dark-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-sl-dark-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, light ────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: page.goto: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - navigating to "http://localhost:5173/groups/52a0b8c7-7d3d-47be-9341-6c8405e642c1/history", waiting until "load"[22m
+
+
+       at e2e\nfr-support.ts:65
+
+      63 |
+      64 | export async function openScreen(page: Page, screen: Screen): Promise<void> {
+    > 65 |   await page.goto(screen.path ?? '/');
+         |              ^
+      66 |   await page.getByRole('main').waitFor();
+      67 |   await page.waitForLoadState('networkidle');
+      68 |   await screen.open?.(page);
+        at openScreen (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\nfr-support.ts:65:14)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\accessibility.spec.ts:37:15
+
+    Error Context: test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-en-light-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-en-light-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-en-light-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, dark ─────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: page.goto: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - navigating to "http://localhost:5173/groups/075aa152-9938-4ea0-8399-edfc8f2d5583/members", waiting until "load"[22m
+
+
+       at e2e\nfr-support.ts:65
+
+      63 |
+      64 | export async function openScreen(page: Page, screen: Screen): Promise<void> {
+    > 65 |   await page.goto(screen.path ?? '/');
+         |              ^
+      66 |   await page.getByRole('main').waitFor();
+      67 |   await page.waitForLoadState('networkidle');
+      68 |   await screen.open?.(page);
+        at openScreen (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\nfr-support.ts:65:14)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\accessibility.spec.ts:37:15
+
+    Error Context: test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-en-dark-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-en-dark-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-accessibility-NFR-09-axe-on-every-main-screen-en-dark-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [webkit] › e2e\accessibility.spec.ts:48:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus 
+
+    Error: focus visible at tab stop 4
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      66 |   for (let i = 0; i < 40 && !reached; i++) {
+      67 |     await page.keyboard.press('Tab');
+    > 68 |     expect(await focusVisible(), `focus visible at tab stop ${i + 1}`).toBe(true);
+         |                                                                        ^
+      69 |     reached = await page.evaluate(() => document.activeElement?.textContent?.includes('Konferenca 2026') ?? false);
+      70 |   }
+      71 |   expect(reached).toBe(true);
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\accessibility.spec.ts:68:72
+
+    Error Context: test-results\e2e-accessibility-NFR-09-k-34d45-ontact-with-a-visible-focus-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-accessibility-NFR-09-k-34d45-ontact-with-a-visible-focus-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-accessibility-NFR-09-k-34d45-ontact-with-a-visible-focus-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [webkit] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+
+    Error: groups at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "table.w-full text-left right=343",[39m
+    [31m+   "thead. right=343",[39m
+    [31m+   "tr.border-b border-border right=343",[39m
+    [31m+   "th.px-4 py-3 right=343",[39m
+    [31m+   "tbody. right=343",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: contacts at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+   "tr.border-b border-border right=504",[39m
+    [31m+   "th.px-3 py-2 right=342",[39m
+    [31m+   "button.flex min-h-11 w-full items-center gap-1 text-left font-semib right=330",[39m
+    [31m+   "span. right=330",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: filter at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+   "tr.border-b border-border right=504",[39m
+    [31m+   "th.px-3 py-2 right=342",[39m
+    [31m+   "button.flex min-h-11 w-full items-center gap-1 text-left font-semib right=330",[39m
+    [31m+   "span. right=330",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: members at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 border-b-2 border-primary fo right=400",[39m
+    [31m+   "table.w-full text-left right=392",[39m
+    [31m+   "thead. right=392",[39m
+    [31m+   "tr.border-b border-border right=392",[39m
+    [31m+   "th.px-4 py-3 right=392",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: history at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=400",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error: trash at 320
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "a.flex min-h-11 items-center px-3 hover:bg-surface-raised right=399",[39m
+    [31m+ ][39m
+
+      48 |     for (const screen of mainScreens(groupId, contactId)) {
+      49 |       await openScreen(page, screen);
+    > 50 |       expect.soft(await overflow(page),`${screen.name} at ${width}`).toEqual([]);
+         |                                                                      ^
+      51 |       await page.screenshot({
+      52 |         path: join('..', 'logs', 'screenshots', 'responsive', `${screen.name}-${browserName}-${width}.png`),
+      53 |       });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\responsive.spec.ts:50:70
+
+    Error Context: test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-webkit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-responsive-NFR-08-sign-a656f-x-have-no-horizontal-scroll-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7 failed
+    [firefox] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+    [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, light ─────────
+    [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, sl, dark ──────────
+    [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, light ─────────
+    [webkit] › e2e\accessibility.spec.ts:20:5 › NFR-09 axe on every main screen, en, dark ──────────
+    [webkit] › e2e\accessibility.spec.ts:48:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus 
+    [webkit] › e2e\responsive.spec.ts:50:3 › NFR-08 signed-in screens at 320 px have no horizontal scroll 
+  31 passed (8.8m)
+(node:38452) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38452) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26300) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26300) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+exit 1
