@@ -373,3 +373,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-33: US-005 readings (contact fields, version recorder, screen)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-005
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) T-08 (the version recorder, D-22 reading 3) had not been built, and T-18 needs it for version 1; only `VersionService.record` and `VersionRepository.insert/count` were built, the rest of US-019 (list, read) stays. (2) R-005-03 gives no rule for leading or trailing spaces; R-005-02 treats spaces as empty. (3) A save with a different revision conflicts before the no-change check (D-25 reading 2); a contact in Trash is reported before the revision check. (4) A Viewer is refused with 403 before the body is looked at. (5) History for a create lists every filled field as a change (old value empty); for an edit only the changed fields. (6) The country codes are the JDK list of ISO 3166-1 alpha-2 (249); the web list holds the same codes, names come from `Intl.DisplayNames`. (7) The contact screen has the Details section only: tags (US-006), attributes (US-008), the Delete button (US-012) and the History and Versions tabs (US-013, US-020) come with their stories. (8) The screen code was written before its tests (not red first); the tests were then written against the wireframe and the frozen browser spec.
+- Options: (1) as built. (2) Text fields are stripped at both ends before the rules apply, so spaces alone are empty and stored as empty; the phone is stripped, not rewritten. (3) to (7) as built. (8) Recorded here.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
