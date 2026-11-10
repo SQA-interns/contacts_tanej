@@ -91,6 +91,47 @@ describe('createAuthApi', () => {
     await emit(null);
     expect(seen[1]).toBeNull();
   });
+
+  it('refreshes the token when the reload shows the e-mail verified, so the API sees the verified claim (EX-001-07)', async () => {
+    const getIdToken = vi.fn().mockResolvedValue('tok');
+    const getIdTokenResult = vi.fn().mockResolvedValue({ claims: { email_verified: false } });
+    const user = {
+      email: 'a@x.si',
+      emailVerified: false,
+      displayName: 'Ana',
+      getIdToken,
+      getIdTokenResult,
+      reload: vi.fn(),
+    };
+    user.reload.mockImplementation(() => {
+      user.emailVerified = true;
+      return Promise.resolve();
+    });
+    let emit: (u: unknown) => Promise<void> | void = () => undefined;
+    fb.onAuthStateChanged.mockImplementation(((_auth: unknown, callback: typeof emit) => {
+      emit = callback;
+      return () => undefined;
+    }) as never);
+    const seen: unknown[] = [];
+    createAuthApi(fakeAuth()).observe((u) => seen.push(u));
+    await emit(user);
+    expect(getIdToken).toHaveBeenCalledWith(true);
+    expect(seen).toEqual([{ email: 'a@x.si', emailVerified: true, name: 'Ana' }]);
+  });
+
+  it('refreshes the token of a person the SDK already shows as verified while the token says not (EX-001-07)', async () => {
+    const getIdToken = vi.fn().mockResolvedValue('tok');
+    const getIdTokenResult = vi.fn().mockResolvedValue({ claims: { email_verified: false } });
+    const user = { email: 'a@x.si', emailVerified: true, displayName: 'Ana', getIdToken, getIdTokenResult };
+    let emit: (u: unknown) => Promise<void> | void = () => undefined;
+    fb.onAuthStateChanged.mockImplementation(((_auth: unknown, callback: typeof emit) => {
+      emit = callback;
+      return () => undefined;
+    }) as never);
+    createAuthApi(fakeAuth()).observe(() => undefined);
+    await emit(user);
+    expect(getIdToken).toHaveBeenCalledWith(true);
+  });
 });
 
 describe('authErrorKey', () => {

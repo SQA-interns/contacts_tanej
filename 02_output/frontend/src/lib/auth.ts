@@ -47,6 +47,14 @@ function toSessionUser(user: User): SessionUser {
   return { email: user.email ?? '', emailVerified: user.emailVerified, name: user.displayName };
 }
 
+async function tokenSaysVerified(user: User): Promise<boolean> {
+  try {
+    return (await user.getIdTokenResult()).claims.email_verified === true;
+  } catch {
+    return true; // cannot tell: leave the token alone
+  }
+}
+
 export function createAuthApi(auth: Auth): AuthApi {
   // R-001-08: the SDK's own store keeps the session across page reloads (SR-20).
   void setPersistence(auth, browserLocalPersistence);
@@ -61,6 +69,11 @@ export function createAuthApi(auth: Auth): AuthApi {
       return onAuthStateChanged(auth, async (user) => {
         // EX-001-07: the stored copy of the person may predate the click on the verification link.
         if (user && !user.emailVerified) await user.reload().catch(() => undefined);
+        // The SDK itself reloads a stored person at start, so the copy may be verified while the stored
+        // token still says "not verified"; the API reads that claim, so get a new token when they differ.
+        if (user?.emailVerified && !(await tokenSaysVerified(user))) {
+          await user.getIdToken(true).catch(() => undefined);
+        }
         onChange(user ? toSessionUser(user) : null);
       });
     },
