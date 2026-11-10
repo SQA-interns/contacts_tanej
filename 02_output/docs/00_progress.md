@@ -5,10 +5,10 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: R review INC-1
+- Session: S8 fix F-01
 - Result: done
-- Gate: not passed (DoD-I-02: F-01 to F-04 High open; report `docs/04_review-INC-1.md`)
-- Notes for the next session: 4 High (F-01 no save confirmation after create; F-02 320 px overflow and table instead of cards; F-03 E2E-02 `Role` label match; F-04 "Group not found" heading and "Group" navigation). Per D-48 the next session is `/fix`: check each failing E2E for a test defect first and bring test changes to the developer as decisions. Medium: F-05 WebKit focus, F-06 missing `Red:` lines, F-07 commit size and subject length (release notes), F-08 deleted_accounts cleanup and AC-016 browser tests, F-09 JaCoCo.
+- Gate: not passed (DoD-I-02: F-02 to F-04 High open; report `docs/04_review-INC-1.md`)
+- Notes for the next session: F-01 fixed in b717413 (red: create case in contact-page.test.tsx; vitest 199 passed with `--maxWorkers=2 --testTimeout=30000`, at default workers a few tests hit the 5 s timeout under load). Frozen E2E-01/03 not re-run in the browser (needs the Compose stack). D-49 records the developer's note. Next F-02, F-03, F-04 (see below). Review text: 4 High (F-01 fixed; F-02 320 px overflow and table instead of cards; F-03 E2E-02 `Role` label match; F-04 "Group not found" heading and "Group" navigation). Per D-48 the next session is `/fix`: check each failing E2E for a test defect first and bring test changes to the developer as decisions. Medium: F-05 WebKit focus, F-06 missing `Red:` lines, F-07 commit size and subject length (release notes), F-08 deleted_accounts cleanup and AC-016 browser tests, F-09 JaCoCo.
 
 ## Previous
 - Session: S5 implement T-N04 (log commit after the developer's re-run of 2026-11-10, about 19:18 UTC)
@@ -27,7 +27,7 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /fix F-01
+- Command: /fix F-02
 - Waiting for: nothing
 
 ## Stories

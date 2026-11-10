@@ -549,3 +549,14 @@
 - Human response: 1 (a `/fix` session after `/review INC-1` with the proposed severities; in `/fix` first check each failing E2E against the specification for a test defect and bring any test change to the developer as a decision; fix the app otherwise; no `/design`, re-run the NFR-09 focus check in `/verify`).
 - Resolution: open (fix session pending). Script results 2026-11-10 about 19:11 UTC: backup.sh PASS; restore.sh and clean-host-test.sh FAIL because of script defects (below), fixed in S5 `/implement T-N04 D-48`, to be re-run by the developer: restore.sh summary SQL used PL/pgSQL variables `c`, `h` that clash with the temp table columns (variables and columns renamed, psql runs with ON_ERROR_STOP and a failure is logged as FAIL); clean-host-test.sh used `git -C "$ROOT"` with a POSIX path that Windows git cannot read (now `cd` into the root). `02_output/backups/` is in `.gitignore` (the dump holds test personal data). The last step of clean-host-test.sh (E2E-01) will fail until `/fix`. NFR-10 (language switch on the main screens), NFR-11 and DoD-P02 (first contact in 2.7 s, empty and error states, screenshots in `out/logs/screenshots/states`) and the dialog focus check pass in Chromium (the four new specs also in Firefox and WebKit, except as listed).
 - Overrides: none
+
+## D-49: Note from the developer: the customer has not seen the MVP (F-01)
+- Timestamp: 2026-11-10
+- Session: S8 fix F-01
+- Class: assumption
+- Type: non-blocking
+- Trigger: Note on `/fix F-01`: "customer saw MVP: no". The customer has not seen the grey MVP; this is a research run and the developer stands in for the customer.
+- Options: (1) Record it and keep the customer confirmation open on the D-14 list (proposed). (2) Treat the developer's answers as the customer's.
+- Human response: (1) as stated in the note: customer confirmation stays open on the D-14 list.
+- Resolution: (1). F-01 itself: the frozen E2E-01 and WF-10 agree with AC-005-01 ("stored and shown"), so the test is not at fault; the app was fixed (b717413).
+- Overrides: none
