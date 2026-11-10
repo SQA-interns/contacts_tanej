@@ -1,7 +1,9 @@
 package app.contactgroups.repository;
 
 import app.contactgroups.domain.ContactVersion;
+import app.contactgroups.domain.VersionSummary;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -28,6 +30,21 @@ public class VersionRepository {
             v.userName(),
             Timestamp.from(v.createdAt()))
         .update();
+  }
+
+  /** The versions of a contact, newest first. */
+  public List<VersionSummary> list(UUID contactId) {
+    return jdbc.sql(
+            "SELECT number, user_name, created_at FROM contact_versions WHERE contact_id = ?"
+                + " ORDER BY number DESC")
+        .param(contactId)
+        .query(
+            (rs, row) ->
+                new VersionSummary(
+                    rs.getInt("number"),
+                    rs.getString("user_name"),
+                    rs.getTimestamp("created_at").toInstant()))
+        .list();
   }
 
   public int count(UUID contactId) {

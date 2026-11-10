@@ -1,0 +1,208 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] argLine set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/w/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 76 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 54 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] Building jar: /w/target/contact-groups-backend.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us019VersionsAcceptanceIT
+09:56:07.074 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us019VersionsAcceptanceIT]: Us019VersionsAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:56:08.046 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us019VersionsAcceptanceIT
+09:56:09.914 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+09:56:09.940 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+09:56:09.979 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+09:56:12.728 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+09:56:12.736 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+09:56:12.784 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+09:56:13.425 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+09:56:13.452 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+09:56:13.951 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 454cd1e7f15f1ba2d0b01cda92824ecb267d14c599013e851b648ace7576a12c
+09:56:14.751 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT1.32589966S
+09:56:14.763 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+09:56:14.763 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+09:56:14.766 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+09:56:14.766 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+09:56:14.897 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: 53fc7a8c4c5e0d507a140c5fc7c34f9fad9485565ce89c18dbb745d1d2426b0c
+09:56:17.219 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT2.452185377S
+09:56:17.220 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:56371/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T09:56:19.015Z  INFO 142 --- [contact-groups-backend] [           main] a.c.a.Us019VersionsAcceptanceIT          : Starting Us019VersionsAcceptanceIT using Java 21.0.9 with PID 142 (started by root in /w)
+2026-11-10T09:56:19.018Z  INFO 142 --- [contact-groups-backend] [           main] a.c.a.Us019VersionsAcceptanceIT          : The following 1 profile is active: "test"
+2026-11-10T09:56:25.870Z  INFO 142 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T09:56:25.917Z  INFO 142 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T09:56:25.918Z  INFO 142 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T09:56:26.080Z  INFO 142 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T09:56:26.081Z  INFO 142 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6983 ms
+2026-11-10T09:56:27.296Z  INFO 142 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T09:56:27.836Z  INFO 142 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@53b7580
+2026-11-10T09:56:27.843Z  INFO 142 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T09:56:27.931Z  INFO 142 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:56371/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T09:56:28.138Z  INFO 142 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T09:56:28.152Z  INFO 142 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.098s)
+2026-11-10T09:56:28.197Z  INFO 142 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T09:56:28.307Z  INFO 142 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T09:56:28.370Z  INFO 142 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T09:56:28.524Z  INFO 142 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.116s)
+2026-11-10T09:56:32.136Z  INFO 142 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 45967 (http) with context path '/'
+2026-11-10T09:56:32.149Z  INFO 142 --- [contact-groups-backend] [           main] a.c.a.Us019VersionsAcceptanceIT          : Started Us019VersionsAcceptanceIT in 14.761 seconds (process running for 28.699)
+2026-11-10T09:56:34.920Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T09:56:34.920Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T09:56:34.922Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-11-10T09:56:52.633Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/** status=404 user=uid-ana
+2026-11-10T09:56:53.409Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T09:56:53.610Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/versions status=403 user=uid-petra
+2026-11-10T09:56:53.786Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+[ERROR] Tests run: 12, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 47.41 s <<< FAILURE! -- in app.contactgroups.acceptance.Us019VersionsAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_03_aVersionKeepsTheNameOfAnAuthorWhoLeftTheProduct -- Time elapsed: 4.556 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_03_aVersionKeepsTheNameOfAnAuthorWhoLeftTheProduct(Us019VersionsAcceptanceIT.java:143)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us019VersionsAcceptanceIT.AC_019_05_renamingATagForTheGroupRecordsNoVersion -- Time elapsed: 0.233 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us019VersionsAcceptanceIT.AC_019_05_renamingATagForTheGroupRecordsNoVersion(Us019VersionsAcceptanceIT.java:82)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us019VersionsAcceptanceIT.AC_019_07_erasingTheContactErasesItsVersions -- Time elapsed: 0.273 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.trash(AcceptanceBase.java:354)
+	at app.contactgroups.acceptance.Us019VersionsAcceptanceIT.AC_019_07_erasingTheContactErasesItsVersions(Us019VersionsAcceptanceIT.java:99)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_02_trashingAndRestoringRecordsNoVersion -- Time elapsed: 0.175 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.trash(AcceptanceBase.java:354)
+	at app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_02_trashingAndRestoringRecordsNoVersion(Us019VersionsAcceptanceIT.java:133)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.it.ContactsIT
+2026-11-10T09:56:53.813Z  INFO 142 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.ContactsIT]: ContactsIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T09:56:54.109Z  INFO 142 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.ContactsIT
+2026-11-10T09:56:54.736Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T09:56:54.746Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T09:56:54.757Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T09:56:55.127Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.117 s -- in app.contactgroups.it.ContactsIT
+[INFO] Running app.contactgroups.it.OpenApiContractIT
+2026-11-10T09:56:55.934Z  INFO 142 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.OpenApiContractIT]: OpenApiContractIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T09:56:55.941Z  INFO 142 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.OpenApiContractIT
+2026-11-10T09:56:58.759Z  INFO 142 --- [contact-groups-backend] [o-auto-1-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 2751 ms
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.093 s -- in app.contactgroups.it.OpenApiContractIT
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   Us019VersionsAcceptanceIT.AC_019_05_renamingATagForTheGroupRecordsNoVersion:82 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us019VersionsAcceptanceIT.AC_019_07_erasingTheContactErasesItsVersions:99->AcceptanceBase.trash:354 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us019VersionsAcceptanceIT.EX_019_02_trashingAndRestoringRecordsNoVersion:133->AcceptanceBase.trash:354 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us019VersionsAcceptanceIT.EX_019_03_aVersionKeepsTheNameOfAnAuthorWhoLeftTheProduct:143 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+[INFO] 
+[ERROR] Tests run: 23, Failures: 4, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:32 min
+[INFO] Finished at: 2026-11-10T09:57:11Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+exit 1

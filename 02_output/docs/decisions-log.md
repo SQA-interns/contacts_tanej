@@ -406,3 +406,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-36: US-019 readings (version list)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-019
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) Order of checks of the version list. (2) Version list of a contact in Trash. (3) Recording on every kind of change already existed in the save path (T-08, T-21, T-23), so T-25 only adds the list.
+- Options: (1) Role first (a Viewer gets 403 even for an unknown contact), then the contact (404 when it is not in the group). (2) A trashed contact still lists its versions (EX-019-02 needs it). (3) VersionController.list, VersionService.list, VersionRepository.list (newest first), VersionSummary (number, userName, createdAt).
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
