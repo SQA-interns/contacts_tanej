@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
-import { AuthPage, FormError, TextField } from './AuthForm';
+import { AuthPage, FormError, GoogleButton, TextField } from './AuthForm';
 import { useAuthAction } from './useAuthAction';
 
 /** WF-01: e-mail and password, "Sign in with Google", reset and register links (R-001-01, R-001-07). */
@@ -40,14 +40,7 @@ export function SignInPage() {
         <Button type="submit" busy={busy}>
           {t('auth.signIn.submit')}
         </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={busy}
-          onClick={() => void run(auth.signInWithGoogle)}
-        >
-          {t('auth.google')}
-        </Button>
+        <GoogleButton disabled={busy} onClick={() => void run(auth.signInWithGoogle)} />
       </form>
       <p className="text-sm">
         <Link className="underline" to="/reset-password">

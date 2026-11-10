@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
-import { AuthPage, FormError, TextField } from './AuthForm';
+import { AuthPage, FormError, GoogleButton, TextField } from './AuthForm';
 import { useAuthAction } from './useAuthAction';
 import {
   NAME_MAX_LENGTH,
@@ -67,14 +67,7 @@ export function RegisterPage() {
         <Button type="submit" busy={busy}>
           {t('auth.register.submit')}
         </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={busy}
-          onClick={() => void run(auth.signInWithGoogle)}
-        >
-          {t('auth.google')}
-        </Button>
+        <GoogleButton disabled={busy} onClick={() => void run(auth.signInWithGoogle)} />
       </form>
       <p className="text-sm">
         {t('auth.register.haveAccount')}{' '}

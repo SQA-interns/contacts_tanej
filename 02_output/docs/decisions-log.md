@@ -318,3 +318,14 @@
 - Human response: the developer's note allows either option (2026-11-09)
 - Resolution: option 1, pending review
 - Overrides: none
+
+## D-28: Content-Security-Policy allows Google's sign-in script
+- Timestamp: 2026-11-10
+- Session: S5 implement US-001
+- Class: allow
+- Type: non-blocking
+- Trigger: "Sign in with Google" (R-001-01) opens a pop-up through the Firebase SDK, which loads `https://apis.google.com/js/api.js`. The policy of the web server (`frontend/docker/default.conf.template`) had `script-src 'self'` and blocked it, so the button only showed an error (AC-001-04 failed in the browser).
+- Options: 1. (proposed, applied) `script-src 'self' https://apis.google.com`: one named Google host, still no inline script and no wildcard (SR-06). 2. A different sign-in flow without the script (redirect), which the specification (4.1) does not use.
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none

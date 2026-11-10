@@ -1,5 +1,6 @@
 import { useId, type ComponentProps, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -50,6 +51,16 @@ export function TextField({ label, hint, error, ...input }: TextFieldProps) {
         </p>
       )}
     </div>
+  );
+}
+
+/** "Sign in with Google" (R-001-01); the same button on the sign-in and the register screen. */
+export function GoogleButton({ disabled, onClick }: { disabled: boolean; onClick: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <Button type="button" variant="secondary" disabled={disabled} onClick={onClick}>
+      {t('auth.google')}
+    </Button>
   );
 }
 
