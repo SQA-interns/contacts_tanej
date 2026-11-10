@@ -1,0 +1,276 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 76 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 54 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us006TagsAcceptanceIT
+10:00:27.460 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us006TagsAcceptanceIT]: Us006TagsAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:00:28.234 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us006TagsAcceptanceIT
+10:00:29.684 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+10:00:29.702 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+10:00:29.728 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+10:00:31.871 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+10:00:31.880 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+10:00:31.924 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+10:00:32.504 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+10:00:32.527 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+10:00:32.953 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 3054b6c0d30a044ceb16f3f36245fe93cd5d1f761dc20c9e0895164bfc59e77f
+10:00:33.681 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT1.177447842S
+10:00:33.693 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+10:00:33.693 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+10:00:33.695 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+10:00:33.696 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+10:00:33.816 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: e80b40b0191f9aa853bc4fa3df85d0de537a60cc2d5c141ff1ecbccdb78dd6d7
+10:00:35.932 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT2.236017836S
+10:00:35.933 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:59283/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T10:00:37.500Z  INFO 121 --- [contact-groups-backend] [           main] a.c.acceptance.Us006TagsAcceptanceIT     : Starting Us006TagsAcceptanceIT using Java 21.0.9 with PID 121 (started by root in /w)
+2026-11-10T10:00:37.503Z  INFO 121 --- [contact-groups-backend] [           main] a.c.acceptance.Us006TagsAcceptanceIT     : The following 1 profile is active: "test"
+2026-11-10T10:00:44.204Z  INFO 121 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T10:00:44.250Z  INFO 121 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T10:00:44.250Z  INFO 121 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T10:00:44.398Z  INFO 121 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T10:00:44.398Z  INFO 121 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6829 ms
+2026-11-10T10:00:45.476Z  INFO 121 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T10:00:46.021Z  INFO 121 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1ddc8fc
+2026-11-10T10:00:46.028Z  INFO 121 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T10:00:46.109Z  INFO 121 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:59283/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T10:00:46.295Z  INFO 121 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T10:00:46.309Z  INFO 121 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.105s)
+2026-11-10T10:00:46.352Z  INFO 121 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T10:00:46.462Z  INFO 121 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T10:00:46.526Z  INFO 121 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T10:00:46.684Z  INFO 121 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.119s)
+2026-11-10T10:00:50.665Z  INFO 121 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 46143 (http) with context path '/'
+2026-11-10T10:00:50.678Z  INFO 121 --- [contact-groups-backend] [           main] a.c.acceptance.Us006TagsAcceptanceIT     : Started Us006TagsAcceptanceIT in 14.599 seconds (process running for 25.591)
+2026-11-10T10:00:53.172Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T10:00:53.173Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T10:00:53.174Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-11-10T10:00:59.283Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=403 user=uid-petra
+[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 32.73 s <<< FAILURE! -- in app.contactgroups.acceptance.Us006TagsAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_08_aTagIsOnlyALabelAndChangesNoBehaviour -- Time elapsed: 0.254 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_08_aTagIsOnlyALabelAndChangesNoBehaviour(Us006TagsAcceptanceIT.java:114)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.acceptance.Us007TagAdminAcceptanceIT
+2026-11-10T10:00:59.842Z  INFO 121 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us007TagAdminAcceptanceIT]: Us007TagAdminAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:00:59.850Z  INFO 121 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us007TagAdminAcceptanceIT
+2026-11-10T10:01:01.404Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:01:01.887Z  INFO 121 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId}/tags/{tagId} status=403 user=uid-petra
+2026-11-10T10:01:01.899Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/tags/{tagId} status=403 user=uid-petra
+2026-11-10T10:01:02.482Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:01:02.982Z  INFO 121 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/tags/{tagId} status=404 user=uid-ana
+2026-11-10T10:01:02.993Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/tags/{tagId} status=404 user=uid-ana
+2026-11-10T10:01:03.341Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+[ERROR] Tests run: 13, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 3.922 s <<< FAILURE! -- in app.contactgroups.acceptance.Us007TagAdminAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.EX_007_01_renamingToTheSameNameChangesNothingAndWritesNoEntry -- Time elapsed: 0.293 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.entries(AcceptanceBase.java:367)
+	at app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.EX_007_01_renamingToTheSameNameChangesNothingAndWritesNoEntry(Us007TagAdminAcceptanceIT.java:147)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.EX_007_02_aTagOnATrashedContactIsStillListedAndRenameAndDeleteApplyToIt -- Time elapsed: 0.216 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.trash(AcceptanceBase.java:354)
+	at app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.EX_007_02_aTagOnATrashedContactIsStillListedAndRenameAndDeleteApplyToIt(Us007TagAdminAcceptanceIT.java:155)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.AC_007_06_renamingATagWritesOneHistoryEntryPerAffectedContact -- Time elapsed: 0.347 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.entries(AcceptanceBase.java:367)
+	at app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.AC_007_06_renamingATagWritesOneHistoryEntryPerAffectedContact(Us007TagAdminAcceptanceIT.java:118)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.AC_007_04_deletingATagRemovesItFromAllContactsAndDeletesNone -- Time elapsed: 0.405 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us007TagAdminAcceptanceIT.AC_007_04_deletingATagRemovesItFromAllContactsAndDeletesNone(Us007TagAdminAcceptanceIT.java:93)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.acceptance.Us019VersionsAcceptanceIT
+2026-11-10T10:01:03.770Z  INFO 121 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us019VersionsAcceptanceIT]: Us019VersionsAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:01:03.778Z  INFO 121 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us019VersionsAcceptanceIT
+2026-11-10T10:01:20.119Z  INFO 121 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:01:20.300Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/versions status=403 user=uid-petra
+2026-11-10T10:01:20.483Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+[ERROR] Tests run: 12, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 16.73 s <<< FAILURE! -- in app.contactgroups.acceptance.Us019VersionsAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_03_aVersionKeepsTheNameOfAnAuthorWhoLeftTheProduct -- Time elapsed: 0.260 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_03_aVersionKeepsTheNameOfAnAuthorWhoLeftTheProduct(Us019VersionsAcceptanceIT.java:143)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us019VersionsAcceptanceIT.AC_019_07_erasingTheContactErasesItsVersions -- Time elapsed: 0.258 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.trash(AcceptanceBase.java:354)
+	at app.contactgroups.acceptance.Us019VersionsAcceptanceIT.AC_019_07_erasingTheContactErasesItsVersions(Us019VersionsAcceptanceIT.java:99)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_02_trashingAndRestoringRecordsNoVersion -- Time elapsed: 0.182 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.trash(AcceptanceBase.java:354)
+	at app.contactgroups.acceptance.Us019VersionsAcceptanceIT.EX_019_02_trashingAndRestoringRecordsNoVersion(Us019VersionsAcceptanceIT.java:133)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.domain.TagNamesTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in app.contactgroups.domain.TagNamesTest
+[INFO] Running app.contactgroups.it.ContactsIT
+2026-11-10T10:01:20.541Z  INFO 121 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.ContactsIT]: ContactsIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:01:20.815Z  INFO 121 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.ContactsIT
+2026-11-10T10:01:21.375Z  INFO 121 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T10:01:21.384Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:01:21.394Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T10:01:21.737Z  INFO 121 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.975 s -- in app.contactgroups.it.ContactsIT
+[INFO] Running app.contactgroups.it.OpenApiContractIT
+2026-11-10T10:01:22.519Z  INFO 121 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.OpenApiContractIT]: OpenApiContractIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:01:22.525Z  INFO 121 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.OpenApiContractIT
+2026-11-10T10:01:25.679Z  INFO 121 --- [contact-groups-backend] [o-auto-1-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 3096 ms
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.526 s -- in app.contactgroups.it.OpenApiContractIT
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   Us006TagsAcceptanceIT.AC_006_08_aTagIsOnlyALabelAndChangesNoBehaviour:114->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us007TagAdminAcceptanceIT.AC_007_04_deletingATagRemovesItFromAllContactsAndDeletesNone:93->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us007TagAdminAcceptanceIT.AC_007_06_renamingATagWritesOneHistoryEntryPerAffectedContact:118->AcceptanceBase.entries:367 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us007TagAdminAcceptanceIT.EX_007_01_renamingToTheSameNameChangesNothingAndWritesNoEntry:147->AcceptanceBase.entries:367 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us007TagAdminAcceptanceIT.EX_007_02_aTagOnATrashedContactIsStillListedAndRenameAndDeleteApplyToIt:155->AcceptanceBase.trash:354 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us019VersionsAcceptanceIT.AC_019_07_erasingTheContactErasesItsVersions:99->AcceptanceBase.trash:354 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us019VersionsAcceptanceIT.EX_019_02_trashingAndRestoringRecordsNoVersion:133->AcceptanceBase.trash:354 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us019VersionsAcceptanceIT.EX_019_03_aVersionKeepsTheNameOfAnAuthorWhoLeftTheProduct:143 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+[INFO] 
+[ERROR] Tests run: 61, Failures: 8, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:21 min
+[INFO] Finished at: 2026-11-10T10:01:26Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.4:test (default-test) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
