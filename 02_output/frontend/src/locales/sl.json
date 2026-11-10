@@ -59,7 +59,8 @@
     "UNAVAILABLE": "Storitev trenutno ni na voljo."
   },
   "form": {
-    "required": "obvezno"
+    "required": "obvezno",
+    "cancel": "Prekliči"
   },
   "auth": {
     "email": "E-pošta",
@@ -113,6 +114,37 @@
     "empty": {
       "title": "Ustvarite skupino",
       "text": "Skupina zajema vaše kontakte in njene člane. Ustvarite prvo skupino, da začnete."
+    },
+    "name": "Ime skupine",
+    "nameHint": "Do {{max}} znakov.",
+    "createTitle": "Ustvari skupino",
+    "renameTitle": "Preimenuj skupino",
+    "rename": "Preimenuj",
+    "columns": {
+      "name": "Ime",
+      "role": "Vloga",
+      "actions": "Dejanja"
+    },
+    "nameError": {
+      "REQUIRED": "Vnesite ime skupine.",
+      "TOO_LONG": "Ime ima lahko največ {{max}} znakov."
+    },
+    "notFound": {
+      "title": "Skupine ni mogoče najti",
+      "text": "Ta skupina ne obstaja ali v njej niste član."
+    },
+    "tabs": {
+      "label": "Skupina",
+      "contacts": "Kontakti"
+    },
+    "noContacts": {
+      "title": "Še ni kontaktov",
+      "text": "Ta skupina nima kontaktov."
     }
+  },
+  "role": {
+    "OWNER": "Lastnik",
+    "EDITOR": "Urednik",
+    "VIEWER": "Bralec"
   }
 }

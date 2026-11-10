@@ -59,7 +59,8 @@
     "UNAVAILABLE": "The service is not available right now."
   },
   "form": {
-    "required": "required"
+    "required": "required",
+    "cancel": "Cancel"
   },
   "auth": {
     "email": "E-mail",
@@ -113,6 +114,37 @@
     "empty": {
       "title": "Create a group",
       "text": "A group holds your contacts and its members. Create your first group to start."
+    },
+    "name": "Group name",
+    "nameHint": "Up to {{max}} characters.",
+    "createTitle": "Create group",
+    "renameTitle": "Rename group",
+    "rename": "Rename",
+    "columns": {
+      "name": "Name",
+      "role": "Role",
+      "actions": "Actions"
+    },
+    "nameError": {
+      "REQUIRED": "Enter a group name.",
+      "TOO_LONG": "The name can have at most {{max}} characters."
+    },
+    "notFound": {
+      "title": "Group not found",
+      "text": "This group does not exist or you are not a member of it."
+    },
+    "tabs": {
+      "label": "Group",
+      "contacts": "Contacts"
+    },
+    "noContacts": {
+      "title": "No contacts yet",
+      "text": "This group has no contacts."
     }
+  },
+  "role": {
+    "OWNER": "Owner",
+    "EDITOR": "Editor",
+    "VIEWER": "Viewer"
   }
 }
