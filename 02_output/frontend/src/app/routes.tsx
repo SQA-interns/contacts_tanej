@@ -5,8 +5,9 @@ import { Card } from '@/components/ui/card';
 import { RegisterPage } from '@/features/auth/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/ResetPasswordPage';
 import { SignInPage } from '@/features/auth/SignInPage';
-import { GroupPage } from '@/features/groups/GroupPage';
+import { ContactsTab, GroupPage } from '@/features/groups/GroupPage';
 import { GroupsHome } from '@/features/groups/GroupsHome';
+import { MembersTab } from '@/features/members/MembersTab';
 import { PublicOnly, RequireSession, SessionRoot } from './guards';
 
 function NotFoundPage() {
@@ -45,7 +46,14 @@ export const routes: RouteObject[] = [
             element: <RequireSession />,
             children: [
               { index: true, element: <GroupsHome /> },
-              { path: 'groups/:groupId', element: <GroupPage /> },
+              {
+                path: 'groups/:groupId',
+                element: <GroupPage />,
+                children: [
+                  { index: true, element: <ContactsTab /> },
+                  { path: 'members', element: <MembersTab /> },
+                ],
+              },
               { path: '*', element: <NotFoundPage /> },
             ],
           },
