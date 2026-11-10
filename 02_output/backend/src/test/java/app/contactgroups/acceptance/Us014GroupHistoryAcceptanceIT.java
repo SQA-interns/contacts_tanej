@@ -72,7 +72,12 @@ class Us014GroupHistoryAcceptanceIT extends AcceptanceBase {
     save(ANA, gid, openContact(ANA, gid, c), "company", "Dan3").expect(200);
     JsonNode r = filtered(ANA, "?from=2026-07-02&to=2026-07-02").expect(200).json();
     assertThat(r.at("/total").asInt()).isEqualTo(1);
-    assertThat(r.toString()).contains("Dan2").doesNotContain("Dan1", "Dan3");
+    assertThat(r.at("/items/0/changes/0/newValue").asText()).isEqualTo("Dan2");
+    for (JsonNode entry : r.path("items")) {
+      for (JsonNode change : entry.path("changes")) {
+        assertThat(change.path("newValue").asText()).isNotIn("Dan1", "Dan3");
+      }
+    }
   }
 
   @Test
@@ -139,8 +144,9 @@ class Us014GroupHistoryAcceptanceIT extends AcceptanceBase {
     post(MARKO, "/groups/" + gid + "/leave", null).expect(204);
     JsonNode actors = get(ANA, "/groups/" + gid + "/history/actors").expect(200).json();
     assertThat(values(actors, "id")).contains(MARKO.uid());
-    assertThat(filtered(ANA, "?actorId=" + MARKO.uid()).expect(200).at("/total").asInt())
-        .isEqualTo(1);
+    JsonNode byMarko = filtered(ANA, "?actorId=" + MARKO.uid()).expect(200).json();
+    assertThat(byMarko.at("/total").asInt()).isEqualTo(2);
+    assertThat(values(byMarko.path("items"), "eventType")).contains("MEMBER_REMOVED");
   }
 
   @Test

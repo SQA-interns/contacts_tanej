@@ -6,8 +6,8 @@ The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
 - Session: S5 implement US-014
-- Result: done (T-44, T-45 built)
-- Gate: not passed (DoD-S-01: Us014 11 of 13 frozen API tests pass; AC_014_04 and EX_014_03 contradict the specification, D-44 waits for the human; browser tests of the story pass in three browsers)
+- Result: done (T-44, T-45 built; D-44 answered: the two frozen tests AC_014_04 and EX_014_03 were fixed by human approval and re-frozen, new hash in `03_acceptance-manifest.sha256`)
+- Gate: passed (DoD-S-01: Us014 13 of 13 frozen API tests pass, `out/logs/us014-fix-d44.log`; browser tests of the story pass in three browsers)
 - Notes for the next session: US-014 built: `HistoryFilter` (days in Europe/Ljubljana, 400 INVALID_DATE_RANGE), filtered `HistoryRepository`/`HistoryService`/`HistoryController`, `GET /groups/{g}/history/actors`. Web: `features/history/{GroupHistoryPage,HistoryFilters}`, route `history`, tab "History" for Owner and Editor; the group tab bar is hidden on contact pages (frozen AC-013-01 needs one "History" link). Erased entries show `[erased]` in place of the contact name. D-44 lists readings and the two frozen-test conflicts.
 - Backend full run `out/logs/us014-full.log` (format, PMD, CPD clean; failures only of US-014 (2), US-016, US-020 to US-022, US-017 contract tests for endpoints not yet built, EX-013-03, EX-004-05, EX-019-03). Vitest 195 pass, tsc, eslint, prettier clean. Browser `trash-history.spec.ts`: all pass; AC-012-03 (US-012) failed once in Firefox and once in Chromium under load, then passed (flaky, not US-014).
 - Do not put "to", "from" or similar words in `aria-label`s on the History screen: the frozen tests use `getByLabel('To')`, which matches by substring.
@@ -15,7 +15,7 @@ The handover between sessions. Every session reads it first and updates it last.
 
 ## Next
 - Command: /implement US-016
-- Waiting for: D-44 (non-blocking: the two frozen US-014 API tests)
+- Waiting for: nothing
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
@@ -37,6 +37,6 @@ The handover between sessions. Every session reads it first and updates it last.
 | US-011 | 1 (MVP) | in progress (T-36, T-37 done; browser AC-011-01, 05, 06, 07, 09, 10 not run; AC-013-05 waits on US-013) | DoD-S-01 not met; 02 to 07 met |
 | US-015 | 1 (MVP) | in progress (T-38 to T-40 done; AC-015-04 waits on US-013; browser AC-015-01, 02 not run) | DoD-S-01 not met; 02 to 07 met |
 | US-013 | 1 (MVP) | in progress (T-41 to T-43 done; EX-013-03 waits on US-016; browser AC-013-01, 08 pass, AC-013-10 waits on US-014) | DoD-S-01 not met; 02 to 07 met |
-| US-014 | 1 (MVP) | in progress (T-44, T-45 done; frozen AC_014_04 and EX_014_03 wait for D-44) | DoD-S-01 not met; 02 to 07 met |
+| US-014 | 1 (MVP) | done (D-44 resolved; browser tests of the story passed in the previous session) | DoD-S-01 to 07 met |
 | US-016 | 1 (MVP) | ready | |
 | US-020 to US-022 | 2 | ready | |
