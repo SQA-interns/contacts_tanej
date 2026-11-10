@@ -34,6 +34,22 @@ class ContactSearchIT extends AcceptanceBase {
   }
 
   @Test
+  @DisplayName("R-010-08 EX-010-04: a contact in Trash is not listed by a filter either")
+  void trashedContactIsHiddenFromFilters() {
+    JsonNode c = newContact(ANA, gid, j("lastName", "Novak", "tags", arr("x"), "company", "Acme"));
+    jdbc.update(
+        "UPDATE contacts SET state = 'TRASHED', trashed_at = now() WHERE id = ?",
+        UUID.fromString(c.path("id").asText()));
+    for (var condition :
+        java.util.List.of(
+            j("type", "TAGS_ALL", "tags", arr("x")),
+            j("type", "TAG_NOT", "tag", "y"),
+            j("type", "COMPANY", "company", "acme"))) {
+      assertThat(search(ANA, gid, j("conditions", arr(condition))).at("/total").asInt()).isZero();
+    }
+  }
+
+  @Test
   @DisplayName("R-009-07: a contact of another group is never listed")
   void otherGroupIsNeverListed() {
     newContact(ANA, gid, "Ana", "Novak");

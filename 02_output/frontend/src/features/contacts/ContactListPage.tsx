@@ -9,7 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { StatePanel } from '@/components/ui/state-panel';
 import type { components } from '@/lib/api/schema';
+import { type Condition } from './conditions';
 import { ContactTable, type Sort } from './ContactTable';
+import { FilterChips } from './FilterChips';
+import { FilterDialog } from './FilterDialog';
 import { Pager } from './Pager';
 
 type GroupSummary = components['schemas']['GroupSummary'];
@@ -41,16 +44,19 @@ export function ContactListPage() {
   const [text, setText] = useState('');
   const [sort, setSort] = useState<Sort | undefined>();
   const [page, setPage] = useState(1);
+  const [conditions, setConditions] = useState<Condition[]>([]);
+  const [filtering, setFiltering] = useState(false);
   const q = useDebounced(text);
   const canEdit = group.role !== 'VIEWER';
 
   const list = useQuery({
-    queryKey: ['contacts', group.id, { q, sort, page }],
+    queryKey: ['contacts', group.id, { q, conditions, sort, page }],
     queryFn: () =>
       api.request<ContactPage>('POST', `/groups/${encodeURIComponent(group.id)}/contacts/search`, {
         q,
         sort,
         page,
+        conditions,
       }),
     placeholderData: keepPreviousData,
   });
@@ -67,13 +73,19 @@ export function ContactListPage() {
 
   function clearFilters() {
     setText('');
+    setConditions([]);
+    setPage(1);
+  }
+
+  function changeConditions(next: Condition[]) {
+    setConditions(next);
     setPage(1);
   }
 
   const addContact = canEdit && (
     <Button onClick={() => navigate(`/groups/${group.id}/contacts/new`)}>{t('contact.add')}</Button>
   );
-  const searching = q.trim() !== '' || text.trim() !== '';
+  const searching = q.trim() !== '' || text.trim() !== '' || conditions.length > 0;
 
   let body;
   if (list.isPending) body = <StatePanel state="loading" />;
@@ -122,9 +134,27 @@ export function ContactListPage() {
             onChange={(event) => changeText(event.target.value)}
           />
         </div>
+        <Button variant="secondary" onClick={() => setFiltering(true)}>
+          {t('list.filter.button')}
+        </Button>
         {canEdit && list.data && list.data.total > 0 && addContact}
       </div>
+      <FilterChips
+        conditions={conditions}
+        onRemove={(index) => changeConditions(conditions.filter((_, i) => i !== index))}
+        onClear={clearFilters}
+      />
       {body}
+      {filtering && (
+        <FilterDialog
+          groupId={group.id}
+          onClose={() => setFiltering(false)}
+          onAdd={(condition) => {
+            changeConditions([...conditions, condition]);
+            setFiltering(false);
+          }}
+        />
+      )}
     </div>
   );
 }

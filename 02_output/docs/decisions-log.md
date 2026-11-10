@@ -439,3 +439,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-39: US-010 readings (filter)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-010
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) Name of the button that clears all conditions. (2) How conditions are checked. (3) Matching of tags, keys, values, companies. (4) Where EX-010-04 and the E2E tests wait. (5) The suggestions of the company condition. (6) Screen code and its tests written in the same step (as in D-33 to D-38).
+- Options: (1) The frozen tests click "Filter" by a name that matches as a substring, and AC-011-01 and E2E-03 do so while a chip is shown; a second button named "Clear filters" would make that click ambiguous. The chip bar therefore offers "Clear all" (sl: "Počisti vse"); "Clear filters" stays in the "No contacts match" panel (R-010-10, AC-010-08), which also clears the search text. (2) `Conditions.parse` returns the seven records of `Condition` or one 400 `VALIDATION_FAILED` naming `conditions[i].type|tags|tag|key|value|country|company` (REQUIRED; INVALID_VALUE for an unknown type; INVALID_FORMAT for a country that is not two capitals); texts are stripped; an empty attribute value is allowed for "key equals value". (3) Tag and key compare with `lower()`, the attribute value and the company with `f_fold` (case and accents); a contact only has tags of its own group, so tags of another group never match; every value is a bind parameter (SR-07); conditions and search words combine with AND in `Where`. (4) EX-010-04 (Trash) waits on US-012 like AC-009-08; own `ContactSearchIT` covers it with a SQL-trashed contact. E2E-03 and E2E-04 need export and Trash and are not run. (5) `GET /groups/{g}/companies?q=` (`SearchController`, `SearchService.companies`) lists each company once (folded), active contacts only, for every member. (6) Recorded here.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none

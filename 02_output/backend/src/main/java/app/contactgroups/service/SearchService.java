@@ -1,5 +1,8 @@
 package app.contactgroups.service;
 
+import app.contactgroups.domain.Condition;
+import app.contactgroups.domain.ConditionInput;
+import app.contactgroups.domain.Conditions;
 import app.contactgroups.domain.ContactPage;
 import app.contactgroups.domain.ContactSort;
 import app.contactgroups.domain.SearchWords;
@@ -21,16 +24,29 @@ public class SearchService {
     this.access = access;
   }
 
+  /** The companies used in the group that match the typed text, for every member (R-010-07). */
+  @Transactional(readOnly = true)
+  public List<String> companies(UUID groupId, String userId, String part) {
+    access.requireMember(groupId, userId);
+    return contacts.companiesOfGroup(groupId, part);
+  }
+
   /** One page; a page beyond the last gives the last, a missing page the first (EX-009-09). */
   @Transactional(readOnly = true)
   public ContactPage search(
-      UUID groupId, String userId, String text, ContactSort sort, Integer requestedPage) {
+      UUID groupId,
+      String userId,
+      String text,
+      List<ConditionInput> rawConditions,
+      ContactSort sort,
+      Integer requestedPage) {
     access.requireMember(groupId, userId);
     List<String> patterns = SearchWords.patterns(text);
-    int total = contacts.count(groupId, patterns);
+    List<Condition> conditions = Conditions.parse(rawConditions);
+    int total = contacts.count(groupId, patterns, conditions);
     int wanted = requestedPage == null ? 1 : Math.max(1, requestedPage);
     int page = Math.min(wanted, ContactPage.lastPage(total));
-    var items = contacts.page(groupId, patterns, ContactSort.of(sort), page);
+    var items = contacts.page(groupId, patterns, conditions, ContactSort.of(sort), page);
     return new ContactPage(items, total, page, ContactPage.PAGE_SIZE);
   }
 }

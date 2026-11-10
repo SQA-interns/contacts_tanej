@@ -273,6 +273,50 @@
       "text": "Spremenite iskalno besedilo ali filtre."
     },
     "clearFilters": "Počisti filtre",
+    "filter": {
+      "button": "Filter",
+      "title": "Filtriranje kontaktov",
+      "intro": "Ujemati se morajo vsi pogoji in iskano besedilo. Izberite pogoj.",
+      "condition": "Pogoj",
+      "choose": "Izberite …",
+      "types": {
+        "TAGS_ALL": "Ima vse te oznake",
+        "TAGS_ANY": "Ima katero od teh oznak",
+        "TAG_NOT": "Nima oznake",
+        "ATTRIBUTE_EQUALS": "Ključ atributa je enak vrednosti",
+        "ATTRIBUTE_EXISTS": "Ključ atributa obstaja",
+        "COUNTRY": "Država",
+        "COMPANY": "Podjetje"
+      },
+      "tags": "Oznake",
+      "tagsHint": "Vpišite ime oznake in pritisnite Enter; prikažejo se predlogi.",
+      "tag": "Oznaka",
+      "key": "Ključ atributa",
+      "value": "Vrednost atributa",
+      "country": "Država",
+      "company": "Podjetje",
+      "add": "Dodaj pogoj",
+      "active": "Filtri:",
+      "remove": "Odstrani pogoj",
+      "clearAll": "Počisti vse",
+      "chip": {
+        "all": "Ima vse: {{tags}}",
+        "any": "Ima katero od: {{tags}}",
+        "not": "Nima oznake: {{tag}}",
+        "equals": "Ključ {{key}} je enak {{value}}",
+        "exists": "Ključ {{key}} obstaja",
+        "country": "Država: {{country}}",
+        "company": "Podjetje: {{company}}"
+      },
+      "error": {
+        "type": "Izberite pogoj.",
+        "tags": "Vpišite vsaj eno oznako.",
+        "tag": "Vpišite oznako.",
+        "key": "Vpišite ključ.",
+        "country": "Izberite državo.",
+        "company": "Vpišite podjetje."
+      }
+    },
     "column": {
       "lastName": "Priimek",
       "firstName": "Ime",

@@ -273,6 +273,50 @@
       "text": "Change the search text or the filters."
     },
     "clearFilters": "Clear filters",
+    "filter": {
+      "button": "Filter",
+      "title": "Filter contacts",
+      "intro": "All conditions and the search text must match. Choose a condition.",
+      "condition": "Condition",
+      "choose": "Choose …",
+      "types": {
+        "TAGS_ALL": "Has all of these tags",
+        "TAGS_ANY": "Has any of these tags",
+        "TAG_NOT": "Does not have tag",
+        "ATTRIBUTE_EQUALS": "Attribute key equals value",
+        "ATTRIBUTE_EXISTS": "Attribute key exists",
+        "COUNTRY": "Country",
+        "COMPANY": "Company"
+      },
+      "tags": "Tags",
+      "tagsHint": "Type a tag name and press Enter; suggestions appear.",
+      "tag": "Tag",
+      "key": "Attribute key",
+      "value": "Attribute value",
+      "country": "Country",
+      "company": "Company",
+      "add": "Add condition",
+      "active": "Filters:",
+      "remove": "Remove condition",
+      "clearAll": "Clear all",
+      "chip": {
+        "all": "Has all of: {{tags}}",
+        "any": "Has any of: {{tags}}",
+        "not": "Does not have tag: {{tag}}",
+        "equals": "Key {{key}} equals {{value}}",
+        "exists": "Key {{key}} exists",
+        "country": "Country: {{country}}",
+        "company": "Company: {{company}}"
+      },
+      "error": {
+        "type": "Choose a condition.",
+        "tags": "Enter at least one tag.",
+        "tag": "Enter a tag.",
+        "key": "Enter a key.",
+        "country": "Choose a country.",
+        "company": "Enter a company."
+      }
+    },
     "column": {
       "lastName": "Last name",
       "firstName": "First name",

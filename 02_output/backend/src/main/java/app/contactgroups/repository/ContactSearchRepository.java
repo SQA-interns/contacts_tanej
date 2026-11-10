@@ -1,5 +1,6 @@
 package app.contactgroups.repository;
 
+import app.contactgroups.domain.Condition;
 import app.contactgroups.domain.ContactPage;
 import app.contactgroups.domain.ContactRow;
 import app.contactgroups.domain.ContactSort;
@@ -23,37 +24,32 @@ public class ContactSearchRepository {
 
   private static final String COLLATION = "COLLATE \"sl-SI-x-icu\"";
 
-  /** One word must be part of a folded own field, a tag name or an attribute value (R-009-03). */
-  private static final String WORD =
-      " AND (c.search_fold LIKE f_fold(?) ESCAPE '\\'"
-          + " OR EXISTS (SELECT 1 FROM contact_tags ct JOIN tags t ON t.id = ct.tag_id"
-          + " WHERE ct.contact_id = c.id AND f_fold(t.name) LIKE f_fold(?) ESCAPE '\\')"
-          + " OR EXISTS (SELECT 1 FROM attributes a"
-          + " WHERE a.contact_id = c.id AND f_fold(a.value) LIKE f_fold(?) ESCAPE '\\'))";
-
   private final JdbcClient jdbc;
 
   public ContactSearchRepository(JdbcClient jdbc) {
     this.jdbc = jdbc;
   }
 
-  /** The number of active contacts of the group in which every pattern matches. */
-  public int count(UUID groupId, List<String> patterns) {
-    return jdbc.sql("SELECT count(*) FROM contacts c WHERE " + where(patterns))
-        .params(params(groupId, patterns))
+  /** The number of active contacts of the group that match every pattern and condition. */
+  public int count(UUID groupId, List<String> patterns, List<Condition> conditions) {
+    Where where = Where.of(groupId, patterns, conditions);
+    return jdbc.sql("SELECT count(*) FROM contacts c WHERE " + where.sql())
+        .params(where.params())
         .query(Integer.class)
         .single();
   }
 
   /** One page of rows, {@code page} counted from 1, with the tags of each contact. */
-  public List<ContactRow> page(UUID groupId, List<String> patterns, ContactSort sort, int page) {
-    List<Object> params = params(groupId, patterns);
+  public List<ContactRow> page(
+      UUID groupId, List<String> patterns, List<Condition> conditions, ContactSort sort, int page) {
+    Where where = Where.of(groupId, patterns, conditions);
+    List<Object> params = new ArrayList<>(where.params());
     params.add(ContactPage.PAGE_SIZE);
     params.add((page - 1) * ContactPage.PAGE_SIZE);
     List<ContactRow> rows =
         jdbc.sql(
                 "SELECT c.* FROM contacts c WHERE "
-                    + where(patterns)
+                    + where.sql()
                     + orderBy(sort)
                     + " LIMIT ? OFFSET ?")
             .params(params)
@@ -61,21 +57,6 @@ public class ContactSearchRepository {
             .list();
     Map<UUID, List<String>> tags = tagsOf(rows);
     return rows.stream().map(r -> r.withTags(tags.getOrDefault(r.id(), List.of()))).toList();
-  }
-
-  private static String where(List<String> patterns) {
-    return "c.group_id = ? AND c.state = 'ACTIVE'" + WORD.repeat(patterns.size());
-  }
-
-  private static List<Object> params(UUID groupId, List<String> patterns) {
-    List<Object> params = new ArrayList<>();
-    params.add(groupId);
-    for (String pattern : patterns) {
-      params.add(pattern);
-      params.add(pattern);
-      params.add(pattern);
-    }
-    return params;
   }
 
   /** The chosen column first, then last name, first name and id so that the order is stable. */
@@ -93,6 +74,20 @@ public class ContactSearchRepository {
         + " NULLS LAST, c.first_name "
         + COLLATION
         + " NULLS LAST, c.id";
+  }
+
+  /** The companies of the active contacts that contain {@code part}, folded, each once. */
+  public List<String> companiesOfGroup(UUID groupId, String part) {
+    String text = part == null ? "" : part.strip();
+    String like = text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
+    return jdbc.sql(
+            "SELECT min(c.company) AS company FROM contacts c"
+                + " WHERE c.group_id = ? AND c.state = 'ACTIVE' AND c.company <> ''"
+                + " AND f_fold(c.company) LIKE '%' || f_fold(?) || '%' ESCAPE '\\'"
+                + " GROUP BY f_fold(c.company) ORDER BY f_fold(c.company), min(c.company)")
+        .params(groupId, like)
+        .query(String.class)
+        .list();
   }
 
   private Map<UUID, List<String>> tagsOf(List<ContactRow> rows) {
