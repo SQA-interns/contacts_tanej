@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useOutletContext, useParams } from 'react-router';
+import { Link, useLocation, useNavigate, useOutletContext, useParams } from 'react-router';
 import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -202,7 +202,9 @@ function useSave(
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [busy, setBusy] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const location = useLocation();
+  // A new contact opens on its own page; the create hands the confirmation over in the navigation state.
+  const [saved, setSaved] = useState((location.state as { saved?: boolean } | null)?.saved === true);
   const [failure, setFailure] = useState<string | null>(null);
   const [problems, setProblems] = useState<Partial<Record<string, string>>>({});
   const base = `/groups/${encodeURIComponent(groupId)}/contacts`;
@@ -224,7 +226,10 @@ function useSave(
         setSaved(true);
       } else {
         const created = await api.request<Contact>('POST', base, { ...values, tags, attributes });
-        navigate(`/groups/${groupId}/contacts/${created.id}`, { replace: true });
+        navigate(`/groups/${groupId}/contacts/${created.id}`, {
+          replace: true,
+          state: { saved: true },
+        });
       }
     } catch (error) {
       await refuse(error, values, tags, attributes);

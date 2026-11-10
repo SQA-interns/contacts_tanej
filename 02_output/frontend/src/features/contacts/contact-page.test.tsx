@@ -96,6 +96,7 @@ describe('the new contact form (R-005-01, R-005-03, EX-005-10)', () => {
     await userEvent.selectOptions(screen.getByLabelText('Country'), 'SI');
     await userEvent.click(screen.getByRole('button', { name: 'Save' }));
     await screen.findByRole('heading', { name: 'Ana Novak', level: 1 });
+    expect(screen.getByRole('status')).toHaveTextContent('The contact was saved.');
     const post = calls.find((c) => c.startsWith('POST /groups/g-1/contacts'));
     expect(JSON.parse(post!.replace('POST /groups/g-1/contacts ', ''))).toMatchObject({
       lastName: 'Novak',
