@@ -571,3 +571,14 @@
 - Human response: 1 - a human-approved fix of a frozen-test defect, as in D-44. Use `getByLabel('Role', { exact: true })` in E2E-02 and AC-003-01 only; leave E2E-07 and the app's "Role of {name}" label unchanged. Update `docs/03_acceptance-manifest.sha256` and record the change.
 - Resolution: (1), human-approved fix of a frozen-test defect (2026-11-10, S8 fix F-03). `e2e/e2e-02-team-work.spec.ts` (line 35) and `acceptance/groups-members.spec.ts` (line 101) now call `getByLabel('Role', { exact: true })`; E2E-07 and the app are unchanged. Both lines in `docs/03_acceptance-manifest.sha256` updated (groups-members d7ad9883…, e2e-02 e525fe96…). Not yet re-run in the browser (needs the Compose stack); `/verify` runs them.
 - Overrides: none
+
+## D-51: F-04 E2E-08 races the sign-in (frozen test defect); E2E-06 belongs to the second increment
+- Timestamp: 2026-11-10
+- Session: S8 fix F-04
+- Class: approval
+- Type: non-blocking
+- Trigger: F-04 has four causes. (1) E2E-03 "Group" navigation: the app hid the group tab bar on a contact page, while the frozen test opens "Contacts" from it right after Save; an app defect, fixed. (2) E2E-03 then failed at `getByText('2 contacts exported')`: the group History showed "Contacts exported" plus a field row; an app defect (wording), fixed. (3) E2E-08 "Group not found": the app is right (a copy of the test that waits for the "User menu" button after `signIn` passes in Chromium). The frozen test calls `signIn` (returns right after the click), then `expect(link 'Konferenca 2026').toHaveCount(0)`, which is true on the sign-in screen, then `goto('/groups/<id>')`, which cuts the sign-in off; the page ends on "Sign in" or on the groups list. Same defect as AC-002-03 (D-31). (4) E2E-06 needs the Duplicates tab (US-021, second increment, DoD-P10); it cannot pass in INC-1 and is not an INC-1 defect.
+- Options: (1) Approve a change to the frozen file `acceptance/support.ts`: `signIn` waits until the signed-in screen shows (`getByRole('button', { name: 'User menu' })` visible), and update `docs/03_acceptance-manifest.sha256`; this also fixes AC-002-03 and every test that signs in and navigates at once (proposed). (2) Change only E2E-08 (a wait after `signIn(marko, MARKO)`). (3) Leave both and list them in the release notes.
+- Human response: none
+- Resolution: open, waiting for the developer's answer; no frozen test changed in this session. Parts (1) and (2) fixed in the `fix: … (F-04)` commits. Re-run in Chromium on the rebuilt stack (E2E-03, contacts-form, trash-history, groups-members): E2E-03 passes; the other failures are AC-002-03 (this decision), AC-003-01 (D-50 change, not analysed further), AC-003-08 (D-32), AC-008-03, AC-016-05 and AC-012-03 (not analysed, may be flaky); none is caused by the F-04 changes (the contact nav and the export wording touch no locator they use).
+- Overrides: none
