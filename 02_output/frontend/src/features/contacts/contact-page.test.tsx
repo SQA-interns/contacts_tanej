@@ -30,13 +30,17 @@ function refusal(status: number, body: Partial<ErrorResponse>) {
 }
 
 /** The groups stand-in plus the contact endpoints of group g-1, answering as the test says. */
-function contactsApi(answer: (method: string, path: string, body?: unknown) => unknown) {
+function contactsApi(
+  answer: (method: string, path: string, body?: unknown) => unknown,
+  suggestions: components['schemas']['Tag'][] = [],
+) {
   const { api: groups, calls } = groupsApi([konferenca, poroka, skupno]);
   const api: ApiClient = {
     ...groups,
     request: (async (method: string, path: string, body?: unknown) => {
-      if (path.startsWith('/groups/g-') && path.includes('/contacts')) {
+      if (path.startsWith('/groups/g-') && (path.includes('/contacts') || path.includes('/tags'))) {
         calls.push(`${method} ${path} ${body ? JSON.stringify(body) : ''}`.trim());
+        if (path.includes('/tags')) return suggestions;
         const result = answer(method, path, body);
         if (result instanceof Error) throw result;
         return result;
@@ -184,6 +188,84 @@ describe('opening and saving a contact (R-005-06, R-005-07)', () => {
     const { api } = contactsApi(() => refusal(404, { code: 'NOT_FOUND' }));
     renderApp('/groups/g-1/contacts/c-404', { auth: signedIn(), api });
     expect(await screen.findByRole('heading', { name: 'Not found' })).toBeInTheDocument();
+  });
+});
+
+describe('the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10)', () => {
+  const tagged: Contact = { ...ana, tags: ['udelezenec2025', 'neObvescaj'] };
+
+  function putBody(calls: string[]) {
+    const put = calls.find((c) => c.startsWith('PUT'));
+    return JSON.parse(put!.replace('PUT /groups/g-1/contacts/c-1 ', ''));
+  }
+
+  it('shows the tags as chips and removes one with its button (R-006-06)', async () => {
+    const { api, calls } = contactsApi((method) => (method === 'PUT' ? tagged : tagged));
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    const list = await screen.findByRole('list', { name: 'Tags of this contact' });
+    expect(list).toHaveTextContent('udelezenec2025');
+    await userEvent.click(screen.getByRole('button', { name: 'Remove tag neObvescaj' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await screen.findByRole('status');
+    expect(putBody(calls).tags).toEqual(['udelezenec2025']);
+  });
+
+  it('adds a tag with Enter and sends all tags with the save (R-006-01)', async () => {
+    const { api, calls } = contactsApi(() => ana);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.type(await screen.findByLabelText('Tags'), 'udelezenec2025{Enter}');
+    expect(screen.getByLabelText('Tags')).toHaveValue('');
+    expect(screen.getByRole('list', { name: 'Tags of this contact' })).toHaveTextContent('udelezenec2025');
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await screen.findByRole('status');
+    expect(putBody(calls).tags).toEqual(['udelezenec2025']);
+  });
+
+  it('takes a tag that was typed but not confirmed along with the save', async () => {
+    const { api, calls } = contactsApi(() => ana);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.type(await screen.findByLabelText('Tags'), 'gost');
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await screen.findByRole('status');
+    expect(putBody(calls).tags).toEqual(['gost']);
+  });
+
+  it('suggests the tags of the group while typing and never forces one (R-006-10)', async () => {
+    const { api, calls } = contactsApi(() => ana, [{ id: 't-1', name: 'udelezenec2025', contactCount: 3 }]);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.type(await screen.findByLabelText('Tags'), 'ud');
+    await waitFor(() =>
+      expect(document.querySelector('datalist option[value="udelezenec2025"]')).not.toBeNull(),
+    );
+    expect(calls.some((c) => c.startsWith('GET /groups/g-1/tags?q=ud'))).toBe(true);
+    await userEvent.type(screen.getByLabelText('Tags'), 'x{Enter}');
+    expect(screen.getByRole('list', { name: 'Tags of this contact' })).toHaveTextContent('udx');
+  });
+
+  it('names the refused tag with the reason and keeps the typed tags (R-006-03, AC-006-03)', async () => {
+    const { api } = contactsApi((method) =>
+      method === 'PUT'
+        ? refusal(400, {
+            code: 'VALIDATION_FAILED',
+            errors: [{ field: 'tags[0]', code: 'INVALID_CHARACTERS', message: 'x' }],
+          })
+        : ana,
+    );
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.type(await screen.findByLabelText('Tags'), 'neka značka{Enter}');
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(await screen.findByText('Tag names use letters, digits, - and _.')).toBeInTheDocument();
+    expect(screen.getByText('neka značka', { selector: 'strong' })).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Tags of this contact' })).toHaveTextContent('neka značka');
+  });
+
+  it('shows a Viewer the tags as text and no control to change them (R-006-09, AC-006-07)', async () => {
+    const { api } = contactsApi(() => tagged);
+    renderApp('/groups/g-3/contacts/c-1', { auth: signedIn(), api });
+    expect(await screen.findByText('udelezenec2025')).toBeInTheDocument();
+    expect(screen.getByText('neObvescaj')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Tags')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Remove tag/ })).not.toBeInTheDocument();
   });
 });
 

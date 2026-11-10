@@ -5,7 +5,9 @@ import type { Values } from './contactValues';
 
 interface ConflictPanelProps {
   current: Values;
+  currentTags: string[];
   mine: Values;
+  mineTags: string[];
   onReload: () => void;
   onCancel: () => void;
 }
@@ -15,7 +17,14 @@ interface ConflictPanelProps {
  * (R-005-08). The current values and the user's own entries are shown side by side; nothing was
  * overwritten, and the user chooses to continue from the current values.
  */
-export function ConflictPanel({ current, mine, onReload, onCancel }: ConflictPanelProps) {
+export function ConflictPanel({
+  current,
+  currentTags,
+  mine,
+  mineTags,
+  onReload,
+  onCancel,
+}: ConflictPanelProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-4">
@@ -23,8 +32,8 @@ export function ConflictPanel({ current, mine, onReload, onCancel }: ConflictPan
         <strong>{t('contact.conflict.title')}</strong> {t('contact.conflict.text')}
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
-        <ContactDetails title={t('contact.conflict.current')} values={current} />
-        <ContactDetails title={t('contact.conflict.mine')} values={mine} />
+        <ContactDetails title={t('contact.conflict.current')} values={current} tags={currentTags} />
+        <ContactDetails title={t('contact.conflict.mine')} values={mine} tags={mineTags} />
       </div>
       <div className="flex gap-3">
         <Button onClick={onReload}>{t('contact.conflict.reload')}</Button>

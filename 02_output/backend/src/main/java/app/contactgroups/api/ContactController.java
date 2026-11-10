@@ -6,6 +6,7 @@ import app.contactgroups.service.ContactService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -37,6 +38,7 @@ public class ContactController {
       String city,
       String country,
       String notes,
+      List<String> tags,
       Long revision) {
 
     ContactInput fields() {
@@ -77,7 +79,7 @@ public class ContactController {
       @AuthenticationPrincipal Jwt jwt,
       @PathVariable UUID groupId,
       @RequestBody ContactRequest request) {
-    return contacts.create(groupId, jwt.getSubject(), request.fields());
+    return contacts.create(groupId, jwt.getSubject(), request.fields(), request.tags());
   }
 
   @GetMapping("/groups/{groupId}/contacts/{contactId}")
@@ -111,6 +113,6 @@ public class ContactController {
       @PathVariable UUID contactId,
       @RequestBody ContactRequest request) {
     return contacts.save(
-        groupId, jwt.getSubject(), contactId, request.fields(), request.revision());
+        groupId, jwt.getSubject(), contactId, request.fields(), request.tags(), request.revision());
   }
 }

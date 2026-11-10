@@ -163,7 +163,18 @@
     "emailHint": "For example name@example.com",
     "phoneHint": "Digits, spaces and + ( ) - . /",
     "notesHint": "Up to 5,000 characters.",
+    "tagsOfContact": "Tags of this contact",
+    "removeTag": "Remove tag {{tag}}",
+    "tagsHint": "Press Enter to add a tag. Letters, digits, - and _; up to 50 characters.",
+    "tagError": {
+      "INVALID_CHARACTERS": "Tag names use letters, digits, - and _.",
+      "TOO_LONG": "A tag has at most 50 characters.",
+      "TOO_SHORT": "A tag needs at least 1 character.",
+      "TOO_MANY": "A contact has at most 50 tags.",
+      "OTHER": "This tag is not valid."
+    },
     "field": {
+      "tags": "Tags",
       "firstName": "First name",
       "lastName": "Last name",
       "email": "E-mail",

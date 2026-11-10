@@ -9,6 +9,7 @@ import { countryName } from '@/lib/format';
 import type { Language } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { FIELDS, maxLength, type Field, type Values } from './contactValues';
+import { TagInput, tagProblems } from './TagInput';
 
 const TEXT_FIELDS = FIELDS.filter((f) => f !== 'country' && f !== 'notes');
 const HINTS: Partial<Record<Field, string>> = { email: 'emailHint', phone: 'phoneHint', notes: 'notesHint' };
@@ -17,11 +18,13 @@ const SELECT_CLASS =
   'aria-[invalid=true]:border-danger';
 
 interface ContactFormProps {
+  groupId: string;
   initial: Values;
+  initialTags: string[];
   /** The refused fields of the last save: field name to the code of the broken rule. */
   problems: Partial<Record<string, string>>;
   busy: boolean;
-  onSubmit: (values: Values) => void;
+  onSubmit: (values: Values, tags: string[]) => void;
   onCancel: () => void;
 }
 
@@ -29,16 +32,30 @@ interface ContactFormProps {
  * WF-10, the form of the 11 predefined fields (R-005-01, R-005-07). The server decides every rule;
  * the typed values stay when it refuses (UI-13) and each refused field shows its reason.
  */
-export function ContactForm({ initial, problems, busy, onSubmit, onCancel }: ContactFormProps) {
+export function ContactForm({
+  groupId,
+  initial,
+  initialTags,
+  problems,
+  busy,
+  onSubmit,
+  onCancel,
+}: ContactFormProps) {
   const { t, i18n } = useTranslation();
   const id = useId();
   const [values, setValues] = useState<Values>(initial);
+  const [tags, setTags] = useState<string[]>(initialTags);
+  const [typed, setTyped] = useState('');
   const language = i18n.language as Language;
   const oneOfRefused = problems.firstName === 'REQUIRED_ONE_OF';
 
   function submit(event: FormEvent) {
     event.preventDefault();
-    onSubmit(values);
+    const typedTag = typed.trim();
+    const all = typedTag === '' ? tags : [...tags, typedTag];
+    setTags(all);
+    setTyped('');
+    onSubmit(values, all);
   }
 
   function reason(field: Field): string | undefined {
@@ -132,6 +149,14 @@ export function ContactForm({ initial, problems, busy, onSubmit, onCancel }: Con
             ),
             true,
           )}
+          <TagInput
+            groupId={groupId}
+            tags={tags}
+            typed={typed}
+            problems={tagProblems(problems)}
+            onTags={setTags}
+            onTyped={setTyped}
+          />
         </div>
       </Card>
       <div className="sticky bottom-0 flex gap-3 border-t border-border bg-background py-3">

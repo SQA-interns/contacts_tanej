@@ -28,6 +28,20 @@ public record Contact(
   /** One attribute of a contact (contract {@code Attribute}). */
   public record Attribute(String key, String value) {}
 
+  public Contact withTags(List<String> names) {
+    return new Contact(
+        id,
+        groupId,
+        state,
+        trashedAt,
+        createdAt,
+        revision,
+        versionNumber,
+        fields,
+        names,
+        attributes);
+  }
+
   /** The name shown for the contact in History: its name, else its e-mail, else its company. */
   @JsonIgnore
   public String label() {

@@ -7,10 +7,11 @@ import { FIELDS, type Values } from './contactValues';
 interface ContactDetailsProps {
   title: string;
   values: Values;
+  tags: string[];
 }
 
 /** The values of a contact as text: what a Viewer sees, and a contact in Trash (WF-10). */
-export function ContactDetails({ title, values }: ContactDetailsProps) {
+export function ContactDetails({ title, values, tags }: ContactDetailsProps) {
   const { t, i18n } = useTranslation();
   const language = i18n.language as Language;
   return (
@@ -27,6 +28,25 @@ export function ContactDetails({ title, values }: ContactDetailsProps) {
             </dd>
           </div>
         ))}
+        <div className="sm:col-span-2">
+          <dt className="text-sm text-text-muted">{t('contact.field.tags')}</dt>
+          <dd>
+            {tags.length === 0 ? (
+              <span aria-label={t('contact.empty')}>–</span>
+            ) : (
+              <ul aria-label={t('contact.tagsOfContact')} className="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-control border border-border bg-surface-raised px-3 py-1 break-all"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </dd>
+        </div>
       </dl>
     </Card>
   );

@@ -54,6 +54,13 @@ export function ContactPage() {
   return <ContactScreen group={group} contact={contact.data} title={contactTitle(valuesOf(contact.data))} />;
 }
 
+/** A save refused as a conflict: the contact as it is now and what the user entered. */
+interface Conflict {
+  current: Contact;
+  mine: Values;
+  mineTags: string[];
+}
+
 interface ContactScreenProps {
   group: GroupSummary;
   contact?: Contact;
@@ -62,7 +69,7 @@ interface ContactScreenProps {
 
 function ContactScreen({ group, contact, title }: ContactScreenProps) {
   const { t } = useTranslation();
-  const [conflict, setConflict] = useState<{ current: Contact; mine: Values } | null>(null);
+  const [conflict, setConflict] = useState<Conflict | null>(null);
   const save = useSave(group.id, contact, setConflict);
   const trashed = contact?.state === 'TRASHED';
   const canEdit = group.role !== 'VIEWER' && !trashed;
@@ -95,21 +102,25 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
       {conflict ? (
         <ConflictPanel
           current={valuesOf(conflict.current)}
+          currentTags={conflict.current.tags ?? []}
           mine={conflict.mine}
+          mineTags={conflict.mineTags}
           onReload={() => save.reload(conflict.current, () => setConflict(null))}
           onCancel={() => save.leave(back)}
         />
       ) : canEdit ? (
         <ContactForm
           key={contact?.revision}
+          groupId={group.id}
           initial={valuesOf(contact)}
+          initialTags={contact?.tags ?? []}
           problems={save.problems}
           busy={save.busy}
-          onSubmit={(values) => void save.submit(values)}
+          onSubmit={(values, tags) => void save.submit(values, tags)}
           onCancel={() => save.leave(back)}
         />
       ) : (
-        <ContactDetails title={t('contact.details')} values={valuesOf(contact)} />
+        <ContactDetails title={t('contact.details')} values={valuesOf(contact)} tags={contact?.tags ?? []} />
       )}
     </>
   );
@@ -119,7 +130,7 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
 function useSave(
   groupId: string,
   contact: Contact | undefined,
-  setConflict: (conflict: { current: Contact; mine: Values } | null) => void,
+  setConflict: (conflict: Conflict | null) => void,
 ) {
   const { t } = useTranslation();
   const { api } = useServices();
@@ -131,7 +142,7 @@ function useSave(
   const [problems, setProblems] = useState<Partial<Record<string, string>>>({});
   const base = `/groups/${encodeURIComponent(groupId)}/contacts`;
 
-  async function submit(values: Values) {
+  async function submit(values: Values, tags: string[]) {
     setBusy(true);
     setSaved(false);
     setFailure(null);
@@ -140,26 +151,27 @@ function useSave(
       if (contact) {
         await api.request<Contact>('PUT', `${base}/${encodeURIComponent(contact.id)}`, {
           ...values,
+          tags,
           revision: contact.revision,
         });
         await queryClient.invalidateQueries({ queryKey: ['contact', groupId, contact.id] });
         setSaved(true);
       } else {
-        const created = await api.request<Contact>('POST', base, values);
+        const created = await api.request<Contact>('POST', base, { ...values, tags });
         navigate(`/groups/${groupId}/contacts/${created.id}`, { replace: true });
       }
     } catch (error) {
-      await refuse(error, values);
+      await refuse(error, values, tags);
     } finally {
       setBusy(false);
     }
   }
 
-  async function refuse(error: unknown, values: Values) {
+  async function refuse(error: unknown, values: Values, tags: string[]) {
     if (!(error instanceof ApiError)) return setFailure(t('error.INTERNAL_ERROR'));
     if (error.code === 'VALIDATION_FAILED') return setProblems(refusedFields(error));
     if (error.code === 'CONFLICT' && error.body.current) {
-      return setConflict({ current: error.body.current, mine: values });
+      return setConflict({ current: error.body.current, mine: values, mineTags: tags });
     }
     if (error.code === 'CONTACT_IN_TRASH' && contact) {
       await queryClient.invalidateQueries({ queryKey: ['contact', groupId, contact.id] });

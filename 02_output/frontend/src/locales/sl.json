@@ -163,7 +163,18 @@
     "emailHint": "Na primer ime@primer.si",
     "phoneHint": "Števke, presledki in + ( ) - . /",
     "notesHint": "Do 5.000 znakov.",
+    "tagsOfContact": "Oznake tega stika",
+    "removeTag": "Odstrani oznako {{tag}}",
+    "tagsHint": "Za dodajanje oznake pritisnite Enter. Črke, števke, - in _; do 50 znakov.",
+    "tagError": {
+      "INVALID_CHARACTERS": "Imena oznak vsebujejo črke, števke, - in _.",
+      "TOO_LONG": "Oznaka ima največ 50 znakov.",
+      "TOO_SHORT": "Oznaka mora imeti vsaj 1 znak.",
+      "TOO_MANY": "Stik ima največ 50 oznak.",
+      "OTHER": "Ta oznaka ni veljavna."
+    },
     "field": {
+      "tags": "Oznake",
       "firstName": "Ime",
       "lastName": "Priimek",
       "email": "E-naslov",
