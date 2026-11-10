@@ -135,7 +135,8 @@
     },
     "tabs": {
       "label": "Group",
-      "contacts": "Contacts"
+      "contacts": "Contacts",
+      "members": "Members"
     },
     "noContacts": {
       "title": "No contacts yet",
@@ -146,5 +147,23 @@
     "OWNER": "Owner",
     "EDITOR": "Editor",
     "VIEWER": "Viewer"
+  },
+  "members": {
+    "invite": {
+      "title": "Invite people",
+      "submit": "Invite"
+    },
+    "pending": {
+      "title": "Pending invitations",
+      "empty": "No pending invitations.",
+      "expiresColumn": "Expires",
+      "expires": "Expires {{date}}",
+      "cancel": "Cancel invitation"
+    },
+    "limitReached": "The limit of 20 pending invitations is reached. Cancel one to invite more people.",
+    "emailError": {
+      "INVALID_FORMAT": "Enter a valid e-mail address.",
+      "TOO_LONG": "The e-mail address can have at most 255 characters."
+    }
   }
 }

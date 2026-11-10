@@ -135,7 +135,8 @@
     },
     "tabs": {
       "label": "Skupina",
-      "contacts": "Kontakti"
+      "contacts": "Kontakti",
+      "members": "Člani"
     },
     "noContacts": {
       "title": "Še ni kontaktov",
@@ -146,5 +147,23 @@
     "OWNER": "Lastnik",
     "EDITOR": "Urednik",
     "VIEWER": "Bralec"
+  },
+  "members": {
+    "invite": {
+      "title": "Povabi ljudi",
+      "submit": "Povabi"
+    },
+    "pending": {
+      "title": "Čakajoča vabila",
+      "empty": "Ni čakajočih vabil.",
+      "expiresColumn": "Poteče",
+      "expires": "Poteče {{date}}",
+      "cancel": "Prekliči vabilo"
+    },
+    "limitReached": "Dosežena je omejitev 20 čakajočih vabil. Prekličite eno, da lahko povabite več ljudi.",
+    "emailError": {
+      "INVALID_FORMAT": "Vnesite veljaven e-poštni naslov.",
+      "TOO_LONG": "E-poštni naslov ima lahko največ 255 znakov."
+    }
   }
 }
