@@ -72,6 +72,19 @@ describe('Contact History tab (R-013-07, R-013-09, R-013-12)', () => {
     expect(screen.queryByText('+386 41 555 123')).not.toBeInTheDocument();
   });
 
+  it('shows a creation as one line without the first values', async () => {
+    const created: Entry = {
+      ...edited,
+      id: 'e-0',
+      changeSetId: 's-0',
+      eventType: 'CONTACT_CREATED',
+      changes: [{ field: 'phone', oldValue: '', newValue: '+386 40 123 456' }],
+    };
+    renderApp('/groups/g-1/contacts/c-1/history', { auth: signedIn(), api: historyApi([created]) });
+    expect(await screen.findByText('Contact created')).toBeInTheDocument();
+    expect(screen.queryByText('+386 40 123 456')).not.toBeInTheDocument();
+  });
+
   it('says so when there is no History yet', async () => {
     renderApp('/groups/g-1/contacts/c-1/history', { auth: signedIn(), api: historyApi([]) });
     expect(await screen.findByText('No History yet')).toBeInTheDocument();

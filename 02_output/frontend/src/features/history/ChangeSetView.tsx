@@ -53,7 +53,7 @@ export function ChangeSetView({ set }: { set: HistoryEntry[] }) {
           <div key={entry.id} className="flex flex-col gap-1">
             <p>{t(`history.event.${entry.eventType}`)}</p>
             <ul className="flex flex-col gap-1">
-              {entry.changes.map((change) => (
+              {(entry.eventType === 'CONTACT_CREATED' ? [] : entry.changes).map((change) => (
                 <li key={change.field} className="flex flex-wrap items-baseline gap-x-2">
                   <span className="font-medium">{label(change.field)}</span>
                   <Value erased={entry.erased} value={change.oldValue} />
