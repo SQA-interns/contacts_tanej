@@ -560,3 +560,14 @@
 - Human response: (1) as stated in the note: customer confirmation stays open on the D-14 list.
 - Resolution: (1). F-01 itself: the frozen E2E-01 and WF-10 agree with AC-005-01 ("stored and shown"), so the test is not at fault; the app was fixed (b717413).
 - Overrides: none
+
+## D-50: F-03 E2E-02 `getByLabel('Role')` conflicts with E2E-07 (frozen tests)
+- Timestamp: 2026-11-10
+- Session: S8 fix F-03
+- Class: block
+- Type: approval
+- Trigger: F-03. `getByLabel('Role')` matches by substring, case-insensitive. E2E-02 and AC-003-01 (`acceptance/groups-members.spec.ts:101`) call it on the whole page to reach the invite form's Role select; it fails in strict mode when a member row also has a Role select (`MemberList.tsx:69`, "Role of {name}"; the Owner's own row has one, AC-004-03). E2E-07 (`e2e-07-leaving.spec.ts:36`) calls `row(page, 'Marko Pirc').getByLabel('Role')` and needs "Role" in the name of the member row's select. No accessible name satisfies both on the same page, so the app cannot pass both frozen tests. This is a test defect (page-wide substring match), not an accessible-name defect: a per-row name is right for NFR-09. No code or test was changed.
+- Options: (1) Approve a change to the frozen tests: scope the invite selects to the invite form or use `getByLabel('Role', { exact: true })` in E2E-02 and AC-003-01, and update `docs/03_acceptance-manifest.sha256` (proposed). (2) Keep the tests; rename only the Owner's own row select so its name has no "Role" (passes only while the Owner is the only member; worse for screen-reader users). (3) Accept F-03 as High and list it in the release notes (needs approval).
+- Human response: none
+- Resolution: pending review (F-03 stays open until the developer answers; the session continues with F-04)
+- Overrides: none
