@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useOutletContext, useParams } from 'react-router';
 import { useServices } from '@/app/services';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ConfirmDialog } from '@/features/members/ConfirmDialog';
 import { StatePanel } from '@/components/ui/state-panel';
 import { ApiError } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -132,7 +134,50 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
           attributes={contact?.attributes ?? []}
         />
       )}
+      {contact && canEdit && !conflict && <DeleteContact groupId={group.id} contactId={contact.id} />}
     </>
+  );
+}
+
+/** "Delete contact" (R-012-01): after the confirmation the contact moves to Trash and the list shows. */
+function DeleteContact({ groupId, contactId }: { groupId: string; contactId: string }) {
+  const { t } = useTranslation();
+  const { api } = useServices();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const [asking, setAsking] = useState(false);
+
+  async function trash() {
+    try {
+      await api.request<void>(
+        'POST',
+        `/groups/${encodeURIComponent(groupId)}/contacts/${encodeURIComponent(contactId)}/trash`,
+      );
+      navigate(`/groups/${groupId}`);
+    } catch {
+      // Already in Trash or no longer allowed: the screen below shows the contact as it is now.
+    } finally {
+      await queryClient.invalidateQueries({ queryKey: ['contacts', groupId] });
+      await queryClient.invalidateQueries({ queryKey: ['trash', groupId] });
+      await queryClient.invalidateQueries({ queryKey: ['contact', groupId, contactId] });
+    }
+  }
+
+  return (
+    <div className="mt-6">
+      <Button type="button" variant="secondary" onClick={() => setAsking(true)}>
+        {t('contact.delete')}
+      </Button>
+      {asking && (
+        <ConfirmDialog
+          title={t('contact.delete')}
+          text={t('contact.deleteText')}
+          confirm={t('contact.delete')}
+          onConfirm={trash}
+          onClose={() => setAsking(false)}
+        />
+      )}
+    </div>
   );
 }
 

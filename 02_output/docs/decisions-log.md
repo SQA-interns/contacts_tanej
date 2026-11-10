@@ -450,3 +450,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-40: US-012 readings (Trash)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-012
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) Actor of the `CONTACT_ERASED` entry written by the cleanup. (2) Revision on trash and restore. (3) The cleanup's advisory lock. (4) How the Trash view shows the days left. (5) Order of the erasure steps. (6) Screen code and its tests written in the same step (as in D-33 to D-39).
+- Options: (1) `history_entries.actor_name` is NOT NULL and no source names an actor for a system change; the cleanup writes `actor_id` NULL, `actor_name` "System", no e-mail (`HistoryRecorder.SYSTEM_ACTOR`); US-013 may show it as it likes. (2) Trash and restore raise `revision` by 1 (no version), so an edit opened before a trash and restore round trip meets a conflict instead of overwriting (same idea as D-19). (3) ADR-08 asks for `pg_try_advisory_lock`; one backend container runs the cleanup (ADR-08: several instances are not a requirement), so the lock is left out until there is a second instance. (4) The "Days left" column shows the number only (Slovenian "dni" has four forms); the column header carries the unit. (5) Erasure: record `CONTACT_ERASED` first, then anonymise every entry of the contact (the new one too), delete the row, delete unused tags, all in one transaction. The cleanup covers contacts only; groups, invitations and tombstones join it with US-015, US-003 and US-016. (6) Recorded here.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none

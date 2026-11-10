@@ -18,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class HistoryRecorder {
 
+  /** The name of the actor of a change made by the system itself, e.g. the Trash cleanup. */
+  public static final String SYSTEM_ACTOR = "System";
+
   private final HistoryRepository history;
   private final UserRepository users;
   private final Clock clock;
@@ -28,13 +31,27 @@ public class HistoryRecorder {
     this.clock = clock;
   }
 
-  /** Appends one entry per event of the change set; all share the change set id. */
+  /**
+   * Anonymises every entry about the contact: flag, label and values (ADR-05, BR-06). Call it after
+   * the last entry about the contact was recorded.
+   */
+  @Transactional(propagation = Propagation.MANDATORY)
+  public void erase(UUID contactId) {
+    history.anonymiseContact(contactId);
+  }
+
+  /**
+   * Appends one entry per event of the change set; all share the change set id. A change set
+   * without actor is made by the system.
+   */
   @Transactional(propagation = Propagation.MANDATORY)
   public void record(ChangeSet set) {
     User actor =
-        users
-            .find(set.actorId())
-            .orElseThrow(() -> new IllegalStateException("The actor has no user record"));
+        set.actorId() == null
+            ? null
+            : users
+                .find(set.actorId())
+                .orElseThrow(() -> new IllegalStateException("The actor has no user record"));
     var now = clock.instant();
     for (ChangeSet.Event e : set.events()) {
       history.insert(
@@ -45,9 +62,9 @@ public class HistoryRecorder {
               e.contactLabel(),
               set.id(),
               e.type(),
-              actor.id(),
-              actor.name(),
-              actor.email(),
+              actor == null ? null : actor.id(),
+              actor == null ? SYSTEM_ACTOR : actor.name(),
+              actor == null ? null : actor.email(),
               e.subjectName(),
               e.role(),
               false,

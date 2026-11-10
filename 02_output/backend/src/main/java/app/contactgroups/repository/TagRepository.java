@@ -87,6 +87,15 @@ public class TagRepository {
         .update();
   }
 
+  /** Drops the tags of the group that no contact carries any more (EX-012-08). */
+  public void deleteUnused(UUID groupId) {
+    jdbc.sql(
+            "DELETE FROM tags t WHERE t.group_id = ?"
+                + " AND NOT EXISTS (SELECT 1 FROM contact_tags ct WHERE ct.tag_id = t.id)")
+        .param(groupId)
+        .update();
+  }
+
   /** The tag of the group, if it exists (a tag no contact carries does not exist, R-006-07). */
   public Optional<Tag> find(UUID groupId, UUID tagId) {
     return jdbc.sql(

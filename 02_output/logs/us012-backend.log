@@ -1,0 +1,675 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:apply (default-cli) @ contact-groups-backend ---
+[INFO] clean file: /w/src/main/java/app/contactgroups/repository/HistoryRepository.java
+[INFO] clean file: /w/src/test/java/app/contactgroups/it/TrashIT.java
+[INFO] Spotless.Java is keeping 152 files clean - 2 were changed to be clean, 7 were already clean, 143 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] argLine set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/w/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 92 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 60 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.it.TrashIT
+10:49:25.551 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.it.TrashIT]: TrashIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:49:27.818 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.TrashIT
+10:49:32.932 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+10:49:32.993 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+10:49:33.079 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+10:49:40.390 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+10:49:40.438 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+10:49:40.576 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+10:49:42.018 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+10:49:42.095 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+10:49:43.554 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 361055f9d948485e71bd41f7e1aafd30f2d9fe001ae5ffa24b32ce0a6ae61c4a
+10:49:45.620 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT3.602123547S
+10:49:45.701 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+10:49:45.701 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+10:49:45.708 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+10:49:45.710 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+10:49:45.987 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: ae6c564ab353eb34a0356f9334602c573f93259afcb2249bba48eece48a7b089
+10:49:50.106 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT4.396099717S
+10:49:50.108 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:50068/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T10:49:54.832Z  INFO 160 --- [contact-groups-backend] [           main] app.contactgroups.it.TrashIT             : Starting TrashIT using Java 21.0.9 with PID 160 (started by root in /w)
+2026-11-10T10:49:54.840Z  INFO 160 --- [contact-groups-backend] [           main] app.contactgroups.it.TrashIT             : The following 1 profile is active: "test"
+2026-11-10T10:50:14.819Z  INFO 160 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T10:50:14.956Z  INFO 160 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T10:50:14.957Z  INFO 160 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T10:50:15.466Z  INFO 160 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T10:50:15.467Z  INFO 160 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 20420 ms
+2026-11-10T10:50:18.379Z  INFO 160 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T10:50:19.960Z  INFO 160 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@410b8efd
+2026-11-10T10:50:19.980Z  INFO 160 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T10:50:20.231Z  INFO 160 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:50068/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T10:50:20.745Z  INFO 160 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T10:50:20.776Z  INFO 160 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.314s)
+2026-11-10T10:50:20.873Z  INFO 160 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T10:50:21.109Z  INFO 160 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T10:50:21.256Z  INFO 160 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T10:50:21.657Z  INFO 160 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.311s)
+2026-11-10T10:50:32.246Z  INFO 160 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 44509 (http) with context path '/'
+2026-11-10T10:50:32.322Z  INFO 160 --- [contact-groups-backend] [           main] app.contactgroups.it.TrashIT             : Started TrashIT in 41.677 seconds (process running for 76.014)
+2026-11-10T10:50:48.022Z  INFO 160 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T10:50:48.023Z  INFO 160 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T10:50:48.029Z  INFO 160 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 98.06 s -- in app.contactgroups.it.TrashIT
+[INFO] Running app.contactgroups.ArchitectureTest
+2026-11-10T10:51:02.662Z  INFO 160 --- [contact-groups-backend] [           main] com.tngtech.archunit.core.PluginLoader   : Detected Java version 21.0.9
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.37 s -- in app.contactgroups.ArchitectureTest
+2026-11-10T10:51:19.172Z  INFO 160 --- [contact-groups-backend] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-10T10:51:19.188Z  INFO 160 --- [contact-groups-backend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+[ERROR] Surefire is going to kill self fork JVM. The exit has elapsed 30 seconds after System.exit(0).
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] Building jar: /w/target/contact-groups-backend.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us009ListAcceptanceIT
+10:52:42.171 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us009ListAcceptanceIT]: Us009ListAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:52:44.867 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us009ListAcceptanceIT
+10:52:49.961 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+10:52:50.015 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+10:52:50.097 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+10:52:52.298 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+10:52:57.143 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+10:52:57.150 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+10:52:57.313 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+10:52:58.773 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+10:52:58.846 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+10:53:00.381 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 237548abed17ef9711b87c7d0a5aca5c1abd65483a34df8af22b5cb0451a52c2
+10:53:02.337 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT3.563828796S
+10:53:02.365 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+10:53:02.366 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+10:53:02.372 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+10:53:02.374 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+10:53:02.627 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: b29fa6dd371964e8b08978401bb7d883bb1b94e870c219a05c54053a01113226
+10:53:07.253 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT4.879655504S
+10:53:07.255 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:63583/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T10:53:12.076Z  INFO 337 --- [contact-groups-backend] [           main] a.c.acceptance.Us009ListAcceptanceIT     : Starting Us009ListAcceptanceIT using Java 21.0.9 with PID 337 (started by root in /w)
+2026-11-10T10:53:12.085Z  INFO 337 --- [contact-groups-backend] [           main] a.c.acceptance.Us009ListAcceptanceIT     : The following 1 profile is active: "test"
+2026-11-10T10:53:32.626Z  INFO 337 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T10:53:32.752Z  INFO 337 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T10:53:32.754Z  INFO 337 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T10:53:33.232Z  INFO 337 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T10:53:33.233Z  INFO 337 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 20928 ms
+2026-11-10T10:53:36.249Z  INFO 337 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T10:53:37.763Z  INFO 337 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6699408b
+2026-11-10T10:53:37.787Z  INFO 337 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T10:53:38.036Z  INFO 337 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:63583/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T10:53:38.463Z  INFO 337 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T10:53:38.494Z  INFO 337 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.234s)
+2026-11-10T10:53:38.594Z  INFO 337 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T10:53:38.831Z  INFO 337 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T10:53:38.988Z  INFO 337 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T10:53:39.477Z  INFO 337 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.356s)
+2026-11-10T10:53:50.016Z  INFO 337 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 38867 (http) with context path '/'
+2026-11-10T10:53:50.100Z  INFO 337 --- [contact-groups-backend] [           main] a.c.acceptance.Us009ListAcceptanceIT     : Started Us009ListAcceptanceIT in 42.336 seconds (process running for 76.903)
+2026-11-10T10:53:57.877Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T10:53:57.878Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T10:53:57.881Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 99.70 s -- in app.contactgroups.acceptance.Us009ListAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us010FilterAcceptanceIT
+2026-11-10T10:54:20.670Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us010FilterAcceptanceIT]: Us010FilterAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:54:20.686Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us010FilterAcceptanceIT
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.373 s -- in app.contactgroups.acceptance.Us010FilterAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us012TrashAcceptanceIT
+2026-11-10T10:54:30.004Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us012TrashAcceptanceIT]: Us012TrashAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:54:30.019Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us012TrashAcceptanceIT
+2026-11-10T10:54:30.564Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/trash status=404 user=uid-boris
+2026-11-10T10:54:30.587Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/trash status=404 user=uid-ana
+2026-11-10T10:54:34.217Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:54:35.376Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/contacts/{contactId} status=403 user=uid-marko
+2026-11-10T10:54:36.014Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/restore status=404 user=uid-ana
+2026-11-10T10:54:36.524Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/trash-contacts status=403 user=uid-petra
+2026-11-10T10:54:36.547Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/trash status=403 user=uid-petra
+2026-11-10T10:54:36.599Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/restore status=403 user=uid-petra
+2026-11-10T10:54:36.619Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/contacts/{contactId} status=403 user=uid-petra
+2026-11-10T10:54:38.099Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:54:38.129Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/restore status=404 user=uid-marko
+2026-11-10T10:54:39.203Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:54:40.077Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 11.41 s <<< FAILURE! -- in app.contactgroups.acceptance.Us012TrashAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us012TrashAcceptanceIT.EX_012_07_afterErasureTheHistoryRemainsWithTheContactsDataReplaced -- Time elapsed: 0.969 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us012TrashAcceptanceIT.EX_012_07_afterErasureTheHistoryRemainsWithTheContactsDataReplaced(Us012TrashAcceptanceIT.java:209)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+2026-11-10T10:54:41.468Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us013HistoryAcceptanceIT]: Us013HistoryAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:54:41.482Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+2026-11-10T10:54:42.700Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:43.240Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-marko
+2026-11-10T10:54:43.817Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:44.298Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:44.920Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:45.437Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:45.894Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:46.536Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:47.141Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:47.575Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:48.037Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:48.583Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:49.164Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:49.658Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:54:50.267Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:50.885Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:51.726Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:54:52.209Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-petra
+2026-11-10T10:54:52.705Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+[ERROR] Tests run: 20, Failures: 20, Errors: 0, Skipped: 0, Time elapsed: 11.31 s <<< FAILURE! -- in app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone -- Time elapsed: 0.587 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone(Us013HistoryAcceptanceIT.java:260)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc -- Time elapsed: 0.617 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc(Us013HistoryAcceptanceIT.java:251)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_05_anExportIsRecordedWithWhoWhenAndTheCount -- Time elapsed: 0.538 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_05_anExportIsRecordedWithWhoWhenAndTheCount(Us013HistoryAcceptanceIT.java:133)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_02_twoFieldChangesOfOneSaveAreGroupedTogether -- Time elapsed: 0.576 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_02_twoFieldChangesOfOneSaveAreGroupedTogether(Us013HistoryAcceptanceIT.java:80)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_08_aRefusedSaveWritesNoEntry -- Time elapsed: 0.478 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.groupTotal(Us013HistoryAcceptanceIT.java:40)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_08_aRefusedSaveWritesNoEntry(Us013HistoryAcceptanceIT.java:310)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_07_oldAndNewValueOfLongNotesAreKeptInFull -- Time elapsed: 0.620 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_07_oldAndNewValueOfLongNotesAreKeptInFull(Us013HistoryAcceptanceIT.java:302)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_05_anOldEmptyValueIsReportedAsEmpty -- Time elapsed: 0.514 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_05_anOldEmptyValueIsReportedAsEmpty(Us013HistoryAcceptanceIT.java:280)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_01_aSaveWithNoChangeWritesNoEntry -- Time elapsed: 0.456 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.groupTotal(Us013HistoryAcceptanceIT.java:40)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_01_aSaveWithNoChangeWritesNoEntry(Us013HistoryAcceptanceIT.java:241)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_10_afterAnErasureTheEntriesStayWithTheActorAndTheValuesAreErased -- Time elapsed: 0.638 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_10_afterAnErasureTheEntriesStayWithTheActorAndTheValuesAreErased(Us013HistoryAcceptanceIT.java:205)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry -- Time elapsed: 0.602 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.entries(AcceptanceBase.java:367)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry(Us013HistoryAcceptanceIT.java:151)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_07_viewingAndSearchingLeaveNoEntry -- Time elapsed: 0.432 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.groupTotal(Us013HistoryAcceptanceIT.java:40)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_07_viewingAndSearchingLeaveNoEntry(Us013HistoryAcceptanceIT.java:164)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_09_noEndpointChangesOrDeletesAnEntry -- Time elapsed: 0.459 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_09_noEndpointChangesOrDeletesAnEntry(Us013HistoryAcceptanceIT.java:182)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_01_aChangeShowsWhoWhenWhichFieldAndOldAndNewValue -- Time elapsed: 0.543 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_01_aChangeShowsWhoWhenWhichFieldAndOldAndNewValue(Us013HistoryAcceptanceIT.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_11_deletingAndRestoringAContactGivesTwoEntries -- Time elapsed: 0.581 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_11_deletingAndRestoringAContactGivesTwoEntries(Us013HistoryAcceptanceIT.java:226)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_12_deletingAndRestoringAGroupGivesTwoGroupLevelEntries -- Time elapsed: 0.497 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_12_deletingAndRestoringAGroupGivesTwoGroupLevelEntries(Us013HistoryAcceptanceIT.java:232)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_04_aRemovedMembersEarlierEntriesRemainWithTheName -- Time elapsed: 0.600 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_04_aRemovedMembersEarlierEntriesRemainWithTheName(Us013HistoryAcceptanceIT.java:272)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_03_anAddedTagAndAttributeAreRecordedWithNameKeyAndValue -- Time elapsed: 0.615 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_03_anAddedTagAndAttributeAreRecordedWithNameKeyAndValue(Us013HistoryAcceptanceIT.java:105)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_04_renamingATagGivesOneEntryPerAffectedContactInTheGroupHistory -- Time elapsed: 0.840 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.entries(AcceptanceBase.java:367)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_04_renamingATagGivesOneEntryPerAffectedContactInTheGroupHistory(Us013HistoryAcceptanceIT.java:118)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_08_aViewerHasNoHistory -- Time elapsed: 0.481 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 403
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Res.expectError(Res.java:44)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_08_aViewerHasNoHistory(Us013HistoryAcceptanceIT.java:175)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_06_whenTheGroupIsDeletedForGoodAllItsHistoryIsDeleted -- Time elapsed: 0.494 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_06_whenTheGroupIsDeletedForGoodAllItsHistoryIsDeleted(Us013HistoryAcceptanceIT.java:289)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.it.ContactsIT
+2026-11-10T10:54:52.746Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.ContactsIT]: ContactsIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:54:53.774Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.ContactsIT
+2026-11-10T10:54:55.394Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T10:54:55.414Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:54:55.434Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T10:54:56.339Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.642 s -- in app.contactgroups.it.ContactsIT
+[INFO] Running app.contactgroups.it.HistoryRecorderIT
+2026-11-10T10:54:58.387Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.HistoryRecorderIT]: HistoryRecorderIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:54:58.401Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.HistoryRecorderIT
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.674 s -- in app.contactgroups.it.HistoryRecorderIT
+[INFO] Running app.contactgroups.it.HistoryRecorderTransactionIT
+2026-11-10T10:54:59.066Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.HistoryRecorderTransactionIT]: HistoryRecorderTransactionIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:54:59.081Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.HistoryRecorderTransactionIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.720 s -- in app.contactgroups.it.HistoryRecorderTransactionIT
+[INFO] Running app.contactgroups.it.IsolationMatrixIT
+2026-11-10T10:54:59.787Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.IsolationMatrixIT]: IsolationMatrixIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:54:59.801Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.IsolationMatrixIT
+2026-11-10T10:54:59.963Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:00.214Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-ana
+2026-11-10T10:55:00.233Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-ana
+2026-11-10T10:55:00.262Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId} status=404 user=uid-ana
+2026-11-10T10:55:00.276Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId} status=404 user=uid-ana
+2026-11-10T10:55:00.315Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:00.352Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:00.389Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:00.425Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:00.447Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/members status=404 user=uid-ana
+2026-11-10T10:55:00.461Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/members status=404 user=uid-ana
+2026-11-10T10:55:00.485Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/members/{userId} status=404 user=uid-ana
+2026-11-10T10:55:00.498Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/members/{userId} status=404 user=uid-ana
+2026-11-10T10:55:00.519Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/members/{userId} status=404 user=uid-ana
+2026-11-10T10:55:00.533Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/members/{userId} status=404 user=uid-ana
+2026-11-10T10:55:00.555Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/leave status=404 user=uid-ana
+2026-11-10T10:55:00.567Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/leave status=404 user=uid-ana
+2026-11-10T10:55:00.593Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/invitations status=404 user=uid-ana
+2026-11-10T10:55:00.606Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/invitations status=404 user=uid-ana
+2026-11-10T10:55:00.628Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/invitations status=404 user=uid-ana
+2026-11-10T10:55:00.641Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/invitations status=404 user=uid-ana
+2026-11-10T10:55:00.661Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/invitations/{invitationId} status=404 user=uid-ana
+2026-11-10T10:55:00.674Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/invitations/{invitationId} status=404 user=uid-ana
+2026-11-10T10:55:00.695Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=404 user=uid-ana
+2026-11-10T10:55:00.708Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=404 user=uid-ana
+2026-11-10T10:55:00.728Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-ana
+2026-11-10T10:55:00.741Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-ana
+2026-11-10T10:55:00.761Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:55:00.774Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:55:00.794Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:55:00.806Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:55:00.826Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:55:00.839Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T10:55:00.859Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/trash status=404 user=uid-ana
+2026-11-10T10:55:00.872Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/trash status=404 user=uid-ana
+2026-11-10T10:55:00.893Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/restore status=404 user=uid-ana
+2026-11-10T10:55:00.907Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/restore status=404 user=uid-ana
+2026-11-10T10:55:00.928Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/trash-contacts status=404 user=uid-ana
+2026-11-10T10:55:00.941Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/trash-contacts status=404 user=uid-ana
+2026-11-10T10:55:00.962Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/tags status=404 user=uid-ana
+2026-11-10T10:55:00.975Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/tags status=404 user=uid-ana
+2026-11-10T10:55:00.996Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId}/tags/{tagId} status=404 user=uid-ana
+2026-11-10T10:55:01.008Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId}/tags/{tagId} status=404 user=uid-ana
+2026-11-10T10:55:01.033Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/tags/{tagId} status=404 user=uid-ana
+2026-11-10T10:55:01.045Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/tags/{tagId} status=404 user=uid-ana
+2026-11-10T10:55:01.068Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/attribute-keys status=404 user=uid-ana
+2026-11-10T10:55:01.081Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/attribute-keys status=404 user=uid-ana
+2026-11-10T10:55:01.102Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/companies status=404 user=uid-ana
+2026-11-10T10:55:01.115Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/companies status=404 user=uid-ana
+2026-11-10T10:55:01.146Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.179Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.215Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.248Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.282Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.312Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.346Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.380Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.401Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/versions status=404 user=uid-ana
+2026-11-10T10:55:01.414Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/versions status=404 user=uid-ana
+2026-11-10T10:55:01.449Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.480Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.570Z  INFO 337 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.605Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.637Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.667Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.704Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.739Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.775Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T10:55:01.810Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.055 s -- in app.contactgroups.it.IsolationMatrixIT
+[INFO] Running app.contactgroups.it.OpenApiContractIT
+2026-11-10T10:55:01.890Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.OpenApiContractIT]: OpenApiContractIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:55:01.903Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.OpenApiContractIT
+2026-11-10T10:55:12.033Z  INFO 337 --- [contact-groups-backend] [o-auto-1-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 9980 ms
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.57 s -- in app.contactgroups.it.OpenApiContractIT
+[INFO] Running app.contactgroups.it.TrashIT
+2026-11-10T10:55:12.415Z  INFO 337 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.TrashIT]: TrashIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T10:55:12.429Z  INFO 337 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.TrashIT
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.559 s -- in app.contactgroups.it.TrashIT
+2026-11-10T10:55:15.178Z  INFO 337 --- [contact-groups-backend] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-10T10:55:15.184Z  INFO 337 --- [contact-groups-backend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-11-10T10:55:15.198Z  INFO 337 --- [contact-groups-backend] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-10T10:55:15.205Z  INFO 337 --- [contact-groups-backend] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+[ERROR] Surefire is going to kill self fork JVM. The exit has elapsed 30 seconds after System.exit(0).
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   Us012TrashAcceptanceIT.EX_012_07_afterErasureTheHistoryRemainsWithTheContactsDataReplaced:209 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_01_aChangeShowsWhoWhenWhichFieldAndOldAndNewValue:57->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_02_twoFieldChangesOfOneSaveAreGroupedTogether:80->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_03_anAddedTagAndAttributeAreRecordedWithNameKeyAndValue:105->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_04_renamingATagGivesOneEntryPerAffectedContactInTheGroupHistory:118->AcceptanceBase.entries:367 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_05_anExportIsRecordedWithWhoWhenAndTheCount:133 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry:151->AcceptanceBase.entries:367 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_07_viewingAndSearchingLeaveNoEntry:164->groupTotal:40 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_08_aViewerHasNoHistory:175 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 403
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_09_noEndpointChangesOrDeletesAnEntry:182 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_10_afterAnErasureTheEntriesStayWithTheActorAndTheValuesAreErased:205 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_11_deletingAndRestoringAContactGivesTwoEntries:226->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_12_deletingAndRestoringAGroupGivesTwoGroupLevelEntries:232 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_01_aSaveWithNoChangeWritesNoEntry:241->groupTotal:40 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc:251->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone:260 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_04_aRemovedMembersEarlierEntriesRemainWithTheName:272->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_05_anOldEmptyValueIsReportedAsEmpty:280->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_06_whenTheGroupIsDeletedForGoodAllItsHistoryIsDeleted:289 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_07_oldAndNewValueOfLongNotesAreKeptInFull:302->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_08_aRefusedSaveWritesNoEntry:310->groupTotal:40 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[INFO] 
+[ERROR] Tests run: 129, Failures: 21, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  07:49 min
+[INFO] Finished at: 2026-11-10T10:55:45Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+EXIT 1

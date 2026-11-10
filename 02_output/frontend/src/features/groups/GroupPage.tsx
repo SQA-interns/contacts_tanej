@@ -71,7 +71,10 @@ export function GroupPage() {
       <nav aria-label={t('groups.tabs.label')} className="mb-4 flex gap-1 border-b border-border">
         <GroupTab to={`/groups/${group.data.id}`} end label={t('groups.tabs.contacts')} />
         {group.data.role !== 'VIEWER' && (
-          <GroupTab to={`/groups/${group.data.id}/tags`} label={t('groups.tabs.tags')} />
+          <>
+            <GroupTab to={`/groups/${group.data.id}/trash`} label={t('groups.tabs.trash')} />
+            <GroupTab to={`/groups/${group.data.id}/tags`} label={t('groups.tabs.tags')} />
+          </>
         )}
         <GroupTab to={`/groups/${group.data.id}/members`} label={t('groups.tabs.members')} />
       </nav>

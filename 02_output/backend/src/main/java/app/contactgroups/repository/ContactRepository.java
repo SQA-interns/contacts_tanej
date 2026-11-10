@@ -3,6 +3,7 @@ package app.contactgroups.repository;
 import app.contactgroups.domain.Contact;
 import app.contactgroups.domain.ContactInput;
 import app.contactgroups.domain.ContactState;
+import app.contactgroups.domain.TrashedContact;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -103,6 +104,75 @@ public class ContactRepository {
     jdbc.sql("UPDATE contacts SET revision = revision + 1 WHERE id = ANY (?)")
         .param(contactIds.toArray(UUID[]::new))
         .update();
+  }
+
+  /** Moves the contact to Trash; the revision grows so that an open edit sees a change. */
+  public void trash(UUID contactId, Instant now) {
+    jdbc.sql(
+            "UPDATE contacts SET state = 'TRASHED', trashed_at = ?, revision = revision + 1"
+                + " WHERE id = ?")
+        .params(Timestamp.from(now), contactId)
+        .update();
+  }
+
+  /** Brings the contact back to the list; no version is recorded (EX-019-02). */
+  public void restore(UUID contactId) {
+    jdbc.sql(
+            "UPDATE contacts SET state = 'ACTIVE', trashed_at = NULL, revision = revision + 1"
+                + " WHERE id = ?")
+        .param(contactId)
+        .update();
+  }
+
+  /** Deletes the row; versions, tag links, attributes and merge links go by cascade. */
+  public void delete(UUID contactId) {
+    jdbc.sql("DELETE FROM contacts WHERE id = ?").param(contactId).update();
+  }
+
+  /** The number of contacts of the group in Trash. */
+  public int countTrashed(UUID groupId) {
+    return jdbc.sql("SELECT count(*) FROM contacts WHERE group_id = ? AND state = 'TRASHED'")
+        .param(groupId)
+        .query(Integer.class)
+        .single();
+  }
+
+  /** One page of the Trash view, the longest in Trash first. */
+  public List<TrashedContact> pageTrashed(UUID groupId, int limit, int offset, Instant now) {
+    return jdbc.sql(
+            "SELECT id, first_name, last_name, email, company, trashed_at FROM contacts"
+                + " WHERE group_id = ? AND state = 'TRASHED'"
+                + " ORDER BY trashed_at, id LIMIT ? OFFSET ?")
+        .params(groupId, limit, offset)
+        .query(
+            (rs, n) -> {
+              Instant trashedAt = rs.getTimestamp("trashed_at").toInstant();
+              return new TrashedContact(
+                  rs.getObject("id", UUID.class),
+                  orEmpty(rs.getString("first_name")),
+                  orEmpty(rs.getString("last_name")),
+                  orEmpty(rs.getString("email")),
+                  orEmpty(rs.getString("company")),
+                  trashedAt,
+                  TrashedContact.daysLeft(trashedAt, now));
+            })
+        .list();
+  }
+
+  /** Ids (contact, group) of the contacts in Trash since {@code cutoff} or earlier (BR-04). */
+  public List<UUID[]> expired(Instant cutoff) {
+    return jdbc.sql(
+            "SELECT id, group_id FROM contacts WHERE state = 'TRASHED' AND trashed_at <= ?"
+                + " ORDER BY trashed_at, id")
+        .param(Timestamp.from(cutoff))
+        .query(
+            (rs, n) ->
+                new UUID[] {rs.getObject("id", UUID.class), rs.getObject("group_id", UUID.class)})
+        .list();
+  }
+
+  private static String orEmpty(String value) {
+    return value == null ? "" : value;
   }
 
   private static String nul(String value) {

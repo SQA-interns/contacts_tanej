@@ -137,6 +137,7 @@
       "label": "Skupina",
       "contacts": "Kontakti",
       "tags": "Oznake",
+      "trash": "Koš",
       "members": "Člani"
     },
     "noContacts": {
@@ -158,6 +159,8 @@
     "save": "Shrani",
     "saving": "Shranjujem …",
     "saved": "Stik je shranjen.",
+    "delete": "Izbriši stik",
+    "deleteText": "Stik gre v koš. Tam ga lahko 30 dni obnovite.",
     "inTrash": "Ta stik je v košu in ga ni mogoče urejati. Obnovite ga na zavihku Koš.",
     "empty": "prazno",
     "countryChoose": "Izberite …",
@@ -244,6 +247,17 @@
       "text": "Izgubite dostop do te skupine.",
       "action": "Zapusti skupino"
     }
+  },
+  "trash": {
+    "intro": "Stiki ostanejo v košu 30 dni, nato se izbrišejo.",
+    "empty": "Koš je prazen. Izbrisani stiki ostanejo tu 30 dni.",
+    "contact": "Stik",
+    "deleted": "Izbrisano",
+    "daysLeft": "Preostali dnevi",
+    "restore": "Obnovi",
+    "restored": "Stik je obnovljen.",
+    "erase": "Izbriši za vedno",
+    "eraseText": "Stik in njegovi podatki se zdaj izbrišejo. Tega ni mogoče razveljaviti. Zgodovina obdrži le anonimizirane vnose."
   },
   "tags": {
     "column": "Oznaka",

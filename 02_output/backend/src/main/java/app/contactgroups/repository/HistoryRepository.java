@@ -52,6 +52,18 @@ public class HistoryRepository {
     }
   }
 
+  /** Marks the entries of the contact erased and removes its label and values (BR-06). */
+  public void anonymiseContact(UUID contactId) {
+    jdbc.sql(
+            "UPDATE history_changes SET old_value = NULL, new_value = NULL WHERE entry_id IN"
+                + " (SELECT id FROM history_entries WHERE contact_id = ?)")
+        .param(contactId)
+        .update();
+    jdbc.sql("UPDATE history_entries SET erased = true, contact_label = NULL WHERE contact_id = ?")
+        .param(contactId)
+        .update();
+  }
+
   /** The entries of one group, newest first, with their changes in the order they were written. */
   public List<HistoryEntry> findByGroup(UUID groupId) {
     return jdbc
