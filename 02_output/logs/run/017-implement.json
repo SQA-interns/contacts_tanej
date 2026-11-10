@@ -1,0 +1,11 @@
+{
+  "command": "/implement US-018",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "29f65e17-8657-4be3-9689-0d7df0f6589d",
+  "total_cost_usd": 0.386347,
+  "result": "US-018's code is built, but the story isn't done. DoD-S-01 is not met because most of its frozen browser tests can't pass yet.\n\n**What I added:**\n- **`lib/format.ts`:** `formatDateTime` always uses `Europe/Ljubljana`, so summer and winter time both come out right. It gives `2. 7. 2026 00:30` in Slovenian and `2026-07-02 00:30` in English. `formatDecimal` uses a comma in Slovenian and a point in English. `countryName` uses `Intl.DisplayNames`.\n- **`errorText(t, code)` in `lib/i18n.ts`:** it shows the `error.<code>` text in the active language. An unknown code falls back to the generic error text, so a key is never shown.\n- **Tests:** `format.test.ts` and `i18n.test.ts` were written first and failed for the right reason, then passed.\n\nThe language switch, the i18n setup and the locale-parity test were already in place from the skeleton.\n\n**Checks:** all 70 Vitest tests pass, and `tsc`, ESLint and Prettier are clean. I did not run the Playwright acceptance spec `us018-language.spec.ts`, which needs the compose stack and the screens below.\n\n**Why the frozen tests wait:** `us018-language.spec.ts` needs screens from later stories. These are the contact form, the contact list, the History tab and the group create dialog. They come with US-002 and later stories. Only AC-018-01 and AC-018-03 depend on screens that already exist. I recorded in the handover that the spec should be re-run once those screens exist.\n\nI committed the code as `d7d75ee` and updated `00_progress.md` in `6031052`. The next command is `/implement US-002`. I did not run a secret scan on this change, though it touches no secrets.",
+  "stderr": ""
+}

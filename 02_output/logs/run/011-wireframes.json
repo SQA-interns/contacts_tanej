@@ -1,0 +1,11 @@
+{
+  "command": "/wireframes D-26: 2 - approved by the developer only; the customer has not seen the wireframes. note: for the build, on mobile the tab row (Contacts, Trash, Tags, History, Members, Duplicates) is cut off at the right edge; in the real screen it must either scroll sideways with a visible hint that more tabs follow, or wrap onto a second line",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "abf2bd16-5b4d-4ea6-85fc-0dd39d197b7f",
+  "total_cost_usd": 0.29476230000000003,
+  "result": "The wireframes are approved, so the phase 2 gate has passed. The developer approved them without the customer (D-26, option 2), and the customer has not seen them. This session only edited the decisions log, the wireframes README and the progress file. The wireframe pages and images are unchanged, so nothing needed re-rendering.\n\n- **Tab row note:** I recorded it as D-27, a non-blocking decision marked pending review. Your note allows either fix, so I set the default to wrapping the tabs onto a second line, since nothing is hidden that way. Sideways scrolling with a visible hint is listed as the alternative. The wireframes README now carries a build note so `/implement` and `/design` pick it up. The 375 px images still show the cut-off row, as approved.\n- **Handover:** `docs/00_progress.md` now says the session is done, the next command is `/acceptance-tests`, and nothing is waited for. Everything is committed as `3c30a6f`.",
+  "stderr": ""
+}

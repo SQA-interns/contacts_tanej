@@ -1,0 +1,11 @@
+{
+  "command": "/preflight",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "3b1d75b1-2ddb-4215-9fec-bec8d2f173ec",
+  "total_cost_usd": 0.3957434,
+  "result": "Preflight did not pass, and it stopped after only part of the checks. The phase 0 gate has not been met and no input manifest was written. The report and decisions are committed as `d5d878e`.\n\n**Passed**\n- `.env` has non-empty values for `DB_PASSWORD` and `FIREBASE_WEB_API_KEY`. I only checked that they are set and never displayed them.\n- The working tree is clean apart from the runner logs.\n- The Docker daemon is running.\n- The `postgres:17.6`, `eclipse-temurin:21.0.8_9-jre`, `nginx:1.29.1` and `gitleaks:v8.28.0` images resolve, and so does `react@19.1.1`.\n\n**Host tools differ from the pins in `tech-stack.md`**\n\n| Tool | Pinned | Found on host |\n|---|---|---|\n| Node | 22.20.0 | 24.13.0 (other major) |\n| npm | 10.9.3 | 11.6.2 (other major) |\n| Java | Temurin 21.0.8 | Oracle 21.0.11 |\n| Docker | 28.4.0 | 29.9.3 |\n| PostgreSQL | 17.6 | not found on the host (the pinned image does resolve) |\n\n**Not run yet**\n- The rest of the Maven Central and npm pins.\n- The Playwright blank-page screenshot, because Playwright isn't installed.\n- The dependency vulnerability scan, because `02_output/` has no `pom.xml` or `package.json` yet.\n\n**Decisions I need from you** (recorded in `02_output/docs/decisions-log.md`)\n- **D-01 (blocking): Node 24 and npm 11 against the pinned 22 and 10.**\n  1. Install Node 22.20.0 on the host (recommended).\n  2. Approve Node 24.13.0 and npm 11.6.2 in place of the pins.\n  3. Run the frontend tooling in a `node:22.20.0` container.\n- **D-02 (non-blocking, pending review):** accept the host Java 21.0.11 and Docker 29.9.3 for local builds. The delivered images keep the pinned tags.\n- **D-03 (non-blocking, pending review):** check PostgreSQL through the container instead of the host binary, and scan the pinned dependency set from a temporary manifest next time.\n\nTo continue, run `/preflight D-01: <1|2|3>`. The next run re-runs only the checks that failed or were skipped.",
+  "stderr": ""
+}

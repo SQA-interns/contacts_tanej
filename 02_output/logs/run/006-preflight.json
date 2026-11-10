@@ -1,0 +1,11 @@
+{
+  "command": "/preflight D-12: 2 - vitest and @vitest/coverage-v8 4.1.11, and @stryker-mutator/core and @stryker-mutator/vitest-runner 10.0.0 (replaces D-07); vitest 5.x does not work with the Stryker vitest runner, 4.1.11 with Stryker 10.0.0 is a known working pair; check in this preflight that the tinypool finding is gone with 4.1.11, D-13: 1 - override Tomcat 10.1.59 and Jackson 2.21.7; keep Spring Framework 6.2.19 with the two Critical findings recorded as not reachable (no server-sent events, no XsltView), rechecked by /verify; if a 6.2.x release that fixes them exists, use it instead",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "7af58b18-2c9e-4397-b60f-6da286e8d6ce",
+  "total_cost_usd": 0.5265868,
+  "result": "Preflight passed and the phase 0 gate is closed. I committed everything as `ffad375`; next is `/clarify`.\n\n- **D-12 (applied):** vitest and `@vitest/coverage-v8` 4.1.11, Stryker core and vitest-runner 10.0.0. `npm audit` on the scratch lockfile shows no Critical, and tinypool is no longer in the tree. The only High findings left are the firebase chain, which you recorded as Medium in D-08. This replaces D-07.\n- **D-13 (applied):** Tomcat 10.1.59 and Jackson 2.21.7 resolve, and OSV shows no finding on either. Spring Framework stays at 6.2.19, the latest 6.2.x on Maven Central, so there is no fixed release to switch to.\n- **Open exceptions:** the two Spring Critical findings (GHSA-j9f9-w8pj-32f8 and GHSA-pc63-qcmh-9cmg) stay open, recorded as not reachable on your approval. `/verify` re-checks them.\n- **Moderate only:** `commons-lang3` 3.17.0 and `log4j-api` 2.24.3.\n- **Manifest and handover:** `docs/00_input-manifest.sha256` has 73 files. I updated the report, decisions log (D-12 and D-13 resolved) and `00_progress.md`.\n\nThe product pom needs `tomcat.version` 10.1.59 and `jackson-bom.version` 2.21.7. This is in the handover notes. The OWASP dependency-check still didn't run (NVD errors), so the Maven scan is OSV on all 130 resolved artifacts.\n\nUntracked run logs and `preflight-scan2/node_modules` are left uncommitted.",
+  "stderr": ""
+}
