@@ -5,8 +5,10 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S5 implement T-N01
-- Result: done (T-N01 built; readings in D-46)
+- Session: S5 implement T-N02 (note: restart-test.sh UTF-8 fix)
+- Result: done (scripts/restart-test.sh now writes the contact JSON with Špela to a file with node and sends it with `--data-binary @file`; not run by the session, the developer runs `./scripts/restart-test.sh` from 02_output/. I could not run `bash -n` on it here: the tool refused the command.)
+- Tasks left for the developer to run (shell scripts): T-N04 (`scripts/backup.sh`, `restore.sh`), T-N10 (`scripts/clean-host-test.sh`). Session tasks still to do: T-N05 to T-N09, T-N11, T-N12.
+- Previous: S5 implement T-N01 (readings in D-46)
 - Gate: not applicable (NFR task). NFR-01, NFR-02, NFR-04, DoD-P03, EX-009-08, EX-010-07 pass in `out/logs/perf-load-test.log` (p95: search 543 ms, open contact 17 ms, no errors in 1,740 requests).
 - Notes for the next session: `node scripts/perf/load-test.mjs [--duration 60] [--skip-seed]` needs the Compose stack up; it creates 100 emulator accounts (perf-user-001..100) and loads `scripts/perf/seed-10000.sql` (group a0000000-...-0 with 10,000 contacts, four groups of 250). Watch item in D-46: the two-word search with accents takes about 550 to 700 ms.
 - Browser tests AC-016-02, 05, 06 (`acceptance/groups-members.spec.ts`) are still not run; run them in `/review` or the NFR tasks. Cleanup of old `deleted_accounts` rows is open (ADR-08).
