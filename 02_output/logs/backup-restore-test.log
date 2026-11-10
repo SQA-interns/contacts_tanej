@@ -1,0 +1,51 @@
+Restore test 2026-11-10T19:18:30Z
+Backup file: backups/contacts-20261110T191112Z.dump
+Starting a clean database (project contact-groups-restore) ...
+ Volume contact-groups-restore_contacts-db Creating 
+ Network contact-groups-restore_default Creating 
+ Network contact-groups-restore_default Creating 
+ Volume contact-groups-restore_contacts-db Creating 
+ Volume contact-groups-restore_contacts-db Created 
+ Volume contact-groups-restore_contacts-db Created 
+ Network contact-groups-restore_default Created 
+ Network contact-groups-restore_default Created 
+ Container contact-groups-restore-db-1 Creating 
+ Container contact-groups-restore-db-1 Created 
+ Container contact-groups-restore-db-1 Starting 
+ Container contact-groups-restore-db-1 Started 
+ Container contact-groups-restore-db-1 Waiting 
+ Container contact-groups-restore-db-1 Healthy 
+Restoring ...
+Source database:
+attributes|0|
+contact_merges|0|
+contacts|4|c09ab487effedc7697dde9295e341207
+contact_tags|4|fe30dbaafacf4ee44e334ae470908384
+contact_versions|4|6756043e3ff7f372183fd87396e3f39e
+deleted_accounts|0|
+duplicate_dismissals|0|
+flyway_schema_history|2|bfb2bac2b4a5feea599f055ec633cff5
+groups|1|3ef841fc14199c9c8794474c60b5c47e
+history_changes|20|03bb85a89069d0fc07647f01cae30897
+history_entries|8|97851de61ec89a7681e29eba193afa0f
+invitations|0|
+memberships|1|6282a189319a7d304a6f8c1f12414228
+tags|1|0d6d8073d071766f60c2882ba040b243
+users|1|6a68751618fc589273275a7cc2b9e2e8
+Restored database:
+attributes|0|
+contact_merges|0|
+contacts|4|c09ab487effedc7697dde9295e341207
+contact_tags|4|fe30dbaafacf4ee44e334ae470908384
+contact_versions|4|6756043e3ff7f372183fd87396e3f39e
+deleted_accounts|0|
+duplicate_dismissals|0|
+flyway_schema_history|2|bfb2bac2b4a5feea599f055ec633cff5
+groups|1|3ef841fc14199c9c8794474c60b5c47e
+history_changes|20|03bb85a89069d0fc07647f01cae30897
+history_entries|8|97851de61ec89a7681e29eba193afa0f
+invitations|0|
+memberships|1|6282a189319a7d304a6f8c1f12414228
+tags|1|0d6d8073d071766f60c2882ba040b243
+users|1|6a68751618fc589273275a7cc2b9e2e8
+PASS NFR-06 15 tables with identical row counts and checksums

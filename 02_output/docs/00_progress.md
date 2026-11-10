@@ -5,11 +5,12 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S5 implement T-N04 D-48: 1 (script fixes after the developer's run of 2026-11-10)
-- Result: done for the scripts; blocked on the developer's re-run. backup.sh passed; restore.sh (ambiguous `h` in the summary SQL, silent exit) and clean-host-test.sh (git -C with a POSIX path) are fixed but not run again by me. `02_output/backups/` added to `.gitignore`. D-48 answered 1: `/fix` after `/review INC-1` (check the failing E2E for test defects first, test changes go to the developer as decisions; NFR-09 focus check in `/verify`).
-- Earlier session: S5 implement T-N04 to T-N12 (T-N02 is the label of the session that runs T-N03 to T-N12). Result then: blocked on the developer for T-N04 and T-N10; NFR findings open in D-48.
-- Done: T-N03 (passing restart run committed), T-N11 (`MigrationIT`, 4 tests pass), T-N12 (`scripts/licence-check.mjs` passes, CI step added, D-47). Specs written and run: T-N05 (E2E in 3 engines: E2E-01, 02, 03, 06, 08 fail in all three, so NFR-07 not met), T-N06 (NFR-08 fails at 320 px, passes at 768 and 1280), T-N07 (axe clean everywhere, WebKit keyboard focus fails at Tab stop 4), T-N08 (passes), T-N09 (first contact 2.7 s, empty and error states pass). Details and suggested severities: D-48.
-- For the developer, from `02_output/` (Git Bash), : T-N04 (stack up): `./scripts/backup.sh` then `./scripts/restore.sh` (log `logs/backup-restore-test.log`). T-N10: `docker compose --env-file ../.env down` then `./scripts/clean-host-test.sh` (log `logs/clean-host-test.log`), then `docker compose --env-file ../.env up -d` again.
+- Session: S5 implement T-N04 (log commit after the developer's re-run of 2026-11-10, about 19:18 UTC)
+- Result: done
+- Gate: not applicable (NFR tasks)
+- T-N04: `restore.sh` PASS (NFR-06): 15 tables, identical row counts and checksums (`out/logs/backup-restore-test.log`); the source held only 1 group and 4 contacts. The `backups/` dump is not committed (in `.gitignore`).
+- T-N10: `clean-host-test.sh`: stack built from 723 committed files plus `.env`, healthy (backend, db, emulator, frontend); E2E-01 failed only at `getByText('The contact was saved.')`, the known D-48 failure (`out/logs/clean-host-test.log`). NFR-12 counts as met up to E2E-01; re-run the script after `/fix`.
+- Earlier: T-N03, T-N11, T-N12 done; T-N05 to T-N09 specs run, findings in D-48 (answered 1: `/fix` after `/review INC-1`; check the failing E2E for test defects first, test changes go to the developer as decisions; NFR-09 focus check in `/verify`).
 - Still open: the install guide text for the daily backup and 14-day retention (phase 7); the manual Safari/Edge check (NFR-07).
 - Previous: S5 implement T-N01 (readings in D-46)
 - Gate: not applicable (NFR tasks). NFR-01, NFR-02, NFR-04, DoD-P03, EX-009-08, EX-010-07 pass in `out/logs/perf-load-test.log`.
@@ -20,8 +21,8 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /review INC-1 (after the developer has re-run `./scripts/restore.sh` (T-N04) and `./scripts/clean-host-test.sh` (T-N10; its E2E-01 step is expected to fail until `/fix`) and given the results; if restore.sh or an earlier step fails: /implement T-N04 or T-N10 with the log)
-- Waiting for: the developer's re-run of `restore.sh` and `clean-host-test.sh`
+- Command: /review INC-1
+- Waiting for: nothing
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
