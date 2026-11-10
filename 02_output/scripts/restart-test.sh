@@ -57,7 +57,7 @@ GROUP_ID="$(echo "$GROUP" | json id)"
 [ -n "$GROUP_ID" ] || fail "group not created: $GROUP"
 # Git Bash on Windows does not pass non-ASCII command-line arguments to curl as UTF-8, so the body
 # is written to a file by node (S with caron as Š in the source, UTF-8 on disk) and sent as is.
-BODY_FILE="$(mktemp)"
+BODY_FILE=logs/restart-body.json  # relative: node on Windows cannot open a Git Bash /tmp path
 trap 'rm -f "$BODY_FILE"' EXIT
 node -e '
 const body = {firstName: "Špela", lastName: "Restart" + process.argv[1],
