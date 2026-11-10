@@ -27,7 +27,7 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(ApiException.class)
   static ResponseEntity<ErrorResponse> refused(ApiException e) {
-    return respond(ErrorResponse.of(e.code(), e.getMessage(), e.fields()));
+    return respond(ErrorResponse.of(e));
   }
 
   @ExceptionHandler(HttpRequestMethodNotSupportedException.class)

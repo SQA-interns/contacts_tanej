@@ -15,6 +15,7 @@ public class ApiException extends RuntimeException {
 
   private final ErrorCode code;
   private final transient List<FieldProblem> fields;
+  private transient Contact current;
 
   public ApiException(ErrorCode code, String message, List<FieldProblem> fields) {
     super(message);
@@ -24,6 +25,17 @@ public class ApiException extends RuntimeException {
 
   public ApiException(ErrorCode code, String message) {
     this(code, message, List.of());
+  }
+
+  private ApiException(ErrorCode code, String message, Contact current) {
+    this(code, message, List.of());
+    this.current = current;
+  }
+
+  /** The 409 of a stale save; it carries the contact as it is now (R-005-08, R-017-15). */
+  public static ApiException conflict(Contact current) {
+    return new ApiException(
+        ErrorCode.CONFLICT, "This contact was changed by someone else.", current);
   }
 
   /** The 404 for a non-member, a missing group, a malformed id and a trashed group (SR-03). */
@@ -37,5 +49,10 @@ public class ApiException extends RuntimeException {
 
   public List<FieldProblem> fields() {
     return fields;
+  }
+
+  /** The current contact of a CONFLICT, else null. */
+  public Contact current() {
+    return current;
   }
 }
