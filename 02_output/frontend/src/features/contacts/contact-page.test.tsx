@@ -41,6 +41,7 @@ function contactsApi(
     request: (async (method: string, path: string, body?: unknown) => {
       if (
         path.startsWith('/groups/g-') &&
+        !path.endsWith('/contacts/search') &&
         (path.includes('/contacts') || path.includes('/tags') || path.includes('/attribute-keys'))
       ) {
         calls.push(`${method} ${path} ${body ? JSON.stringify(body) : ''}`.trim());

@@ -257,5 +257,31 @@
     "deleteText": "Oznaka se odstrani z njenih kontaktov. Kontakti ostanejo.",
     "deleteConfirm": "Izbriši oznako",
     "empty": "Še ni oznak. Oznake, ki jih dodate kontaktom, se prikažejo tukaj."
+  },
+  "list": {
+    "search": "Iskanje",
+    "searchHint": "Iščite po imenu, e-pošti, podjetju, kraju, oznaki ali vrednosti atributa",
+    "total": "Št. kontaktov: {{total}}",
+    "totalOne": "1 kontakt",
+    "pages": "Strani",
+    "previous": "Prejšnja",
+    "next": "Naslednja",
+    "emptyEditor": "Dodajte prvi kontakt v to skupino.",
+    "emptyViewer": "Nihče še ni dodal kontakta v to skupino.",
+    "noMatch": {
+      "title": "Noben kontakt ne ustreza",
+      "text": "Spremenite iskalno besedilo ali filtre."
+    },
+    "clearFilters": "Počisti filtre",
+    "column": {
+      "lastName": "Priimek",
+      "firstName": "Ime",
+      "email": "E-pošta",
+      "phone": "Telefon",
+      "company": "Podjetje",
+      "city": "Kraj",
+      "country": "Država",
+      "tags": "Oznake"
+    }
   }
 }

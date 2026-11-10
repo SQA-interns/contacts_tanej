@@ -9,7 +9,7 @@ describe('open a group (R-002-06, R-002-07, AC-002-03)', () => {
     renderApp('/groups/g-2', { auth: signedIn(), api });
     expect(await screen.findByRole('heading', { level: 1, name: 'Poroka' })).toBeInTheDocument();
     expect(screen.getByText('Editor')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'No contacts yet' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'No contacts yet' })).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Group' })).toBeInTheDocument();
   });
 

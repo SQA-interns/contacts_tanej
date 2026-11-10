@@ -64,7 +64,7 @@ describe('create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-
     await userEvent.type(within(dialog).getByLabelText(/^Group name/), '  Konferenca 2026 ');
     await userEvent.click(within(dialog).getByRole('button', { name: 'Create group' }));
     expect(await screen.findByRole('heading', { name: 'Konferenca 2026' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'No contacts yet' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'No contacts yet' })).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).toBeNull();
     expect(calls).toContain('POST /groups {"name":"Konferenca 2026"}');
   });
@@ -159,7 +159,7 @@ describe('create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-
     await userEvent.click(submit);
     release();
     await screen.findByRole('heading', { name: 'Poroka' });
-    expect(calls.filter((c) => c.startsWith('POST'))).toHaveLength(1);
+    expect(calls.filter((c) => c.startsWith('POST /groups '))).toHaveLength(1);
   });
 
   it('closes with Cancel and sends nothing; the next opening starts empty', async () => {

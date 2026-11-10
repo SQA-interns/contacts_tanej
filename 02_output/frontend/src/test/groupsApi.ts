@@ -8,13 +8,18 @@ export function failure(status: number, code: components['schemas']['ErrorCode']
   return new ApiError(status, { status, code, message: 'x' });
 }
 
+export type ContactRow = components['schemas']['ContactRow'];
+
 /** A backend stand-in that keeps the groups of one person and records every call. */
-export function groupsApi(initial: GroupSummary[] = [], options: { hold?: Promise<void> } = {}) {
+export function groupsApi(
+  initial: GroupSummary[] = [],
+  options: { hold?: Promise<void>; contacts?: ContactRow[] } = {},
+) {
   const groups = [...initial];
   const calls: string[] = [];
   let created = 0;
   const api: ApiClient = {
-    request: (async (method: string, path: string, body?: { name?: string }) => {
+    request: (async (method: string, path: string, body?: { name?: string; q?: string; page?: number }) => {
       calls.push(`${method} ${path} ${body ? JSON.stringify(body) : ''}`.trim());
       if (path === '/groups' && method === 'GET') return groups.map((g) => ({ ...g }));
       if (path === '/groups' && method === 'POST') {
@@ -27,6 +32,7 @@ export function groupsApi(initial: GroupSummary[] = [], options: { hold?: Promis
         groups.push(group);
         return { ...group };
       }
+      if (/^\/groups\/[^/]+\/contacts\/search$/.test(path)) return searchPage(options.contacts ?? [], body);
       const one = /^\/groups\/([^/]+)$/.exec(path);
       const group = groups.find((g) => g.id === one?.[1]);
       if (!group) throw failure(404, 'NOT_FOUND');
@@ -48,3 +54,13 @@ export const poroka: GroupSummary = { id: 'g-2', name: 'Poroka', role: 'EDITOR' 
 export const skupno: GroupSummary = { id: 'g-3', name: 'Skupno', role: 'VIEWER' };
 
 export const signedIn = () => createFakeAuth(ANA);
+
+/** The list endpoint of the stand-in: every word of the search text must be part of a name (R-009-03). */
+function searchPage(all: ContactRow[], body?: { q?: string; page?: number }) {
+  const words = (body?.q ?? '').toLowerCase().split(/\s+/).filter(Boolean);
+  const found = all.filter((c) =>
+    words.every((w) => `${c.firstName} ${c.lastName}`.toLowerCase().includes(w)),
+  );
+  const page = Math.min(body?.page ?? 1, Math.max(1, Math.ceil(found.length / 25)));
+  return { items: found.slice((page - 1) * 25, page * 25), total: found.length, page, pageSize: 25 };
+}

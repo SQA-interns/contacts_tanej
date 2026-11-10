@@ -6,7 +6,8 @@ import { RegisterPage } from '@/features/auth/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/ResetPasswordPage';
 import { SignInPage } from '@/features/auth/SignInPage';
 import { ContactPage } from '@/features/contacts/ContactPage';
-import { ContactsTab, GroupPage } from '@/features/groups/GroupPage';
+import { ContactListPage } from '@/features/contacts/ContactListPage';
+import { GroupPage } from '@/features/groups/GroupPage';
 import { GroupsHome } from '@/features/groups/GroupsHome';
 import { MembersTab } from '@/features/members/MembersTab';
 import { ManageTagsPage } from '@/features/tags/ManageTagsPage';
@@ -52,7 +53,7 @@ export const routes: RouteObject[] = [
                 path: 'groups/:groupId',
                 element: <GroupPage />,
                 children: [
-                  { index: true, element: <ContactsTab /> },
+                  { index: true, element: <ContactListPage /> },
                   { path: 'tags', element: <ManageTagsPage /> },
                   { path: 'members', element: <MembersTab /> },
                   { path: 'contacts/new', element: <ContactPage /> },

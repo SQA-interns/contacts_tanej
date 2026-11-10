@@ -257,5 +257,31 @@
     "deleteText": "The tag is removed from its contacts. The contacts stay.",
     "deleteConfirm": "Delete tag",
     "empty": "No tags yet. Tags you add to contacts appear here."
+  },
+  "list": {
+    "search": "Search",
+    "searchHint": "Search by name, e-mail, company, city, tag or attribute value",
+    "total": "{{total}} contacts",
+    "totalOne": "1 contact",
+    "pages": "Pages",
+    "previous": "Previous",
+    "next": "Next",
+    "emptyEditor": "Add the first contact to this group.",
+    "emptyViewer": "Nobody has added a contact to this group yet.",
+    "noMatch": {
+      "title": "No contacts match",
+      "text": "Change the search text or the filters."
+    },
+    "clearFilters": "Clear filters",
+    "column": {
+      "lastName": "Last name",
+      "firstName": "First name",
+      "email": "E-mail",
+      "phone": "Phone",
+      "company": "Company",
+      "city": "City",
+      "country": "Country",
+      "tags": "Tags"
+    }
   }
 }
