@@ -329,3 +329,14 @@
 - Human response: none
 - Resolution: option 1, pending review
 - Overrides: none
+
+## D-29: Readings made while building the secured API (US-017)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-017
+- Class: allow
+- Type: non-blocking
+- Trigger: (1) The emulator-host guard of ADR-02 needs a profile, but the frozen acceptance tests set the emulator host and no profile. (2) AC-017-11 and the drift test of ADR-09 compare the served description with all 40 operations of the contract, which exist only after the last story. (3) `/health` must appear in `/v3/api-docs` as `getHealth`; the actuator endpoint is not described by springdoc. (4) Most frozen US-017 tests set the scene with `POST /groups` (US-002) or read `GET /groups`, so they cannot pass before US-002. (5) The `feat` commit 7cebd93 lists a `Red:` line for AC-017-12 that was not observed: the actuator health already answered 503 and 200; only the `getHealth` description was missing.
+- Options: (1) Surefire and Failsafe run under the profile `test` (pom, no change to the tests); a host outside `local` and `test` stops the start. (2) `OpenApiContractIT` checks code to contract now (operationId, response statuses, parameters, request body present); the other direction stays with AC-017-11. Schema property names are not compared yet because `schemas.yaml` is not in the backend folder; this is added with the first story that has a body. (3) Own `HealthController`; the actuator starter is removed (its own `build` commit). (4) The story stays `in progress`; its own tests pass. (5) Stated here; history is not rewritten.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none

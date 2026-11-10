@@ -5,18 +5,19 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S5 implement US-001
-- Result: done (web app part); 5 frozen browser tests wait for the backend (see notes)
-- Gate: not passed (DoD-S-01: AC-001-02, AC-001-03, AC-001-04, AC-001-08, EX-001-07 need `GET /groups` and `POST /groups`, which the backend does not have yet: US-017 and US-002)
-- Notes for the next session: US-001 is entirely web app (T-01, T-02; the backend has no controller yet). Browser run of `acceptance/us001-sign-in.spec.ts`: 10 of 15 pass (log `out/logs/us001-acceptance-run2.log`). The 5 that fail all stop at the groups API: AC-001-02 sets the scene with `POST /groups` (500), the other four wait for the empty state, which asks `GET /groups` (the screen shows the error state until the endpoint exists). Run them again after US-017/US-002 and expect them to pass without a change to the web app. The leftovers of runs 013/014 were checked (25 tests, lint, types clean) and committed. D-28: the web server's CSP now allows `https://apis.google.com` (Google sign-in script). The empty state's "Create group" button has no action until US-002 adds the dialog (`EmptyState onCreate`). `GroupsHome` shows a plain name list until US-002. `checks/shell.spec.ts` now scans the three sign-in screens (screens in `out/logs/screens/`, no Critical or Serious violation, no overflow). Test helpers: `src/test/fakeAuth.ts`, `src/test/renderApp.tsx`.
+- Session: S5 implement US-017
+- Result: done (tasks T-03 to T-06 built; most frozen US-017 tests wait for US-002)
+- Gate: not passed (DoD-S-01: the frozen `Us017SecuredApiAcceptanceIT` and `Us017RateLimitAcceptanceIT` set the scene with `POST /groups` or read `GET /groups`, which US-002 builds; AC-017-12 passes; AC-017-11 needs every endpoint)
+- Notes for the next session: Built: `GET /me`, identity filters (verified e-mail 403, deleted account 401, user upsert, D-20 name), emulator-host guard, `ApiException`/`FieldProblem` and the error mapping (404 sameness, 400, 405, 500), `RequestLogFilter`, rate limit, 1 MB limit, own `/health`, `AccessService.notFound()` (membership and role checks are still to build with US-002). Filter order: log, bearer, verified e-mail, user sync, authorization, rate limit, body size. Tests run under profile `test` (pom). Own tests in `src/test/.../it/` (IdentityIT, LimitsIT, RequestLogIT, IsolationMatrixIT, OpenApiContractIT, SecurityHeadersIT) pass; PMD, CPD, spotless clean; log `out/logs/us017-full.log` (325 other frozen tests fail: later stories). Each controller must carry `@Operation(operationId=…)` and `@ApiResponses` equal to the contract (drift test). The JaCoCo report step fails in the Maven image ("malformed input"), not investigated. D-29 lists readings. Next story: US-002 must make AC-017-01, 02, 04..07, 10, 13 and EX-017-02, 03, 06..09 pass; re-run `Us017*` and `Us001` browser tests after it.
 
 ## Next
-- Command: /implement US-017
+- Command: /implement US-018
 - Waiting for: nothing
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
 |---|---|---|---|
-| US-001 | 1 (MVP) | in progress (web app done; 5 frozen browser tests wait for US-017, US-002) | DoD-S-01 not met; 02 to 07 met |
-| US-002 to US-019 | 1 (MVP) | ready | |
+| US-001 | 1 (MVP) | in progress (web app done; 5 frozen browser tests wait for US-002) | DoD-S-01 not met; 02 to 07 met |
+| US-017 | 1 (MVP) | in progress (T-03 to T-06 done; frozen tests wait for US-002 and later stories) | DoD-S-01 not met; 02 to 07 met |
+| US-002 to US-016, US-018, US-019 | 1 (MVP) | ready | |
 | US-020 to US-022 | 2 | ready | |
