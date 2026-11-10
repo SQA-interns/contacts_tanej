@@ -50,6 +50,27 @@ describe('Group History (R-014-01 to R-014-08)', () => {
     expect(screen.getByRole('list', { name: 'Newest first' })).toHaveTextContent('Contact edited');
   });
 
+  it('shows an export entry with the number of contacts, as "2 contacts exported" (E2E-03, F-04)', async () => {
+    const exported: Entry = {
+      ...edited,
+      id: 'e-2',
+      changeSetId: 's-2',
+      eventType: 'EXPORTED',
+      contactId: undefined,
+      changes: [{ field: 'contacts', oldValue: '', newValue: '2' }],
+    };
+    const one: Entry = {
+      ...exported,
+      id: 'e-3',
+      changeSetId: 's-3',
+      changes: [{ field: 'contacts', newValue: '1' }],
+    };
+    const { api } = historyApi([exported, one]);
+    renderApp('/groups/g-1/history', { auth: signedIn(), api });
+    expect(await screen.findByText('2 contacts exported')).toBeInTheDocument();
+    expect(screen.getByText('1 contact exported')).toBeInTheDocument();
+  });
+
   it('shows a Viewer no History tab', async () => {
     const { api } = historyApi([]);
     renderApp('/groups/g-3', { auth: signedIn(), api });
