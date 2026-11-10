@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink, Outlet, useParams } from 'react-router';
+import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from 'react-router';
 import { useServices } from '@/app/services';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
 import { ApiError } from '@/lib/api/client';
@@ -42,13 +43,21 @@ function GroupTab({ to, end, label }: { to: string; end?: boolean; label: string
   );
 }
 
-/** The Contacts tab: no contacts exist before US-005 and US-009. */
+/**
+ * The Contacts tab: the button to add a contact for an Owner or Editor (R-005-09); the list itself
+ * comes with US-009.
+ */
 export function ContactsTab() {
   const { t } = useTranslation();
+  const group = useOutletContext<GroupSummary>();
+  const navigate = useNavigate();
   return (
     <Card className="flex flex-col items-start gap-2">
       <h2 className="text-xl font-semibold">{t('groups.noContacts.title')}</h2>
       <p className="text-text-muted">{t('groups.noContacts.text')}</p>
+      {group.role !== 'VIEWER' && (
+        <Button onClick={() => navigate(`/groups/${group.id}/contacts/new`)}>{t('contact.add')}</Button>
+      )}
     </Card>
   );
 }

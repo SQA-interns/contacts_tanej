@@ -148,6 +148,49 @@
     "EDITOR": "Editor",
     "VIEWER": "Viewer"
   },
+  "contact": {
+    "add": "Add contact",
+    "new": "New contact",
+    "crumb": "Contact",
+    "form": "Contact",
+    "details": "Details",
+    "save": "Save",
+    "saving": "Saving …",
+    "saved": "The contact was saved.",
+    "inTrash": "This contact is in Trash and cannot be edited. Restore it from the Trash tab.",
+    "empty": "empty",
+    "countryChoose": "Choose …",
+    "emailHint": "For example name@example.com",
+    "phoneHint": "Digits, spaces and + ( ) - . /",
+    "notesHint": "Up to 5,000 characters.",
+    "field": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "E-mail",
+      "company": "Company",
+      "jobTitle": "Job title",
+      "phone": "Phone",
+      "street": "Street",
+      "postalCode": "Postal code",
+      "city": "City",
+      "country": "Country",
+      "notes": "Notes"
+    },
+    "error": {
+      "REQUIRED_ONE_OF": "Enter at least one of first name, last name, e-mail or company.",
+      "TOO_LONG": "Use at most {{max}} characters.",
+      "INVALID_FORMAT": "Check the e-mail address.",
+      "INVALID_CHARACTERS": "Use only digits, spaces and + ( ) - . /",
+      "UNKNOWN_COUNTRY": "Choose a country from the list."
+    },
+    "conflict": {
+      "title": "This contact was changed by someone else.",
+      "text": "The current values are shown below. Your entries are kept next to them.",
+      "current": "Current values",
+      "mine": "Your entries",
+      "reload": "Reload with the current values"
+    }
+  },
   "members": {
     "invite": {
       "title": "Invite people",

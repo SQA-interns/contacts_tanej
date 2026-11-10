@@ -148,6 +148,49 @@
     "EDITOR": "Urednik",
     "VIEWER": "Bralec"
   },
+  "contact": {
+    "add": "Dodaj stik",
+    "new": "Nov stik",
+    "crumb": "Stik",
+    "form": "Stik",
+    "details": "Podrobnosti",
+    "save": "Shrani",
+    "saving": "Shranjujem …",
+    "saved": "Stik je shranjen.",
+    "inTrash": "Ta stik je v košu in ga ni mogoče urejati. Obnovite ga na zavihku Koš.",
+    "empty": "prazno",
+    "countryChoose": "Izberite …",
+    "emailHint": "Na primer ime@primer.si",
+    "phoneHint": "Števke, presledki in + ( ) - . /",
+    "notesHint": "Do 5.000 znakov.",
+    "field": {
+      "firstName": "Ime",
+      "lastName": "Priimek",
+      "email": "E-naslov",
+      "company": "Podjetje",
+      "jobTitle": "Delovno mesto",
+      "phone": "Telefon",
+      "street": "Ulica",
+      "postalCode": "Poštna številka",
+      "city": "Kraj",
+      "country": "Država",
+      "notes": "Opombe"
+    },
+    "error": {
+      "REQUIRED_ONE_OF": "Vnesite vsaj eno od polj: ime, priimek, e-naslov ali podjetje.",
+      "TOO_LONG": "Uporabite največ {{max}} znakov.",
+      "INVALID_FORMAT": "Preverite e-naslov.",
+      "INVALID_CHARACTERS": "Uporabite samo števke, presledke in + ( ) - . /",
+      "UNKNOWN_COUNTRY": "Izberite državo s seznama."
+    },
+    "conflict": {
+      "title": "Ta stik je spremenil nekdo drug.",
+      "text": "Trenutne vrednosti so prikazane spodaj. Vaši vnosi so ohranjeni ob njih.",
+      "current": "Trenutne vrednosti",
+      "mine": "Vaši vnosi",
+      "reload": "Naloži s trenutnimi vrednostmi"
+    }
+  },
   "members": {
     "invite": {
       "title": "Povabi ljudi",

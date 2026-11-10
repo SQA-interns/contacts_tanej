@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { RegisterPage } from '@/features/auth/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/ResetPasswordPage';
 import { SignInPage } from '@/features/auth/SignInPage';
+import { ContactPage } from '@/features/contacts/ContactPage';
 import { ContactsTab, GroupPage } from '@/features/groups/GroupPage';
 import { GroupsHome } from '@/features/groups/GroupsHome';
 import { MembersTab } from '@/features/members/MembersTab';
@@ -52,6 +53,8 @@ export const routes: RouteObject[] = [
                 children: [
                   { index: true, element: <ContactsTab /> },
                   { path: 'members', element: <MembersTab /> },
+                  { path: 'contacts/new', element: <ContactPage /> },
+                  { path: 'contacts/:contactId', element: <ContactPage /> },
                 ],
               },
               { path: '*', element: <NotFoundPage /> },
