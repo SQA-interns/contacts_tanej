@@ -1,0 +1,24 @@
+package app.contactgroups.domain;
+
+/** The kinds of History entry (contract {@code HistoryEventType}, R-013-01 to R-013-06). */
+public enum HistoryEventType {
+  CONTACT_CREATED,
+  CONTACT_EDITED,
+  CONTACT_DELETED,
+  CONTACT_RESTORED,
+  CONTACT_ERASED,
+  TAG_CHANGED,
+  ATTRIBUTE_CHANGED,
+  TAG_RENAMED,
+  TAG_DELETED,
+  EXPORTED,
+  MEMBER_INVITED,
+  INVITATION_CANCELLED,
+  ROLE_CHANGED,
+  MEMBER_REMOVED,
+  GROUP_RENAMED,
+  GROUP_DELETED,
+  GROUP_RESTORED,
+  CONTACTS_MERGED,
+  VERSION_RESTORED
+}
