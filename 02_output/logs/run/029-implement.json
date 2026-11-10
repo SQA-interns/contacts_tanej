@@ -1,0 +1,11 @@
+{
+  "command": "/implement US-011",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "1a3d707d-26a4-4aef-beb0-7e60d1dc7d05",
+  "total_cost_usd": 1.8731638999999998,
+  "result": "US-011 is built and committed (`12c9fee`), but DoD-S-01 is not met yet. I did not run the browser tests AC-011-01, 05, 06, 07, 09 and 10 this session, because they need the Docker stack up. They still have to run, with `acceptance/contacts-list.spec.ts -g AC-011`.\n\n**What was built**\n- **Backend:** `POST /groups/{g}/exports` (Owner or Editor) returns the `.xlsx` file. It covers the columns, headers, file naming, formula-safe cells, the 10,000 limit, Trash exclusion and the `EXPORTED` History entry. The main classes are `ExportController`, `ExportService`, `ExportWorkbook`, `ExportRepository` and `domain/ExportLayout`.\n- **Web app:** tick boxes, \"select all on this page\", \"select all N results\", a selection count and the Export button are in place. They are hidden for Viewers, and the selection clears when the search text or a filter changes. The code is in `features/export/` plus `ContactTable`, with English and Slovenian texts.\n\n**Test results**\n- **Passing:** all 17 frozen US-011 API tests and the two 10,000-limit tests (AC-011-09, EX-011-01) pass. The earlier US-009, US-010, Contacts and Trash tests, the architecture tests, and the new `ExportLayoutTest` (7) also pass.\n- **Frontend:** Vitest passes 172 tests (7 of them new for export). tsc, eslint and prettier are clean.\n- **Static checks:** spotless, PMD and CPD are clean. The JaCoCo report step failed on the partial run, which I did not investigate.\n- **Still failing:**\n  - **Us013 (20):** `AC_013_05`, which checks the `EXPORTED` entry, is blocked until US-013 provides the History endpoint.\n  - **Us014 (13):** also blocked on the History endpoint.\n  - **Us017 (4):** `DELETE /me` and other endpoints that don't exist yet. I didn't confirm whether the `exports` endpoint matches the OpenAPI drift test, since that test stops at the first missing endpoint.\n\nI recorded my readings of the unclear parts in D-41 in `docs/decisions-log.md`. The handover in `docs/00_progress.md` lists `/implement US-015` as the next command.",
+  "stderr": ""
+}

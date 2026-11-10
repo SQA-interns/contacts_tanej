@@ -1,7 +1,10 @@
 package app.contactgroups.service;
 
 import app.contactgroups.domain.ApiException;
+import app.contactgroups.domain.ChangeSet;
 import app.contactgroups.domain.ErrorCode;
+import app.contactgroups.domain.FieldChange;
+import app.contactgroups.domain.HistoryEventType;
 import app.contactgroups.domain.Member;
 import app.contactgroups.domain.Role;
 import app.contactgroups.repository.MembershipRepository;
@@ -20,10 +23,13 @@ public class MemberService {
 
   private final MembershipRepository memberships;
   private final AccessService access;
+  private final HistoryRecorder history;
 
-  public MemberService(MembershipRepository memberships, AccessService access) {
+  public MemberService(
+      MembershipRepository memberships, AccessService access, HistoryRecorder history) {
     this.memberships = memberships;
     this.access = access;
+    this.history = history;
   }
 
   /** The members of the group, for every member (R-004-01). */
@@ -46,6 +52,15 @@ public class MemberService {
       requireAnotherOwner(groupId);
     }
     memberships.updateRole(groupId, targetId, role);
+    history.record(
+        ChangeSet.of(
+            groupId,
+            actorId,
+            ChangeSet.Event.member(
+                HistoryEventType.ROLE_CHANGED,
+                target.name(),
+                role,
+                List.of(new FieldChange("role", target.role().name(), role.name())))));
     return new Member(target.userId(), target.name(), target.email(), role);
   }
 
@@ -54,22 +69,28 @@ public class MemberService {
   public void remove(UUID groupId, String actorId, String targetId) {
     requireOwnerUnderLock(groupId, actorId);
     Member target = memberships.findMember(groupId, targetId).orElseThrow(AccessService::notFound);
-    delete(groupId, target);
+    delete(groupId, actorId, target);
   }
 
-  /** The member leaves: a removal of oneself by oneself (R-004-06). */
+  /** The member leaves: a removal of oneself by oneself (R-004-06, R-013-05). */
   @Transactional
   public void leave(UUID groupId, String userId) {
     access.requireMemberLocked(groupId, userId);
     Member self = memberships.findMember(groupId, userId).orElseThrow(AccessService::notFound);
-    delete(groupId, self);
+    delete(groupId, userId, self);
   }
 
-  private void delete(UUID groupId, Member target) {
+  private void delete(UUID groupId, String actorId, Member target) {
     if (target.role() == Role.OWNER) {
       requireAnotherOwner(groupId);
     }
     memberships.delete(groupId, target.userId());
+    history.record(
+        ChangeSet.of(
+            groupId,
+            actorId,
+            ChangeSet.Event.member(
+                HistoryEventType.MEMBER_REMOVED, target.name(), target.role(), List.of())));
   }
 
   /** Locks the group and checks the Owner role as it is now, not as it was before the wait. */

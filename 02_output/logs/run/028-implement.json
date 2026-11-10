@@ -1,0 +1,11 @@
+{
+  "command": "/implement US-012",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "1b9546ff-0ed8-46c2-bf9c-d198e9b7fd18",
+  "total_cost_usd": 1.9485054000000002,
+  "result": "US-012 is built and committed (`529a1a9`), but `DoD-S-01` is not met. One frozen API test, EX-012-07, still fails, so the story stays \"in progress\".\n\n- **EX-012-07 (History after erasure):** it needs the History endpoint, which belongs to US-013. It fails with a 404 on that endpoint. My own `TrashIT` already checks that no personal data is left after an erase and that each step writes its History entry.\n- **API tests:** 15 of 16 frozen `Us012` tests pass. Also passing: `TrashIT` (5), `ContactsIT`, `OpenApiContractIT`, `IsolationMatrixIT` and `ArchitectureTest`. The earlier waiting cases Us009 AC-009-08 and Us010 EX-010-04 now pass (`Us009` 19 and `Us010` 17 all pass). The 20 `Us013` tests fail because US-013 is not built yet.\n- **Browser tests:** AC-012-01 to 04, 08 and 09 pass in chromium, firefox and webkit. AC-012-03 failed once in chromium, probably from load, and passed when I re-ran it alone.\n- **Static checks and frontend:** spotless, PMD and CPD are clean. Vitest passes (165 tests, `trash.test.tsx` has 5), and `tsc`, ESLint and Prettier are clean.\n- **Not run:** E2E-05 (E2E-03 and E2E-04 also need export and History). I did not run the secret scan separately. Browser output was not saved to `out/logs/`.\n- **Cleanup scope:** the cleanup erases expired contacts only; groups, invitations and account tombstones are still to add with US-015, US-003 and US-016.\n- **Decisions in D-40:**\n  - Cleanup-written History entries use the actor \"System\".\n  - Trash and restore raise the contact's `revision` by 1.\n  - The advisory lock from ADR-08 is left out for now.\n  - The Trash view shows the days left as a number only.\n\n`00_progress.md` is updated with the next command, `/implement US-011`.",
+  "stderr": ""
+}

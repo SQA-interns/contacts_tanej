@@ -257,6 +257,40 @@
       "action": "Leave group"
     }
   },
+  "history": {
+    "tab": "History",
+    "title": "History",
+    "back": "Back to the contact",
+    "emptyTitle": "No History yet",
+    "emptyText": "Changes to this contact appear here.",
+    "erased": "[erased]",
+    "field": {
+      "tag": "Tag",
+      "name": "Name",
+      "contacts": "Contacts exported"
+    },
+    "event": {
+      "CONTACT_CREATED": "Contact created",
+      "CONTACT_EDITED": "Contact edited",
+      "CONTACT_DELETED": "Contact moved to Trash",
+      "CONTACT_RESTORED": "Contact restored",
+      "CONTACT_ERASED": "Contact erased",
+      "TAG_CHANGED": "Tag changed",
+      "ATTRIBUTE_CHANGED": "Attribute changed",
+      "TAG_RENAMED": "Tag renamed",
+      "TAG_DELETED": "Tag deleted",
+      "EXPORTED": "Contacts exported",
+      "MEMBER_INVITED": "Member invited",
+      "INVITATION_CANCELLED": "Invitation cancelled",
+      "ROLE_CHANGED": "Role changed",
+      "MEMBER_REMOVED": "Member removed",
+      "GROUP_RENAMED": "Group renamed",
+      "GROUP_DELETED": "Group deleted",
+      "GROUP_RESTORED": "Group restored",
+      "CONTACTS_MERGED": "Contacts merged",
+      "VERSION_RESTORED": "Version restored"
+    }
+  },
   "trash": {
     "intro": "Contacts stay in Trash for 30 days, then they are erased.",
     "empty": "Trash is empty. Deleted contacts stay here for 30 days.",

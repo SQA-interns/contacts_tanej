@@ -64,6 +64,42 @@ public class HistoryRepository {
         .update();
   }
 
+  public int countByGroup(UUID groupId) {
+    return count("group_id = ?", groupId);
+  }
+
+  public int countByContact(UUID contactId) {
+    return count("contact_id = ?", contactId);
+  }
+
+  /** One page of the group's entries, newest first, with their changes. */
+  public List<HistoryEntry> pageByGroup(UUID groupId, int limit, int offset) {
+    return page("group_id = ?", groupId, limit, offset);
+  }
+
+  /** One page of the entries about one contact, newest first, with their changes. */
+  public List<HistoryEntry> pageByContact(UUID contactId, int limit, int offset) {
+    return page("contact_id = ?", contactId, limit, offset);
+  }
+
+  private int count(String where, UUID id) {
+    return jdbc.sql("SELECT count(*) FROM history_entries WHERE " + where)
+        .param(id)
+        .query(Integer.class)
+        .single();
+  }
+
+  private List<HistoryEntry> page(String where, UUID id, int limit, int offset) {
+    return jdbc
+        .sql("SELECT * FROM history_entries WHERE " + where + " ORDER BY seq DESC LIMIT ? OFFSET ?")
+        .params(id, limit, offset)
+        .query((rs, n) -> entry(rs))
+        .list()
+        .stream()
+        .map(e -> e.withChanges(changesOf(e.id())))
+        .toList();
+  }
+
   /** The entries of one group, newest first, with their changes in the order they were written. */
   public List<HistoryEntry> findByGroup(UUID groupId) {
     return jdbc

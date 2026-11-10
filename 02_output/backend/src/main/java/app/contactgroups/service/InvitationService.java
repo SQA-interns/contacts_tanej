@@ -1,8 +1,10 @@
 package app.contactgroups.service;
 
 import app.contactgroups.domain.ApiException;
+import app.contactgroups.domain.ChangeSet;
 import app.contactgroups.domain.EmailAddress;
 import app.contactgroups.domain.ErrorCode;
+import app.contactgroups.domain.HistoryEventType;
 import app.contactgroups.domain.Invitation;
 import app.contactgroups.domain.Role;
 import app.contactgroups.repository.InvitationRepository;
@@ -31,6 +33,7 @@ public class InvitationService {
   private final MembershipRepository memberships;
   private final UserRepository users;
   private final AccessService access;
+  private final HistoryRecorder history;
   private final Clock clock;
 
   public InvitationService(
@@ -38,7 +41,9 @@ public class InvitationService {
       MembershipRepository memberships,
       UserRepository users,
       AccessService access,
+      HistoryRecorder history,
       Clock clock) {
+    this.history = history;
     this.invitations = invitations;
     this.memberships = memberships;
     this.users = users;
@@ -77,6 +82,7 @@ public class InvitationService {
     invitations.deleteExpired(groupId, email, cutoff);
     Row row = new Row(UUID.randomUUID(), groupId, email, role, now);
     invitations.insert(row, userId);
+    record(groupId, userId, HistoryEventType.MEMBER_INVITED, role);
     return toInvitation(row);
   }
 
@@ -84,9 +90,14 @@ public class InvitationService {
   @Transactional
   public void cancel(UUID groupId, String userId, UUID invitationId) {
     access.requireOwnerLocked(groupId, userId);
-    if (!invitations.delete(groupId, invitationId)) {
-      throw AccessService.notFound();
-    }
+    Role role = invitations.delete(groupId, invitationId).orElseThrow(AccessService::notFound);
+    record(groupId, userId, HistoryEventType.INVITATION_CANCELLED, role);
+  }
+
+  /** The entry holds the role only, never the address of the invited person (D-16). */
+  private void record(UUID groupId, String userId, HistoryEventType type, Role role) {
+    history.record(
+        ChangeSet.of(groupId, userId, ChangeSet.Event.member(type, null, role, List.of())));
   }
 
   /**

@@ -1,0 +1,187 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] argLine set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/w/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 102 source files with javac [debug parameters release 21] to target/classes
+[INFO] /w/src/main/java/app/contactgroups/service/ExportWorkbook.java: /w/src/main/java/app/contactgroups/service/ExportWorkbook.java uses or overrides a deprecated API.
+[INFO] /w/src/main/java/app/contactgroups/service/ExportWorkbook.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 63 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] Building jar: /w/target/contact-groups-backend.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+11:58:59.489 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us013HistoryAcceptanceIT]: Us013HistoryAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:59:00.548 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+11:59:02.513 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+11:59:02.534 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+11:59:02.566 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+11:59:05.117 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+11:59:05.127 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+11:59:05.176 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+11:59:05.779 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+11:59:05.806 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+11:59:06.311 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 6cc73d2cb6bafbc141dab9c689d1284dc84bcbf717bf48b4a02020ecf3121a9e
+11:59:07.036 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT1.256948291S
+11:59:07.050 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+11:59:07.050 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+11:59:07.052 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+11:59:07.053 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+11:59:07.164 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: 0a37d326f04ce5c0cde303d71adcf03e7dd9fdda3037b8864d46d0dc04b42442
+11:59:09.180 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT2.126891038S
+11:59:09.181 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:61377/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T11:59:10.835Z  INFO 146 --- [contact-groups-backend] [           main] a.c.acceptance.Us013HistoryAcceptanceIT  : Starting Us013HistoryAcceptanceIT using Java 21.0.9 with PID 146 (started by root in /w)
+2026-11-10T11:59:10.838Z  INFO 146 --- [contact-groups-backend] [           main] a.c.acceptance.Us013HistoryAcceptanceIT  : The following 1 profile is active: "test"
+2026-11-10T11:59:18.030Z  INFO 146 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T11:59:18.078Z  INFO 146 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T11:59:18.079Z  INFO 146 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T11:59:18.220Z  INFO 146 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T11:59:18.221Z  INFO 146 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7307 ms
+2026-11-10T11:59:19.236Z  INFO 146 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T11:59:19.773Z  INFO 146 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@35b1df36
+2026-11-10T11:59:19.780Z  INFO 146 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T11:59:19.880Z  INFO 146 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:61377/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T11:59:20.069Z  INFO 146 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T11:59:20.083Z  INFO 146 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.101s)
+2026-11-10T11:59:20.127Z  INFO 146 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T11:59:20.236Z  INFO 146 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T11:59:20.298Z  INFO 146 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T11:59:20.437Z  INFO 146 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.101s)
+2026-11-10T11:59:24.438Z  INFO 146 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 44645 (http) with context path '/'
+2026-11-10T11:59:24.469Z  INFO 146 --- [contact-groups-backend] [           main] a.c.acceptance.Us013HistoryAcceptanceIT  : Started Us013HistoryAcceptanceIT in 15.126 seconds (process running for 28.511)
+2026-11-10T11:59:27.125Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T11:59:27.125Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T11:59:27.127Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-10T11:59:35.590Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/** status=404 user=uid-ana
+2026-11-10T11:59:35.625Z  INFO 146 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/** status=404 user=uid-ana
+2026-11-10T11:59:35.660Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/** status=404 user=uid-ana
+2026-11-10T11:59:35.693Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T11:59:37.878Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/history status=403 user=uid-petra
+2026-11-10T11:59:37.891Z  INFO 146 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/history status=403 user=uid-petra
+[ERROR] Tests run: 20, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 40.28 s <<< FAILURE! -- in app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone -- Time elapsed: 4.294 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone(Us013HistoryAcceptanceIT.java:260)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc -- Time elapsed: 0.379 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting actual:
+  2026-11-10T11:59:29.022292Z
+to be between:
+  [2026-07-01T22:29:30Z, 2026-07-01T22:31:30Z]
+
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc(Us013HistoryAcceptanceIT.java:253)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry -- Time elapsed: 0.348 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected size: 3 but was: 0 in:
+[]
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry(Us013HistoryAcceptanceIT.java:151)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry:151 
+Expected size: 3 but was: 0 in:
+[]
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc:253 
+Expecting actual:
+  2026-11-10T11:59:29.022292Z
+to be between:
+  [2026-07-01T22:29:30Z, 2026-07-01T22:31:30Z]
+
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone:260 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+[INFO] 
+[ERROR] Tests run: 20, Failures: 3, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:32 min
+[INFO] Finished at: 2026-11-10T11:59:57Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+
+EXIT 1

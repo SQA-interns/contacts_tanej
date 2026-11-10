@@ -4,6 +4,7 @@ import app.contactgroups.domain.Role;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -76,12 +77,15 @@ public class InvitationRepository {
         .update();
   }
 
-  /** Removes the invitation of the group; false when it does not exist (R-003-07). */
-  public boolean delete(UUID groupId, UUID invitationId) {
-    return jdbc.sql("DELETE FROM invitations WHERE group_id = ? AND id = ?")
-            .params(groupId, invitationId)
-            .update()
-        > 0;
+  /**
+   * Removes the invitation of the group and returns its role; empty when it does not exist
+   * (R-003-07).
+   */
+  public Optional<Role> delete(UUID groupId, UUID invitationId) {
+    return jdbc.sql("DELETE FROM invitations WHERE group_id = ? AND id = ? RETURNING role")
+        .params(groupId, invitationId)
+        .query((rs, n) -> Role.valueOf(rs.getString("role")))
+        .optional();
   }
 
   /** Removes the invitation, whatever its group, once it has been accepted. */

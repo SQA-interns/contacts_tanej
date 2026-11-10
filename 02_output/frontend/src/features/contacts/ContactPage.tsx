@@ -88,6 +88,16 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
         / {t('contact.crumb')}
       </p>
       <h1 className="mb-4 text-2xl font-semibold break-words">{title}</h1>
+      {contact && group.role !== 'VIEWER' && (
+        <nav aria-label={t('contact.crumb')} className="mb-4 flex gap-4">
+          <span aria-current="page" className="font-medium">
+            {t('contact.details')}
+          </span>
+          <Link to={`${back}/contacts/${contact.id}/history`} className="underline">
+            {t('history.tab')}
+          </Link>
+        </nav>
+      )}
       {trashed && (
         <div role="alert" className="mb-4 rounded-card border border-danger bg-surface-raised p-4">
           {t('contact.inTrash')}

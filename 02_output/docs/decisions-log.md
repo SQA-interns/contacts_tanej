@@ -483,3 +483,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-43: US-013 readings (History)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-013
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) "Newest first" with a clock that the frozen test EX-013-02 moves back (the older-looking edit must still be on top). (2) The group-wide History endpoint belongs to US-014's screen, but the frozen US-013 tests read `GET /groups/{g}/history`. (3) Group-level entries hold no e-mail (D-16). (4) The contact History tab as a link. (5) EX-013-03 (account deletion removes the actor's e-mail) needs `DELETE /me`.
+- Options: (1) Order by a write sequence number (`seq`, migration V2) instead of the time; in production both orders are the same. (2) Build the endpoint with paging only (25 per page, Owner and Editor); the filters `actorId`, `types`, `from`, `to`, `/history/actors` and the screen stay with US-014. (3) An invitation or its cancellation holds the role only, a role change or removal the member's name and role; a leaving is recorded as MEMBER_REMOVED by the member (R-013-05). (4) A link "History" next to "Details" at `contacts/:id/history`, for Owner and Editor; the group-wide History tab is US-014. (5) Left to US-016; EX-013-03 and the browser test AC-013-10 (group History tab) wait for US-016 and US-014.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none

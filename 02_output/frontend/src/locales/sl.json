@@ -257,6 +257,40 @@
       "action": "Zapusti skupino"
     }
   },
+  "history": {
+    "tab": "Zgodovina",
+    "title": "Zgodovina",
+    "back": "Nazaj na stik",
+    "emptyTitle": "Zgodovine še ni",
+    "emptyText": "Spremembe tega stika se prikažejo tukaj.",
+    "erased": "[izbrisano]",
+    "field": {
+      "tag": "Oznaka",
+      "name": "Ime",
+      "contacts": "Izvoženi stiki"
+    },
+    "event": {
+      "CONTACT_CREATED": "Stik ustvarjen",
+      "CONTACT_EDITED": "Stik urejen",
+      "CONTACT_DELETED": "Stik premaknjen v koš",
+      "CONTACT_RESTORED": "Stik obnovljen",
+      "CONTACT_ERASED": "Stik izbrisan",
+      "TAG_CHANGED": "Oznaka spremenjena",
+      "ATTRIBUTE_CHANGED": "Atribut spremenjen",
+      "TAG_RENAMED": "Oznaka preimenovana",
+      "TAG_DELETED": "Oznaka izbrisana",
+      "EXPORTED": "Stiki izvoženi",
+      "MEMBER_INVITED": "Član povabljen",
+      "INVITATION_CANCELLED": "Vabilo preklicano",
+      "ROLE_CHANGED": "Vloga spremenjena",
+      "MEMBER_REMOVED": "Član odstranjen",
+      "GROUP_RENAMED": "Skupina preimenovana",
+      "GROUP_DELETED": "Skupina izbrisana",
+      "GROUP_RESTORED": "Skupina obnovljena",
+      "CONTACTS_MERGED": "Stiki združeni",
+      "VERSION_RESTORED": "Različica obnovljena"
+    }
+  },
   "trash": {
     "intro": "Stiki ostanejo v košu 30 dni, nato se izbrišejo.",
     "empty": "Koš je prazen. Izbrisani stiki ostanejo tu 30 dni.",
