@@ -1,0 +1,22 @@
+
+Running 10 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/10] [chromium] › checks\shell.spec.ts:40:5 › sign-in at mobile: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[2/10] [chromium] › checks\shell.spec.ts:40:5 › sign-in at tablet: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[3/10] [chromium] › checks\shell.spec.ts:40:5 › sign-in at desktop: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[4/10] [chromium] › checks\shell.spec.ts:40:5 › register at mobile: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[5/10] [chromium] › checks\shell.spec.ts:40:5 › register at tablet: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[6/10] [chromium] › checks\shell.spec.ts:40:5 › register at desktop: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[7/10] [chromium] › checks\shell.spec.ts:40:5 › reset-password at mobile: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[8/10] [chromium] › checks\shell.spec.ts:40:5 › reset-password at tablet: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[9/10] [chromium] › checks\shell.spec.ts:40:5 › reset-password at desktop: no horizontal scroll and no serious accessibility violation (NFR-08, NFR-09)
+[1A[2K[10/10] [chromium] › checks\shell.spec.ts:66:1 › the language switch changes all texts at once and the choice survives a reload (R-018-02, R-018-03)
+[1A[2K  10 passed (20.8s)
+[1A[2K(node:37856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:37856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

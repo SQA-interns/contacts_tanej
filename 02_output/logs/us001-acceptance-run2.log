@@ -1,0 +1,226 @@
+
+Running 15 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/15] [chromium] › acceptance\us001-sign-in.spec.ts:37:1 › AC-001-01 registering creates the account, shows the verify screen and has Firebase send the e-mail
+[1A[2K[2/15] [chromium] › acceptance\us001-sign-in.spec.ts:52:1 › AC-001-02 an unverified user sees only the verify screen for the list and for a group address
+[1A[2K  1) [chromium] › acceptance\us001-sign-in.spec.ts:52:1 › AC-001-02 an unverified user sees only the verify screen for the list and for a group address 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:59:19
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-A-2a39e-ist-and-for-a-group-address-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-A-2a39e-ist-and-for-a-group-address-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+
+
+
+[1A[2K[3/15] [chromium] › acceptance\us001-sign-in.spec.ts:68:1 › AC-001-03 a verified user without a group sees the empty state with the button to create a group
+[1A[2K  2) [chromium] › acceptance\us001-sign-in.spec.ts:68:1 › AC-001-03 a verified user without a group sees the empty state with the button to create a group 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      73 |   await createAccount(ANA);
+      74 |   await signIn(page, ANA);
+    > 75 |   await expect(emptyState(page)).toBeVisible();
+         |                                  ^
+      76 |   await expect(page.getByRole('heading', { name: 'Create a group' })).toBeVisible();
+      77 | });
+      78 |
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:75:34
+
+    Error Context: test-results\acceptance-us001-sign-in-A-562c4-he-button-to-create-a-group-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-A-562c4-he-button-to-create-a-group-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-A-562c4-he-button-to-create-a-group-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+
+
+
+[1A[2K[4/15] [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state
+[1A[2K  3) [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      85 |   await popup.getByRole('button', { name: 'Auto-generate user information' }).click();
+      86 |   await popup.getByRole('button', { name: 'Sign in with Google.com' }).click();
+    > 87 |   await expect(emptyState(page)).toBeVisible();
+         |                                  ^
+      88 | });
+      89 |
+      90 | test('AC-001-05 a wrong password shows an error and the person stays on the sign-in screen', async ({
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:87:34
+
+    Error Context: test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+
+
+
+[1A[2K[5/15] [chromium] › acceptance\us001-sign-in.spec.ts:96:1 › AC-001-05 a wrong password shows an error and the person stays on the sign-in screen
+[1A[2K[6/15] [chromium] › acceptance\us001-sign-in.spec.ts:110:1 › AC-001-06 "Forgot password" starts the reset e-mail flow of Firebase
+[1A[2K[7/15] [chromium] › acceptance\us001-sign-in.spec.ts:127:1 › AC-001-07 a password of 7 characters is refused with the reason and creates no account
+[1A[2K[8/15] [chromium] › acceptance\us001-sign-in.spec.ts:142:1 › AC-001-08 the session survives a reload and "Sign out" shows the sign-in screen
+[1A[2K  4) [chromium] › acceptance\us001-sign-in.spec.ts:142:1 › AC-001-08 the session survives a reload and "Sign out" shows the sign-in screen 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      120 |   await createAccount(ANA);
+      121 |   await signIn(page, ANA);
+    > 122 |   await expect(emptyState(page)).toBeVisible();
+          |                                  ^
+      123 |   await page.reload();
+      124 |   await expect(emptyState(page)).toBeVisible();
+      125 |   await signOut(page);
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:122:34
+
+    Error Context: test-results\acceptance-us001-sign-in-A-a83eb-ut-shows-the-sign-in-screen-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-A-a83eb-ut-shows-the-sign-in-screen-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-A-a83eb-ut-shows-the-sign-in-screen-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+
+
+
+[1A[2K[9/15] [chromium] › acceptance\us001-sign-in.spec.ts:155:1 › EX-001-01 a password of exactly 8 characters is accepted
+[1A[2K[10/15] [chromium] › acceptance\us001-sign-in.spec.ts:165:1 › EX-001-02 a password of 7 characters is refused
+[1A[2K[11/15] [chromium] › acceptance\us001-sign-in.spec.ts:176:1 › EX-001-03 an empty name and a name of 101 characters are refused and create no account
+[1A[2K[12/15] [chromium] › acceptance\us001-sign-in.spec.ts:194:1 › EX-001-04 a name of exactly 100 characters is accepted
+[1A[2K[13/15] [chromium] › acceptance\us001-sign-in.spec.ts:204:1 › EX-001-05 an e-mail that already has an account shows the refusal of Firebase and changes nothing
+[1A[2K[14/15] [chromium] › acceptance\us001-sign-in.spec.ts:220:1 › EX-001-06 "Send again" makes Firebase send the verification e-mail again
+[1A[2K[15/15] [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state
+[1A[2K  5) [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      181 |   await verifyEmail(ANA.email);
+      182 |   await page.reload();
+    > 183 |   await expect(emptyState(page)).toBeVisible();
+          |                                  ^
+      184 | });
+      185 |
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:183:34
+
+    Error Context: test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  5 failed
+    [chromium] › acceptance\us001-sign-in.spec.ts:52:1 › AC-001-02 an unverified user sees only the verify screen for the list and for a group address 
+    [chromium] › acceptance\us001-sign-in.spec.ts:68:1 › AC-001-03 a verified user without a group sees the empty state with the button to create a group 
+    [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+    [chromium] › acceptance\us001-sign-in.spec.ts:142:1 › AC-001-08 the session survives a reload and "Sign out" shows the sign-in screen 
+    [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state 
+  10 passed (1.2m)
+[1A[2K(node:10772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:38840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:38840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:34988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:34988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
