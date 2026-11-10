@@ -1,0 +1,11 @@
+{
+  "command": "/implement US-019",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "1ed8109a-fd1d-4002-8bba-e7243a4980df",
+  "total_cost_usd": 0.5642503000000001,
+  "result": "US-019 is built and committed (`21fa960`), but it does not meet DoD-S-01 yet: 8 of the 12 frozen Us019 tests pass, and the other 4 wait on later stories.\n\n- **Built:** `GET /groups/{g}/contacts/{c}/versions` (T-25) lists versions newest first. A Viewer gets 403 and an unknown contact gets 404. Recording versions on every kind of change was already in the save path from earlier stories.\n- **Tests:** the 8 passing cover AC-019-01 to 04, 06 and 08 and EX-019-01 and 04. `ContactsIT` (9 tests) and `OpenApiContractIT` (2) also pass.\n- **Waiting on later stories:**\n  - AC-019-05 needs tag rename (US-007).\n  - AC-019-07 and EX-019-02 need Trash and erase (US-012).\n  - EX-019-03 needs account deletion (US-016).\n  - Re-run Us019 after each of these stories.\n- **Checks:** spotless, PMD and CPD are clean (`02_output/logs/us019-static.log`). I wrote no new tests of my own for the endpoint, since the frozen Us019 tests cover it. The test log is `02_output/logs/us019-backend.log`.\n- **Handover:** D-36 in `02_output/docs/decisions-log.md` records two readings: the role check comes before the contact lookup, and a contact in Trash still lists its versions. `02_output/docs/00_progress.md` now says the next command is `/implement US-007`.\n- **Left out of the commit:** the untracked `run-console` and `run/*.json` logs were already there before this session and I didn't commit them.",
+  "stderr": ""
+}

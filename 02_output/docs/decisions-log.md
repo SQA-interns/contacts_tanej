@@ -428,3 +428,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-38: US-009 readings (list and search)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-009
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) How a word is matched. (2) Descending order and empty last names. (3) Request shape before US-010. (4) Display of a row without a last name. (5) The list screen and its tests were written in the same step (screen code before its tests, as in D-33 to D-37). (6) When the search box sends its text.
+- Options: (1) Each word is folded in SQL (`f_fold`) and must be part of `search_fold` (own fields), of a tag name or of an attribute value; `%`, `_` and `\` are escaped, nothing but bind parameters reaches SQL. (2) Ascending puts empty last names (stored as NULL) last, descending puts them first (a true reversal); ties break on last name, first name, then id, so pages are stable (EX-009-06). (3) `SearchController.SearchRequest` has `q`, `sort`, `page` only; `conditions` is ignored until US-010 adds it. An unknown sort field is refused with 400 by the enum and never reaches SQL (SR-07). (4) The last-name cell is the link to the contact; when empty, the link text is the first name, e-mail or company. (5) Recorded here. (6) The request follows the box after 250 ms; a new search text goes back to page 1, a new sort keeps the page (R-009-08).
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
