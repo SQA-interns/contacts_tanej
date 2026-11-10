@@ -228,6 +228,14 @@ export async function signIn(page: Page, person: Person): Promise<void> {
   await page.getByLabel('E-mail').fill(person.email);
   await page.getByLabel('Password').fill(person.password);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  // Wait for the outcome, so that a following goto does not cut the sign-in off (D-51):
+  // signed in, e-mail not verified, or an error alert.
+  await page
+    .getByRole('button', { name: 'User menu' })
+    .or(page.getByRole('heading', { name: 'Verify your e-mail' }))
+    .or(page.getByRole('alert'))
+    .first()
+    .waitFor();
 }
 
 export async function signOut(page: Page): Promise<void> {

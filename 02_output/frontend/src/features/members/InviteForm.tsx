@@ -79,10 +79,10 @@ export function InviteForm({ onInvite }: InviteFormProps) {
           <div className="flex flex-col gap-1">
             <Label htmlFor={`${id}-role`}>
               {t('groups.columns.role')}
-              <span className="font-normal text-text-muted"> ({t('form.required')})</span>
             </Label>
             <select
               id={`${id}-role`}
+              required
               value={role}
               onChange={(event) => setRole(event.target.value as Role)}
               className="min-h-11 w-full rounded-control border border-border bg-background px-3 text-base text-text"

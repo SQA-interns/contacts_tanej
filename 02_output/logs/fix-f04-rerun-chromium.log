@@ -1,0 +1,97 @@
+
+Running 19 tests using 1 worker
+
+  ok  1 [chromium] › acceptance\groups-members.spec.ts:8:1 › AC-002-01 creating a group in the dialog opens it empty and shows Ana as its Owner (2.9s)
+  ok  2 [chromium] › acceptance\groups-members.spec.ts:27:1 › AC-002-03 the address of a group of someone else shows "Group not found" and nothing of the group (2.6s)
+  ok  3 [chromium] › acceptance\groups-members.spec.ts:40:1 › AC-002-04 a name of spaces only shows the reason in the dialog and creates no group (3.1s)
+  ok  4 [chromium] › acceptance\groups-members.spec.ts:57:1 › AC-002-05 a second group with the same name ignoring case is refused with the reason (2.5s)
+  x   5 [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified (2.9s)
+  ok  6 [chromium] › acceptance\groups-members.spec.ts:100:1 › AC-003-01 the Owner invites two people and the Members tab lists them as pending with role and expiry (3.7s)
+  ok  7 [chromium] › acceptance\groups-members.spec.ts:123:1 › AC-003-03 and AC-003-04 inviting a member or a pending address shows the message and changes nothing (2.9s)
+  ok  8 [chromium] › acceptance\groups-members.spec.ts:150:1 › AC-003-05 the 21st invitation shows the message about the limit of 20 (3.7s)
+  ok  9 [chromium] › acceptance\groups-members.spec.ts:165:1 › AC-003-10 an invalid e-mail is refused as invalid and nothing is created (2.8s)
+  ok 10 [chromium] › acceptance\groups-members.spec.ts:180:1 › AC-004-01 a Viewer sees the members and no controls to manage them or to edit (3.1s)
+  ok 11 [chromium] › acceptance\groups-members.spec.ts:210:1 › AC-004-03 the only Owner who tries to leave gets the last-Owner message and stays Owner (3.1s)
+  ok 12 [chromium] › acceptance\groups-members.spec.ts:228:1 › AC-004-05 a Viewer leaves the group and it disappears from the list (2.8s)
+  ok 13 [chromium] › acceptance\groups-members.spec.ts:247:1 › EX-004-03 a removed member whose browser still shows the group gets "not found" and the group list (2.7s)
+  ok 14 [chromium] › acceptance\groups-members.spec.ts:272:1 › AC-015-01 deleting a group by typing its name hides it and lists it in Deleted groups (3.1s)
+  ok 15 [chromium] › acceptance\groups-members.spec.ts:296:1 › AC-015-02 a name typed in another case deletes nothing (2.8s)
+  ok 16 [chromium] › acceptance\groups-members.spec.ts:314:1 › AC-016-02 the only Owner who deletes the account is refused and the group is named (3.0s)
+  x  17 [chromium] › acceptance\groups-members.spec.ts:331:1 › AC-016-05 cancelling the confirmation deletes nothing (2.9s)
+  ok 18 [chromium] › acceptance\groups-members.spec.ts:353:1 › AC-016-06 an account deletion without a recent sign-in asks to sign in again first (2.7s)
+  ok 19 [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work (6.7s)
+
+
+  1) [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified 
+
+    Error: No verification e-mail for ivan@example.com
+
+       at acceptance\support.ts:118
+
+      116 |   const codes = await emailCodes(email, 'VERIFY_EMAIL');
+      117 |   const last = codes[codes.length - 1];
+    > 118 |   if (!last) throw new Error(`No verification e-mail for ${email}`);
+          |                    ^
+      119 |   await identity(`accounts:update?key=${API_KEY}`, { oobCode: last.oobCode });
+      120 | }
+      121 |
+        at verifyEmail (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:118:20)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\groups-members.spec.ts:84:3
+
+    Error Context: test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › acceptance\groups-members.spec.ts:331:1 › AC-016-05 cancelling the confirmation deletes nothing 
+
+    Error: expect.toBeVisible: Error: strict mode violation: getByRole('heading', { name: 'Account' }) resolved to 3 elements:
+        1) <h1 class="mb-4 text-2xl font-semibold">Account</h1> aka getByRole('heading', { name: 'Account', exact: true })
+        2) <h2 class="mb-2 text-xl font-semibold">Your account</h2> aka getByRole('heading', { name: 'Your account' })
+        3) <h2 class="mb-2 text-xl font-semibold">Delete account</h2> aka getByRole('heading', { name: 'Delete account' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Account' })[22m
+
+
+      240 |   await expect(dialog(page)).toHaveCount(0);
+      241 |   await page.reload();
+    > 242 |   await expect(page.getByRole('heading', { name: 'Account' })).toBeVisible();
+          |                                                                ^
+      243 |   const again = await Client.of(PETRA);
+      244 |   expect((await again.call('GET', '/me')).status).toBe(200);
+      245 | });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\groups-members.spec.ts:242:64
+
+    Error Context: test-results\acceptance-groups-members--dcee1-onfirmation-deletes-nothing-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-groups-members--dcee1-onfirmation-deletes-nothing-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-groups-members--dcee1-onfirmation-deletes-nothing-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified 
+    [chromium] › acceptance\groups-members.spec.ts:331:1 › AC-016-05 cancelling the confirmation deletes nothing 
+  17 passed (1.2m)
+(node:13232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
