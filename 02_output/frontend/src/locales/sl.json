@@ -44,7 +44,7 @@
     "NOT_IN_TRASH": "Ni v košu.",
     "CONTACT_IN_TRASH": "Kontakt je v košu.",
     "GROUP_IN_TRASH": "Skupina je v košu.",
-    "LAST_OWNER": "Skupina mora imeti vsaj enega lastnika.",
+    "LAST_OWNER": "Skupina mora imeti vsaj enega lastnika. Najprej določite drugega člana za lastnika.",
     "SOLE_OWNER": "Ste edini lastnik skupine.",
     "GROUP_NAME_TAKEN": "Skupino s tem imenom že imate.",
     "ALREADY_MEMBER": "Ta oseba je že članica skupine.",
@@ -164,6 +164,17 @@
     "emailError": {
       "INVALID_FORMAT": "Vnesite veljaven e-poštni naslov.",
       "TOO_LONG": "E-poštni naslov ima lahko največ 255 znakov."
+    },
+    "roleOf": "Vloga člana {{name}}",
+    "remove": {
+      "title": "Odstrani člana",
+      "text": "Ta oseba izgubi dostop do skupine. Njeni stiki ostanejo v skupini.",
+      "action": "Odstrani"
+    },
+    "leave": {
+      "title": "Zapusti skupino",
+      "text": "Izgubite dostop do te skupine.",
+      "action": "Zapusti skupino"
     }
   }
 }

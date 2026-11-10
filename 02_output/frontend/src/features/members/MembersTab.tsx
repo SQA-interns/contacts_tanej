@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { MemberSection } from './MemberSection';
 import { useOutletContext } from 'react-router';
 import { useServices } from '@/app/services';
 import { StatePanel } from '@/components/ui/state-panel';
@@ -16,15 +17,14 @@ const MAX_PENDING = 20;
 
 /**
  * WF-07, the Members tab. For an Owner: the pending invitations and the form to invite (US-003).
- * Editors and Viewers get neither, and the invitations are not even asked for (R-003-11). The member
- * list itself comes with US-004.
+ * Editors and Viewers get neither, and the invitations are not even asked for (R-003-11). Every
+ * member sees the member list (R-004-01); the controls on it depend on the role (US-004).
  */
 export function MembersTab() {
-  const { t } = useTranslation();
   const group = useOutletContext<GroupSummary>();
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="sr-only">{t('groups.tabs.members')}</h2>
+      <MemberSection groupId={group.id} isOwner={group.role === 'OWNER'} />
       {group.role === 'OWNER' && <OwnerInvitations groupId={group.id} />}
     </div>
   );

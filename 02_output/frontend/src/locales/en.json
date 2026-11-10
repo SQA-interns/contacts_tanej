@@ -44,7 +44,7 @@
     "NOT_IN_TRASH": "It is not in Trash.",
     "CONTACT_IN_TRASH": "The contact is in Trash.",
     "GROUP_IN_TRASH": "The group is in Trash.",
-    "LAST_OWNER": "A group needs at least one Owner.",
+    "LAST_OWNER": "A group needs at least one Owner. Make another member an Owner first.",
     "SOLE_OWNER": "You are the only Owner of a group.",
     "GROUP_NAME_TAKEN": "You already have a group with this name.",
     "ALREADY_MEMBER": "This person is already a member of the group.",
@@ -164,6 +164,17 @@
     "emailError": {
       "INVALID_FORMAT": "Enter a valid e-mail address.",
       "TOO_LONG": "The e-mail address can have at most 255 characters."
+    },
+    "roleOf": "Role of {{name}}",
+    "remove": {
+      "title": "Remove member",
+      "text": "This person loses access to the group. Their contacts stay in the group.",
+      "action": "Remove"
+    },
+    "leave": {
+      "title": "Leave group",
+      "text": "You lose access to this group.",
+      "action": "Leave group"
     }
   }
 }
