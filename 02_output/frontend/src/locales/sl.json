@@ -341,5 +341,18 @@
       "country": "Država",
       "tags": "Oznake"
     }
+  },
+  "export": {
+    "selectPage": "Izberi vse na tej strani",
+    "selectColumn": "Izbira",
+    "selectContact": "Izberi kontakt",
+    "selectAll": "Izberi vseh {{total}} rezultatov",
+    "none": "Nič ni izbrano",
+    "selected": "Izbrano: {{count}}",
+    "button": "Izvozi",
+    "busy": "Izvažanje …",
+    "done": "Datoteka Excel je prenesena.",
+    "tooMany": "Izbrali ste več kot 10.000 kontaktov. Zožite izbor, da lahko izvozite.",
+    "error": "Izvoz ni uspel. Poskusite znova."
   }
 }

@@ -60,7 +60,7 @@ public class ContactSearchRepository {
   }
 
   /** The chosen column first, then last name, first name and id so that the order is stable. */
-  private static String orderBy(ContactSort sort) {
+  static String orderBy(ContactSort sort) {
     String column = "c." + sort.field().column();
     String direction = sort.direction() == Direction.ASC ? "ASC NULLS LAST" : "DESC NULLS FIRST";
     return " ORDER BY "

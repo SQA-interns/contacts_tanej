@@ -461,3 +461,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-41: US-011 readings (export)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-011
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) Request with both or neither of `contactIds` and `filter`. (2) How a formula-like value is stored. (3) Which count the History entry holds. (4) Order and duplicates of ticked ids. (5) Where the 10,000 limit is checked. (6) Screen code and its tests written in the same step (as in D-33 to D-40).
+- Options: (1) 400 `VALIDATION_FAILED`, field `contactIds`, code `REQUIRED`; an empty `filter` object means "all contacts". (2) The cell is a string with the quote-prefix style (spec 4.11); the text is unchanged. E-mail and phone cells use the text format "@". (3) `EXPORTED` holds `contacts` = rows really written, so a contact trashed meanwhile (EX-011-08) is not counted. (4) Ids are de-duplicated; rows follow the list sort (default last name, first name); unknown, foreign and trashed ids are left out silently. (5) Ids: by list length before reading; filter: by count before reading; both give 400 `TOO_MANY_CONTACTS` on field `contacts`, no file and no History entry. (6) Recorded here. "Select all N results" ends when one row is unticked: the rest of the page stays ticked.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none

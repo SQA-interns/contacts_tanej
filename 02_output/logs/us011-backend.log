@@ -1,0 +1,1000 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] argLine set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/w/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.domain.ExportLayoutTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.632 s -- in app.contactgroups.domain.ExportLayoutTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.LargeGroupAcceptanceIT
+11:10:29.161 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+11:10:29.230 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+11:10:29.317 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+11:10:36.707 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+11:10:36.778 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+11:10:36.957 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+11:10:38.248 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+11:10:38.326 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+11:10:39.689 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 1245f61914206ae78023b95e09eacceff5510e030583d01bff99b450ad65e65e
+11:10:41.646 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT3.397787553S
+11:10:41.675 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+11:10:41.676 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+11:10:41.683 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+11:10:41.686 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+11:10:41.999 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: e0ebb6e3d336de5761ee45c584945617fb0c8f2f56f3fb96a6b08682fdb5e74b
+11:10:46.355 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT4.668786155S
+11:10:46.356 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:50371/test?loggerLevel=OFF)
+11:10:47.497 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.LargeGroupAcceptanceIT]: LargeGroupAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:10:49.976 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.LargeGroupAcceptanceIT
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T11:10:56.315Z  INFO 159 --- [contact-groups-backend] [           main] a.c.acceptance.LargeGroupAcceptanceIT    : Starting LargeGroupAcceptanceIT using Java 21.0.9 with PID 159 (started by root in /w)
+2026-11-10T11:10:56.323Z  INFO 159 --- [contact-groups-backend] [           main] a.c.acceptance.LargeGroupAcceptanceIT    : The following 1 profile is active: "test"
+2026-11-10T11:11:16.846Z  INFO 159 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T11:11:16.980Z  INFO 159 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T11:11:16.981Z  INFO 159 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T11:11:17.380Z  INFO 159 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T11:11:17.381Z  INFO 159 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 20809 ms
+2026-11-10T11:11:20.395Z  INFO 159 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T11:11:21.981Z  INFO 159 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c645e05
+2026-11-10T11:11:22.002Z  INFO 159 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T11:11:22.256Z  INFO 159 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:50371/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T11:11:22.754Z  INFO 159 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T11:11:22.786Z  INFO 159 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.291s)
+2026-11-10T11:11:22.886Z  INFO 159 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T11:11:23.126Z  INFO 159 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T11:11:23.261Z  INFO 159 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T11:11:23.628Z  INFO 159 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.281s)
+2026-11-10T11:11:33.899Z  INFO 159 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 35641 (http) with context path '/'
+2026-11-10T11:11:33.964Z  INFO 159 --- [contact-groups-backend] [           main] a.c.acceptance.LargeGroupAcceptanceIT    : Started LargeGroupAcceptanceIT in 41.739 seconds (process running for 75.755)
+2026-11-10T11:11:35.135Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T11:11:35.136Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T11:11:35.138Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 363.1 s -- in app.contactgroups.acceptance.LargeGroupAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us011ExportAcceptanceIT
+2026-11-10T11:16:28.938Z  INFO 159 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us011ExportAcceptanceIT]: Us011ExportAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:16:28.947Z  INFO 159 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us011ExportAcceptanceIT
+2026-11-10T11:16:32.575Z  INFO 159 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/exports status=403 user=uid-petra
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.647 s -- in app.contactgroups.acceptance.Us011ExportAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+2026-11-10T11:16:34.589Z  INFO 159 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us013HistoryAcceptanceIT]: Us013HistoryAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:16:34.597Z  INFO 159 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+2026-11-10T11:16:35.129Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:35.379Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:35.590Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:35.785Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:36.018Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:36.214Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:36.381Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:36.625Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:36.851Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:37.033Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:37.199Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:37.406Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:37.606Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:37.746Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T11:16:37.973Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:38.183Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:38.498Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:38.665Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-petra
+2026-11-10T11:16:38.835Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+[ERROR] Tests run: 20, Failures: 20, Errors: 0, Skipped: 0, Time elapsed: 4.263 s <<< FAILURE! -- in app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone -- Time elapsed: 0.297 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone(Us013HistoryAcceptanceIT.java:260)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc -- Time elapsed: 0.221 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc(Us013HistoryAcceptanceIT.java:251)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_05_anExportIsRecordedWithWhoWhenAndTheCount -- Time elapsed: 0.248 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.entries(AcceptanceBase.java:367)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_05_anExportIsRecordedWithWhoWhenAndTheCount(Us013HistoryAcceptanceIT.java:134)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_02_twoFieldChangesOfOneSaveAreGroupedTogether -- Time elapsed: 0.210 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_02_twoFieldChangesOfOneSaveAreGroupedTogether(Us013HistoryAcceptanceIT.java:80)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_08_aRefusedSaveWritesNoEntry -- Time elapsed: 0.193 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.groupTotal(Us013HistoryAcceptanceIT.java:40)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_08_aRefusedSaveWritesNoEntry(Us013HistoryAcceptanceIT.java:310)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_07_oldAndNewValueOfLongNotesAreKeptInFull -- Time elapsed: 0.231 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_07_oldAndNewValueOfLongNotesAreKeptInFull(Us013HistoryAcceptanceIT.java:302)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_05_anOldEmptyValueIsReportedAsEmpty -- Time elapsed: 0.195 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_05_anOldEmptyValueIsReportedAsEmpty(Us013HistoryAcceptanceIT.java:280)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_01_aSaveWithNoChangeWritesNoEntry -- Time elapsed: 0.167 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.groupTotal(Us013HistoryAcceptanceIT.java:40)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_01_aSaveWithNoChangeWritesNoEntry(Us013HistoryAcceptanceIT.java:241)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_10_afterAnErasureTheEntriesStayWithTheActorAndTheValuesAreErased -- Time elapsed: 0.242 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_10_afterAnErasureTheEntriesStayWithTheActorAndTheValuesAreErased(Us013HistoryAcceptanceIT.java:205)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry -- Time elapsed: 0.225 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.entries(AcceptanceBase.java:367)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry(Us013HistoryAcceptanceIT.java:151)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_07_viewingAndSearchingLeaveNoEntry -- Time elapsed: 0.181 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.groupTotal(Us013HistoryAcceptanceIT.java:40)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_07_viewingAndSearchingLeaveNoEntry(Us013HistoryAcceptanceIT.java:164)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_09_noEndpointChangesOrDeletesAnEntry -- Time elapsed: 0.165 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_09_noEndpointChangesOrDeletesAnEntry(Us013HistoryAcceptanceIT.java:182)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_01_aChangeShowsWhoWhenWhichFieldAndOldAndNewValue -- Time elapsed: 0.205 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_01_aChangeShowsWhoWhenWhichFieldAndOldAndNewValue(Us013HistoryAcceptanceIT.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_11_deletingAndRestoringAContactGivesTwoEntries -- Time elapsed: 0.199 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_11_deletingAndRestoringAContactGivesTwoEntries(Us013HistoryAcceptanceIT.java:226)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_12_deletingAndRestoringAGroupGivesTwoGroupLevelEntries -- Time elapsed: 0.138 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_12_deletingAndRestoringAGroupGivesTwoGroupLevelEntries(Us013HistoryAcceptanceIT.java:232)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_04_aRemovedMembersEarlierEntriesRemainWithTheName -- Time elapsed: 0.225 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_04_aRemovedMembersEarlierEntriesRemainWithTheName(Us013HistoryAcceptanceIT.java:272)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_03_anAddedTagAndAttributeAreRecordedWithNameKeyAndValue -- Time elapsed: 0.210 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.contactEntries(Us013HistoryAcceptanceIT.java:36)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_03_anAddedTagAndAttributeAreRecordedWithNameKeyAndValue(Us013HistoryAcceptanceIT.java:105)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_04_renamingATagGivesOneEntryPerAffectedContactInTheGroupHistory -- Time elapsed: 0.314 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.entries(AcceptanceBase.java:367)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_04_renamingATagGivesOneEntryPerAffectedContactInTheGroupHistory(Us013HistoryAcceptanceIT.java:118)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_08_aViewerHasNoHistory -- Time elapsed: 0.166 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 403
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Res.expectError(Res.java:44)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.AC_013_08_aViewerHasNoHistory(Us013HistoryAcceptanceIT.java:175)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_06_whenTheGroupIsDeletedForGoodAllItsHistoryIsDeleted -- Time elapsed: 0.169 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us013HistoryAcceptanceIT.EX_013_06_whenTheGroupIsDeletedForGoodAllItsHistoryIsDeleted(Us013HistoryAcceptanceIT.java:289)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT
+2026-11-10T11:16:38.851Z  INFO 159 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT]: Us014GroupHistoryAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:16:38.857Z  INFO 159 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT
+2026-11-10T11:16:39.162Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:39.365Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:39.567Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:39.905Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:40.133Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-petra
+2026-11-10T11:16:40.541Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:40.785Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:40.999Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:41.243Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:41.450Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:41.737Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:41.926Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+2026-11-10T11:16:42.170Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+[ERROR] Tests run: 13, Failures: 13, Errors: 0, Skipped: 0, Time elapsed: 3.333 s <<< FAILURE! -- in app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_03_theTypeFilterShowsOnlyThoseTypes -- Time elapsed: 0.301 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_03_theTypeFilterShowsOnlyThoseTypes(Us014GroupHistoryAcceptanceIT.java:59)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_06_aFilterWithoutAMatchGivesAnEmptyPage -- Time elapsed: 0.202 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_06_aFilterWithoutAMatchGivesAnEmptyPage(Us014GroupHistoryAcceptanceIT.java:94)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_01_anEntryAt2330UtcBelongsToTheNextDayInLjubljana -- Time elapsed: 0.200 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_01_anEntryAt2330UtcBelongsToTheNextDayInLjubljana(Us014GroupHistoryAcceptanceIT.java:124)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_05_personAndTypeCombineWithAnd -- Time elapsed: 0.337 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_05_personAndTypeCombineWithAnd(Us014GroupHistoryAcceptanceIT.java:85)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_07_aViewerHasNoGroupHistory -- Time elapsed: 0.227 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 403
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Res.expectError(Res.java:44)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_07_aViewerHasNoGroupHistory(Us014GroupHistoryAcceptanceIT.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_04_theDateRangeUsesDaysInLjubljana -- Time elapsed: 0.406 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_04_theDateRangeUsesDaysInLjubljana(Us014GroupHistoryAcceptanceIT.java:73)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_08_onlyEntriesOfTheOwnGroupAreShown -- Time elapsed: 0.243 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_08_onlyEntriesOfTheOwnGroupAreShown(Us014GroupHistoryAcceptanceIT.java:112)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_02_aRangeWithTheEndBeforeTheStartIsRefused -- Time elapsed: 0.213 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 400
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Res.expectError(Res.java:44)
+	at app.contactgroups.acceptance.Res.expectFieldCode(Res.java:64)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_02_aRangeWithTheEndBeforeTheStartIsRefused(Us014GroupHistoryAcceptanceIT.java:133)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_01_aChangeByTheOwnerAppearsAtTheTop -- Time elapsed: 0.244 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_01_aChangeByTheOwnerAppearsAtTheTop(Us014GroupHistoryAcceptanceIT.java:39)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_03_aPersonWhoLeftIsStillSelectableWhileEntriesExist -- Time elapsed: 0.204 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_03_aPersonWhoLeftIsStillSelectableWhileEntriesExist(Us014GroupHistoryAcceptanceIT.java:140)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_04_25EntriesAreOnePageAnd26AreTwo -- Time elapsed: 0.286 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_04_25EntriesAreOnePageAnd26AreTwo(Us014GroupHistoryAcceptanceIT.java:150)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_05_aGroupWithoutContactEventsHasNoContactEntries -- Time elapsed: 0.188 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.EX_014_05_aGroupWithoutContactEventsHasNoContactEntries(Us014GroupHistoryAcceptanceIT.java:161)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_02_thePersonFilterShowsOnlyThatPersonsEntries -- Time elapsed: 0.243 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us014GroupHistoryAcceptanceIT.AC_014_02_thePersonFilterShowsOnlyThatPersonsEntries(Us014GroupHistoryAcceptanceIT.java:49)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT
+2026-11-10T11:16:42.186Z  INFO 159 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT]: Us017SecuredApiAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:16:42.193Z  INFO 159 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT
+2026-11-10T11:16:42.290Z  INFO 159 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/** status=404 user=uid-ana
+2026-11-10T11:16:42.379Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-ana
+2026-11-10T11:16:42.389Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-ana
+2026-11-10T11:16:42.459Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/members status=404 user=uid-ana
+2026-11-10T11:16:42.466Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-ana
+2026-11-10T11:16:42.578Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/exports status=403 user=uid-petra
+2026-11-10T11:16:42.683Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T11:16:43.122Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-boris
+2026-11-10T11:16:43.133Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId} status=404 user=uid-boris
+2026-11-10T11:16:43.148Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.162Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.172Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/members status=404 user=uid-boris
+2026-11-10T11:16:43.181Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/members/{userId} status=404 user=uid-boris
+2026-11-10T11:16:43.190Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/members/{userId} status=404 user=uid-boris
+2026-11-10T11:16:43.200Z  INFO 159 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/leave status=404 user=uid-boris
+2026-11-10T11:16:43.210Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/invitations status=404 user=uid-boris
+2026-11-10T11:16:43.220Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/invitations status=404 user=uid-boris
+2026-11-10T11:16:43.229Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/invitations/{invitationId} status=404 user=uid-boris
+2026-11-10T11:16:43.239Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=404 user=uid-boris
+2026-11-10T11:16:43.253Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-boris
+2026-11-10T11:16:43.266Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T11:16:43.278Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T11:16:43.289Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T11:16:43.298Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/trash status=404 user=uid-boris
+2026-11-10T11:16:43.307Z  INFO 159 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/restore status=404 user=uid-boris
+2026-11-10T11:16:43.316Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/trash-contacts status=404 user=uid-boris
+2026-11-10T11:16:43.325Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/tags status=404 user=uid-boris
+2026-11-10T11:16:43.335Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId}/tags/{tagId} status=404 user=uid-boris
+2026-11-10T11:16:43.344Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/tags/{tagId} status=404 user=uid-boris
+2026-11-10T11:16:43.353Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/attribute-keys status=404 user=uid-boris
+2026-11-10T11:16:43.363Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/companies status=404 user=uid-boris
+2026-11-10T11:16:43.372Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/exports status=404 user=uid-boris
+2026-11-10T11:16:43.386Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.400Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.416Z  INFO 159 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.427Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/versions status=404 user=uid-boris
+2026-11-10T11:16:43.442Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.455Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.469Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.484Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.498Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-10T11:16:43.737Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T11:16:43.747Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T11:16:43.823Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-10T11:16:43.964Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-10T11:16:43.966Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-10T11:16:43.967Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-10T11:16:44.020Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-10T11:16:44.142Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-marko
+2026-11-10T11:16:44.342Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-10T11:16:44.344Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-10T11:16:44.355Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-ana
+2026-11-10T11:16:44.366Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+2026-11-10T11:16:44.399Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T11:16:46.613Z  WARN 159 --- [contact-groups-backend] [-auto-1-exec-10] com.zaxxer.hikari.pool.ProxyConnection   : HikariPool-1 - Connection org.postgresql.jdbc.PgConnection@4c90ec92 marked as broken because of SQLSTATE(08003), ErrorCode(0)
+
+org.postgresql.util.PSQLException: This connection has been closed.
+	at org.postgresql.jdbc.PgConnection.checkClosed(PgConnection.java:1050) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgConnection.clearWarnings(PgConnection.java:942) ~[postgresql-42.7.14.jar:42.7.14]
+	at com.zaxxer.hikari.pool.ProxyConnection.close(ProxyConnection.java:258) ~[HikariCP-6.3.3.jar:na]
+	at app.contactgroups.repository.HealthRepository.databaseWorks(HealthRepository.java:24) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728) ~[spring-aop-6.2.19.jar:6.2.19]
+	at app.contactgroups.repository.HealthRepository$$SpringCGLIB$$0.databaseWorks(<generated>) ~[classes/:na]
+	at app.contactgroups.service.HealthService.databaseWorks(HealthService.java:17) ~[classes/:na]
+	at app.contactgroups.api.HealthController.getHealth(HealthController.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.59.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.59.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57) ~[tomcat-embed-websocket-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:370) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.BodySizeLimitFilter.doFilterInternal(BodySizeLimitFilter.java:42) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.RateLimitFilter.doFilterInternal(RateLimitFilter.java:44) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.AuthenticationFilter.doFilterInternal(AuthenticationFilter.java:177) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.UserSyncFilter.doFilterInternal(UserSyncFilter.java:46) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.VerifiedEmailFilter.doFilterInternal(VerifiedEmailFilter.java:41) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.doFilterInternal(BearerTokenAuthenticationFilter.java:135) ~[spring-security-oauth2-resource-server-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.RequestLogFilter.doFilterInternal(RequestLogFilter.java:30) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:410) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2197) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-11-10T11:16:46.711Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-10T11:16:46.712Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-10T11:16:46.713Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-10T11:16:49.916Z  INFO 159 --- [contact-groups-backend] [o-auto-1-exec-8] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 3150 ms
+[ERROR] Tests run: 54, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 7.821 s <<< FAILURE! -- in app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.EX_017_07_aMethodNotAllowedOnAPathGivesAnErrorResponseWithStatus405 -- Time elapsed: 0.090 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 405
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.EX_017_07_aMethodNotAllowedOnAPathGivesAnErrorResponseWithStatus405(Us017SecuredApiAcceptanceIT.java:299)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.EX_017_06_aGroupInTrashRequestedByANonOwnerMemberIsNotFound -- Time elapsed: 0.104 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.EX_017_06_aGroupInTrashRequestedByANonOwnerMemberIsNotFound(Us017SecuredApiAcceptanceIT.java:289)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken -- Time elapsed: 0.109 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting size of:
+  [Operation[method=GET, path=/health, id=getHealth, hasBody=false, statuses=[200, 503]],
+    Operation[method=GET, path=/me, id=getMe, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=DELETE, path=/me, id=deleteAccount, hasBody=false, statuses=[204, 401, 403, 409]],
+    Operation[method=GET, path=/groups, id=listGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=POST, path=/groups, id=createGroup, hasBody=true, statuses=[201, 400, 401, 403, 409, 413, 429]],
+    Operation[method=GET, path=/deleted-groups, id=listDeletedGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=GET, path=/groups/{groupId}, id=getGroup, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}, id=renameGroup, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/trash, id=trashGroup, hasBody=true, statuses=[204, 400, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/restore, id=restoreGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/members, id=listMembers, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/members/{userId}, id=changeRole, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/members/{userId}, id=removeMember, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/leave, id=leaveGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/invitations, id=listInvitations, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/invitations, id=createInvitation, hasBody=true, statuses=[201, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/invitations/{invitationId}, id=cancelInvitation, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts, id=createContact, hasBody=true, statuses=[201, 400, 401, 403, 404, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/search, id=searchContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}, id=getContact, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/contacts/{contactId}, id=saveContact, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/contacts/{contactId}, id=eraseContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/trash, id=trashContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/restore, id=restoreContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/trash-contacts, id=listTrashedContacts, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/tags, id=listTags, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}/tags/{tagId}, id=renameTag, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/tags/{tagId}, id=deleteTag, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/attribute-keys, id=listAttributeKeys, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/companies, id=listCompanies, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/exports, id=exportContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/history, id=listGroupHistory, hasBody=false, statuses=[200, 400, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/history/actors, id=listHistoryActors, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/history, id=listContactHistory, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions, id=listVersions, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions/{number}, id=getVersion, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/versions/{number}/restore, id=restoreVersion, hasBody=true, statuses=[200, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/search, id=findDuplicates, hasBody=false, statuses=[200, 401, 403, 404, 429]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/dismissals, id=dismissDuplicates, hasBody=true, statuses=[204, 400, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/merges, id=mergeContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]]]
+to be greater than 40 but was 40
+	at app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken(Us017SecuredApiAcceptanceIT.java:90)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_11_theOpenApiDescriptionListsEveryEndpointOfTheContract -- Time elapsed: 3.276 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[DELETE /me] 
+Expecting value to be false but was true
+	at app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_11_theOpenApiDescriptionListsEveryEndpointOfTheContract(Us017SecuredApiAcceptanceIT.java:205)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_01_aChangeShowsWhoWhenWhichFieldAndOldAndNewValue:57->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_02_twoFieldChangesOfOneSaveAreGroupedTogether:80->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_03_anAddedTagAndAttributeAreRecordedWithNameKeyAndValue:105->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_04_renamingATagGivesOneEntryPerAffectedContactInTheGroupHistory:118->AcceptanceBase.entries:367 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_05_anExportIsRecordedWithWhoWhenAndTheCount:134->AcceptanceBase.entries:367 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_06_everyGroupLevelEventHasOneEntry:151->AcceptanceBase.entries:367 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_07_viewingAndSearchingLeaveNoEntry:164->groupTotal:40 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_08_aViewerHasNoHistory:175 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 403
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_09_noEndpointChangesOrDeletesAnEntry:182 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_10_afterAnErasureTheEntriesStayWithTheActorAndTheValuesAreErased:205 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_11_deletingAndRestoringAContactGivesTwoEntries:226->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.AC_013_12_deletingAndRestoringAGroupGivesTwoGroupLevelEntries:232 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_01_aSaveWithNoChangeWritesNoEntry:241->groupTotal:40 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_02_theTimeIsStoredInUtc:251->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_03_afterTheActorsAccountIsDeletedTheNameStaysAndTheEmailIsGone:260 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 204
+ but was: 405
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_04_aRemovedMembersEarlierEntriesRemainWithTheName:272->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_05_anOldEmptyValueIsReportedAsEmpty:280->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_06_whenTheGroupIsDeletedForGoodAllItsHistoryIsDeleted:289 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_07_oldAndNewValueOfLongNotesAreKeptInFull:302->contactEntries:36 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us013HistoryAcceptanceIT.EX_013_08_aRefusedSaveWritesNoEntry:310->groupTotal:40 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_01_aChangeByTheOwnerAppearsAtTheTop:39 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_02_thePersonFilterShowsOnlyThatPersonsEntries:49 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_03_theTypeFilterShowsOnlyThoseTypes:59 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_04_theDateRangeUsesDaysInLjubljana:73 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_05_personAndTypeCombineWithAnd:85 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_06_aFilterWithoutAMatchGivesAnEmptyPage:94 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_07_aViewerHasNoGroupHistory:103 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 403
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.AC_014_08_onlyEntriesOfTheOwnGroupAreShown:112 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.EX_014_01_anEntryAt2330UtcBelongsToTheNextDayInLjubljana:124 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.EX_014_02_aRangeWithTheEndBeforeTheStartIsRefused:133 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 400
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.EX_014_03_aPersonWhoLeftIsStillSelectableWhileEntriesExist:140 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.EX_014_04_25EntriesAreOnePageAnd26AreTwo:150 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us014GroupHistoryAcceptanceIT.EX_014_05_aGroupWithoutContactEventsHasNoContactEntries:161 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us017SecuredApiAcceptanceIT.AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken:90 
+Expecting size of:
+  [Operation[method=GET, path=/health, id=getHealth, hasBody=false, statuses=[200, 503]],
+    Operation[method=GET, path=/me, id=getMe, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=DELETE, path=/me, id=deleteAccount, hasBody=false, statuses=[204, 401, 403, 409]],
+    Operation[method=GET, path=/groups, id=listGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=POST, path=/groups, id=createGroup, hasBody=true, statuses=[201, 400, 401, 403, 409, 413, 429]],
+    Operation[method=GET, path=/deleted-groups, id=listDeletedGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=GET, path=/groups/{groupId}, id=getGroup, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}, id=renameGroup, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/trash, id=trashGroup, hasBody=true, statuses=[204, 400, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/restore, id=restoreGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/members, id=listMembers, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/members/{userId}, id=changeRole, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/members/{userId}, id=removeMember, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/leave, id=leaveGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/invitations, id=listInvitations, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/invitations, id=createInvitation, hasBody=true, statuses=[201, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/invitations/{invitationId}, id=cancelInvitation, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts, id=createContact, hasBody=true, statuses=[201, 400, 401, 403, 404, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/search, id=searchContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}, id=getContact, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/contacts/{contactId}, id=saveContact, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/contacts/{contactId}, id=eraseContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/trash, id=trashContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/restore, id=restoreContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/trash-contacts, id=listTrashedContacts, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/tags, id=listTags, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}/tags/{tagId}, id=renameTag, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/tags/{tagId}, id=deleteTag, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/attribute-keys, id=listAttributeKeys, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/companies, id=listCompanies, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/exports, id=exportContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/history, id=listGroupHistory, hasBody=false, statuses=[200, 400, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/history/actors, id=listHistoryActors, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/history, id=listContactHistory, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions, id=listVersions, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions/{number}, id=getVersion, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/versions/{number}/restore, id=restoreVersion, hasBody=true, statuses=[200, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/search, id=findDuplicates, hasBody=false, statuses=[200, 401, 403, 404, 429]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/dismissals, id=dismissDuplicates, hasBody=true, statuses=[204, 400, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/merges, id=mergeContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]]]
+to be greater than 40 but was 40
+[ERROR]   Us017SecuredApiAcceptanceIT.AC_017_11_theOpenApiDescriptionListsEveryEndpointOfTheContract:205 [DELETE /me] 
+Expecting value to be false but was true
+[ERROR]   Us017SecuredApiAcceptanceIT.EX_017_06_aGroupInTrashRequestedByANonOwnerMemberIsNotFound:289 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us017SecuredApiAcceptanceIT.EX_017_07_aMethodNotAllowedOnAPathGivesAnErrorResponseWithStatus405:299 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 405
+ but was: 404
+[INFO] 
+[ERROR] Tests run: 108, Failures: 37, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  07:28 min
+[INFO] Finished at: 2026-11-10T11:17:04Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release

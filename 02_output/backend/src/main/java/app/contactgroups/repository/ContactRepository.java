@@ -179,7 +179,7 @@ public class ContactRepository {
     return value.isEmpty() ? null : value;
   }
 
-  private static Contact contact(ResultSet rs) throws SQLException {
+  static Contact contact(ResultSet rs) throws SQLException {
     Timestamp trashed = rs.getTimestamp("trashed_at");
     return new Contact(
         rs.getObject("id", UUID.class),

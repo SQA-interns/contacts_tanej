@@ -1,0 +1,203 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:apply (default-cli) @ contact-groups-backend ---
+[INFO] clean file: /w/src/main/java/app/contactgroups/repository/ExportRepository.java
+[INFO] Spotless.Java is keeping 158 files clean - 1 were changed to be clean, 1 were already clean, 156 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- spotless:2.46.1:check (default-cli) @ contact-groups-backend ---
+[INFO] Spotless.Java is keeping 158 files clean - 0 needs changes to be clean, 0 were already clean, 158 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] >>> pmd:3.27.0:check (default-cli) > :pmd @ contact-groups-backend >>>
+[INFO] 
+[INFO] --- pmd:3.27.0:pmd (pmd) @ contact-groups-backend ---
+[WARNING] Unable to locate Source XRef to link to -- DISABLED
+[INFO] PMD version: 7.14.0
+[WARNING] Unable to find a URL to the parent project. The parent menu will NOT be added.
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:2.0.0-M9 skin
+[INFO] 
+[INFO] <<< pmd:3.27.0:check (default-cli) < :pmd @ contact-groups-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- pmd:3.27.0:check (default-cli) @ contact-groups-backend ---
+[INFO] 
+[INFO] >>> pmd:3.27.0:cpd-check (default-cli) > :cpd @ contact-groups-backend >>>
+[INFO] 
+[INFO] --- pmd:3.27.0:cpd (cpd) @ contact-groups-backend ---
+[WARNING] Unable to locate Source XRef to link to -- DISABLED
+[WARNING] Unable to find a URL to the parent project. The parent menu will NOT be added.
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:2.0.0-M9 skin
+[INFO] 
+[INFO] <<< pmd:3.27.0:cpd-check (default-cli) < :cpd @ contact-groups-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- pmd:3.27.0:cpd-check (default-cli) @ contact-groups-backend ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] argLine set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/w/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 97 source files with javac [debug parameters release 21] to target/classes
+[INFO] /w/src/main/java/app/contactgroups/service/ExportWorkbook.java: /w/src/main/java/app/contactgroups/service/ExportWorkbook.java uses or overrides a deprecated API.
+[INFO] /w/src/main/java/app/contactgroups/service/ExportWorkbook.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 61 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.domain.ExportLayoutTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.462 s -- in app.contactgroups.domain.ExportLayoutTest
+[INFO] Running app.contactgroups.ArchitectureTest
+11:20:12.831 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.9
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.55 s -- in app.contactgroups.ArchitectureTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] Building jar: /w/target/contact-groups-backend.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us009ListAcceptanceIT
+11:21:02.834 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us009ListAcceptanceIT]: Us009ListAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:21:05.346 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us009ListAcceptanceIT
+11:21:10.250 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+11:21:10.330 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+11:21:10.443 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+11:21:17.569 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+11:21:17.588 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+11:21:17.714 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+11:21:19.052 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+11:21:19.127 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+11:21:20.615 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 83949edb9736a12322969820ba8b40f9b1d8b869643150a7935c5db5ab8bd71d
+11:21:22.457 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT3.404368376S
+11:21:22.482 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+11:21:22.483 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+11:21:22.489 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+11:21:22.490 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+11:21:22.780 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: cb787c475d09b67fe121714cfabf086682c6d94267cd522ebf46e6b811fc976b
+11:21:27.092 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT4.6010923S
+11:21:27.093 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:51471/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T11:21:31.726Z  INFO 246 --- [contact-groups-backend] [           main] a.c.acceptance.Us009ListAcceptanceIT     : Starting Us009ListAcceptanceIT using Java 21.0.9 with PID 246 (started by root in /w)
+2026-11-10T11:21:31.733Z  INFO 246 --- [contact-groups-backend] [           main] a.c.acceptance.Us009ListAcceptanceIT     : The following 1 profile is active: "test"
+2026-11-10T11:21:51.740Z  INFO 246 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T11:21:51.894Z  INFO 246 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T11:21:51.896Z  INFO 246 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T11:21:52.309Z  INFO 246 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T11:21:52.310Z  INFO 246 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 20343 ms
+2026-11-10T11:21:55.268Z  INFO 246 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T11:21:56.829Z  INFO 246 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2c01fcbc
+2026-11-10T11:21:56.854Z  INFO 246 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T11:21:57.120Z  INFO 246 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:51471/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T11:21:57.652Z  INFO 246 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T11:21:57.683Z  INFO 246 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.262s)
+2026-11-10T11:21:57.783Z  INFO 246 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T11:21:58.069Z  INFO 246 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T11:21:58.205Z  INFO 246 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T11:21:58.599Z  INFO 246 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.298s)
+2026-11-10T11:22:11.355Z  INFO 246 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 37961 (http) with context path '/'
+2026-11-10T11:22:11.432Z  INFO 246 --- [contact-groups-backend] [           main] a.c.acceptance.Us009ListAcceptanceIT     : Started Us009ListAcceptanceIT in 43.851 seconds (process running for 76.602)
+2026-11-10T11:22:19.928Z  INFO 246 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T11:22:19.928Z  INFO 246 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T11:22:19.930Z  INFO 246 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 100.1 s -- in app.contactgroups.acceptance.Us009ListAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us010FilterAcceptanceIT
+2026-11-10T11:22:41.807Z  INFO 246 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us010FilterAcceptanceIT]: Us010FilterAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:22:41.827Z  INFO 246 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us010FilterAcceptanceIT
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.066 s -- in app.contactgroups.acceptance.Us010FilterAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us011ExportAcceptanceIT
+2026-11-10T11:22:50.878Z  INFO 246 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us011ExportAcceptanceIT]: Us011ExportAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:22:50.895Z  INFO 246 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us011ExportAcceptanceIT
+2026-11-10T11:23:06.668Z  INFO 246 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/exports status=403 user=uid-petra
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.73 s -- in app.contactgroups.acceptance.Us011ExportAcceptanceIT
+[INFO] Running app.contactgroups.it.ContactsIT
+2026-11-10T11:23:11.612Z  INFO 246 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.ContactsIT]: ContactsIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:23:12.522Z  INFO 246 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.ContactsIT
+2026-11-10T11:23:14.127Z  INFO 246 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T11:23:14.147Z  INFO 246 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T11:23:14.168Z  INFO 246 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T11:23:15.109Z  INFO 246 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.397 s -- in app.contactgroups.it.ContactsIT
+[INFO] Running app.contactgroups.it.TrashIT
+2026-11-10T11:23:17.016Z  INFO 246 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.TrashIT]: TrashIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T11:23:17.031Z  INFO 246 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.TrashIT
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.524 s -- in app.contactgroups.it.TrashIT
+2026-11-10T11:23:19.761Z  INFO 246 --- [contact-groups-backend] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-10T11:23:19.767Z  INFO 246 --- [contact-groups-backend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-11-10T11:23:19.781Z  INFO 246 --- [contact-groups-backend] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-10T11:23:19.788Z  INFO 246 --- [contact-groups-backend] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+[ERROR] Surefire is going to kill self fork JVM. The exit has elapsed 30 seconds after System.exit(0).
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 67, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (report) @ contact-groups-backend ---
+[INFO] Loading execution data file /w/target/jacoco.exec
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  06:11 min
+[INFO] Finished at: 2026-11-10T11:24:06Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.jacoco:jacoco-maven-plugin:0.8.13:report (report) on project contact-groups-backend: An error has occurred in JaCoCo report generation. Error while creating report: malformed input around byte 2 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended

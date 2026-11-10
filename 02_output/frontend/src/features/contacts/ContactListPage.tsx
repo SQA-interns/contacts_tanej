@@ -9,6 +9,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { StatePanel } from '@/components/ui/state-panel';
 import type { components } from '@/lib/api/schema';
+import { ExportBar } from '@/features/export/ExportBar';
+import { useExport } from '@/features/export/useExport';
+import { useSelection } from '@/features/export/useSelection';
 import { type Condition } from './conditions';
 import { ContactTable, type Sort } from './ContactTable';
 import { FilterChips } from './FilterChips';
@@ -37,7 +40,7 @@ function useDebounced(value: string): string {
  * only where the rules say so (R-009-08). A Viewer sees the same list (R-009-10).
  */
 export function ContactListPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { api } = useServices();
   const group = useOutletContext<GroupSummary>();
   const navigate = useNavigate();
@@ -48,6 +51,8 @@ export function ContactListPage() {
   const [filtering, setFiltering] = useState(false);
   const q = useDebounced(text);
   const canEdit = group.role !== 'VIEWER';
+  const selection = useSelection();
+  const exporter = useExport(group.id);
 
   const list = useQuery({
     queryKey: ['contacts', group.id, { q, conditions, sort, page }],
@@ -64,6 +69,7 @@ export function ContactListPage() {
   function changeText(value: string) {
     setText(value);
     setPage(1);
+    selection.clear();
   }
 
   function changeSort(field: SortField) {
@@ -75,11 +81,23 @@ export function ContactListPage() {
     setText('');
     setConditions([]);
     setPage(1);
+    selection.clear();
   }
 
   function changeConditions(next: Condition[]) {
     setConditions(next);
     setPage(1);
+    selection.clear();
+  }
+
+  /** Ticked ids as ids, or the current filter for "select all N results" (R-011-04). */
+  function exportSelection() {
+    const language = i18n.language === 'sl' ? 'sl' : 'en';
+    void exporter.run(
+      selection.all
+        ? { language, sort, filter: { q, conditions } }
+        : { language, sort, contactIds: [...selection.ids] },
+    );
   }
 
   const addContact = canEdit && (
@@ -88,6 +106,7 @@ export function ContactListPage() {
   const searching = q.trim() !== '' || text.trim() !== '' || conditions.length > 0;
 
   let body;
+  let pageIds: string[] = [];
   if (list.isPending) body = <StatePanel state="loading" />;
   else if (list.isError) body = <StatePanel state="error" onRetry={() => void list.refetch()} />;
   else if (list.data.total === 0 && !searching) {
@@ -110,12 +129,38 @@ export function ContactListPage() {
     );
   } else {
     const data = list.data;
+    pageIds = data.items.map((row) => row.id);
     body = (
       <>
         <p role="status" className="mb-2 text-text-muted">
           {data.total === 1 ? t('list.totalOne') : t('list.total', { total: data.total })}
         </p>
-        <ContactTable rows={data.items} groupId={group.id} sort={sort} onSort={changeSort} />
+        {canEdit && (
+          <ExportBar
+            total={data.total}
+            count={selection.all ? data.total : selection.ids.size}
+            pageAllTicked={pageIds.length > 0 && pageIds.every((id) => selection.ids.has(id))}
+            allResults={selection.all}
+            state={exporter.state}
+            onTogglePage={(checked) => selection.set(pageIds, checked, pageIds)}
+            onSelectAll={selection.selectAll}
+            onExport={exportSelection}
+          />
+        )}
+        <ContactTable
+          rows={data.items}
+          groupId={group.id}
+          sort={sort}
+          onSort={changeSort}
+          ticks={
+            canEdit
+              ? {
+                  isTicked: (id) => selection.all || selection.ids.has(id),
+                  onTick: (id, checked) => selection.set([id], checked, pageIds),
+                }
+              : undefined
+          }
+        />
         <Pager page={data.page} last={Math.ceil(data.total / data.pageSize)} onPage={setPage} />
       </>
     );

@@ -26,6 +26,8 @@ interface ContactTableProps {
   groupId: string;
   sort: Sort | undefined;
   onSort: (field: SortField) => void;
+  /** Tick boxes of the export selection; absent for a Viewer (R-011-10). */
+  ticks?: { isTicked: (id: string) => boolean; onTick: (id: string, checked: boolean) => void };
 }
 
 function ariaSort(sort: Sort | undefined, field: string) {
@@ -43,7 +45,7 @@ function arrow(sort: Sort | undefined, field: string) {
  * sorts by its column; a click on the sorted column turns the direction. A row opens the contact
  * (R-009-09).
  */
-export function ContactTable({ rows, groupId, sort, onSort }: ContactTableProps) {
+export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTableProps) {
   const { t, i18n } = useTranslation();
   const language = i18n.language as Language;
 
@@ -74,6 +76,11 @@ export function ContactTable({ rows, groupId, sort, onSort }: ContactTableProps)
     <table className="w-full text-left max-md:block">
       <thead className="max-md:sr-only">
         <tr className="border-b border-border">
+          {ticks && (
+            <th scope="col" className="w-12 px-3 py-2">
+              <span className="sr-only">{t('export.selectColumn')}</span>
+            </th>
+          )}
           {COLUMNS.map(({ field, hideTablet }) => (
             <th
               key={field}
@@ -103,6 +110,17 @@ export function ContactTable({ rows, groupId, sort, onSort }: ContactTableProps)
             key={row.id}
             className="border-b border-border max-md:mb-3 max-md:block max-md:rounded-card max-md:border max-md:p-3"
           >
+            {ticks && (
+              <td className="px-3 py-2">
+                <input
+                  type="checkbox"
+                  className="size-5"
+                  aria-label={t('export.selectContact')}
+                  checked={ticks.isTicked(row.id)}
+                  onChange={(event) => ticks.onTick(row.id, event.target.checked)}
+                />
+              </td>
+            )}
             {COLUMNS.map(({ field, hideTablet }) => (
               <td
                 key={field}
