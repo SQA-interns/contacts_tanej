@@ -85,6 +85,26 @@ public class ContactRepository {
         .update();
   }
 
+  /**
+   * The contacts of the group that carry the tag, in Trash too, locked in id order until the end of
+   * the transaction so that no save changes them meanwhile (R-007-01, D-19).
+   */
+  public List<Contact> lockWithTag(UUID tagId) {
+    return jdbc.sql(
+            "SELECT c.* FROM contacts c JOIN contact_tags ct ON ct.contact_id = c.id"
+                + " WHERE ct.tag_id = ? ORDER BY c.id FOR UPDATE OF c")
+        .param(tagId)
+        .query((rs, n) -> contact(rs))
+        .list();
+  }
+
+  /** A change without a version still counts as a change of the contact (D-19, R-007-06). */
+  public void touch(List<UUID> contactIds) {
+    jdbc.sql("UPDATE contacts SET revision = revision + 1 WHERE id = ANY (?)")
+        .param(contactIds.toArray(UUID[]::new))
+        .update();
+  }
+
   private static String nul(String value) {
     return value.isEmpty() ? null : value;
   }

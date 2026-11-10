@@ -2,6 +2,7 @@ package app.contactgroups.repository;
 
 import app.contactgroups.domain.Tag;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -84,6 +85,38 @@ public class TagRepository {
                 + " AND NOT EXISTS (SELECT 1 FROM contact_tags ct WHERE ct.tag_id = t.id)")
         .params(groupId, name)
         .update();
+  }
+
+  /** The tag of the group, if it exists (a tag no contact carries does not exist, R-006-07). */
+  public Optional<Tag> find(UUID groupId, UUID tagId) {
+    return jdbc.sql(
+            "SELECT t.id, t.name, (SELECT count(*) FROM contact_tags ct WHERE ct.tag_id = t.id) AS n"
+                + " FROM tags t WHERE t.id = ? AND t.group_id = ?")
+        .params(tagId, groupId)
+        .query(
+            (rs, i) ->
+                new Tag(rs.getObject("id", UUID.class), rs.getString("name"), rs.getInt("n")))
+        .optional();
+  }
+
+  /** True when another tag of the group has this name ignoring case (BR-07). */
+  public boolean nameTakenByOther(UUID groupId, UUID tagId, String name) {
+    return jdbc.sql(
+            "SELECT EXISTS (SELECT 1 FROM tags WHERE group_id = ? AND id <> ?"
+                + " AND lower(name) = lower(?))")
+        .params(groupId, tagId, name)
+        .query(Boolean.class)
+        .single();
+  }
+
+  /** Gives the tag its new name; false when the tag is gone. */
+  public boolean rename(UUID tagId, String name) {
+    return jdbc.sql("UPDATE tags SET name = ? WHERE id = ?").params(name, tagId).update() == 1;
+  }
+
+  /** Deletes the tag and, by cascade, its place on every contact; false when it is gone. */
+  public boolean delete(UUID tagId) {
+    return jdbc.sql("DELETE FROM tags WHERE id = ?").param(tagId).update() == 1;
   }
 
   private static String likeFolded(String part) {

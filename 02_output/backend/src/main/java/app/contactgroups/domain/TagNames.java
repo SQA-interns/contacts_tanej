@@ -42,6 +42,16 @@ public final class TagNames {
     return List.copyOf(byKey.values());
   }
 
+  /** The new name of a tag (R-007-04): the same rules as one tag of a contact, field "name". */
+  public static String validateName(String raw) {
+    String name = raw == null ? "" : raw.strip();
+    List<FieldProblem> problems = new ArrayList<>();
+    if (!check(problems, "name", name)) {
+      throw new ApiException(ErrorCode.VALIDATION_FAILED, "The request is not valid.", problems);
+    }
+    return name;
+  }
+
   private static boolean check(List<FieldProblem> problems, String field, String name) {
     String code = null;
     String message = null;

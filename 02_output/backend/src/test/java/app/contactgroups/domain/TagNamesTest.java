@@ -18,6 +18,24 @@ class TagNamesTest {
     return ((ApiException) thrown).fields();
   }
 
+  private static FieldProblem refusedName(String name) {
+    Throwable thrown = catchThrowable(() -> TagNames.validateName(name));
+    assertThat(thrown).isInstanceOf(ApiException.class);
+    return ((ApiException) thrown).fields().get(0);
+  }
+
+  @Test
+  void aNewNameIsCheckedLikeATagAndReportedOnTheFieldName() {
+    assertThat(TagNames.validateName(" VIP ")).isEqualTo("VIP");
+    assertThat(TagNames.validateName("a".repeat(50))).hasSize(50);
+    assertThat(refusedName("a".repeat(51)))
+        .extracting(FieldProblem::field, FieldProblem::code)
+        .containsExactly("name", "TOO_LONG");
+    assertThat(refusedName("neue marke").code()).isEqualTo("INVALID_CHARACTERS");
+    assertThat(refusedName(null).code()).isEqualTo("TOO_SHORT");
+    assertThat(refusedName("  ").code()).isEqualTo("TOO_SHORT");
+  }
+
   @Test
   void acceptsLettersDigitsHyphenUnderscoreAndAccents() {
     assertThat(TagNames.validate(List.of("a-b_c9", "čaj2026", "Šola")))
