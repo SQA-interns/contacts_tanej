@@ -5,16 +5,17 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S5 implement US-016
-- Result: done (T-46, T-47 built; readings in D-45)
-- Gate: passed for the API (DoD-S-01: Us016 10 of 10 frozen API tests pass, also EX-013-03, EX-004-05 of US-013 and US-004, `out/logs/us016-final.log`). Browser tests AC-016-02, 05, 06 (`acceptance/groups-members.spec.ts`) were NOT run (they need the Compose stack); run them in `/review` or the NFR tasks.
-- Notes for the next session: `DELETE /me` in `AccountController`/`AccountService` (5-minute `auth_time`, SOLE_OWNER with `groups[]` incl. Trash, History actor e-mail removed, `deleted_accounts` row, user deleted). Web: `features/account/AccountPage` (route `account`, reuses `ConfirmDialog`), `AuthApi.deleteAccount()` (Firebase `deleteUser`). Cleanup of old `deleted_accounts` rows is still open (ADR-08, not in the tasks of US-016).
-- Backend full run `out/logs/us016-full.log`: failures only of US-017 contract tests for endpoints not yet built and US-020 to US-022. JaCoCo report generation fails with "malformed input" in the Docker run (exec file); the other checks ran separately: spotless, PMD, CPD clean (`out/logs/us016-check.log`). Vitest, tsc, eslint, prettier clean on the changed frontend files.
+- Session: S5 implement T-N01
+- Result: done (T-N01 built; readings in D-46)
+- Gate: not applicable (NFR task). NFR-01, NFR-02, NFR-04, DoD-P03, EX-009-08, EX-010-07 pass in `out/logs/perf-load-test.log` (p95: search 543 ms, open contact 17 ms, no errors in 1,740 requests).
+- Notes for the next session: `node scripts/perf/load-test.mjs [--duration 60] [--skip-seed]` needs the Compose stack up; it creates 100 emulator accounts (perf-user-001..100) and loads `scripts/perf/seed-10000.sql` (group a0000000-...-0 with 10,000 contacts, four groups of 250). Watch item in D-46: the two-word search with accents takes about 550 to 700 ms.
+- Browser tests AC-016-02, 05, 06 (`acceptance/groups-members.spec.ts`) are still not run; run them in `/review` or the NFR tasks. Cleanup of old `deleted_accounts` rows is open (ADR-08).
+- JaCoCo report generation fails with "malformed input" in the Docker run; spotless, PMD, CPD run separately.
 - Do not put "to", "from" or similar words in `aria-label`s on the History screen: the frozen tests use `getByLabel('To')`, which matches by substring.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /implement T-N01 (the NFR tasks T-N01 to T-N12 of INC-1 follow US-016, `docs/02_tasks.md`; then `/review INC-1`)
+- Command: /implement T-N02 (the NFR tasks T-N02 to T-N12 of INC-1, `docs/02_tasks.md`; then `/review INC-1`)
 - Waiting for: nothing
 
 ## Stories
