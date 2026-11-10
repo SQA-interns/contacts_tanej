@@ -316,7 +316,7 @@
 - Trigger: note from the developer with the answer to D-26: at 375 px the tab row (Contacts, Trash, Tags, History, Members, Duplicates) is cut off at the right edge in the wireframes. The wireframes stay as approved (D-26); the note binds the build (`/implement`, `/design`).
 - Options: 1. (proposed) The real screen wraps the tabs onto a second line, so nothing is hidden. 2. The real screen scrolls the tab row sideways with a visible hint that more tabs follow. Either satisfies the developer's note; the choice is made once, in the shared tab component, and applies at every width where the row does not fit.
 - Human response: the developer's note allows either option (2026-11-09)
-- Resolution: option 1, pending review
+- Resolution: option 1, built in the fix for F-02 (the tab row wraps in `GroupPage.tsx`)
 - Overrides: none
 
 ## D-28: Content-Security-Policy allows Google's sign-in script
