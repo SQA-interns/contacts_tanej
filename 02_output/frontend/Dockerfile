@@ -16,7 +16,7 @@ COPY docker/default.conf.template /etc/nginx/templates/default.conf.template
 COPY docker/40-config.sh /docker-entrypoint.d/40-config.sh
 COPY --from=build --chown=101:0 /w/dist /usr/share/nginx/html
 # only the CSP_ variables are substituted in the nginx template; $uri and the like stay untouched
-ENV NGINX_ENVSUBST_FILTER=^CSP_ CSP_CONNECT_EXTRA=
+ENV NGINX_ENVSUBST_FILTER=^CSP_ CSP_CONNECT_EXTRA= CSP_FRAME_EXTRA=
 USER 101
 EXPOSE 8080
 HEALTHCHECK --interval=15s --timeout=3s --retries=5 CMD curl -fsS http://localhost:8080/ || exit 1

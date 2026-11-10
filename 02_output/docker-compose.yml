@@ -50,6 +50,7 @@ services:
       FIREBASE_AUTH_DOMAIN: localhost
       FIREBASE_AUTH_EMULATOR_URL: http://localhost:9099
       CSP_CONNECT_EXTRA: http://localhost:9099 http://127.0.0.1:9099
+      CSP_FRAME_EXTRA: http://localhost:9099 http://127.0.0.1:9099
     ports:
       - "127.0.0.1:5173:8080"
 
