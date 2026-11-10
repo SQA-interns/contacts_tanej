@@ -26,6 +26,7 @@ function membersApi(pending: Invitation[], refuse?: { status: number; code: 'ALR
   const api: ApiClient = {
     ...groups,
     request: (async (method: string, path: string, body?: { email: string; role: Invitation['role'] }) => {
+      if (path === '/groups/g-1/members') return [];
       if (path !== base) return groups.request(method, path, body);
       calls.push(`${method} ${path} ${body ? JSON.stringify(body) : ''}`.trim());
       if (method === 'GET') return list.map((i) => ({ ...i }));

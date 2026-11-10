@@ -52,6 +52,11 @@ public class AccessService {
         groups.lockActiveOfMember(groupId, userId).orElseThrow(AccessService::notFound));
   }
 
+  /** Like {@link #requireMember} and locks the group row until the end of the transaction. */
+  public GroupSummary requireMemberLocked(UUID groupId, String userId) {
+    return groups.lockActiveOfMember(groupId, userId).orElseThrow(AccessService::notFound);
+  }
+
   private static GroupSummary ownerOnly(GroupSummary group) {
     if (group.role() != Role.OWNER) {
       throw forbidden();

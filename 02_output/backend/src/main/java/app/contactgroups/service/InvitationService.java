@@ -3,7 +3,6 @@ package app.contactgroups.service;
 import app.contactgroups.domain.ApiException;
 import app.contactgroups.domain.EmailAddress;
 import app.contactgroups.domain.ErrorCode;
-import app.contactgroups.domain.FieldProblem;
 import app.contactgroups.domain.Invitation;
 import app.contactgroups.domain.Role;
 import app.contactgroups.repository.InvitationRepository;
@@ -61,7 +60,7 @@ public class InvitationService {
   public Invitation create(UUID groupId, String userId, String rawEmail, String rawRole) {
     access.requireOwnerLocked(groupId, userId);
     String email = EmailAddress.of(rawEmail);
-    Role role = role(rawRole);
+    Role role = Role.parse(rawRole);
     Instant now = clock.instant();
     Instant cutoff = now.minus(VALIDITY);
     if (memberships.hasMemberWithEmail(groupId, email)) {
@@ -116,18 +115,6 @@ public class InvitationService {
   private static Invitation toInvitation(Row row) {
     return new Invitation(
         row.id(), row.email(), row.role(), row.createdAt(), row.createdAt().plus(VALIDITY));
-  }
-
-  private static Role role(String raw) {
-    for (Role role : Role.values()) {
-      if (role.name().equals(raw)) {
-        return role;
-      }
-    }
-    throw new ApiException(
-        ErrorCode.VALIDATION_FAILED,
-        "The request is not valid.",
-        List.of(new FieldProblem("role", "INVALID_VALUE", "The role is Owner, Editor or Viewer.")));
   }
 
   private static ApiException conflict(ErrorCode code, String message) {
