@@ -10,9 +10,9 @@ import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
+import org.springframework.security.oauth2.jwt.BadJwtException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtException;
 import org.springframework.security.oauth2.jwt.JwtTimestampValidator;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
@@ -36,7 +36,7 @@ final class FirebaseJwtDecoders {
         Jwt jwt = parseUnsigned(token);
         OAuth2TokenValidatorResult result = validator.validate(jwt);
         if (result.hasErrors()) {
-          throw new JwtException("Invalid token");
+          throw new BadJwtException("Invalid token");
         }
         return jwt;
       };
@@ -69,7 +69,7 @@ final class FirebaseJwtDecoders {
       Instant expires = parsed.getJWTClaimsSet().getExpirationTime().toInstant();
       return new Jwt(token, issuedAt, expires, headers, claims);
     } catch (ParseException | RuntimeException e) {
-      throw new JwtException("Invalid token", e);
+      throw new BadJwtException("Invalid token", e);
     }
   }
 }
