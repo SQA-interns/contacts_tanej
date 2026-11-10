@@ -1,6 +1,7 @@
 package app.contactgroups.api;
 
 import app.contactgroups.domain.User;
+import app.contactgroups.service.InvitationService;
 import app.contactgroups.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,8 +17,11 @@ public class AccountController {
 
   private final UserService users;
 
-  public AccountController(UserService users) {
+  private final InvitationService invitations;
+
+  public AccountController(UserService users, InvitationService invitations) {
     this.users = users;
+    this.invitations = invitations;
   }
 
   @GetMapping("/me")
@@ -28,6 +32,7 @@ public class AccountController {
     @ApiResponse(responseCode = "403")
   })
   public User getMe(@AuthenticationPrincipal Jwt jwt) {
+    invitations.acceptFor(jwt.getSubject());
     return users.current(jwt.getSubject());
   }
 }

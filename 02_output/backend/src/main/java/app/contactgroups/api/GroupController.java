@@ -2,6 +2,7 @@ package app.contactgroups.api;
 
 import app.contactgroups.domain.GroupSummary;
 import app.contactgroups.service.GroupService;
+import app.contactgroups.service.InvitationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -27,8 +28,11 @@ public class GroupController {
 
   private final GroupService groups;
 
-  public GroupController(GroupService groups) {
+  private final InvitationService invitations;
+
+  public GroupController(GroupService groups, InvitationService invitations) {
     this.groups = groups;
+    this.invitations = invitations;
   }
 
   @GetMapping("/groups")
@@ -39,6 +43,7 @@ public class GroupController {
     @ApiResponse(responseCode = "403")
   })
   public List<GroupSummary> list(@AuthenticationPrincipal Jwt jwt) {
+    invitations.acceptFor(jwt.getSubject());
     return groups.listFor(jwt.getSubject());
   }
 
