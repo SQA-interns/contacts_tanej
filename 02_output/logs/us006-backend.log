@@ -1,0 +1,539 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:apply (default-cli) @ contact-groups-backend ---
+[INFO] clean file: /w/src/main/java/app/contactgroups/domain/Contact.java
+[INFO] clean file: /w/src/main/java/app/contactgroups/service/ContactService.java
+[INFO] Spotless.Java is keeping 122 files clean - 2 were changed to be clean, 9 were already clean, 111 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] argLine set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/w/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 70 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 52 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us005ContactsAcceptanceIT
+09:42:46.593 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us005ContactsAcceptanceIT]: Us005ContactsAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:42:48.946 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us005ContactsAcceptanceIT
+09:42:53.871 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+09:42:53.929 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+09:42:54.007 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+09:43:01.255 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+09:43:01.272 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+09:43:01.395 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+09:43:02.808 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+09:43:02.891 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+09:43:04.279 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 817b260890e1f3087dd024bac7a12e4c8dbe9a1a433f2be953f1604542a8c6d9
+09:43:06.241 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT3.43249977S
+09:43:06.274 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+09:43:06.275 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+09:43:06.283 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+09:43:06.286 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+09:43:06.629 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: fadb42ae2a736959554376098539d44fb413ccf7d8e08c8217abb0dcaacd73da
+09:43:10.806 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT4.520137137S
+09:43:10.809 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:55402/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T09:43:15.446Z  INFO 171 --- [contact-groups-backend] [           main] a.c.a.Us005ContactsAcceptanceIT          : Starting Us005ContactsAcceptanceIT using Java 21.0.9 with PID 171 (started by root in /w)
+2026-11-10T09:43:15.453Z  INFO 171 --- [contact-groups-backend] [           main] a.c.a.Us005ContactsAcceptanceIT          : The following 1 profile is active: "test"
+2026-11-10T09:43:34.881Z  INFO 171 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T09:43:35.047Z  INFO 171 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T09:43:35.048Z  INFO 171 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T09:43:35.516Z  INFO 171 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T09:43:35.517Z  INFO 171 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 19863 ms
+2026-11-10T09:43:38.758Z  INFO 171 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T09:43:40.331Z  INFO 171 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@34dfec02
+2026-11-10T09:43:40.351Z  INFO 171 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T09:43:40.609Z  INFO 171 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:55402/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T09:43:41.085Z  INFO 171 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T09:43:41.119Z  INFO 171 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.264s)
+2026-11-10T09:43:41.223Z  INFO 171 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T09:43:41.478Z  INFO 171 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T09:43:41.622Z  INFO 171 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T09:43:41.978Z  INFO 171 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.272s)
+2026-11-10T09:43:51.998Z  INFO 171 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 40007 (http) with context path '/'
+2026-11-10T09:43:52.028Z  INFO 171 --- [contact-groups-backend] [           main] a.c.a.Us005ContactsAcceptanceIT          : Started Us005ContactsAcceptanceIT in 40.651 seconds (process running for 74.835)
+2026-11-10T09:43:59.766Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T09:43:59.767Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T09:43:59.770Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-10T09:44:08.707Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=403 user=uid-petra
+2026-11-10T09:44:08.734Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+2026-11-10T09:44:11.639Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T09:44:12.767Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T09:44:13.781Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T09:44:13.812Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T09:44:14.723Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-ana
+[ERROR] Tests run: 22, Failures: 11, Errors: 0, Skipped: 0, Time elapsed: 89.93 s <<< FAILURE! -- in app.contactgroups.acceptance.Us005ContactsAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_05_notesOf5000AreSavedAndOf5001AreRefused -- Time elapsed: 0.738 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_05_notesOf5000AreSavedAndOf5001AreRefused(Us005ContactsAcceptanceIT.java:200)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_02_aContactWithOnlyAPhoneIsRefusedAndNothingIsStored -- Time elapsed: 0.479 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_02_aContactWithOnlyAPhoneIsRefusedAndNothingIsStored(Us005ContactsAcceptanceIT.java:63)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_10_aCountryOutsideTheListIsRefusedNamingTheField -- Time elapsed: 0.463 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_10_aCountryOutsideTheListIsRefusedNamingTheField(Us005ContactsAcceptanceIT.java:143)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_10_twoFailedFieldsAreBothNamedAndTheWholeSaveIsRefused -- Time elapsed: 0.423 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_10_twoFailedFieldsAreBothNamedAndTheWholeSaveIsRefused(Us005ContactsAcceptanceIT.java:244)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_02_aFirstNameOfSpacesAloneIsRefused -- Time elapsed: 0.419 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_02_aFirstNameOfSpacesAloneIsRefused(Us005ContactsAcceptanceIT.java:154)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_09_aContactInTrashCannotBeSaved -- Time elapsed: 0.523 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.trash(AcceptanceBase.java:354)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_09_aContactInTrashCannotBeSaved(Us005ContactsAcceptanceIT.java:133)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_04_aTextFieldOf256CharactersIsRefusedNamingTheField -- Time elapsed: 0.611 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_04_aTextFieldOf256CharactersIsRefusedNamingTheField(Us005ContactsAcceptanceIT.java:192)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_12_aContactTrashedWhileEditingGivesASaveRefusedAsInTrash -- Time elapsed: 0.514 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.trash(AcceptanceBase.java:354)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_12_aContactTrashedWhileEditingGivesASaveRefusedAsInTrash(Us005ContactsAcceptanceIT.java:261)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_04_anInvalidEmailIsRefusedNamingTheFieldAndNothingIsStored -- Time elapsed: 0.405 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_04_anInvalidEmailIsRefusedNamingTheFieldAndNothingIsStored(Us005ContactsAcceptanceIT.java:77)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_09_aSaveWithNoChangeWritesNothing -- Time elapsed: 0.498 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.EX_005_09_aSaveWithNoChangeWritesNothing(Us005ContactsAcceptanceIT.java:227)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_05_aSecondContactWithTheSameEmailIsAllowedWithoutWarning -- Time elapsed: 0.475 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.total(Us005ContactsAcceptanceIT.java:35)
+	at app.contactgroups.acceptance.Us005ContactsAcceptanceIT.AC_005_05_aSecondContactWithTheSameEmailIsAllowedWithoutWarning(Us005ContactsAcceptanceIT.java:91)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.acceptance.Us006TagsAcceptanceIT
+2026-11-10T09:44:15.257Z  INFO 171 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us006TagsAcceptanceIT]: Us006TagsAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T09:44:15.273Z  INFO 171 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us006TagsAcceptanceIT
+2026-11-10T09:44:16.699Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:17.210Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:17.730Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:18.703Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:19.271Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:19.744Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:20.234Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:20.781Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:22.004Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:22.503Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:23.017Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+2026-11-10T09:44:24.064Z ERROR 171 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.api.ApiExceptionHandler  : Unexpected failure: DataIntegrityViolationException
+[ERROR] Tests run: 16, Failures: 13, Errors: 0, Skipped: 0, Time elapsed: 8.845 s <<< FAILURE! -- in app.contactgroups.acceptance.Us006TagsAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_01_aTagIsAttachedToTheContactAndOfferedInTheGroup -- Time elapsed: 0.810 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_01_aTagIsAttachedToTheContactAndOfferedInTheGroup(Us006TagsAcceptanceIT.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_05_aTagOfAnotherGroupIsNeverSuggested -- Time elapsed: 0.508 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_05_aTagOfAnotherGroupIsNeverSuggested(Us006TagsAcceptanceIT.java:86)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_06_exactlyFiftyTagsAreAccepted -- Time elapsed: 0.515 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_06_exactlyFiftyTagsAreAccepted(Us006TagsAcceptanceIT.java:170)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_08_aTagIsOnlyALabelAndChangesNoBehaviour -- Time elapsed: 0.459 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:341)
+	at app.contactgroups.acceptance.AcceptanceBase.search(AcceptanceBase.java:345)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_08_aTagIsOnlyALabelAndChangesNoBehaviour(Us006TagsAcceptanceIT.java:114)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_07_theLastContactLosingATagMakesTheGroupStopOfferingIt -- Time elapsed: 0.508 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_07_theLastContactLosingATagMakesTheGroupStopOfferingIt(Us006TagsAcceptanceIT.java:177)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_06_removingATagDetachesItFromThatContactOnly -- Time elapsed: 0.567 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_06_removingATagDetachesItFromThatContactOnly(Us006TagsAcceptanceIT.java:95)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_04_aTagWithAccentedLettersIsAccepted -- Time elapsed: 0.470 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_04_aTagWithAccentedLettersIsAccepted(Us006TagsAcceptanceIT.java:152)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_04_a51stTagIsRefusedAndTheContactKeepsItsFifty -- Time elapsed: 0.484 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_04_a51stTagIsRefusedAndTheContactKeepsItsFifty(Us006TagsAcceptanceIT.java:77)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_02_aTagOfTheSameNameIgnoringCaseUsesTheExistingTagAndSpelling -- Time elapsed: 0.546 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_02_aTagOfTheSameNameIgnoringCaseUsesTheExistingTagAndSpelling(Us006TagsAcceptanceIT.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_02_aTagWithHyphenUnderscoreAndDigitsIsAccepted -- Time elapsed: 0.532 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_02_aTagWithHyphenUnderscoreAndDigitsIsAccepted(Us006TagsAcceptanceIT.java:135)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_05_theSameTagTypedTwiceOnOneContactIsStoredOnce -- Time elapsed: 0.493 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_05_theSameTagTypedTwiceOnOneContactIsStoredOnce(Us006TagsAcceptanceIT.java:159)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_07_aViewerSeesTheTagsButCannotChangeThem -- Time elapsed: 0.510 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.AC_006_07_aViewerSeesTheTagsButCannotChangeThem(Us006TagsAcceptanceIT.java:105)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_01_aTagNameOfExactly50CharactersIsAcceptedAndOf51Refused -- Time elapsed: 0.468 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+	at app.contactgroups.acceptance.Res.expect(Res.java:38)
+	at app.contactgroups.acceptance.Us006TagsAcceptanceIT.EX_006_01_aTagNameOfExactly50CharactersIsAcceptedAndOf51Refused(Us006TagsAcceptanceIT.java:127)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.domain.ContactRulesTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.071 s -- in app.contactgroups.domain.ContactRulesTest
+[INFO] Running app.contactgroups.domain.TagChangeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in app.contactgroups.domain.TagChangeTest
+[INFO] Running app.contactgroups.domain.TagNamesTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s -- in app.contactgroups.domain.TagNamesTest
+[INFO] Running app.contactgroups.it.ContactsIT
+2026-11-10T09:44:24.249Z  INFO 171 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.ContactsIT]: ContactsIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T09:44:25.059Z  INFO 171 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.ContactsIT
+2026-11-10T09:44:26.721Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T09:44:26.744Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-10T09:44:26.771Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-10T09:44:27.685Z  INFO 171 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.408 s -- in app.contactgroups.it.ContactsIT
+[INFO] Running app.contactgroups.it.OpenApiContractIT
+2026-11-10T09:44:29.660Z  INFO 171 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.OpenApiContractIT]: OpenApiContractIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T09:44:29.674Z  INFO 171 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.OpenApiContractIT
+2026-11-10T09:44:37.584Z  INFO 171 --- [contact-groups-backend] [-auto-1-exec-10] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 7788 ms
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.552 s -- in app.contactgroups.it.OpenApiContractIT
+[INFO] Running app.contactgroups.ArchitectureTest
+2026-11-10T09:44:38.393Z  INFO 171 --- [contact-groups-backend] [           main] com.tngtech.archunit.core.PluginLoader   : Detected Java version 21.0.9
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.48 s -- in app.contactgroups.ArchitectureTest
+2026-11-10T09:44:51.939Z  INFO 171 --- [contact-groups-backend] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-10T09:44:51.947Z  INFO 171 --- [contact-groups-backend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+[ERROR] Surefire is going to kill self fork JVM. The exit has elapsed 30 seconds after System.exit(0).
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   Us005ContactsAcceptanceIT.AC_005_02_aContactWithOnlyAPhoneIsRefusedAndNothingIsStored:63->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.AC_005_04_anInvalidEmailIsRefusedNamingTheFieldAndNothingIsStored:77->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.AC_005_05_aSecondContactWithTheSameEmailIsAllowedWithoutWarning:91->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.AC_005_09_aContactInTrashCannotBeSaved:133->AcceptanceBase.trash:354 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us005ContactsAcceptanceIT.AC_005_10_aCountryOutsideTheListIsRefusedNamingTheField:143->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.EX_005_02_aFirstNameOfSpacesAloneIsRefused:154->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.EX_005_04_aTextFieldOf256CharactersIsRefusedNamingTheField:192->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.EX_005_05_notesOf5000AreSavedAndOf5001AreRefused:200->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.EX_005_09_aSaveWithNoChangeWritesNothing:227 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 200
+ but was: 404
+[ERROR]   Us005ContactsAcceptanceIT.EX_005_10_twoFailedFieldsAreBothNamedAndTheWholeSaveIsRefused:244->total:35->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us005ContactsAcceptanceIT.EX_005_12_aContactTrashedWhileEditingGivesASaveRefusedAsInTrash:261->AcceptanceBase.trash:354 [status of the answer, body: {"status":404,"code":"NOT_FOUND","message":"Not found."}] 
+expected: 204
+ but was: 404
+[ERROR]   Us006TagsAcceptanceIT.AC_006_01_aTagIsAttachedToTheContactAndOfferedInTheGroup:48 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.AC_006_02_aTagOfTheSameNameIgnoringCaseUsesTheExistingTagAndSpelling:57 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.AC_006_04_a51stTagIsRefusedAndTheContactKeepsItsFifty:77 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.AC_006_05_aTagOfAnotherGroupIsNeverSuggested:86 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.AC_006_06_removingATagDetachesItFromThatContactOnly:95 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.AC_006_07_aViewerSeesTheTagsButCannotChangeThem:105 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.AC_006_08_aTagIsOnlyALabelAndChangesNoBehaviour:114->AcceptanceBase.search:345->AcceptanceBase.search:341 [status of the answer, body: {"status":405,"code":"METHOD_NOT_ALLOWED","message":"Method not allowed."}] 
+expected: 200
+ but was: 405
+[ERROR]   Us006TagsAcceptanceIT.EX_006_01_aTagNameOfExactly50CharactersIsAcceptedAndOf51Refused:127 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.EX_006_02_aTagWithHyphenUnderscoreAndDigitsIsAccepted:135 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.EX_006_04_aTagWithAccentedLettersIsAccepted:152 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.EX_006_05_theSameTagTypedTwiceOnOneContactIsStoredOnce:159 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.EX_006_06_exactlyFiftyTagsAreAccepted:170 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[ERROR]   Us006TagsAcceptanceIT.EX_006_07_theLastContactLosingATagMakesTheGroupStopOfferingIt:177 [status of the answer, body: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}] 
+expected: 200
+ but was: 500
+[INFO] 
+[ERROR] Tests run: 77, Failures: 24, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:52 min
+[INFO] Finished at: 2026-11-10T09:45:22Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.4:test (default-test) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+exit 1

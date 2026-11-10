@@ -384,3 +384,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-34: US-006 readings (tags in the save path)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-006
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) The contract does not say what a save without `tags` does. (2) A tag typed with spaces around it. (3) Tag changes of one group could race (create and orphan delete). (4) A tags-only save and its History. (5) The tag input and its tests were written in the same step (screen code before its tests, as in D-33).
+- Options: (1) `tags` absent keeps the tags; a list replaces them. (2) Stripped at both ends; blank is `TOO_SHORT`; the first spelling wins when the same name repeats ignoring case. (3) A transaction advisory lock per group serialises tag changes. (4) A tags-only change makes a new version and revision; History gets one `TAG_CHANGED` entry per tag added or removed (field `tag`, old or new value) and `CONTACT_EDITED` only when a field changed. (5) Recorded here.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
