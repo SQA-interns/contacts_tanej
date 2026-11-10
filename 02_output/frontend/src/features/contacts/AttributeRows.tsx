@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
@@ -78,6 +78,7 @@ function AttributeRow({ groupId, row, problems, onChange, onRemove }: AttributeR
   const { t } = useTranslation();
   const { api } = useServices();
   const id = useId();
+  const [open, setOpen] = useState(false);
   const part = row.key.trim();
   const suggestions = useQuery({
     queryKey: ['attribute-keys', groupId, part],
@@ -89,24 +90,57 @@ function AttributeRow({ groupId, row, problems, onChange, onRemove }: AttributeR
     enabled: part !== '',
     retry: false,
   });
+  const keys = suggestions.data ?? [];
+  const shown = open && keys.length > 0;
   return (
     <div className="flex flex-col gap-1">
       <div className="grid grid-cols-[1fr_1fr_auto] items-end gap-2">
         <div className="flex flex-col gap-1">
           <Label htmlFor={`${id}-key`}>{t('contact.attributeKey')}</Label>
-          <Input
-            id={`${id}-key`}
-            value={row.key}
-            list={`${id}-keys`}
-            autoComplete="off"
-            aria-invalid={problems.length > 0 || undefined}
-            onChange={(e) => onChange({ key: e.target.value })}
-          />
-          <datalist id={`${id}-keys`}>
-            {(suggestions.data ?? []).map((key) => (
-              <option key={key} value={key} />
-            ))}
-          </datalist>
+          <div className="relative">
+            <Input
+              id={`${id}-key`}
+              value={row.key}
+              role="combobox"
+              aria-expanded={shown}
+              aria-controls={shown ? `${id}-keys` : undefined}
+              aria-autocomplete="list"
+              autoComplete="off"
+              aria-invalid={problems.length > 0 || undefined}
+              onChange={(e) => {
+                setOpen(true);
+                onChange({ key: e.target.value });
+              }}
+              onFocus={() => setOpen(true)}
+              onBlur={() => setOpen(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') setOpen(false);
+              }}
+            />
+            {shown && (
+              <ul
+                id={`${id}-keys`}
+                role="listbox"
+                className="absolute z-10 mt-1 max-h-48 w-full overflow-auto rounded-control border border-border bg-background shadow"
+              >
+                {keys.map((key) => (
+                  <li
+                    key={key}
+                    role="option"
+                    aria-selected={key === row.key}
+                    className="min-h-11 cursor-pointer px-3 py-2 hover:bg-surface-raised"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      onChange({ key });
+                      setOpen(false);
+                    }}
+                  >
+                    {key}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
         <div className="flex flex-col gap-1">
           <Label htmlFor={`${id}-value`}>{t('contact.attributeValue')}</Label>

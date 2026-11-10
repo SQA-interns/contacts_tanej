@@ -325,10 +325,20 @@ describe('the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R
     renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
     await userEvent.click(await screen.findByRole('button', { name: 'Add attribute' }));
     await userEvent.type(screen.getByLabelText('Key'), 'kom');
-    await waitFor(() => expect(document.querySelector('datalist option[value="kompetenca"]')).not.toBeNull());
+    // a visible listbox, not a native datalist: AC-008-03 needs a visible option
+    expect(await screen.findByRole('option', { name: 'kompetenca' })).toBeVisible();
     expect(calls.some((c) => c.startsWith('GET /groups/g-1/attribute-keys?q=kom'))).toBe(true);
     await userEvent.type(screen.getByLabelText('Key'), 'p2');
     expect(screen.getByLabelText('Key')).toHaveValue('komp2');
+  });
+
+  it('puts a clicked suggestion into the key field', async () => {
+    const { api } = contactsApi(() => ana, [], ['kompetenca']);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Add attribute' }));
+    await userEvent.type(screen.getByLabelText('Key'), 'kom');
+    await userEvent.click(await screen.findByRole('option', { name: 'kompetenca' }));
+    expect(screen.getByLabelText('Key')).toHaveValue('kompetenca');
   });
 
   it('names the refused attribute with the reason and keeps the typed rows (R-008-02, AC-008-02)', async () => {
