@@ -5,8 +5,8 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S5 implement T-N02 (note: restart-test.sh temp file fix)
-- Result: done (scripts/restart-test.sh: `mktemp` gave /tmp/tmp.X, which node on Windows could not open (ENOENT) with MSYS_NO_PATHCONV=1; the body file is now `logs/restart-body.json`, removed on exit. Not run by the session; the developer runs `./scripts/restart-test.sh` from 02_output/. The earlier `logs/restart-test.log` holds a failed run and is not committed.)
+- Session: S5 implement T-N04 (note: T-N03 passing run committed)
+- Result: done for T-N03 (the developer ran `scripts/restart-test.sh` on 2026-11-10 18:16 UTC: /health 200 after restarting db and backend; contact, tag, attribute and group read back; `logs/restart-test.log` holds the passing run). T-N02 is the session label for T-N03 to T-N12.
 - Tasks left for the developer to run (shell scripts): T-N04 (`scripts/backup.sh`, `restore.sh`), T-N10 (`scripts/clean-host-test.sh`). Session tasks still to do: T-N05 to T-N09, T-N11, T-N12.
 - Developer note for the tasks after this one: do every task the session can run itself first, then list the shell scripts (T-N04, T-N10, and the restart test) for the developer to run.
 - Previous: S5 implement T-N01 (readings in D-46)

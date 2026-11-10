@@ -1,0 +1,13 @@
+Restart test 2026-11-10T18:16:41Z
+Writing a group and a contact ...
+  group 68670618-37f6-4c86-bf8d-1f94c3f55f43, contact fb55500c-418c-4fc0-866e-8d29ad30562e
+Restarting backend and database ...
+ Container contact-groups-backend-1 Restarting 
+ Container contact-groups-db-1 Restarting 
+ Container contact-groups-db-1 Started 
+ Container contact-groups-backend-1 Started 
+Waiting for /health ...
+PASS /health 200
+PASS contact read back with its values, tag and attribute
+PASS group in the list
+PASS NFR-05 data intact after the restart
