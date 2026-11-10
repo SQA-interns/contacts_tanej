@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink, Outlet, useParams } from 'react-router';
+import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router';
 import { useServices } from '@/app/services';
 import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
@@ -51,6 +51,7 @@ export function GroupPage() {
   const { t } = useTranslation();
   const { api } = useServices();
   const { groupId = '' } = useParams();
+  const onContact = useLocation().pathname.includes('/contacts/');
   const group = useQuery({
     queryKey: ['group', groupId],
     queryFn: () => api.request<GroupSummary>('GET', `/groups/${encodeURIComponent(groupId)}`),
@@ -68,16 +69,19 @@ export function GroupPage() {
         <h1 className="text-2xl font-semibold break-words">{group.data.name}</h1>
         <RoleBadge role={group.data.role} />
       </div>
-      <nav aria-label={t('groups.tabs.label')} className="mb-4 flex gap-1 border-b border-border">
-        <GroupTab to={`/groups/${group.data.id}`} end label={t('groups.tabs.contacts')} />
-        {group.data.role !== 'VIEWER' && (
-          <>
-            <GroupTab to={`/groups/${group.data.id}/trash`} label={t('groups.tabs.trash')} />
-            <GroupTab to={`/groups/${group.data.id}/tags`} label={t('groups.tabs.tags')} />
-          </>
-        )}
-        <GroupTab to={`/groups/${group.data.id}/members`} label={t('groups.tabs.members')} />
-      </nav>
+      {!onContact && (
+        <nav aria-label={t('groups.tabs.label')} className="mb-4 flex gap-1 border-b border-border">
+          <GroupTab to={`/groups/${group.data.id}`} end label={t('groups.tabs.contacts')} />
+          {group.data.role !== 'VIEWER' && (
+            <>
+              <GroupTab to={`/groups/${group.data.id}/trash`} label={t('groups.tabs.trash')} />
+              <GroupTab to={`/groups/${group.data.id}/tags`} label={t('groups.tabs.tags')} />
+              <GroupTab to={`/groups/${group.data.id}/history`} label={t('groups.tabs.history')} />
+            </>
+          )}
+          <GroupTab to={`/groups/${group.data.id}/members`} label={t('groups.tabs.members')} />
+        </nav>
+      )}
       <Outlet context={group.data} />
     </>
   );

@@ -138,7 +138,8 @@
       "contacts": "Contacts",
       "tags": "Tags",
       "trash": "Trash",
-      "members": "Members"
+      "members": "Members",
+      "history": "History"
     },
     "noContacts": {
       "title": "No contacts yet",
@@ -289,7 +290,20 @@
       "GROUP_RESTORED": "Group restored",
       "CONTACTS_MERGED": "Contacts merged",
       "VERSION_RESTORED": "Version restored"
-    }
+    },
+    "groupEmptyText": "Events in this group appear here.",
+    "noMatchTitle": "No events match",
+    "noMatchText": "Change the person, the event type or the dates.",
+    "clear": "Clear filters",
+    "apply": "Apply",
+    "person": "Person",
+    "everybody": "Everybody",
+    "eventType": "Event type",
+    "allEvents": "All events",
+    "from": "From",
+    "to": "To",
+    "invalidRange": "The end date must not be before the start date.",
+    "listLabel": "Newest first"
   },
   "trash": {
     "intro": "Contacts stay in Trash for 30 days, then they are erased.",

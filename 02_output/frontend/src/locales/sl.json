@@ -138,7 +138,8 @@
       "contacts": "Kontakti",
       "tags": "Oznake",
       "trash": "Koš",
-      "members": "Člani"
+      "members": "Člani",
+      "history": "Zgodovina"
     },
     "noContacts": {
       "title": "Še ni kontaktov",
@@ -289,7 +290,20 @@
       "GROUP_RESTORED": "Skupina obnovljena",
       "CONTACTS_MERGED": "Stiki združeni",
       "VERSION_RESTORED": "Različica obnovljena"
-    }
+    },
+    "groupEmptyText": "Dogodki v tej skupini se prikažejo tukaj.",
+    "noMatchTitle": "Ni ujemajočih dogodkov",
+    "noMatchText": "Spremenite osebo, vrsto dogodka ali datume.",
+    "clear": "Počisti filtre",
+    "apply": "Uporabi",
+    "person": "Oseba",
+    "everybody": "Vsi",
+    "eventType": "Vrsta dogodka",
+    "allEvents": "Vsi dogodki",
+    "from": "Od",
+    "to": "Do",
+    "invalidRange": "Končni datum ne sme biti pred začetnim.",
+    "listLabel": "Najnovejše najprej"
   },
   "trash": {
     "intro": "Stiki ostanejo v košu 30 dni, nato se izbrišejo.",

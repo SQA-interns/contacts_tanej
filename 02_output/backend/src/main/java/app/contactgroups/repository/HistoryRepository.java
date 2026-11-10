@@ -1,12 +1,16 @@
 package app.contactgroups.repository;
 
 import app.contactgroups.domain.FieldChange;
+import app.contactgroups.domain.HistoryActor;
 import app.contactgroups.domain.HistoryEntry;
 import app.contactgroups.domain.HistoryEventType;
+import app.contactgroups.domain.HistoryFilter;
 import app.contactgroups.domain.Role;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -66,6 +70,73 @@ public class HistoryRepository {
 
   public int countByGroup(UUID groupId) {
     return count("group_id = ?", groupId);
+  }
+
+  /** The number of the group's entries that match the filter. */
+  public int countByGroup(UUID groupId, HistoryFilter filter) {
+    var where = Where.of(groupId, filter);
+    return jdbc.sql("SELECT count(*) FROM history_entries WHERE " + where.sql())
+        .params(where.args())
+        .query(Integer.class)
+        .single();
+  }
+
+  /** One page of the group's entries that match the filter, newest first. */
+  public List<HistoryEntry> pageByGroup(UUID groupId, HistoryFilter filter, int limit, int offset) {
+    var where = Where.of(groupId, filter);
+    var args = new ArrayList<>(where.args());
+    args.add(limit);
+    args.add(offset);
+    return jdbc
+        .sql(
+            "SELECT * FROM history_entries WHERE "
+                + where.sql()
+                + " ORDER BY seq DESC LIMIT ? OFFSET ?")
+        .params(args)
+        .query((rs, n) -> entry(rs))
+        .list()
+        .stream()
+        .map(e -> e.withChanges(changesOf(e.id())))
+        .toList();
+  }
+
+  /** The people with entries in the group, also those who left (EX-014-03), by name. */
+  public List<HistoryActor> actors(UUID groupId) {
+    return jdbc.sql(
+            "SELECT actor_id, actor_name FROM (SELECT DISTINCT ON (actor_id) actor_id, actor_name"
+                + " FROM history_entries WHERE group_id = ? AND actor_id IS NOT NULL"
+                + " ORDER BY actor_id, seq DESC) a ORDER BY lower(actor_name), actor_id")
+        .param(groupId)
+        .query((rs, n) -> new HistoryActor(rs.getString("actor_id"), rs.getString("actor_name")))
+        .list();
+  }
+
+  /** The WHERE clause and its arguments for a group and a filter. */
+  private record Where(String sql, List<Object> args) {
+    static Where of(UUID groupId, HistoryFilter f) {
+      var sql = new StringBuilder("group_id = ?");
+      var args = new ArrayList<Object>();
+      args.add(groupId);
+      if (f.actorId() != null) {
+        sql.append(" AND actor_id = ?");
+        args.add(f.actorId());
+      }
+      if (!f.types().isEmpty()) {
+        sql.append(" AND event_type IN (")
+            .append(String.join(", ", Collections.nCopies(f.types().size(), "?")))
+            .append(')');
+        f.types().forEach(t -> args.add(t.name()));
+      }
+      if (f.start() != null) {
+        sql.append(" AND created_at >= ?");
+        args.add(Timestamp.from(f.start()));
+      }
+      if (f.endExclusive() != null) {
+        sql.append(" AND created_at < ?");
+        args.add(Timestamp.from(f.endExclusive()));
+      }
+      return new Where(sql.toString(), args);
+    }
   }
 
   public int countByContact(UUID contactId) {

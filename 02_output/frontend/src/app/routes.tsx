@@ -6,6 +6,7 @@ import { RegisterPage } from '@/features/auth/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/ResetPasswordPage';
 import { SignInPage } from '@/features/auth/SignInPage';
 import { ContactPage } from '@/features/contacts/ContactPage';
+import { GroupHistoryPage } from '@/features/history/GroupHistoryPage';
 import { ContactHistoryPage } from '@/features/history/ContactHistoryPage';
 import { ContactListPage } from '@/features/contacts/ContactListPage';
 import { TrashPage } from '@/features/contacts/TrashPage';
@@ -60,6 +61,7 @@ export const routes: RouteObject[] = [
                   { index: true, element: <ContactListPage /> },
                   { path: 'trash', element: <TrashPage /> },
                   { path: 'tags', element: <ManageTagsPage /> },
+                  { path: 'history', element: <GroupHistoryPage /> },
                   { path: 'members', element: <MembersTab /> },
                   { path: 'contacts/new', element: <ContactPage /> },
                   { path: 'contacts/:contactId', element: <ContactPage /> },

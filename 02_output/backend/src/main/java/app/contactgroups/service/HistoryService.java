@@ -1,8 +1,10 @@
 package app.contactgroups.service;
 
 import app.contactgroups.domain.ContactPage;
+import app.contactgroups.domain.HistoryActor;
 import app.contactgroups.domain.HistoryEntry;
 import app.contactgroups.domain.HistoryEntryView;
+import app.contactgroups.domain.HistoryFilter;
 import app.contactgroups.domain.Role;
 import app.contactgroups.repository.ContactRepository;
 import app.contactgroups.repository.HistoryRepository;
@@ -32,12 +34,20 @@ public class HistoryService {
 
   /** The group-wide History. */
   @Transactional(readOnly = true)
-  public HistoryPage ofGroup(UUID groupId, String userId, Integer requestedPage) {
+  public HistoryPage ofGroup(
+      UUID groupId, String userId, HistoryFilter filter, Integer requestedPage) {
     requireWriter(groupId, userId);
     return page(
-        history.countByGroup(groupId),
+        history.countByGroup(groupId, filter),
         requestedPage,
-        offset -> history.pageByGroup(groupId, ContactPage.PAGE_SIZE, offset));
+        offset -> history.pageByGroup(groupId, filter, ContactPage.PAGE_SIZE, offset));
+  }
+
+  /** The people for the person filter, also those who left (EX-014-03). */
+  @Transactional(readOnly = true)
+  public List<HistoryActor> actors(UUID groupId, String userId) {
+    requireWriter(groupId, userId);
+    return history.actors(groupId);
   }
 
   /** The History tab of one contact, also of a contact in Trash. */

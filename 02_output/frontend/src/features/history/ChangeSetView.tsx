@@ -35,7 +35,7 @@ function Value({ erased, value }: { erased: boolean; value?: string }) {
 }
 
 /** WF-11: the actor, the time, what happened and, per changed field, the old and the new value. */
-export function ChangeSetView({ set }: { set: HistoryEntry[] }) {
+export function ChangeSetView({ set, showContact }: { set: HistoryEntry[]; showContact?: boolean }) {
   const { t, i18n } = useTranslation();
   const label = useFieldLabel();
   const first = set[0]!;
@@ -51,7 +51,15 @@ export function ChangeSetView({ set }: { set: HistoryEntry[] }) {
         </p>
         {set.map((entry) => (
           <div key={entry.id} className="flex flex-col gap-1">
-            <p>{t(`history.event.${entry.eventType}`)}</p>
+            <p>
+              {t(`history.event.${entry.eventType}`)}
+              {showContact && (entry.erased || entry.contactLabel) && (
+                <span className="text-text-muted">
+                  {' '}
+                  · {entry.erased ? t('history.erased') : entry.contactLabel}
+                </span>
+              )}
+            </p>
             <ul className="flex flex-col gap-1">
               {(entry.eventType === 'CONTACT_CREATED' ? [] : entry.changes).map((change) => (
                 <li key={change.field} className="flex flex-wrap items-baseline gap-x-2">

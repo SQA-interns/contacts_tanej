@@ -494,3 +494,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-44: US-014 readings and two frozen API tests that contradict the specification
+- Timestamp: 2026-11-10
+- Session: S5 implement US-014
+- Class: approval
+- Type: non-blocking
+- Trigger: (1) Frozen `AC_014_04` asserts that the answer for 2 July contains neither "Dan1" nor "Dan3", but the 2 July entry records the change Dan1 to Dan2 (R-013-02 old and new value), so "Dan1" is always in it; the count `total = 1` and the entry are right. (2) Frozen `EX_014_03` expects one entry by Marko after he left, but R-013-05 records a leaving as a removal by the member, so Marko has two (the contact he created and his leaving). (3) The group tab bar and the contact's own "Details / History" bar both showed a link "History" on the contact page; the frozen `AC-013-01` clicks `link "History"` and needs exactly one. (4) Where the filters and the person list are built.
+- Options: (1) and (2) (proposed) Leave both frozen tests unchanged and the story `in progress` (DoD-S-01 not met); the behaviour follows the specification. You decide whether the tests should compare the entry (not the whole body) and expect two entries for Marko (a change to frozen files, new freeze). Alternative for (2): record a leaving with no actor, against R-013-05. (3) The group tab bar is not shown on the contact pages (WF-10 and WF-11 have no group tab bar; the contact page keeps its breadcrumb). (4) `HistoryFilter` (domain; days taken in Europe/Ljubljana, the end of the last day exclusive; `to` before `from` gives 400 `INVALID_DATE_RANGE` on `to`), `HistoryRepository` builds the WHERE for group, person, types and days, `GET /groups/{g}/history/actors` lists each actor once with the latest name, also those who left. The screen takes one event type (the wireframe has one list) and refuses a range with the end before the start before it sends the request.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
