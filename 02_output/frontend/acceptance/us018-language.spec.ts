@@ -34,7 +34,7 @@ test.describe('Slovenian by default', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'sl');
     await expect(page.getByRole('heading', { name: 'Sign in' })).toHaveCount(0);
     // the first visit opens the sign-in screen: one e-mail field and at least two buttons in the main area
-    await expect(page.getByRole('main').getByRole('textbox')).toHaveCount(1);
+    await expect(page.getByRole('main').locator('input[type=email]')).toHaveCount(1);
     expect(await page.getByRole('main').getByRole('button').count()).toBeGreaterThanOrEqual(2);
   });
 });
@@ -148,14 +148,12 @@ test('EX-018-02 a server error is shown in the active language', async ({ page }
   const { owner } = await scene('Konferenca 2026');
   expect(owner).toBeDefined();
   await signIn(page, ANA);
-  const create = async () => {
-    await page.getByRole('button', { name: 'Create group' }).first().click();
-    await page.getByLabel('Group name').fill('Konferenca 2026');
-    await page.getByRole('dialog').getByRole('button', { name: 'Create group' }).click();
-  };
-  await create();
-  await expect(page.getByText('You already have a group with this name.')).toBeVisible();
+  // the dialog is modal and hides the header switch, so the language is chosen before it opens
   await slovenian(page).click();
+  await page.getByRole('button', { name: 'Ustvari skupino' }).first().click();
+  await page.getByLabel('Ime skupine').fill('Konferenca 2026');
+  await page.getByRole('dialog').getByRole('button', { name: 'Ustvari skupino' }).click();
+  await expect(page.getByText('Skupino s tem imenom že imate.')).toBeVisible();
   const alertText = await page.getByRole('dialog').innerText();
   expect(alertText).not.toContain('You already have a group with this name.');
   expect(alertText).not.toMatch(/error\.|GROUP_NAME_TAKEN/);

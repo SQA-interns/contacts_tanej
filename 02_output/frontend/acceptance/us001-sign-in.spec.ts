@@ -81,6 +81,7 @@ test('AC-001-04 "Sign in with Google" signs the person in and shows the empty st
   const popupPromise = page.waitForEvent('popup');
   await page.getByRole('button', { name: 'Sign in with Google' }).click();
   const popup = await popupPromise;
+  await popup.waitForLoadState('load');
   await popup.getByText('Add new account').click();
   await popup.getByRole('button', { name: 'Auto-generate user information' }).click();
   await popup.getByRole('button', { name: 'Sign in with Google.com' }).click();

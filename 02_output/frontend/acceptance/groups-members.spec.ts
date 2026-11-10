@@ -81,6 +81,8 @@ test('AC-003-08 an invited person with an unverified e-mail sees only the verify
   await signIn(page, IVAN);
   await expect(page.getByRole('heading', { name: 'Verify your e-mail' })).toBeVisible();
   await expect(page.getByText('Konferenca 2026')).toHaveCount(0);
+  // the emulator API sends no mail for the created account; the app's own "Send again" does
+  await page.getByRole('button', { name: 'Send again' }).click();
   await verifyEmail(IVAN.email);
   await page.getByRole('button', { name: 'Sign out' }).click();
   await signIn(page, IVAN);
