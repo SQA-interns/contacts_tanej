@@ -34,11 +34,15 @@ class OpenApiContractIT extends AcceptanceBase {
   }
 
   @SuppressWarnings("unchecked")
-  private static Set<String> contractParameters(Map<String, Object> doc, Map<String, Object> op) {
+  private static Set<String> contractParameters(
+      Map<String, Object> doc, Map<String, Object> item, Map<String, Object> op) {
     Map<String, Object> components =
         (Map<String, Object>) ((Map<String, Object>) doc.get("components")).get("parameters");
     Set<String> names = new HashSet<>();
-    for (Object p : (List<Object>) op.getOrDefault("parameters", List.of())) {
+    List<Object> declared =
+        new java.util.ArrayList<>((List<Object>) item.getOrDefault("parameters", List.of()));
+    declared.addAll((List<Object>) op.getOrDefault("parameters", List.of()));
+    for (Object p : declared) {
       Map<String, Object> param = (Map<String, Object>) p;
       if (param.containsKey("$ref")) {
         String key = param.get("$ref").toString().replace("#/components/parameters/", "");
@@ -89,7 +93,7 @@ class OpenApiContractIT extends AcceptanceBase {
                 op.path("parameters")
                     .forEach(
                         p -> params.add(p.path("in").asText() + ":" + p.path("name").asText()));
-                if (!params.equals(contractParameters(doc, expected))) {
+                if (!params.equals(contractParameters(doc, item, expected))) {
                   problems.put(where + " parameters", params.toString());
                 }
                 if (op.has("requestBody") != expected.containsKey("requestBody")) {
