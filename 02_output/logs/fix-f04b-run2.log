@@ -1,0 +1,285 @@
+
+Running 57 tests using 1 worker
+
+  ok  1 [chromium] › acceptance\contacts-form.spec.ts:17:1 › AC-005-02 a contact with only a phone is refused with the reason and nothing is stored (3.4s)
+  ok  2 [chromium] › acceptance\contacts-form.spec.ts:35:1 › AC-005-04 an e-mail without a domain is refused naming the e-mail field (3.0s)
+  ok  3 [chromium] › acceptance\contacts-form.spec.ts:54:1 › AC-005-10 the country is chosen from the list and a free text is not offered (2.8s)
+  ok  4 [chromium] › acceptance\contacts-form.spec.ts:73:1 › AC-005-07 the second of two saves is refused with "changed by someone else" and the new values are shown (3.2s)
+  ok  5 [chromium] › acceptance\contacts-form.spec.ts:109:1 › AC-005-08 a Viewer sees all values and no Save or Delete contact (3.3s)
+  ok  6 [chromium] › acceptance\contacts-form.spec.ts:135:1 › AC-006-01 a tag typed on the contact is saved and shown as a chip (3.0s)
+  ok  7 [chromium] › acceptance\contacts-form.spec.ts:159:1 › AC-006-03 a tag with a space is refused naming the tag and nothing is stored (2.9s)
+  ok  8 [chromium] › acceptance\contacts-form.spec.ts:183:1 › AC-006-07 a Viewer sees the tags and has no control to change them (3.3s)
+  ok  9 [chromium] › acceptance\contacts-form.spec.ts:204:1 › AC-007-02 renaming a tag onto another tag shows the reason and changes nothing (2.9s)
+  ok 10 [chromium] › acceptance\contacts-form.spec.ts:232:1 › AC-007-07 a Viewer has no Tags tab and no rename or delete control (2.7s)
+  ok 11 [chromium] › acceptance\contacts-form.spec.ts:261:1 › AC-008-02 an attribute key equal ignoring case is refused and the contact is unchanged (3.7s)
+  x  12 [chromium] › acceptance\contacts-form.spec.ts:289:1 › AC-008-03 keys used in the group are suggested and a different key may be typed (8.2s)
+  ok 13 [chromium] › acceptance\contacts-form.spec.ts:326:1 › AC-008-07 a Viewer sees the attributes and no control to change them (3.0s)
+  ok 14 [chromium] › acceptance\groups-members.spec.ts:8:1 › AC-002-01 creating a group in the dialog opens it empty and shows Ana as its Owner (2.6s)
+  ok 15 [chromium] › acceptance\groups-members.spec.ts:27:1 › AC-002-03 the address of a group of someone else shows "Group not found" and nothing of the group (2.6s)
+  ok 16 [chromium] › acceptance\groups-members.spec.ts:40:1 › AC-002-04 a name of spaces only shows the reason in the dialog and creates no group (2.9s)
+  ok 17 [chromium] › acceptance\groups-members.spec.ts:57:1 › AC-002-05 a second group with the same name ignoring case is refused with the reason (2.6s)
+  x  18 [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified (2.6s)
+  ok 19 [chromium] › acceptance\groups-members.spec.ts:100:1 › AC-003-01 the Owner invites two people and the Members tab lists them as pending with role and expiry (3.4s)
+  ok 20 [chromium] › acceptance\groups-members.spec.ts:123:1 › AC-003-03 and AC-003-04 inviting a member or a pending address shows the message and changes nothing (3.1s)
+  ok 21 [chromium] › acceptance\groups-members.spec.ts:150:1 › AC-003-05 the 21st invitation shows the message about the limit of 20 (3.4s)
+  ok 22 [chromium] › acceptance\groups-members.spec.ts:165:1 › AC-003-10 an invalid e-mail is refused as invalid and nothing is created (2.9s)
+  ok 23 [chromium] › acceptance\groups-members.spec.ts:180:1 › AC-004-01 a Viewer sees the members and no controls to manage them or to edit (2.8s)
+  ok 24 [chromium] › acceptance\groups-members.spec.ts:210:1 › AC-004-03 the only Owner who tries to leave gets the last-Owner message and stays Owner (3.1s)
+  ok 25 [chromium] › acceptance\groups-members.spec.ts:228:1 › AC-004-05 a Viewer leaves the group and it disappears from the list (3.2s)
+  ok 26 [chromium] › acceptance\groups-members.spec.ts:247:1 › EX-004-03 a removed member whose browser still shows the group gets "not found" and the group list (2.9s)
+  ok 27 [chromium] › acceptance\groups-members.spec.ts:272:1 › AC-015-01 deleting a group by typing its name hides it and lists it in Deleted groups (2.8s)
+  ok 28 [chromium] › acceptance\groups-members.spec.ts:296:1 › AC-015-02 a name typed in another case deletes nothing (2.6s)
+  ok 29 [chromium] › acceptance\groups-members.spec.ts:314:1 › AC-016-02 the only Owner who deletes the account is refused and the group is named (3.1s)
+  ok 30 [chromium] › acceptance\groups-members.spec.ts:331:1 › AC-016-05 cancelling the confirmation deletes nothing (2.7s)
+  ok 31 [chromium] › acceptance\groups-members.spec.ts:354:1 › AC-016-06 an account deletion without a recent sign-in asks to sign in again first (2.9s)
+  ok 32 [chromium] › acceptance\us001-sign-in.spec.ts:37:1 › AC-001-01 registering creates the account, shows the verify screen and has Firebase send the e-mail (2.3s)
+  ok 33 [chromium] › acceptance\us001-sign-in.spec.ts:52:1 › AC-001-02 an unverified user sees only the verify screen for the list and for a group address (3.3s)
+  ok 34 [chromium] › acceptance\us001-sign-in.spec.ts:68:1 › AC-001-03 a verified user without a group sees the empty state with the button to create a group (3.0s)
+  x  35 [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state (11.4s)
+  ok 36 [chromium] › acceptance\us001-sign-in.spec.ts:96:1 › AC-001-05 a wrong password shows an error and the person stays on the sign-in screen (2.5s)
+  ok 37 [chromium] › acceptance\us001-sign-in.spec.ts:110:1 › AC-001-06 "Forgot password" starts the reset e-mail flow of Firebase (2.4s)
+  ok 38 [chromium] › acceptance\us001-sign-in.spec.ts:127:1 › AC-001-07 a password of 7 characters is refused with the reason and creates no account (1.9s)
+  ok 39 [chromium] › acceptance\us001-sign-in.spec.ts:142:1 › AC-001-08 the session survives a reload and "Sign out" shows the sign-in screen (2.8s)
+  ok 40 [chromium] › acceptance\us001-sign-in.spec.ts:155:1 › EX-001-01 a password of exactly 8 characters is accepted (2.4s)
+  ok 41 [chromium] › acceptance\us001-sign-in.spec.ts:165:1 › EX-001-02 a password of 7 characters is refused (2.0s)
+  ok 42 [chromium] › acceptance\us001-sign-in.spec.ts:176:1 › EX-001-03 an empty name and a name of 101 characters are refused and create no account (2.3s)
+  ok 43 [chromium] › acceptance\us001-sign-in.spec.ts:194:1 › EX-001-04 a name of exactly 100 characters is accepted (2.7s)
+  ok 44 [chromium] › acceptance\us001-sign-in.spec.ts:204:1 › EX-001-05 an e-mail that already has an account shows the refusal of Firebase and changes nothing (2.4s)
+  ok 45 [chromium] › acceptance\us001-sign-in.spec.ts:220:1 › EX-001-06 "Send again" makes Firebase send the verification e-mail again (2.9s)
+  x  46 [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state (7.8s)
+  x  47 [chromium] › acceptance\us018-language.spec.ts:45:3 › Slovenian by default › AC-018-01 and EX-018-01 the first visit shows Slovenian, whatever the browser language (7.1s)
+  ok 48 [chromium] › acceptance\us018-language.spec.ts:64:3 › the choice is remembered › AC-018-03 English chosen once is shown again on the next visit in the same browser (2.2s)
+  ok 49 [chromium] › acceptance\us018-language.spec.ts:82:1 › AC-018-02 switching the language changes the labels at once and keeps the typed text (3.3s)
+  ok 50 [chromium] › acceptance\us018-language.spec.ts:96:1 › AC-018-04 a time is shown as 2. 7. 2026 00:30 in Slovenian and 2026-07-02 00:30 in English (3.9s)
+  ok 51 [chromium] › acceptance\us018-language.spec.ts:115:1 › EX-018-03 in winter the time is shown as 23:30 (3.4s)
+  ok 52 [chromium] › acceptance\us018-language.spec.ts:132:1 › AC-018-05 Slovenia is shown as "Slovenija" in Slovenian and "Slovenia" in English (3.3s)
+  ok 53 [chromium] › acceptance\us018-language.spec.ts:156:1 › AC-018-06 the order of Čuk, Cerar, Sever, Šuster is the same in the English and the Slovenian UI (3.0s)
+  ok 54 [chromium] › acceptance\us018-language.spec.ts:177:1 › AC-018-07 tags and attributes are unchanged when the language changes (3.4s)
+  x  55 [chromium] › acceptance\us018-language.spec.ts:204:1 › EX-018-02 a server error is shown in the active language (30.2s)
+  ok 56 [chromium] › acceptance\us018-language.spec.ts:228:1 › EX-018-04 no screen shows a text key instead of a text, in either language (3.7s)
+  ok 57 [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work (7.8s)
+
+
+  1) [chromium] › acceptance\contacts-form.spec.ts:289:1 › AC-008-03 keys used in the group are suggested and a different key may be typed 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('option', { name: 'kompetenca' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('option', { name: 'kompetenca' })[22m
+
+
+      163 |   await page.getByRole('button', { name: 'Add attribute' }).click();
+      164 |   await page.getByLabel('Key').last().fill('kom');
+    > 165 |   await expect(page.getByRole('option', { name: 'kompetenca' })).toBeVisible();
+          |                                                                  ^
+      166 |   await page.getByLabel('Key').last().fill('komp2');
+      167 |   await page.getByLabel('Value').last().fill('x');
+      168 |   await page.getByRole('button', { name: 'Save', exact: true }).click();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\contacts-form.spec.ts:165:66
+
+    Error Context: test-results\acceptance-contacts-form-A-a9a75--different-key-may-be-typed-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-contacts-form-A-a9a75--different-key-may-be-typed-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-contacts-form-A-a9a75--different-key-may-be-typed-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified 
+
+    Error: No verification e-mail for ivan@example.com
+
+       at acceptance\support.ts:118
+
+      116 |   const codes = await emailCodes(email, 'VERIFY_EMAIL');
+      117 |   const last = codes[codes.length - 1];
+    > 118 |   if (!last) throw new Error(`No verification e-mail for ${email}`);
+          |                    ^
+      119 |   await identity(`accounts:update?key=${API_KEY}`, { oobCode: last.oobCode });
+      120 | }
+      121 |
+        at verifyEmail (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:118:20)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\groups-members.spec.ts:84:3
+
+    Error Context: test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      85 |   await popup.getByRole('button', { name: 'Auto-generate user information' }).click();
+      86 |   await popup.getByRole('button', { name: 'Sign in with Google.com' }).click();
+    > 87 |   await expect(emptyState(page)).toBeVisible();
+         |                                  ^
+      88 | });
+      89 |
+      90 | test('AC-001-05 a wrong password shows an error and the person stays on the sign-in screen', async ({
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:87:34
+
+    Error Context: test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      181 |   await verifyEmail(ANA.email);
+      182 |   await page.reload();
+    > 183 |   await expect(emptyState(page)).toBeVisible();
+          |                                  ^
+      184 | });
+      185 |
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:183:34
+
+    Error Context: test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › acceptance\us018-language.spec.ts:45:3 › Slovenian by default › AC-018-01 and EX-018-01 the first visit shows Slovenian, whatever the browser language 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('main').getByRole('textbox')
+    Expected: [32m1[39m
+    Received: [31m2[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('main').getByRole('textbox')[22m
+    [2m    9 × locator resolved to 2 elements[22m
+    [2m      - unexpected value "2"[22m
+
+
+      35 |     await expect(page.getByRole('heading', { name: 'Sign in' })).toHaveCount(0);
+      36 |     // the first visit opens the sign-in screen: one e-mail field and at least two buttons in the main area
+    > 37 |     await expect(page.getByRole('main').getByRole('textbox')).toHaveCount(1);
+         |                                                               ^
+      38 |     expect(await page.getByRole('main').getByRole('button').count()).toBeGreaterThanOrEqual(2);
+      39 |   });
+      40 | });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us018-language.spec.ts:37:63
+
+    Error Context: test-results\acceptance-us018-language--54c7c-atever-the-browser-language-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us018-language--54c7c-atever-the-browser-language-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us018-language--54c7c-atever-the-browser-language-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › acceptance\us018-language.spec.ts:204:1 › EX-018-02 a server error is shown in the active language 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'SL', exact: true })[22m
+
+
+      156 |   await create();
+      157 |   await expect(page.getByText('You already have a group with this name.')).toBeVisible();
+    > 158 |   await slovenian(page).click();
+          |                         ^
+      159 |   const alertText = await page.getByRole('dialog').innerText();
+      160 |   expect(alertText).not.toContain('You already have a group with this name.');
+      161 |   expect(alertText).not.toMatch(/error\.|GROUP_NAME_TAKEN/);
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us018-language.spec.ts:158:25
+
+    Error Context: test-results\acceptance-us018-language--08de8-hown-in-the-active-language-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us018-language--08de8-hown-in-the-active-language-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us018-language--08de8-hown-in-the-active-language-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    [chromium] › acceptance\contacts-form.spec.ts:289:1 › AC-008-03 keys used in the group are suggested and a different key may be typed 
+    [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified 
+    [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+    [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state 
+    [chromium] › acceptance\us018-language.spec.ts:45:3 › Slovenian by default › AC-018-01 and EX-018-01 the first visit shows Slovenian, whatever the browser language 
+    [chromium] › acceptance\us018-language.spec.ts:204:1 › EX-018-02 a server error is shown in the active language 
+  51 passed (4.1m)
+(node:6764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38024) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38024) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

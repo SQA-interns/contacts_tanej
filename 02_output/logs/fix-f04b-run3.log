@@ -1,0 +1,110 @@
+
+Running 28 tests using 1 worker
+
+  ok  1 [chromium] › acceptance\contacts-form.spec.ts:17:1 › AC-005-02 a contact with only a phone is refused with the reason and nothing is stored (3.9s)
+  ok  2 [chromium] › acceptance\contacts-form.spec.ts:35:1 › AC-005-04 an e-mail without a domain is refused naming the e-mail field (3.3s)
+  ok  3 [chromium] › acceptance\contacts-form.spec.ts:54:1 › AC-005-10 the country is chosen from the list and a free text is not offered (2.7s)
+  ok  4 [chromium] › acceptance\contacts-form.spec.ts:73:1 › AC-005-07 the second of two saves is refused with "changed by someone else" and the new values are shown (3.0s)
+  ok  5 [chromium] › acceptance\contacts-form.spec.ts:109:1 › AC-005-08 a Viewer sees all values and no Save or Delete contact (3.2s)
+  ok  6 [chromium] › acceptance\contacts-form.spec.ts:135:1 › AC-006-01 a tag typed on the contact is saved and shown as a chip (3.0s)
+  ok  7 [chromium] › acceptance\contacts-form.spec.ts:159:1 › AC-006-03 a tag with a space is refused naming the tag and nothing is stored (3.0s)
+  ok  8 [chromium] › acceptance\contacts-form.spec.ts:183:1 › AC-006-07 a Viewer sees the tags and has no control to change them (3.3s)
+  ok  9 [chromium] › acceptance\contacts-form.spec.ts:204:1 › AC-007-02 renaming a tag onto another tag shows the reason and changes nothing (3.0s)
+  ok 10 [chromium] › acceptance\contacts-form.spec.ts:232:1 › AC-007-07 a Viewer has no Tags tab and no rename or delete control (2.9s)
+  ok 11 [chromium] › acceptance\contacts-form.spec.ts:261:1 › AC-008-02 an attribute key equal ignoring case is refused and the contact is unchanged (3.0s)
+  ok 12 [chromium] › acceptance\contacts-form.spec.ts:289:1 › AC-008-03 keys used in the group are suggested and a different key may be typed (3.1s)
+  ok 13 [chromium] › acceptance\contacts-form.spec.ts:326:1 › AC-008-07 a Viewer sees the attributes and no control to change them (3.2s)
+  ok 14 [chromium] › acceptance\us001-sign-in.spec.ts:37:1 › AC-001-01 registering creates the account, shows the verify screen and has Firebase send the e-mail (2.3s)
+  ok 15 [chromium] › acceptance\us001-sign-in.spec.ts:52:1 › AC-001-02 an unverified user sees only the verify screen for the list and for a group address (3.8s)
+  ok 16 [chromium] › acceptance\us001-sign-in.spec.ts:68:1 › AC-001-03 a verified user without a group sees the empty state with the button to create a group (2.4s)
+  x  17 [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state (8.6s)
+  ok 18 [chromium] › acceptance\us001-sign-in.spec.ts:96:1 › AC-001-05 a wrong password shows an error and the person stays on the sign-in screen (2.7s)
+  ok 19 [chromium] › acceptance\us001-sign-in.spec.ts:110:1 › AC-001-06 "Forgot password" starts the reset e-mail flow of Firebase (2.3s)
+  ok 20 [chromium] › acceptance\us001-sign-in.spec.ts:127:1 › AC-001-07 a password of 7 characters is refused with the reason and creates no account (1.8s)
+  ok 21 [chromium] › acceptance\us001-sign-in.spec.ts:142:1 › AC-001-08 the session survives a reload and "Sign out" shows the sign-in screen (2.9s)
+  ok 22 [chromium] › acceptance\us001-sign-in.spec.ts:155:1 › EX-001-01 a password of exactly 8 characters is accepted (2.4s)
+  ok 23 [chromium] › acceptance\us001-sign-in.spec.ts:165:1 › EX-001-02 a password of 7 characters is refused (2.0s)
+  ok 24 [chromium] › acceptance\us001-sign-in.spec.ts:176:1 › EX-001-03 an empty name and a name of 101 characters are refused and create no account (2.5s)
+  ok 25 [chromium] › acceptance\us001-sign-in.spec.ts:194:1 › EX-001-04 a name of exactly 100 characters is accepted (2.3s)
+  ok 26 [chromium] › acceptance\us001-sign-in.spec.ts:204:1 › EX-001-05 an e-mail that already has an account shows the refusal of Firebase and changes nothing (2.3s)
+  ok 27 [chromium] › acceptance\us001-sign-in.spec.ts:220:1 › EX-001-06 "Send again" makes Firebase send the verification e-mail again (2.8s)
+  x  28 [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state (7.8s)
+
+
+  1) [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      85 |   await popup.getByRole('button', { name: 'Auto-generate user information' }).click();
+      86 |   await popup.getByRole('button', { name: 'Sign in with Google.com' }).click();
+    > 87 |   await expect(emptyState(page)).toBeVisible();
+         |                                  ^
+      88 | });
+      89 |
+      90 | test('AC-001-05 a wrong password shows an error and the person stays on the sign-in screen', async ({
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:87:34
+
+    Error Context: test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  getByRole('button', { name: 'Create group' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Create group' })[22m
+
+
+      181 |   await verifyEmail(ANA.email);
+      182 |   await page.reload();
+    > 183 |   await expect(emptyState(page)).toBeVisible();
+          |                                  ^
+      184 | });
+      185 |
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:183:34
+
+    Error Context: test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-E-672e1-ontinues-to-the-empty-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+    [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state 
+  26 passed (1.6m)
+(node:23536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

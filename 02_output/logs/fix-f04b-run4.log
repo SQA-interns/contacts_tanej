@@ -1,0 +1,77 @@
+
+Running 33 tests using 1 worker
+
+  ok  1 [chromium] › acceptance\groups-members.spec.ts:8:1 › AC-002-01 creating a group in the dialog opens it empty and shows Ana as its Owner (2.0s)
+  ok  2 [chromium] › acceptance\groups-members.spec.ts:27:1 › AC-002-03 the address of a group of someone else shows "Group not found" and nothing of the group (2.3s)
+  ok  3 [chromium] › acceptance\groups-members.spec.ts:40:1 › AC-002-04 a name of spaces only shows the reason in the dialog and creates no group (2.3s)
+  ok  4 [chromium] › acceptance\groups-members.spec.ts:57:1 › AC-002-05 a second group with the same name ignoring case is refused with the reason (1.9s)
+  ok  5 [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified (2.4s)
+  ok  6 [chromium] › acceptance\groups-members.spec.ts:100:1 › AC-003-01 the Owner invites two people and the Members tab lists them as pending with role and expiry (2.5s)
+  ok  7 [chromium] › acceptance\groups-members.spec.ts:123:1 › AC-003-03 and AC-003-04 inviting a member or a pending address shows the message and changes nothing (2.6s)
+  ok  8 [chromium] › acceptance\groups-members.spec.ts:150:1 › AC-003-05 the 21st invitation shows the message about the limit of 20 (2.4s)
+  ok  9 [chromium] › acceptance\groups-members.spec.ts:165:1 › AC-003-10 an invalid e-mail is refused as invalid and nothing is created (2.4s)
+  ok 10 [chromium] › acceptance\groups-members.spec.ts:180:1 › AC-004-01 a Viewer sees the members and no controls to manage them or to edit (2.2s)
+  ok 11 [chromium] › acceptance\groups-members.spec.ts:210:1 › AC-004-03 the only Owner who tries to leave gets the last-Owner message and stays Owner (2.5s)
+  ok 12 [chromium] › acceptance\groups-members.spec.ts:228:1 › AC-004-05 a Viewer leaves the group and it disappears from the list (2.4s)
+  ok 13 [chromium] › acceptance\groups-members.spec.ts:247:1 › EX-004-03 a removed member whose browser still shows the group gets "not found" and the group list (2.4s)
+  ok 14 [chromium] › acceptance\groups-members.spec.ts:272:1 › AC-015-01 deleting a group by typing its name hides it and lists it in Deleted groups (2.3s)
+  ok 15 [chromium] › acceptance\groups-members.spec.ts:296:1 › AC-015-02 a name typed in another case deletes nothing (2.2s)
+  ok 16 [chromium] › acceptance\groups-members.spec.ts:314:1 › AC-016-02 the only Owner who deletes the account is refused and the group is named (2.4s)
+  ok 17 [chromium] › acceptance\groups-members.spec.ts:331:1 › AC-016-05 cancelling the confirmation deletes nothing (2.3s)
+  ok 18 [chromium] › acceptance\groups-members.spec.ts:354:1 › AC-016-06 an account deletion without a recent sign-in asks to sign in again first (2.2s)
+  ok 19 [chromium] › acceptance\us001-sign-in.spec.ts:37:1 › AC-001-01 registering creates the account, shows the verify screen and has Firebase send the e-mail (1.6s)
+  ok 20 [chromium] › acceptance\us001-sign-in.spec.ts:52:1 › AC-001-02 an unverified user sees only the verify screen for the list and for a group address (2.4s)
+  ok 21 [chromium] › acceptance\us001-sign-in.spec.ts:68:1 › AC-001-03 a verified user without a group sees the empty state with the button to create a group (2.1s)
+  x  22 [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state (30.1s)
+  ok 23 [chromium] › acceptance\us001-sign-in.spec.ts:96:1 › AC-001-05 a wrong password shows an error and the person stays on the sign-in screen (1.6s)
+  ok 24 [chromium] › acceptance\us001-sign-in.spec.ts:110:1 › AC-001-06 "Forgot password" starts the reset e-mail flow of Firebase (1.6s)
+  ok 25 [chromium] › acceptance\us001-sign-in.spec.ts:127:1 › AC-001-07 a password of 7 characters is refused with the reason and creates no account (1.1s)
+  ok 26 [chromium] › acceptance\us001-sign-in.spec.ts:142:1 › AC-001-08 the session survives a reload and "Sign out" shows the sign-in screen (1.9s)
+  ok 27 [chromium] › acceptance\us001-sign-in.spec.ts:155:1 › EX-001-01 a password of exactly 8 characters is accepted (1.5s)
+  ok 28 [chromium] › acceptance\us001-sign-in.spec.ts:165:1 › EX-001-02 a password of 7 characters is refused (1.1s)
+  ok 29 [chromium] › acceptance\us001-sign-in.spec.ts:176:1 › EX-001-03 an empty name and a name of 101 characters are refused and create no account (1.2s)
+  ok 30 [chromium] › acceptance\us001-sign-in.spec.ts:194:1 › EX-001-04 a name of exactly 100 characters is accepted (1.5s)
+  ok 31 [chromium] › acceptance\us001-sign-in.spec.ts:204:1 › EX-001-05 an e-mail that already has an account shows the refusal of Firebase and changes nothing (1.5s)
+  ok 32 [chromium] › acceptance\us001-sign-in.spec.ts:220:1 › EX-001-06 "Send again" makes Firebase send the verification e-mail again (2.0s)
+  ok 33 [chromium] › acceptance\us001-sign-in.spec.ts:235:1 › EX-001-07 verifying in another tab and reloading continues to the empty state (1.6s)
+
+
+  1) [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Auto-generate user information' })[22m
+
+
+      83 |   const popup = await popupPromise;
+      84 |   await popup.getByText('Add new account').click();
+    > 85 |   await popup.getByRole('button', { name: 'Auto-generate user information' }).click();
+         |                                                                               ^
+      86 |   await popup.getByRole('button', { name: 'Sign in with Google.com' }).click();
+      87 |   await expect(emptyState(page)).toBeVisible();
+      88 | });
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\us001-sign-in.spec.ts:85:79
+
+    Error Context: test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-us001-sign-in-A-32ba6-n-and-shows-the-empty-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › acceptance\us001-sign-in.spec.ts:78:1 › AC-001-04 "Sign in with Google" signs the person in and shows the empty state 
+  32 passed (1.6m)
+(node:37736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

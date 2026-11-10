@@ -1,0 +1,123 @@
+
+Running 19 tests using 1 worker
+
+  ok  1 [chromium] › acceptance\groups-members.spec.ts:8:1 › AC-002-01 creating a group in the dialog opens it empty and shows Ana as its Owner (2.8s)
+  ok  2 [chromium] › acceptance\groups-members.spec.ts:27:1 › AC-002-03 the address of a group of someone else shows "Group not found" and nothing of the group (2.6s)
+  ok  3 [chromium] › acceptance\groups-members.spec.ts:40:1 › AC-002-04 a name of spaces only shows the reason in the dialog and creates no group (3.0s)
+  ok  4 [chromium] › acceptance\groups-members.spec.ts:57:1 › AC-002-05 a second group with the same name ignoring case is refused with the reason (2.8s)
+  x   5 [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified (3.0s)
+  x   6 [chromium] › acceptance\groups-members.spec.ts:100:1 › AC-003-01 the Owner invites two people and the Members tab lists them as pending with role and expiry (30.7s)
+  ok  7 [chromium] › acceptance\groups-members.spec.ts:123:1 › AC-003-03 and AC-003-04 inviting a member or a pending address shows the message and changes nothing (3.8s)
+  ok  8 [chromium] › acceptance\groups-members.spec.ts:150:1 › AC-003-05 the 21st invitation shows the message about the limit of 20 (3.7s)
+  ok  9 [chromium] › acceptance\groups-members.spec.ts:165:1 › AC-003-10 an invalid e-mail is refused as invalid and nothing is created (3.1s)
+  ok 10 [chromium] › acceptance\groups-members.spec.ts:180:1 › AC-004-01 a Viewer sees the members and no controls to manage them or to edit (2.8s)
+  ok 11 [chromium] › acceptance\groups-members.spec.ts:210:1 › AC-004-03 the only Owner who tries to leave gets the last-Owner message and stays Owner (3.4s)
+  ok 12 [chromium] › acceptance\groups-members.spec.ts:228:1 › AC-004-05 a Viewer leaves the group and it disappears from the list (3.0s)
+  ok 13 [chromium] › acceptance\groups-members.spec.ts:247:1 › EX-004-03 a removed member whose browser still shows the group gets "not found" and the group list (3.1s)
+  ok 14 [chromium] › acceptance\groups-members.spec.ts:272:1 › AC-015-01 deleting a group by typing its name hides it and lists it in Deleted groups (3.4s)
+  ok 15 [chromium] › acceptance\groups-members.spec.ts:296:1 › AC-015-02 a name typed in another case deletes nothing (3.1s)
+  ok 16 [chromium] › acceptance\groups-members.spec.ts:314:1 › AC-016-02 the only Owner who deletes the account is refused and the group is named (2.6s)
+  ok 17 [chromium] › acceptance\groups-members.spec.ts:331:1 › AC-016-05 cancelling the confirmation deletes nothing (2.9s)
+  ok 18 [chromium] › acceptance\groups-members.spec.ts:354:1 › AC-016-06 an account deletion without a recent sign-in asks to sign in again first (3.3s)
+  x  19 [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work (30.6s)
+
+
+  1) [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified 
+
+    Error: No verification e-mail for ivan@example.com
+
+       at acceptance\support.ts:118
+
+      116 |   const codes = await emailCodes(email, 'VERIFY_EMAIL');
+      117 |   const last = codes[codes.length - 1];
+    > 118 |   if (!last) throw new Error(`No verification e-mail for ${email}`);
+          |                    ^
+      119 |   await identity(`accounts:update?key=${API_KEY}`, { oobCode: last.oobCode });
+      120 | }
+      121 |
+        at verifyEmail (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:118:20)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\groups-members.spec.ts:84:3
+
+    Error Context: test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-groups-members--f683c-erify-screen-until-verified-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › acceptance\groups-members.spec.ts:100:1 › AC-003-01 the Owner invites two people and the Members tab lists them as pending with role and expiry 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Role', { exact: true })[22m
+
+
+       99 |   ] as const) {
+      100 |     await page.getByLabel('E-mail').fill(email);
+    > 101 |     await page.getByLabel('Role', { exact: true }).selectOption({ label: role });
+          |                                                    ^
+      102 |     await page.getByRole('button', { name: 'Invite' }).click();
+      103 |     await expect(row(page, email)).toContainText(role);
+      104 |   }
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\groups-members.spec.ts:101:52
+
+    Error Context: test-results\acceptance-groups-members--ad7f5-ending-with-role-and-expiry-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\acceptance-groups-members--ad7f5-ending-with-role-and-expiry-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\acceptance-groups-members--ad7f5-ending-with-role-and-expiry-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ───────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Role', { exact: true })[22m
+
+
+      33 |   ] as const) {
+      34 |     await page.getByLabel('E-mail').fill(email);
+    > 35 |     await page.getByLabel('Role', { exact: true }).selectOption({ label: role });
+         |                                                    ^
+      36 |     await page.getByRole('button', { name: 'Invite' }).click();
+      37 |     await expect(row(page, email)).toBeVisible();
+      38 |   }
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-02-team-work.spec.ts:35:52
+
+    Error Context: test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-e2e-02-team-work-E2E-02-J2-Team-work-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › acceptance\groups-members.spec.ts:72:1 › AC-003-08 an invited person with an unverified e-mail sees only the verify screen until verified 
+    [chromium] › acceptance\groups-members.spec.ts:100:1 › AC-003-01 the Owner invites two people and the Members tab lists them as pending with role and expiry 
+    [chromium] › e2e\e2e-02-team-work.spec.ts:8:1 › E2E-02 J2 Team work ────────────────────────────
+  16 passed (2.1m)
+(node:11532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
