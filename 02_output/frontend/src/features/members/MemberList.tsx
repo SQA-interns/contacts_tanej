@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { stacked } from '@/components/ui/stacked-table';
 import type { components } from '@/lib/api/schema';
 
 type Member = components['schemas']['Member'];
@@ -34,8 +35,8 @@ export function MemberList({
       <h2 id="members-heading" className="px-4 pt-4 text-xl font-semibold">
         {t('groups.tabs.members')}
       </h2>
-      <table className="w-full text-left">
-        <thead>
+      <table className={stacked.table}>
+        <thead className={stacked.head}>
           <tr className="border-b border-border">
             <th scope="col" className="px-4 py-3">
               {t('groups.columns.name')}
@@ -51,14 +52,18 @@ export function MemberList({
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={stacked.body}>
           {members.map((member) => {
             const self = member.email.toLowerCase() === selfEmail.toLowerCase();
             return (
-              <tr key={member.userId} className="border-b border-border last:border-b-0">
-                <td className="px-4 py-2 break-words">{member.name}</td>
-                <td className="px-4 py-2 break-all">{member.email}</td>
-                <td className="px-4 py-2">
+              <tr key={member.userId} className={stacked.row}>
+                <td data-label={t('groups.columns.name')} className={stacked.cell}>
+                  {member.name}
+                </td>
+                <td data-label={t('auth.email')} className={`${stacked.cell} break-all`}>
+                  {member.email}
+                </td>
+                <td data-label={t('groups.columns.role')} className={stacked.cell}>
                   {canManage ? (
                     <select
                       aria-label={t('members.roleOf', { name: member.name })}
@@ -76,7 +81,7 @@ export function MemberList({
                     t(`role.${member.role}`)
                   )}
                 </td>
-                <td className="px-4 py-2 text-right">
+                <td className={stacked.actions}>
                   {self ? (
                     <Button variant="ghost" onClick={onLeave}>
                       {t('members.leave.action')}

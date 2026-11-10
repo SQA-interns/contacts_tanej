@@ -6,6 +6,7 @@ import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
+import { stacked } from '@/components/ui/stacked-table';
 import type { components } from '@/lib/api/schema';
 import { EmptyState } from './EmptyState';
 import { DeleteGroupDialog } from './DeleteGroupDialog';
@@ -88,8 +89,8 @@ export function GroupsHome() {
         <Button onClick={() => setDialog({ mode: 'create' })}>{t('groups.create')}</Button>
       </div>
       <Card className="p-0">
-        <table className="w-full text-left">
-          <thead>
+        <table className={stacked.table}>
+          <thead className={stacked.head}>
             <tr className="border-b border-border">
               <th scope="col" className="px-4 py-3">
                 {t('groups.columns.name')}
@@ -102,18 +103,18 @@ export function GroupsHome() {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={stacked.body}>
             {groups.data.map((group) => (
-              <tr key={group.id} className="border-b border-border last:border-b-0">
-                <td className="px-4 py-2 break-words">
+              <tr key={group.id} className={stacked.row}>
+                <td data-label={t('groups.columns.name')} className={stacked.cell}>
                   <Link to={`/groups/${group.id}`} className="underline">
                     {group.name}
                   </Link>
                 </td>
-                <td className="px-4 py-2">
+                <td data-label={t('groups.columns.role')} className={stacked.cell}>
                   <RoleBadge role={group.role} />
                 </td>
-                <td className="px-4 py-2 text-right">
+                <td className={stacked.actions}>
                   {group.role === 'OWNER' && (
                     <span className="flex flex-wrap justify-end gap-2">
                       <Button variant="ghost" onClick={() => setDialog({ mode: 'rename', group })}>

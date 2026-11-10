@@ -70,7 +70,7 @@ export function GroupPage() {
         <RoleBadge role={group.data.role} />
       </div>
       {!onContact && (
-        <nav aria-label={t('groups.tabs.label')} className="mb-4 flex gap-1 border-b border-border">
+        <nav aria-label={t('groups.tabs.label')} className="mb-4 flex flex-wrap gap-1 border-b border-border">
           <GroupTab to={`/groups/${group.data.id}`} end label={t('groups.tabs.contacts')} />
           {group.data.role !== 'VIEWER' && (
             <>

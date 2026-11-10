@@ -6,6 +6,7 @@ import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
+import { stacked } from '@/components/ui/stacked-table';
 import { ConfirmDialog } from '@/features/members/ConfirmDialog';
 import { ApiError } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -74,8 +75,8 @@ export function TrashPage() {
         <StatePanel state="empty" emptyText={t('trash.empty')} />
       ) : (
         <Card className="p-0">
-          <table className="w-full text-left">
-            <thead>
+          <table className={stacked.table}>
+            <thead className={stacked.head}>
               <tr className="border-b border-border">
                 <th scope="col" className="px-4 py-3">
                   {t('trash.contact')}
@@ -91,13 +92,19 @@ export function TrashPage() {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={stacked.body}>
               {data.items.map((item) => (
-                <tr key={item.id} className="border-b border-border last:border-b-0">
-                  <td className="px-4 py-2 break-words">{contactTitle({ ...emptyValues, ...item })}</td>
-                  <td className="px-4 py-2">{formatDateTime(item.trashedAt, i18n.language as Language)}</td>
-                  <td className="px-4 py-2">{item.daysLeft}</td>
-                  <td className="px-4 py-2">
+                <tr key={item.id} className={stacked.row}>
+                  <td data-label={t('trash.contact')} className={stacked.cell}>
+                    {contactTitle({ ...emptyValues, ...item })}
+                  </td>
+                  <td data-label={t('trash.deleted')} className={stacked.cell}>
+                    {formatDateTime(item.trashedAt, i18n.language as Language)}
+                  </td>
+                  <td data-label={t('trash.daysLeft')} className={stacked.cell}>
+                    {item.daysLeft}
+                  </td>
+                  <td className={stacked.actions}>
                     <span className="flex flex-wrap justify-end gap-2">
                       <Button
                         variant="secondary"

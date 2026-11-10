@@ -82,8 +82,8 @@ export function GroupHistoryPage() {
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_20rem]">
       <h2 className="sr-only lg:col-span-2">{t('history.title')}</h2>
-      <div className="order-2 lg:order-1">{body}</div>
-      <div className="order-1 lg:order-2">
+      <div className="order-2 min-w-0 lg:order-1">{body}</div>
+      <div className="order-1 min-w-0 lg:order-2">
         <HistoryFilters groupId={group.id} applied={filters} onApply={apply} />
       </div>
     </div>
