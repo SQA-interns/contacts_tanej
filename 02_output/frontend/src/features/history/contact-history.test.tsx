@@ -96,6 +96,15 @@ describe('Contact History tab (R-013-07, R-013-09, R-013-12)', () => {
     expect(await screen.findByText('No History yet')).toBeInTheDocument();
   });
 
+  it('keeps the Group navigation on a contact page, with one History link (E2E-03, F-04)', async () => {
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api: historyApi([]) });
+    await screen.findByRole('heading', { name: 'Ana Novak' });
+    const group = screen.getByRole('navigation', { name: 'Group' });
+    expect(within(group).getByRole('link', { name: 'Contacts' })).toHaveAttribute('href', '/groups/g-1');
+    expect(within(group).getByRole('link', { name: 'Members' })).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: 'History' })).toHaveLength(1);
+  });
+
   it('shows a Viewer no History tab', async () => {
     renderApp('/groups/g-3/contacts/c-1', { auth: signedIn(), api: historyApi([]) });
     await screen.findByRole('heading', { name: 'Ana Novak' });

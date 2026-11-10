@@ -69,19 +69,20 @@ export function GroupPage() {
         <h1 className="text-2xl font-semibold break-words">{group.data.name}</h1>
         <RoleBadge role={group.data.role} />
       </div>
-      {!onContact && (
-        <nav aria-label={t('groups.tabs.label')} className="mb-4 flex flex-wrap gap-1 border-b border-border">
-          <GroupTab to={`/groups/${group.data.id}`} end label={t('groups.tabs.contacts')} />
-          {group.data.role !== 'VIEWER' && (
-            <>
-              <GroupTab to={`/groups/${group.data.id}/trash`} label={t('groups.tabs.trash')} />
-              <GroupTab to={`/groups/${group.data.id}/tags`} label={t('groups.tabs.tags')} />
+      <nav aria-label={t('groups.tabs.label')} className="mb-4 flex flex-wrap gap-1 border-b border-border">
+        <GroupTab to={`/groups/${group.data.id}`} end label={t('groups.tabs.contacts')} />
+        {group.data.role !== 'VIEWER' && (
+          <>
+            <GroupTab to={`/groups/${group.data.id}/trash`} label={t('groups.tabs.trash')} />
+            <GroupTab to={`/groups/${group.data.id}/tags`} label={t('groups.tabs.tags')} />
+            {/* On a contact page "History" is the contact's own tab; one link of that name per page. */}
+            {!onContact && (
               <GroupTab to={`/groups/${group.data.id}/history`} label={t('groups.tabs.history')} />
-            </>
-          )}
-          <GroupTab to={`/groups/${group.data.id}/members`} label={t('groups.tabs.members')} />
-        </nav>
-      )}
+            )}
+          </>
+        )}
+        <GroupTab to={`/groups/${group.data.id}/members`} label={t('groups.tabs.members')} />
+      </nav>
       <Outlet context={group.data} />
     </>
   );
