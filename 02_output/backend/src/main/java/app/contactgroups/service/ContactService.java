@@ -1,9 +1,12 @@
 package app.contactgroups.service;
 
 import app.contactgroups.domain.ApiException;
+import app.contactgroups.domain.AttributeChange;
+import app.contactgroups.domain.Attributes;
 import app.contactgroups.domain.ChangeSet;
 import app.contactgroups.domain.ChangeSet.Event;
 import app.contactgroups.domain.Contact;
+import app.contactgroups.domain.Contact.Attribute;
 import app.contactgroups.domain.ContactInput;
 import app.contactgroups.domain.ContactRules;
 import app.contactgroups.domain.ContactState;
@@ -38,6 +41,7 @@ public class ContactService {
   private final VersionService versions;
   private final HistoryRecorder history;
   private final TagService tags;
+  private final AttributeService attributes;
   private final Clock clock;
 
   public ContactService(
@@ -47,9 +51,11 @@ public class ContactService {
       VersionService versions,
       HistoryRecorder history,
       TagService tags,
+      AttributeService attributes,
       Clock clock) {
     this.contacts = contacts;
     this.tags = tags;
+    this.attributes = attributes;
     this.access = access;
     this.users = users;
     this.versions = versions;
@@ -57,15 +63,20 @@ public class ContactService {
     this.clock = clock;
   }
 
+  /** What a request carries besides the 11 fields; {@code null} means "keep as it is". */
+  public record Extras(List<String> tags, List<Attribute> attributes) {}
+
   /** Stores a new contact as version 1, Owner or Editor (R-005-01). */
   @Transactional
-  public Contact create(UUID groupId, String userId, ContactInput raw, List<String> rawTags) {
+  public Contact create(UUID groupId, String userId, ContactInput raw, Extras extras) {
     requireWriter(groupId, userId);
     ContactInput input = ContactRules.validate(raw);
-    List<String> wanted = TagNames.validate(rawTags == null ? List.of() : rawTags);
+    List<String> wantedTags = TagNames.validate(orEmpty(extras.tags()));
+    List<Attribute> wantedAttributes = Attributes.validate(orEmpty(extras.attributes()));
     UUID id = UUID.randomUUID();
     contacts.insert(id, groupId, input, userId, clock.instant());
-    TagChange tagChange = tags.apply(groupId, id, TagChange.between(List.of(), wanted));
+    TagChange tagChange = tags.apply(groupId, id, TagChange.between(List.of(), wantedTags));
+    attributes.replace(id, wantedAttributes);
     Contact created = load(groupId, id);
     versions.record(created, 1, author(userId));
     List<Event> events = new ArrayList<>();
@@ -73,6 +84,7 @@ public class ContactService {
         Event.contact(
             HistoryEventType.CONTACT_CREATED, id, created.label(), input.changesFrom(null)));
     events.addAll(tagEvents(created, tagChange));
+    events.addAll(attributeEvents(created, AttributeChange.between(List.of(), wantedAttributes)));
     history.record(new ChangeSet(UUID.randomUUID(), groupId, userId, events));
     return created;
   }
@@ -83,22 +95,18 @@ public class ContactService {
     access.requireMember(groupId, userId);
     return contacts
         .find(groupId, contactId)
-        .map(c -> c.withTags(tags.namesOf(contactId)))
+        .map(this::withRelations)
         .orElseThrow(AccessService::notFound);
   }
 
   /**
-   * Saves the contact as opened (revision), Owner or Editor (R-005-07, R-005-08). Tags that are
-   * absent from the request stay as they are; a list replaces them (R-006-01, R-006-06).
+   * Saves the contact as opened (revision), Owner or Editor (R-005-07, R-005-08). Tags and
+   * attributes that are absent from the request stay as they are; a list replaces them (R-006-01,
+   * R-006-06, R-008-01, R-008-07).
    */
   @Transactional
   public Contact save(
-      UUID groupId,
-      String userId,
-      UUID contactId,
-      ContactInput raw,
-      List<String> rawTags,
-      Long revision) {
+      UUID groupId, String userId, UUID contactId, ContactInput raw, Extras extras, Long revision) {
     requireWriter(groupId, userId);
     if (revision == null) {
       throw new ApiException(
@@ -107,11 +115,13 @@ public class ContactService {
           List.of(new FieldProblem("revision", "REQUIRED", "The revision of the opened contact.")));
     }
     ContactInput input = ContactRules.validate(raw);
-    List<String> wanted = rawTags == null ? null : TagNames.validate(rawTags);
+    List<String> wantedTags = extras.tags() == null ? null : TagNames.validate(extras.tags());
+    List<Attribute> wantedAttributes =
+        extras.attributes() == null ? null : Attributes.validate(extras.attributes());
     Contact current =
         contacts
             .lock(groupId, contactId)
-            .map(c -> c.withTags(tags.namesOf(contactId)))
+            .map(this::withRelations)
             .orElseThrow(AccessService::notFound);
     if (current.state() == ContactState.TRASHED) {
       throw new ApiException(ErrorCode.CONTACT_IN_TRASH, "This contact is in Trash.");
@@ -120,21 +130,33 @@ public class ContactService {
       throw ApiException.conflict(current);
     }
     TagChange wantedChange =
-        TagChange.between(current.tags(), wanted == null ? current.tags() : wanted);
-    if (current.fields().equals(input) && wantedChange.isEmpty()) {
+        TagChange.between(current.tags(), wantedTags == null ? current.tags() : wantedTags);
+    List<FieldChange> attributeChanges =
+        AttributeChange.between(
+            current.attributes(),
+            wantedAttributes == null ? current.attributes() : wantedAttributes);
+    if (current.fields().equals(input) && wantedChange.isEmpty() && attributeChanges.isEmpty()) {
       return current;
     }
     int number = current.versionNumber() + 1;
     contacts.update(contactId, input, number);
     TagChange tagChange = tags.apply(groupId, contactId, wantedChange);
+    if (!attributeChanges.isEmpty()) {
+      attributes.replace(contactId, wantedAttributes);
+    }
     Contact saved = load(groupId, contactId);
     versions.record(saved, number, author(userId));
     history.record(
-        new ChangeSet(UUID.randomUUID(), groupId, userId, savedEvents(current, saved, tagChange)));
+        new ChangeSet(
+            UUID.randomUUID(),
+            groupId,
+            userId,
+            savedEvents(current, saved, tagChange, attributeChanges)));
     return saved;
   }
 
-  private List<Event> savedEvents(Contact before, Contact saved, TagChange tagChange) {
+  private List<Event> savedEvents(
+      Contact before, Contact saved, TagChange tagChange, List<FieldChange> attributeChanges) {
     List<Event> events = new ArrayList<>();
     List<FieldChange> changes = saved.fields().changesFrom(before.fields());
     if (!changes.isEmpty()) {
@@ -142,6 +164,7 @@ public class ContactService {
           Event.contact(HistoryEventType.CONTACT_EDITED, saved.id(), saved.label(), changes));
     }
     events.addAll(tagEvents(saved, tagChange));
+    events.addAll(attributeEvents(saved, attributeChanges));
     return events;
   }
 
@@ -149,22 +172,47 @@ public class ContactService {
   private static List<Event> tagEvents(Contact contact, TagChange change) {
     List<Event> events = new ArrayList<>();
     for (String name : change.removed()) {
-      events.add(tagEvent(contact, new FieldChange("tag", name, null)));
+      events.add(
+          Event.contact(
+              HistoryEventType.TAG_CHANGED,
+              contact.id(),
+              contact.label(),
+              List.of(new FieldChange("tag", name, null))));
     }
     for (String name : change.added()) {
-      events.add(tagEvent(contact, new FieldChange("tag", null, name)));
+      events.add(
+          Event.contact(
+              HistoryEventType.TAG_CHANGED,
+              contact.id(),
+              contact.label(),
+              List.of(new FieldChange("tag", null, name))));
     }
     return events;
   }
 
-  private static Event tagEvent(Contact contact, FieldChange change) {
-    return Event.contact(
-        HistoryEventType.TAG_CHANGED, contact.id(), contact.label(), List.of(change));
+  /** One ATTRIBUTE_CHANGED entry per key added, removed or changed (R-013-02). */
+  private static List<Event> attributeEvents(Contact contact, List<FieldChange> changes) {
+    return changes.stream()
+        .map(
+            change ->
+                Event.contact(
+                    HistoryEventType.ATTRIBUTE_CHANGED,
+                    contact.id(),
+                    contact.label(),
+                    List.of(change)))
+        .toList();
+  }
+
+  private static <T> List<T> orEmpty(List<T> list) {
+    return list == null ? List.of() : list;
   }
 
   private Contact load(UUID groupId, UUID contactId) {
-    Contact contact = contacts.find(groupId, contactId).orElseThrow();
-    return contact.withTags(tags.namesOf(contactId));
+    return withRelations(contacts.find(groupId, contactId).orElseThrow());
+  }
+
+  private Contact withRelations(Contact contact) {
+    return contact.withTags(tags.namesOf(contact.id())).withAttributes(attributes.of(contact.id()));
   }
 
   private void requireWriter(UUID groupId, String userId) {

@@ -1,7 +1,9 @@
 package app.contactgroups.api;
 
 import app.contactgroups.domain.Contact;
+import app.contactgroups.domain.Contact.Attribute;
 import app.contactgroups.domain.ContactInput;
+import app.contactgroups.service.AttributeService;
 import app.contactgroups.service.ContactService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +42,12 @@ public class ContactController {
       String country,
       String notes,
       List<String> tags,
+      List<Attribute> attributes,
       Long revision) {
+
+    ContactService.Extras extras() {
+      return new ContactService.Extras(tags, attributes);
+    }
 
     ContactInput fields() {
       return new ContactInput(
@@ -58,9 +66,11 @@ public class ContactController {
   }
 
   private final ContactService contacts;
+  private final AttributeService attributes;
 
-  public ContactController(ContactService contacts) {
+  public ContactController(ContactService contacts, AttributeService attributes) {
     this.contacts = contacts;
+    this.attributes = attributes;
   }
 
   @PostMapping("/groups/{groupId}/contacts")
@@ -79,7 +89,7 @@ public class ContactController {
       @AuthenticationPrincipal Jwt jwt,
       @PathVariable UUID groupId,
       @RequestBody ContactRequest request) {
-    return contacts.create(groupId, jwt.getSubject(), request.fields(), request.tags());
+    return contacts.create(groupId, jwt.getSubject(), request.fields(), request.extras());
   }
 
   @GetMapping("/groups/{groupId}/contacts/{contactId}")
@@ -93,6 +103,21 @@ public class ContactController {
   public Contact get(
       @AuthenticationPrincipal Jwt jwt, @PathVariable UUID groupId, @PathVariable UUID contactId) {
     return contacts.open(groupId, jwt.getSubject(), contactId);
+  }
+
+  @GetMapping("/groups/{groupId}/attribute-keys")
+  @Operation(operationId = "listAttributeKeys")
+  @ApiResponses({
+    @ApiResponse(responseCode = "200"),
+    @ApiResponse(responseCode = "401"),
+    @ApiResponse(responseCode = "403"),
+    @ApiResponse(responseCode = "404")
+  })
+  public List<String> attributeKeys(
+      @AuthenticationPrincipal Jwt jwt,
+      @PathVariable UUID groupId,
+      @RequestParam(required = false) String q) {
+    return attributes.keys(groupId, jwt.getSubject(), q);
   }
 
   @PutMapping("/groups/{groupId}/contacts/{contactId}")
@@ -113,6 +138,11 @@ public class ContactController {
       @PathVariable UUID contactId,
       @RequestBody ContactRequest request) {
     return contacts.save(
-        groupId, jwt.getSubject(), contactId, request.fields(), request.tags(), request.revision());
+        groupId,
+        jwt.getSubject(),
+        contactId,
+        request.fields(),
+        request.extras(),
+        request.revision());
   }
 }

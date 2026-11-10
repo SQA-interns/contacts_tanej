@@ -42,6 +42,11 @@ public record Contact(
         attributes);
   }
 
+  public Contact withAttributes(List<Attribute> list) {
+    return new Contact(
+        id, groupId, state, trashedAt, createdAt, revision, versionNumber, fields, tags, list);
+  }
+
   /** The name shown for the contact in History: its name, else its e-mail, else its company. */
   @JsonIgnore
   public String label() {

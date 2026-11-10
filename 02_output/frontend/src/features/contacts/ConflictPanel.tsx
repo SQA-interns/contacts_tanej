@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { ContactDetails } from './ContactDetails';
+import type { Attribute } from './AttributeRows';
 import type { Values } from './contactValues';
 
 interface ConflictPanelProps {
@@ -8,6 +9,8 @@ interface ConflictPanelProps {
   currentTags: string[];
   mine: Values;
   mineTags: string[];
+  currentAttributes: Attribute[];
+  mineAttributes: Attribute[];
   onReload: () => void;
   onCancel: () => void;
 }
@@ -22,6 +25,8 @@ export function ConflictPanel({
   currentTags,
   mine,
   mineTags,
+  currentAttributes,
+  mineAttributes,
   onReload,
   onCancel,
 }: ConflictPanelProps) {
@@ -32,8 +37,18 @@ export function ConflictPanel({
         <strong>{t('contact.conflict.title')}</strong> {t('contact.conflict.text')}
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
-        <ContactDetails title={t('contact.conflict.current')} values={current} tags={currentTags} />
-        <ContactDetails title={t('contact.conflict.mine')} values={mine} tags={mineTags} />
+        <ContactDetails
+          title={t('contact.conflict.current')}
+          values={current}
+          tags={currentTags}
+          attributes={currentAttributes}
+        />
+        <ContactDetails
+          title={t('contact.conflict.mine')}
+          values={mine}
+          tags={mineTags}
+          attributes={mineAttributes}
+        />
       </div>
       <div className="flex gap-3">
         <Button onClick={onReload}>{t('contact.conflict.reload')}</Button>

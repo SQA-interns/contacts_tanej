@@ -10,6 +10,7 @@ import type { components } from '@/lib/api/schema';
 import { errorText } from '@/lib/i18n';
 import { ConflictPanel } from './ConflictPanel';
 import { ContactDetails } from './ContactDetails';
+import type { Attribute } from './AttributeRows';
 import { ContactForm } from './ContactForm';
 import { contactTitle, refusedFields, valuesOf, type Contact, type Values } from './contactValues';
 
@@ -59,6 +60,7 @@ interface Conflict {
   current: Contact;
   mine: Values;
   mineTags: string[];
+  mineAttributes: Attribute[];
 }
 
 interface ContactScreenProps {
@@ -105,6 +107,8 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
           currentTags={conflict.current.tags ?? []}
           mine={conflict.mine}
           mineTags={conflict.mineTags}
+          currentAttributes={conflict.current.attributes ?? []}
+          mineAttributes={conflict.mineAttributes}
           onReload={() => save.reload(conflict.current, () => setConflict(null))}
           onCancel={() => save.leave(back)}
         />
@@ -114,13 +118,19 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
           groupId={group.id}
           initial={valuesOf(contact)}
           initialTags={contact?.tags ?? []}
+          initialAttributes={contact?.attributes ?? []}
           problems={save.problems}
           busy={save.busy}
-          onSubmit={(values, tags) => void save.submit(values, tags)}
+          onSubmit={(values, tags, attributes) => void save.submit(values, tags, attributes)}
           onCancel={() => save.leave(back)}
         />
       ) : (
-        <ContactDetails title={t('contact.details')} values={valuesOf(contact)} tags={contact?.tags ?? []} />
+        <ContactDetails
+          title={t('contact.details')}
+          values={valuesOf(contact)}
+          tags={contact?.tags ?? []}
+          attributes={contact?.attributes ?? []}
+        />
       )}
     </>
   );
@@ -142,7 +152,7 @@ function useSave(
   const [problems, setProblems] = useState<Partial<Record<string, string>>>({});
   const base = `/groups/${encodeURIComponent(groupId)}/contacts`;
 
-  async function submit(values: Values, tags: string[]) {
+  async function submit(values: Values, tags: string[], attributes: Attribute[]) {
     setBusy(true);
     setSaved(false);
     setFailure(null);
@@ -152,26 +162,32 @@ function useSave(
         await api.request<Contact>('PUT', `${base}/${encodeURIComponent(contact.id)}`, {
           ...values,
           tags,
+          attributes,
           revision: contact.revision,
         });
         await queryClient.invalidateQueries({ queryKey: ['contact', groupId, contact.id] });
         setSaved(true);
       } else {
-        const created = await api.request<Contact>('POST', base, { ...values, tags });
+        const created = await api.request<Contact>('POST', base, { ...values, tags, attributes });
         navigate(`/groups/${groupId}/contacts/${created.id}`, { replace: true });
       }
     } catch (error) {
-      await refuse(error, values, tags);
+      await refuse(error, values, tags, attributes);
     } finally {
       setBusy(false);
     }
   }
 
-  async function refuse(error: unknown, values: Values, tags: string[]) {
+  async function refuse(error: unknown, values: Values, tags: string[], attributes: Attribute[]) {
     if (!(error instanceof ApiError)) return setFailure(t('error.INTERNAL_ERROR'));
     if (error.code === 'VALIDATION_FAILED') return setProblems(refusedFields(error));
     if (error.code === 'CONFLICT' && error.body.current) {
-      return setConflict({ current: error.body.current, mine: values, mineTags: tags });
+      return setConflict({
+        current: error.body.current,
+        mine: values,
+        mineTags: tags,
+        mineAttributes: attributes,
+      });
     }
     if (error.code === 'CONTACT_IN_TRASH' && contact) {
       await queryClient.invalidateQueries({ queryKey: ['contact', groupId, contact.id] });

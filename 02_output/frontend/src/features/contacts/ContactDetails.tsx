@@ -2,16 +2,18 @@ import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { countryName } from '@/lib/format';
 import type { Language } from '@/lib/i18n';
+import type { Attribute } from './AttributeRows';
 import { FIELDS, type Values } from './contactValues';
 
 interface ContactDetailsProps {
   title: string;
   values: Values;
   tags: string[];
+  attributes: Attribute[];
 }
 
 /** The values of a contact as text: what a Viewer sees, and a contact in Trash (WF-10). */
-export function ContactDetails({ title, values, tags }: ContactDetailsProps) {
+export function ContactDetails({ title, values, tags, attributes }: ContactDetailsProps) {
   const { t, i18n } = useTranslation();
   const language = i18n.language as Language;
   return (
@@ -44,6 +46,26 @@ export function ContactDetails({ title, values, tags }: ContactDetailsProps) {
                   </li>
                 ))}
               </ul>
+            )}
+          </dd>
+        </div>
+        <div className="sm:col-span-2">
+          <dt className="text-sm text-text-muted">{t('contact.field.attributes')}</dt>
+          <dd>
+            {attributes.length === 0 ? (
+              <span aria-label={t('contact.empty')}>–</span>
+            ) : (
+              <dl
+                aria-label={t('contact.attributesOfContact')}
+                className="grid gap-1 sm:grid-cols-[auto_1fr]"
+              >
+                {attributes.map((attribute) => (
+                  <div key={attribute.key} className="contents">
+                    <dt className="font-medium break-all">{attribute.key}</dt>
+                    <dd className="break-words whitespace-pre-wrap">{attribute.value}</dd>
+                  </div>
+                ))}
+              </dl>
             )}
           </dd>
         </div>

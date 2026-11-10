@@ -185,7 +185,8 @@
       "postalCode": "Postal code",
       "city": "City",
       "country": "Country",
-      "notes": "Notes"
+      "notes": "Notes",
+      "attributes": "Attributes"
     },
     "error": {
       "REQUIRED_ONE_OF": "Enter at least one of first name, last name, e-mail or company.",
@@ -200,6 +201,18 @@
       "current": "Current values",
       "mine": "Your entries",
       "reload": "Reload with the current values"
+    },
+    "attributesOfContact": "Attributes of this contact",
+    "addAttribute": "Add attribute",
+    "attributeKey": "Key",
+    "attributeValue": "Value",
+    "removeAttribute": "Remove attribute {{key}}",
+    "attributeError": {
+      "REQUIRED": "An attribute needs a key.",
+      "TOO_LONG": "A key has at most 50 and a value at most 255 characters.",
+      "DUPLICATE_KEY": "This key is already used on this contact.",
+      "TOO_MANY": "A contact has at most 50 attributes.",
+      "OTHER": "This attribute is not valid."
     }
   },
   "members": {

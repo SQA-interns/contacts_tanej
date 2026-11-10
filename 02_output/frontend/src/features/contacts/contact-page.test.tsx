@@ -33,14 +33,19 @@ function refusal(status: number, body: Partial<ErrorResponse>) {
 function contactsApi(
   answer: (method: string, path: string, body?: unknown) => unknown,
   suggestions: components['schemas']['Tag'][] = [],
+  keys: string[] = [],
 ) {
   const { api: groups, calls } = groupsApi([konferenca, poroka, skupno]);
   const api: ApiClient = {
     ...groups,
     request: (async (method: string, path: string, body?: unknown) => {
-      if (path.startsWith('/groups/g-') && (path.includes('/contacts') || path.includes('/tags'))) {
+      if (
+        path.startsWith('/groups/g-') &&
+        (path.includes('/contacts') || path.includes('/tags') || path.includes('/attribute-keys'))
+      ) {
         calls.push(`${method} ${path} ${body ? JSON.stringify(body) : ''}`.trim());
         if (path.includes('/tags')) return suggestions;
+        if (path.includes('/attribute-keys')) return keys;
         const result = answer(method, path, body);
         if (result instanceof Error) throw result;
         return result;
@@ -266,6 +271,88 @@ describe('the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10)', () =>
     expect(screen.getByText('neObvescaj')).toBeInTheDocument();
     expect(screen.queryByLabelText('Tags')).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /Remove tag/ })).not.toBeInTheDocument();
+  });
+});
+
+describe('the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08)', () => {
+  const withAttributes: Contact = {
+    ...ana,
+    attributes: [
+      { key: 'kompetenca', value: 'java' },
+      { key: 'leto', value: '2025' },
+    ],
+  };
+
+  function putBody(calls: string[]) {
+    const put = calls.find((c) => c.startsWith('PUT'));
+    return JSON.parse(put!.replace('PUT /groups/g-1/contacts/c-1 ', ''));
+  }
+
+  it('adds a row with Add attribute and sends key and value as text with the save (R-008-01, R-008-06)', async () => {
+    const { api, calls } = contactsApi(() => ana);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Add attribute' }));
+    await userEvent.type(screen.getByLabelText('Key'), 'leto');
+    await userEvent.type(screen.getByLabelText('Value'), '2025');
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await screen.findByRole('status');
+    expect(putBody(calls).attributes).toEqual([{ key: 'leto', value: '2025' }]);
+  });
+
+  it('shows the attributes of the contact in rows and removes one (R-008-07)', async () => {
+    const { api, calls } = contactsApi(() => withAttributes);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    expect(await screen.findAllByLabelText('Key')).toHaveLength(2);
+    await userEvent.click(screen.getByRole('button', { name: 'Remove attribute kompetenca' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await screen.findByRole('status');
+    expect(putBody(calls).attributes).toEqual([{ key: 'leto', value: '2025' }]);
+  });
+
+  it('drops a row that was added and left empty', async () => {
+    const { api, calls } = contactsApi(() => ana);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Add attribute' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await screen.findByRole('status');
+    expect(putBody(calls).attributes).toEqual([]);
+  });
+
+  it('suggests the keys of the group while typing and never forces one (R-008-05)', async () => {
+    const { api, calls } = contactsApi(() => ana, [], ['kompetenca']);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Add attribute' }));
+    await userEvent.type(screen.getByLabelText('Key'), 'kom');
+    await waitFor(() => expect(document.querySelector('datalist option[value="kompetenca"]')).not.toBeNull());
+    expect(calls.some((c) => c.startsWith('GET /groups/g-1/attribute-keys?q=kom'))).toBe(true);
+    await userEvent.type(screen.getByLabelText('Key'), 'p2');
+    expect(screen.getByLabelText('Key')).toHaveValue('komp2');
+  });
+
+  it('names the refused attribute with the reason and keeps the typed rows (R-008-02, AC-008-02)', async () => {
+    const { api } = contactsApi((method) =>
+      method === 'PUT'
+        ? refusal(400, {
+            code: 'VALIDATION_FAILED',
+            errors: [{ field: 'attributes[1].key', code: 'DUPLICATE_KEY', message: 'x' }],
+          })
+        : { ...ana, attributes: [{ key: 'kompetenca', value: 'java' }] },
+    );
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Add attribute' }));
+    await userEvent.type(screen.getAllByLabelText('Key')[1]!, 'Kompetenca');
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(await screen.findByText('This key is already used on this contact.')).toBeInTheDocument();
+    expect(screen.getAllByLabelText('Key')[1]).toHaveValue('Kompetenca');
+  });
+
+  it('shows a Viewer the attributes as text and no control to change them (R-008-08, AC-008-07)', async () => {
+    const { api } = contactsApi(() => withAttributes);
+    renderApp('/groups/g-3/contacts/c-1', { auth: signedIn(), api });
+    expect(await screen.findByText('kompetenca')).toBeInTheDocument();
+    expect(screen.getByText('java')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Add attribute' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Remove attribute/ })).not.toBeInTheDocument();
   });
 });
 

@@ -185,7 +185,8 @@
       "postalCode": "Poštna številka",
       "city": "Kraj",
       "country": "Država",
-      "notes": "Opombe"
+      "notes": "Opombe",
+      "attributes": "Atributi"
     },
     "error": {
       "REQUIRED_ONE_OF": "Vnesite vsaj eno od polj: ime, priimek, e-naslov ali podjetje.",
@@ -200,6 +201,18 @@
       "current": "Trenutne vrednosti",
       "mine": "Vaši vnosi",
       "reload": "Naloži s trenutnimi vrednostmi"
+    },
+    "attributesOfContact": "Atributi tega stika",
+    "addAttribute": "Dodaj atribut",
+    "attributeKey": "Ključ",
+    "attributeValue": "Vrednost",
+    "removeAttribute": "Odstrani atribut {{key}}",
+    "attributeError": {
+      "REQUIRED": "Atribut potrebuje ključ.",
+      "TOO_LONG": "Ključ ima največ 50, vrednost pa največ 255 znakov.",
+      "DUPLICATE_KEY": "Ta ključ je pri tem stiku že uporabljen.",
+      "TOO_MANY": "Stik ima lahko največ 50 atributov.",
+      "OTHER": "Ta atribut ni veljaven."
     }
   },
   "members": {

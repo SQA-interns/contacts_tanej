@@ -9,6 +9,7 @@ import { countryName } from '@/lib/format';
 import type { Language } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { FIELDS, maxLength, type Field, type Values } from './contactValues';
+import { AttributeRows, attributeProblems, type Attribute } from './AttributeRows';
 import { TagInput, tagProblems } from './TagInput';
 
 const TEXT_FIELDS = FIELDS.filter((f) => f !== 'country' && f !== 'notes');
@@ -21,10 +22,11 @@ interface ContactFormProps {
   groupId: string;
   initial: Values;
   initialTags: string[];
+  initialAttributes: Attribute[];
   /** The refused fields of the last save: field name to the code of the broken rule. */
   problems: Partial<Record<string, string>>;
   busy: boolean;
-  onSubmit: (values: Values, tags: string[]) => void;
+  onSubmit: (values: Values, tags: string[], attributes: Attribute[]) => void;
   onCancel: () => void;
 }
 
@@ -36,6 +38,7 @@ export function ContactForm({
   groupId,
   initial,
   initialTags,
+  initialAttributes,
   problems,
   busy,
   onSubmit,
@@ -46,6 +49,7 @@ export function ContactForm({
   const [values, setValues] = useState<Values>(initial);
   const [tags, setTags] = useState<string[]>(initialTags);
   const [typed, setTyped] = useState('');
+  const [rows, setRows] = useState<Attribute[]>(initialAttributes);
   const language = i18n.language as Language;
   const oneOfRefused = problems.firstName === 'REQUIRED_ONE_OF';
 
@@ -55,7 +59,9 @@ export function ContactForm({
     const all = typedTag === '' ? tags : [...tags, typedTag];
     setTags(all);
     setTyped('');
-    onSubmit(values, all);
+    const filled = rows.filter((row) => row.key.trim() !== '' || row.value !== '');
+    setRows(filled);
+    onSubmit(values, all, filled);
   }
 
   function reason(field: Field): string | undefined {
@@ -156,6 +162,12 @@ export function ContactForm({
             problems={tagProblems(problems)}
             onTags={setTags}
             onTyped={setTyped}
+          />
+          <AttributeRows
+            groupId={groupId}
+            rows={rows}
+            problems={attributeProblems(problems)}
+            onRows={setRows}
           />
         </div>
       </Card>
