@@ -2,16 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { Link, type RouteObject } from 'react-router';
 import { AppShell } from '@/components/layout/AppShell';
 import { Card } from '@/components/ui/card';
-
-function HomePage() {
-  const { t } = useTranslation();
-  return (
-    <Card>
-      <h1 className="mb-2 text-2xl font-semibold">{t('home.title')}</h1>
-      <p className="text-text-muted">{t('home.intro')}</p>
-    </Card>
-  );
-}
+import { RegisterPage } from '@/features/auth/RegisterPage';
+import { ResetPasswordPage } from '@/features/auth/ResetPasswordPage';
+import { SignInPage } from '@/features/auth/SignInPage';
+import { GroupsHome } from '@/features/groups/GroupsHome';
+import { PublicOnly, RequireSession, SessionRoot } from './guards';
 
 function NotFoundPage() {
   const { t } = useTranslation();
@@ -27,16 +22,33 @@ function NotFoundPage() {
 }
 
 /**
- * Route table (ADR-06). The skeleton has the shell, a home page and "not found"; every screen of
- * the specification (User interface, Screen inventory) adds its route here, under `/groups/:groupId`
- * for everything of one group (AR-04: the group id comes only from the path).
+ * Route table (ADR-06). The sign-in screens are public; everything else sits behind the guard, under
+ * `/groups/:groupId` for everything of one group (AR-04: the group id comes only from the path).
  */
 export const routes: RouteObject[] = [
   {
-    element: <AppShell />,
+    element: <SessionRoot />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: '*', element: <NotFoundPage /> },
+      {
+        element: <AppShell />,
+        children: [
+          {
+            element: <PublicOnly />,
+            children: [
+              { path: 'sign-in', element: <SignInPage /> },
+              { path: 'register', element: <RegisterPage /> },
+              { path: 'reset-password', element: <ResetPasswordPage /> },
+            ],
+          },
+          {
+            element: <RequireSession />,
+            children: [
+              { index: true, element: <GroupsHome /> },
+              { path: '*', element: <NotFoundPage /> },
+            ],
+          },
+        ],
+      },
     ],
   },
 ];

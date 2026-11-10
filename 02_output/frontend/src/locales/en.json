@@ -27,10 +27,6 @@
     "error": "Something went wrong. Please try again.",
     "retry": "Try again"
   },
-  "home": {
-    "title": "Welcome",
-    "intro": "Sign in to see your groups."
-  },
   "notFound": {
     "title": "Not found",
     "text": "This page does not exist or you have no access to it.",
@@ -61,5 +57,62 @@
     "VALIDATION_FAILED": "The data is not valid.",
     "INTERNAL_ERROR": "Something went wrong. Please try again.",
     "UNAVAILABLE": "The service is not available right now."
+  },
+  "form": {
+    "required": "required"
+  },
+  "auth": {
+    "email": "E-mail",
+    "password": "Password",
+    "name": "Name",
+    "google": "Sign in with Google",
+    "signOut": "Sign out",
+    "signIn": {
+      "title": "Sign in",
+      "submit": "Sign in",
+      "forgot": "Forgot password?",
+      "noAccount": "No account yet?",
+      "register": "Register"
+    },
+    "register": {
+      "title": "Register",
+      "submit": "Register",
+      "nameHint": "Up to {{max}} characters.",
+      "passwordHint": "At least {{min}} characters.",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "reset": {
+      "title": "Reset password",
+      "intro": "Enter your e-mail address and we will send a link to reset the password.",
+      "submit": "Send link",
+      "sentTitle": "Check your e-mail",
+      "sentText": "If an account exists for this address, we sent a link to reset the password.",
+      "back": "Back to sign in"
+    },
+    "verify": {
+      "title": "Verify your e-mail",
+      "text": "We sent a message to {{email}}. Open the link in it, then come back and sign in.",
+      "again": "Send again",
+      "resent": "We sent the message again."
+    },
+    "error": {
+      "wrongCredentials": "The e-mail or password is not correct.",
+      "emailInUse": "An account with this e-mail address already exists.",
+      "passwordTooShort": "The password needs at least 8 characters.",
+      "emailInvalid": "Check your e-mail address.",
+      "nameRequired": "Enter your name.",
+      "nameTooLong": "The name can have up to 100 characters.",
+      "tooManyRequests": "Too many requests. Try again in a moment.",
+      "network": "The network is not available. Check your connection and try again.",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "groups": {
+    "create": "Create group",
+    "empty": {
+      "title": "Create a group",
+      "text": "A group holds your contacts and its members. Create your first group to start."
+    }
   }
 }

@@ -45,8 +45,14 @@ export function Button({
       aria-busy={busy || undefined}
       {...props}
     >
-      {busy && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
-      {children}
+      {asChild ? (
+        children
+      ) : (
+        <>
+          {busy && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
+          {children}
+        </>
+      )}
     </Component>
   );
 }

@@ -27,10 +27,6 @@
     "error": "Prišlo je do napake. Poskusite znova.",
     "retry": "Poskusi znova"
   },
-  "home": {
-    "title": "Dobrodošli",
-    "intro": "Prijavite se, da si ogledate svoje skupine."
-  },
   "notFound": {
     "title": "Ni najdeno",
     "text": "Te strani ni ali do nje nimate dostopa.",
@@ -61,5 +57,62 @@
     "VALIDATION_FAILED": "Podatki niso veljavni.",
     "INTERNAL_ERROR": "Prišlo je do napake. Poskusite znova.",
     "UNAVAILABLE": "Storitev trenutno ni na voljo."
+  },
+  "form": {
+    "required": "obvezno"
+  },
+  "auth": {
+    "email": "E-pošta",
+    "password": "Geslo",
+    "name": "Ime",
+    "google": "Prijava z Googlom",
+    "signOut": "Odjava",
+    "signIn": {
+      "title": "Prijava",
+      "submit": "Prijava",
+      "forgot": "Ste pozabili geslo?",
+      "noAccount": "Še nimate računa?",
+      "register": "Registracija"
+    },
+    "register": {
+      "title": "Registracija",
+      "submit": "Registracija",
+      "nameHint": "Največ {{max}} znakov.",
+      "passwordHint": "Vsaj {{min}} znakov.",
+      "haveAccount": "Že imate račun?",
+      "signIn": "Prijava"
+    },
+    "reset": {
+      "title": "Ponastavitev gesla",
+      "intro": "Vnesite svoj e-poštni naslov in poslali vam bomo povezavo za ponastavitev gesla.",
+      "submit": "Pošlji povezavo",
+      "sentTitle": "Preverite e-pošto",
+      "sentText": "Če za ta naslov obstaja račun, smo poslali povezavo za ponastavitev gesla.",
+      "back": "Nazaj na prijavo"
+    },
+    "verify": {
+      "title": "Potrdite svojo e-pošto",
+      "text": "Poslali smo sporočilo na {{email}}. Odprite povezavo v njem, nato se vrnite in se prijavite.",
+      "again": "Pošlji znova",
+      "resent": "Sporočilo smo poslali znova."
+    },
+    "error": {
+      "wrongCredentials": "E-pošta ali geslo ni pravilno.",
+      "emailInUse": "Račun s tem e-poštnim naslovom že obstaja.",
+      "passwordTooShort": "Geslo mora imeti vsaj 8 znakov.",
+      "emailInvalid": "Preverite svoj e-poštni naslov.",
+      "nameRequired": "Vnesite svoje ime.",
+      "nameTooLong": "Ime ima lahko največ 100 znakov.",
+      "tooManyRequests": "Preveč zahtev. Poskusite znova čez trenutek.",
+      "network": "Omrežje ni na voljo. Preverite povezavo in poskusite znova.",
+      "generic": "Nekaj je šlo narobe. Poskusite znova."
+    }
+  },
+  "groups": {
+    "create": "Ustvari skupino",
+    "empty": {
+      "title": "Ustvarite skupino",
+      "text": "Skupina zajema vaše kontakte in njene člane. Ustvarite prvo skupino, da začnete."
+    }
   }
 }
