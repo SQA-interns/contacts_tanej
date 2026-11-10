@@ -340,3 +340,25 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-30: Readings made while building groups (US-002)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-002
+- Class: allow
+- Type: non-blocking
+- Trigger: (1) T-10 depends on T-07 (the History append foundation, D-22 reading 3), which no session had built yet; T-11 writes the rename entry with it. (2) R-002-08 does not say what a "rename" to the name the group already has does. (3) R-002-04 says nothing about the order of the groups list. (4) R-002-02 says "trimming spaces"; Java's `strip()` leaves a non-breaking space, which would make a name that looks empty valid. (5) R-002-06 and AC-002-01 want the opened group to show no contacts, but the contacts list belongs to US-009 (T-30). (6) The Slovenian names of the roles are in no input. (7) Four frozen US-002 tests set the scene with later stories: AC-002-01 (`POST /contacts/search`, US-009), AC-002-07 and EX-002-05 (`POST /trash`, US-015), AC-002-10 and EX-002-05 (invitations through `join`, US-003). (8) `OpenApiContractIT` (my own test, not frozen) read only the parameters declared on an operation, while the contract declares `groupId` once per path.
+- Options: (1) T-07 is built in this session as its own `feat` commit before T-10 (domain types, `HistoryRepository`, `HistoryRecorder` with a mandatory transaction); US-013 keeps its other tasks. (2) The same name (after trimming, exactly equal) changes nothing: no rule is applied, no History entry is written, the answer is 200 with the group. A change of capitalisation is a rename and is recorded. (3) Slovenian alphabetical order by name (`sl-SI-x-icu`), then creation time. (4) Trimming removes every Unicode space character, also non-breaking ones, on the server and the form accepts the same through `trim()`. (5) The group page shows the name, the role, the tab bar with the Contacts tab and an empty-group text "No contacts yet"; US-009 replaces the text with the list. (6) Lastnik, Urednik, Bralec (formal tone of `ui-design.md`). (7) The story stays `in progress`; its own tests pass. (8) The test merges the path-level parameters with the operation's.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
+
+## D-31: Two frozen browser tests that fail for reasons outside US-002
+- Timestamp: 2026-11-10
+- Session: S5 implement US-002
+- Class: approval
+- Type: non-blocking
+- Trigger: With the rebuilt stack, `AC-002-03` (`groups-members.spec.ts`) fails every time: the helper `signIn` returns right after clicking "Sign in", and the test then calls `page.goto('/groups/<id>')`, which cuts the sign-in off before Firebase stores the session, so the page shows "Sign in". `AC-001-04` (Google popup, `us001-sign-in.spec.ts`) fails every time: the buttons stay disabled after the emulator popup closes; no groups code is involved.
+- Options: 1. (proposed) Leave both frozen tests unchanged and the story `in progress`; the screens they target exist (AC-002-03 page checked in `group-page.test.tsx`). You decide whether `signIn` should wait for the signed-in screen (a change to a frozen file, new freeze) and whether the Google popup failure is a US-001 finding for `/review`. 2. Change the frozen test now (not allowed in this session).
+- Human response: none
+- Resolution: option 1, pending review
+- Overrides: none
