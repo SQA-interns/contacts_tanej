@@ -4,6 +4,7 @@ import app.contactgroups.api.ErrorResponse;
 import app.contactgroups.domain.ErrorCode;
 import app.contactgroups.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.Clock;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.security.oauth2.server.resource.web.authentication.Be
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -37,7 +39,11 @@ public class SecurityConfig {
 
   @Bean
   SecurityFilterChain filterChain(
-      HttpSecurity http, AppProperties properties, ObjectMapper mapper, UserService users)
+      HttpSecurity http,
+      AppProperties properties,
+      ObjectMapper mapper,
+      UserService users,
+      Clock clock)
       throws Exception {
     http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .csrf(AbstractHttpConfigurer::disable)
@@ -59,8 +65,13 @@ public class SecurityConfig {
         .oauth2ResourceServer(
             o -> o.jwt(Customizer.withDefaults()).authenticationEntryPoint(entryPoint(mapper)))
         .exceptionHandling(e -> e.accessDeniedHandler(accessDenied(mapper)))
+        .addFilterBefore(new RequestLogFilter(), BearerTokenAuthenticationFilter.class)
         .addFilterAfter(new VerifiedEmailFilter(mapper), BearerTokenAuthenticationFilter.class)
-        .addFilterAfter(new UserSyncFilter(users, mapper), VerifiedEmailFilter.class);
+        .addFilterAfter(new UserSyncFilter(users, mapper), VerifiedEmailFilter.class)
+        .addFilterAfter(
+            new RateLimitFilter(new RateLimiter(properties.rateLimitPerMinute(), clock), mapper),
+            AuthorizationFilter.class)
+        .addFilterAfter(new BodySizeLimitFilter(mapper), RateLimitFilter.class);
     return http.build();
   }
 
