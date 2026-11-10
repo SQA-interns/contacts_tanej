@@ -143,7 +143,16 @@
     "noContacts": {
       "title": "Še ni kontaktov",
       "text": "Ta skupina nima kontaktov."
-    }
+    },
+    "delete": {
+      "title": "Izbriši skupino",
+      "text": "Skupina in njeni stiki gredo v koš za 30 dni. Do takrat jo lahko obnovite v Izbrisanih skupinah.",
+      "label": "Vpišite ime skupine za potrditev",
+      "hint": "Ime vpišite natančno tako, kot je prikazano zgoraj.",
+      "mismatch": "Ime se ne ujema. Vpišite ga natančno, z enakimi velikimi črkami.",
+      "confirm": "Izbriši skupino"
+    },
+    "deleteAction": "Izbriši skupino"
   },
   "role": {
     "OWNER": "Lastnik",
@@ -354,5 +363,11 @@
     "done": "Datoteka Excel je prenesena.",
     "tooMany": "Izbrali ste več kot 10.000 kontaktov. Zožite izbor, da lahko izvozite.",
     "error": "Izvoz ni uspel. Poskusite znova."
+  },
+  "deletedGroups": {
+    "intro": "Skupine ostanejo v košu 30 dni, nato se izbrišejo.",
+    "empty": "Skupine, ki jih izbrišete, ostanejo tu 30 dni.",
+    "restored": "Skupina je obnovljena.",
+    "nameClash": "Skupino s tem imenom že imate. Najprej preimenujte tisto skupino, nato obnovite to."
   }
 }

@@ -8,12 +8,17 @@ import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
 import type { components } from '@/lib/api/schema';
 import { EmptyState } from './EmptyState';
+import { DeleteGroupDialog } from './DeleteGroupDialog';
 import { GroupNameDialog } from './GroupNameDialog';
 import { RoleBadge } from './RoleBadge';
 
 type GroupSummary = components['schemas']['GroupSummary'];
 
-type Dialog = { mode: 'create' } | { mode: 'rename'; group: GroupSummary } | null;
+type Dialog =
+  | { mode: 'create' }
+  | { mode: 'rename'; group: GroupSummary }
+  | { mode: 'delete'; group: GroupSummary }
+  | null;
 
 /**
  * WF-05, the address "/" of a verified person: loading, error, the empty state of US-001, or the
@@ -44,6 +49,13 @@ export function GroupsHome() {
     setDialog(null);
   }
 
+  async function remove(group: GroupSummary, typedName: string) {
+    await api.request<void>('POST', `/groups/${group.id}/trash`, { name: typedName });
+    await queryClient.invalidateQueries({ queryKey: ['groups'] });
+    await queryClient.invalidateQueries({ queryKey: ['deleted-groups'] });
+    setDialog(null);
+  }
+
   if (groups.isPending) return <StatePanel state="loading" />;
   if (groups.isError) return <StatePanel state="error" onRetry={() => void groups.refetch()} />;
 
@@ -57,6 +69,8 @@ export function GroupsHome() {
         onSubmit={(name) => rename(dialog.group, name)}
         onClose={() => setDialog(null)}
       />
+    ) : dialog?.mode === 'delete' ? (
+      <DeleteGroupDialog onSubmit={(typed) => remove(dialog.group, typed)} onClose={() => setDialog(null)} />
     ) : null;
 
   if (groups.data.length === 0) {
@@ -101,9 +115,14 @@ export function GroupsHome() {
                 </td>
                 <td className="px-4 py-2 text-right">
                   {group.role === 'OWNER' && (
-                    <Button variant="ghost" onClick={() => setDialog({ mode: 'rename', group })}>
-                      {t('groups.rename')}
-                    </Button>
+                    <span className="flex flex-wrap justify-end gap-2">
+                      <Button variant="ghost" onClick={() => setDialog({ mode: 'rename', group })}>
+                        {t('groups.rename')}
+                      </Button>
+                      <Button variant="ghost" onClick={() => setDialog({ mode: 'delete', group })}>
+                        {t('groups.deleteAction')}
+                      </Button>
+                    </span>
                   )}
                 </td>
               </tr>

@@ -8,6 +8,7 @@ import { SignInPage } from '@/features/auth/SignInPage';
 import { ContactPage } from '@/features/contacts/ContactPage';
 import { ContactListPage } from '@/features/contacts/ContactListPage';
 import { TrashPage } from '@/features/contacts/TrashPage';
+import { DeletedGroupsPage } from '@/features/groups/DeletedGroupsPage';
 import { GroupPage } from '@/features/groups/GroupPage';
 import { GroupsHome } from '@/features/groups/GroupsHome';
 import { MembersTab } from '@/features/members/MembersTab';
@@ -50,6 +51,7 @@ export const routes: RouteObject[] = [
             element: <RequireSession />,
             children: [
               { index: true, element: <GroupsHome /> },
+              { path: 'deleted-groups', element: <DeletedGroupsPage /> },
               {
                 path: 'groups/:groupId',
                 element: <GroupPage />,
