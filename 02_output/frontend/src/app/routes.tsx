@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { RegisterPage } from '@/features/auth/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/ResetPasswordPage';
 import { SignInPage } from '@/features/auth/SignInPage';
+import { GroupPage } from '@/features/groups/GroupPage';
 import { GroupsHome } from '@/features/groups/GroupsHome';
 import { PublicOnly, RequireSession, SessionRoot } from './guards';
 
@@ -44,6 +45,7 @@ export const routes: RouteObject[] = [
             element: <RequireSession />,
             children: [
               { index: true, element: <GroupsHome /> },
+              { path: 'groups/:groupId', element: <GroupPage /> },
               { path: '*', element: <NotFoundPage /> },
             ],
           },
