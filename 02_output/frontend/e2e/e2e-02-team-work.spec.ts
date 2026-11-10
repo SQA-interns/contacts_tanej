@@ -32,7 +32,7 @@ test('E2E-02 J2 Team work', async ({ page, browser }) => {
     [PETRA.email, 'Viewer'],
   ] as const) {
     await page.getByLabel('E-mail').fill(email);
-    await page.getByLabel('Role').selectOption({ label: role });
+    await page.getByLabel('Role', { exact: true }).selectOption({ label: role });
     await page.getByRole('button', { name: 'Invite' }).click();
     await expect(row(page, email)).toBeVisible();
   }

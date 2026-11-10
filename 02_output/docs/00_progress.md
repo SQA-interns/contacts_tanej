@@ -5,10 +5,10 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S8 fix F-03
-- Result: blocked
-- Gate: not passed (DoD-I-02: F-03 waits on D-50, F-04 High open; report `docs/04_review-INC-1.md`)
-- Notes for the next session: F-03 is a conflict between frozen tests (E2E-02 and AC-003-01 page-wide `getByLabel('Role')` against E2E-07 row-scoped `getByLabel('Role')`); no code changed; D-50 asks the developer to approve option 1 (scope the invite selects in E2E-02/AC-003-01, update the acceptance manifest). F-02 fixed in 19f6efc (red: `mobile-layout.test.tsx`; vitest 201 passed; `e2e/responsive.spec.ts` 6 passed in Chromium at 320/768/1280 px against the dev server, not the other engines). Groups, members and Trash tables are cards below 768 px via `components/ui/stacked-table.ts`; the group tab row wraps (D-27 option 1). Next F-03, F-04. F-01 fixed in b717413 (red: create case in contact-page.test.tsx; vitest 199 passed with `--maxWorkers=2 --testTimeout=30000`, at default workers a few tests hit the 5 s timeout under load). Frozen E2E-01/03 not re-run in the browser (needs the Compose stack). D-49 records the developer's note. Next F-02, F-03, F-04 (see below). Review text: 4 High (F-01 fixed; F-02 320 px overflow and table instead of cards; F-03 E2E-02 `Role` label match; F-04 "Group not found" heading and "Group" navigation). Per D-48 the next session is `/fix`: check each failing E2E for a test defect first and bring test changes to the developer as decisions. Medium: F-05 WebKit focus, F-06 missing `Red:` lines, F-07 commit size and subject length (release notes), F-08 deleted_accounts cleanup and AC-016 browser tests, F-09 JaCoCo.
+- Session: S8 fix F-03 D-50: 1
+- Result: done
+- Gate: not passed (DoD-I-02: F-04 High open; report `docs/04_review-INC-1.md`)
+- Notes for the next session: F-03 fixed as a human-approved test-defect change (D-50 option 1): `getByLabel('Role', { exact: true })` in E2E-02 and AC-003-01 only; manifest lines updated; not re-run in the browser (needs the Compose stack), `/verify` does that. Earlier note, now resolved: F-03 was a conflict between frozen tests (E2E-02 and AC-003-01 page-wide `getByLabel('Role')` against E2E-07 row-scoped `getByLabel('Role')`); no code changed; D-50 asks the developer to approve option 1 (scope the invite selects in E2E-02/AC-003-01, update the acceptance manifest). F-02 fixed in 19f6efc (red: `mobile-layout.test.tsx`; vitest 201 passed; `e2e/responsive.spec.ts` 6 passed in Chromium at 320/768/1280 px against the dev server, not the other engines). Groups, members and Trash tables are cards below 768 px via `components/ui/stacked-table.ts`; the group tab row wraps (D-27 option 1). Next F-03, F-04. F-01 fixed in b717413 (red: create case in contact-page.test.tsx; vitest 199 passed with `--maxWorkers=2 --testTimeout=30000`, at default workers a few tests hit the 5 s timeout under load). Frozen E2E-01/03 not re-run in the browser (needs the Compose stack). D-49 records the developer's note. Next F-02, F-03, F-04 (see below). Review text: 4 High (F-01 fixed; F-02 320 px overflow and table instead of cards; F-03 E2E-02 `Role` label match; F-04 "Group not found" heading and "Group" navigation). Per D-48 the next session is `/fix`: check each failing E2E for a test defect first and bring test changes to the developer as decisions. Medium: F-05 WebKit focus, F-06 missing `Red:` lines, F-07 commit size and subject length (release notes), F-08 deleted_accounts cleanup and AC-016 browser tests, F-09 JaCoCo.
 
 ## Previous
 - Session: S5 implement T-N04 (log commit after the developer's re-run of 2026-11-10, about 19:18 UTC)
@@ -28,7 +28,7 @@ The handover between sessions. Every session reads it first and updates it last.
 
 ## Next
 - Command: /fix F-04
-- Waiting for: D-50 (F-03; does not block F-04)
+- Waiting for: nothing
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |

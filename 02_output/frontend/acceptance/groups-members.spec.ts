@@ -98,7 +98,7 @@ test('AC-003-01 the Owner invites two people and the Members tab lists them as p
     ['petra@example.com', 'Viewer'],
   ] as const) {
     await page.getByLabel('E-mail').fill(email);
-    await page.getByLabel('Role').selectOption({ label: role });
+    await page.getByLabel('Role', { exact: true }).selectOption({ label: role });
     await page.getByRole('button', { name: 'Invite' }).click();
     await expect(row(page, email)).toContainText(role);
   }
