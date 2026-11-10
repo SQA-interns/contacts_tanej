@@ -40,5 +40,6 @@ public class RequiredConfigurationCheck implements ApplicationListener<Applicati
       throw new IllegalStateException(
           "Missing required configuration: " + String.join(", ", missing));
     }
+    EmulatorHostGuard.check(env);
   }
 }

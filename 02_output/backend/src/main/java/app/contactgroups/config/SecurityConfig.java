@@ -2,18 +2,19 @@ package app.contactgroups.config;
 
 import app.contactgroups.api.ErrorResponse;
 import app.contactgroups.domain.ErrorCode;
+import app.contactgroups.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -35,7 +36,8 @@ public class SecurityConfig {
   }
 
   @Bean
-  SecurityFilterChain filterChain(HttpSecurity http, AppProperties properties, ObjectMapper mapper)
+  SecurityFilterChain filterChain(
+      HttpSecurity http, AppProperties properties, ObjectMapper mapper, UserService users)
       throws Exception {
     http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .csrf(AbstractHttpConfigurer::disable)
@@ -56,7 +58,9 @@ public class SecurityConfig {
             a -> a.requestMatchers("/health").permitAll().anyRequest().authenticated())
         .oauth2ResourceServer(
             o -> o.jwt(Customizer.withDefaults()).authenticationEntryPoint(entryPoint(mapper)))
-        .exceptionHandling(e -> e.accessDeniedHandler(accessDenied(mapper)));
+        .exceptionHandling(e -> e.accessDeniedHandler(accessDenied(mapper)))
+        .addFilterAfter(new VerifiedEmailFilter(mapper), BearerTokenAuthenticationFilter.class)
+        .addFilterAfter(new UserSyncFilter(users, mapper), VerifiedEmailFilter.class);
     return http.build();
   }
 
@@ -73,21 +77,13 @@ public class SecurityConfig {
 
   private static AuthenticationEntryPoint entryPoint(ObjectMapper mapper) {
     return (request, response, e) ->
-        write(
+        ErrorWriter.write(
             mapper, response, ErrorResponse.of(ErrorCode.UNAUTHENTICATED, "Sign in to continue."));
   }
 
   private static AccessDeniedHandler accessDenied(ObjectMapper mapper) {
     return (request, response, e) ->
-        write(mapper, response, ErrorResponse.of(ErrorCode.FORBIDDEN, "You may not do this."));
-  }
-
-  private static void write(
-      ObjectMapper mapper, jakarta.servlet.http.HttpServletResponse response, ErrorResponse body)
-      throws java.io.IOException {
-    response.setStatus(body.status());
-    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-    response.setCharacterEncoding("UTF-8");
-    mapper.writeValue(response.getWriter(), body);
+        ErrorWriter.write(
+            mapper, response, ErrorResponse.of(ErrorCode.FORBIDDEN, "You may not do this."));
   }
 }
