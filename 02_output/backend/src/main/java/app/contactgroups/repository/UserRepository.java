@@ -33,6 +33,20 @@ public class UserRepository {
         .optional();
   }
 
+  /** Records the id as deleted so that its old token is refused (R-016-06). */
+  public void markDeleted(String userId, Instant now) {
+    jdbc.sql(
+            "INSERT INTO deleted_accounts (user_id, deleted_at) VALUES (?, ?)"
+                + " ON CONFLICT (user_id) DO NOTHING")
+        .params(userId, Timestamp.from(now))
+        .update();
+  }
+
+  /** Deletes the user record; its memberships go with it (R-016-01, R-016-05). */
+  public void delete(String userId) {
+    jdbc.sql("DELETE FROM users WHERE id = ?").param(userId).update();
+  }
+
   /** True when the account was deleted, so its old token must be refused (R-016-06). */
   public boolean isDeleted(String userId) {
     return jdbc.sql("SELECT EXISTS (SELECT 1 FROM deleted_accounts WHERE user_id = ?)")

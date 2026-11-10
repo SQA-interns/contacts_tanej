@@ -417,5 +417,20 @@
     "empty": "Groups you delete stay here for 30 days.",
     "restored": "The group was restored.",
     "nameClash": "You already have a group with this name. Rename that group first, then restore this one."
+  },
+  "account": {
+    "details": "Your account",
+    "name": "Name",
+    "email": "E-mail",
+    "deleteTitle": "Delete account",
+    "deleteIntro": "Your account is deleted and your e-mail address is removed from the History. Your name stays in the History. This cannot be undone.",
+    "deleteAction": "Delete account",
+    "deleteConfirm": "This deletes your account and removes you from all your groups. This cannot be undone.",
+    "soleOwner": "You are the only Owner of these groups. Make another member an Owner or delete the group first.",
+    "onlyOwner": "Only Owner",
+    "reauthTitle": "Sign in again to do this",
+    "reauthText": "For your safety we ask you to sign in again before deleting the account.",
+    "reauthAction": "Sign in",
+    "deleting": "Deleting …"
   }
 }

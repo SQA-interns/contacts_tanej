@@ -417,5 +417,20 @@
     "empty": "Skupine, ki jih izbrišete, ostanejo tu 30 dni.",
     "restored": "Skupina je obnovljena.",
     "nameClash": "Skupino s tem imenom že imate. Najprej preimenujte tisto skupino, nato obnovite to."
+  },
+  "account": {
+    "details": "Vaš račun",
+    "name": "Ime",
+    "email": "E-naslov",
+    "deleteTitle": "Izbris računa",
+    "deleteIntro": "Vaš račun se izbriše, vaš e-naslov se odstrani iz zgodovine. Vaše ime v zgodovini ostane. Tega ni mogoče razveljaviti.",
+    "deleteAction": "Izbriši račun",
+    "deleteConfirm": "Izbriše vaš račun in vas odstrani iz vseh skupin. Tega ni mogoče razveljaviti.",
+    "soleOwner": "Ste edini lastnik teh skupin. Najprej naredite drugega člana lastnika ali izbrišite skupino.",
+    "onlyOwner": "Edini lastnik",
+    "reauthTitle": "Za to se morate znova prijaviti",
+    "reauthText": "Zaradi varnosti vas prosimo, da se pred izbrisom računa znova prijavite.",
+    "reauthAction": "Prijava",
+    "deleting": "Brisanje …"
   }
 }

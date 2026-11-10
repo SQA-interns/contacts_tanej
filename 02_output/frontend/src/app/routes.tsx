@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, type RouteObject } from 'react-router';
 import { AppShell } from '@/components/layout/AppShell';
 import { Card } from '@/components/ui/card';
+import { AccountPage } from '@/features/account/AccountPage';
 import { RegisterPage } from '@/features/auth/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/ResetPasswordPage';
 import { SignInPage } from '@/features/auth/SignInPage';
@@ -54,6 +55,7 @@ export const routes: RouteObject[] = [
             children: [
               { index: true, element: <GroupsHome /> },
               { path: 'deleted-groups', element: <DeletedGroupsPage /> },
+              { path: 'account', element: <AccountPage /> },
               {
                 path: 'groups/:groupId',
                 element: <GroupPage />,

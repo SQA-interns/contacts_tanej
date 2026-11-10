@@ -64,6 +64,11 @@ export function createFakeAuth(initial: SessionUser | null = null): FakeAuth {
         user = null;
         notify();
       }),
+    deleteAccount: () =>
+      call('deleteAccount', () => {
+        user = null;
+        notify();
+      }),
     token: async () => (user ? 'token' : null),
   };
 }

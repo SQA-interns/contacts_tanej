@@ -16,11 +16,18 @@ public class ApiException extends RuntimeException {
   private final ErrorCode code;
   private final transient List<FieldProblem> fields;
   private transient Contact current;
+  private final transient List<GroupRef> groups;
 
   public ApiException(ErrorCode code, String message, List<FieldProblem> fields) {
+    this(code, message, fields, List.of());
+  }
+
+  private ApiException(
+      ErrorCode code, String message, List<FieldProblem> fields, List<GroupRef> groups) {
     super(message);
     this.code = code;
     this.fields = List.copyOf(fields);
+    this.groups = List.copyOf(groups);
   }
 
   public ApiException(ErrorCode code, String message) {
@@ -38,6 +45,15 @@ public class ApiException extends RuntimeException {
         ErrorCode.CONFLICT, "This contact was changed by someone else.", current);
   }
 
+  /** The 409 of an account deletion by the only Owner of these groups (R-016-02). */
+  public static ApiException soleOwner(List<GroupRef> groups) {
+    return new ApiException(
+        ErrorCode.SOLE_OWNER,
+        "You are the only Owner of these groups. Hand them to another member or delete them.",
+        List.of(),
+        groups);
+  }
+
   /** The 404 for a non-member, a missing group, a malformed id and a trashed group (SR-03). */
   public static ApiException notFound() {
     return new ApiException(ErrorCode.NOT_FOUND, NOT_FOUND_MESSAGE);
@@ -49,6 +65,11 @@ public class ApiException extends RuntimeException {
 
   public List<FieldProblem> fields() {
     return fields;
+  }
+
+  /** The groups named by a SOLE_OWNER refusal, else empty. */
+  public List<GroupRef> groups() {
+    return groups;
   }
 
   /** The current contact of a CONFLICT, else null. */

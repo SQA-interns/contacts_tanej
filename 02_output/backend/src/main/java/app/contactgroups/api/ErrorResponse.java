@@ -4,6 +4,7 @@ import app.contactgroups.domain.ApiException;
 import app.contactgroups.domain.Contact;
 import app.contactgroups.domain.ErrorCode;
 import app.contactgroups.domain.FieldProblem;
+import app.contactgroups.domain.GroupRef;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 
@@ -14,14 +15,20 @@ import java.util.List;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ErrorResponse(
-    int status, ErrorCode code, String message, List<FieldProblem> errors, Contact current) {
+    int status,
+    ErrorCode code,
+    String message,
+    List<FieldProblem> errors,
+    Contact current,
+    List<GroupRef> groups) {
 
   public static ErrorResponse of(ErrorCode code, String message) {
-    return new ErrorResponse(code.status(), code, message, null, null);
+    return new ErrorResponse(code.status(), code, message, null, null, null);
   }
 
   public static ErrorResponse of(ErrorCode code, String message, List<FieldProblem> errors) {
-    return new ErrorResponse(code.status(), code, message, errors.isEmpty() ? null : errors, null);
+    return new ErrorResponse(
+        code.status(), code, message, errors.isEmpty() ? null : errors, null, null);
   }
 
   public static ErrorResponse of(ApiException e) {
@@ -30,6 +37,7 @@ public record ErrorResponse(
         e.code(),
         e.getMessage(),
         e.fields().isEmpty() ? null : e.fields(),
-        e.current());
+        e.current(),
+        e.groups().isEmpty() ? null : e.groups());
   }
 }

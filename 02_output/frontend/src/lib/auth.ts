@@ -2,6 +2,7 @@ import {
   GoogleAuthProvider,
   browserLocalPersistence,
   createUserWithEmailAndPassword,
+  deleteUser,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
@@ -37,6 +38,8 @@ export interface AuthApi {
   sendPasswordReset(email: string): Promise<void>;
   resendVerification(): Promise<void>;
   signOut(): Promise<void>;
+  /** Deletes the Firebase account of the signed-in person (US-016); the product data is deleted first. */
+  deleteAccount(): Promise<void>;
   token(): Promise<string | null>;
 }
 
@@ -82,6 +85,9 @@ export function createAuthApi(auth: Auth): AuthApi {
     },
     async signOut() {
       await signOut(auth);
+    },
+    async deleteAccount() {
+      await deleteUser(currentUser());
     },
     async token() {
       return auth.currentUser ? auth.currentUser.getIdToken() : null;

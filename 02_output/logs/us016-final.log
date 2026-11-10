@@ -1,0 +1,179 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.api.ApiExceptionHandlerTest
+14:09:22.068 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.3.Final
+14:09:25.315 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+14:09:25.315 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+14:09:25.327 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 11 ms
+14:09:26.443 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+14:09:26.444 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+14:09:26.444 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+14:09:26.839 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+14:09:26.839 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+14:09:26.839 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+14:09:26.955 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+14:09:26.955 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+14:09:26.955 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+14:09:26.958 [main] WARN org.springframework.web.servlet.PageNotFound -- No mapping for GET /nowhere/at/all
+14:09:27.029 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+14:09:27.029 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+14:09:27.029 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+14:09:27.538 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+14:09:27.538 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+14:09:27.539 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+14:09:27.540 [main] ERROR app.contactgroups.api.ApiExceptionHandler -- Unexpected failure: IllegalStateException
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.902 s -- in app.contactgroups.api.ApiExceptionHandlerTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] Building jar: /w/target/contact-groups-backend.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us004MembersAcceptanceIT
+14:09:37.430 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us004MembersAcceptanceIT]: Us004MembersAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:09:38.407 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us004MembersAcceptanceIT
+14:09:39.993 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+14:09:40.010 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+14:09:40.035 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+14:09:42.237 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+14:09:42.245 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+14:09:42.290 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+14:09:42.945 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+14:09:42.971 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+14:09:43.428 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 9ad3f1cc0f40f54af9ab094282397213bbe553cb31cd9078051a38e871768bf0
+14:09:44.162 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT1.216935394S
+14:09:44.176 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+14:09:44.176 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+14:09:44.178 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+14:09:44.179 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+14:09:44.305 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: 6ef84046b0290c03a8135a3d38169784cd1fbbc9e251bf65714cecd2bb7e564a
+14:09:46.406 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT2.227081733S
+14:09:46.407 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:57614/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-10T14:09:47.870Z  INFO 180 --- [contact-groups-backend] [           main] a.c.acceptance.Us004MembersAcceptanceIT  : Starting Us004MembersAcceptanceIT using Java 21.0.9 with PID 180 (started by root in /w)
+2026-11-10T14:09:47.873Z  INFO 180 --- [contact-groups-backend] [           main] a.c.acceptance.Us004MembersAcceptanceIT  : The following 1 profile is active: "test"
+2026-11-10T14:09:54.703Z  INFO 180 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-10T14:09:54.743Z  INFO 180 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T14:09:54.744Z  INFO 180 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-10T14:09:54.873Z  INFO 180 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-10T14:09:54.873Z  INFO 180 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6931 ms
+2026-11-10T14:09:55.812Z  INFO 180 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T14:09:56.295Z  INFO 180 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7c45191e
+2026-11-10T14:09:56.304Z  INFO 180 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T14:09:56.381Z  INFO 180 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:57614/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-10T14:09:56.571Z  INFO 180 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-10T14:09:56.583Z  INFO 180 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.110s)
+2026-11-10T14:09:56.625Z  INFO 180 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-10T14:09:56.729Z  INFO 180 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-10T14:09:56.800Z  INFO 180 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-10T14:09:56.972Z  INFO 180 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "2 - history order"
+2026-11-10T14:09:57.014Z  INFO 180 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "public", now at version v2 (execution time 00:00.123s)
+2026-11-10T14:10:00.918Z  INFO 180 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 33979 (http) with context path '/'
+2026-11-10T14:10:00.944Z  INFO 180 --- [contact-groups-backend] [           main] a.c.acceptance.Us004MembersAcceptanceIT  : Started Us004MembersAcceptanceIT in 14.388 seconds (process running for 25.733)
+2026-11-10T14:10:03.322Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T14:10:03.323Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T14:10:03.324Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-11-10T14:10:05.074Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/members/{userId} status=403 user=uid-marko
+2026-11-10T14:10:05.659Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/members status=404 user=uid-boris
+2026-11-10T14:10:05.984Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-marko
+2026-11-10T14:10:06.147Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-ana
+2026-11-10T14:10:06.409Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-marko
+2026-11-10T14:10:06.686Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-marko
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 29.75 s -- in app.contactgroups.acceptance.Us004MembersAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+2026-11-10T14:10:06.824Z  INFO 180 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us013HistoryAcceptanceIT]: Us013HistoryAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T14:10:06.832Z  INFO 180 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+2026-11-10T14:10:13.062Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/** status=404 user=uid-ana
+2026-11-10T14:10:13.099Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/** status=404 user=uid-ana
+2026-11-10T14:10:13.132Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/** status=404 user=uid-ana
+2026-11-10T14:10:13.164Z  INFO 180 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-ana
+2026-11-10T14:10:15.036Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/history status=403 user=uid-petra
+2026-11-10T14:10:15.047Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/history status=403 user=uid-petra
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.462 s -- in app.contactgroups.acceptance.Us013HistoryAcceptanceIT
+[INFO] Running app.contactgroups.acceptance.Us016AccountAcceptanceIT
+2026-11-10T14:10:16.290Z  INFO 180 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us016AccountAcceptanceIT]: Us016AccountAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T14:10:16.295Z  INFO 180 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us016AccountAcceptanceIT
+2026-11-10T14:10:17.149Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=uid-marko
+2026-11-10T14:10:17.154Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=uid-marko
+2026-11-10T14:10:17.268Z  INFO 180 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/me status=403 user=uid-marko
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.703 s -- in app.contactgroups.acceptance.Us016AccountAcceptanceIT
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 43, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (report) @ contact-groups-backend ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:05 min
+[INFO] Finished at: 2026-11-10T14:10:18Z
+[INFO] ------------------------------------------------------------------------
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+
+EXIT 0

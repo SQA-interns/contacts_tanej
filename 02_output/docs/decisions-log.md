@@ -505,3 +505,14 @@
 - Human response: "2 - both frozen tests are wrong and the app follows the specification (R-013-07 keeps the old value in every edit entry; R-013-05 records a leaving as a removal by the member). Fix only these two tests, then freeze the tests again. Items 3 and 4 are approved as proposed."
 - Resolution: human-approved fix of a frozen-test defect (2026-11-10, S5 implement US-014). `AC_014_04` keeps `total = 1`, checks that the one entry's new value is "Dan2" and that no returned entry has "Dan1" or "Dan3" as its new value (no longer a search of the whole body). `EX_014_03` expects 2 entries by Marko, one of them `MEMBER_REMOVED` (his leaving). Only these two tests in `Us014GroupHistoryAcceptanceIT.java` changed; its line in `docs/03_acceptance-manifest.sha256` is updated to the new hash. Items 3 and 4 as proposed. No production code changed.
 - Overrides: none
+
+## D-45: US-016 readings (account deletion)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-016
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) The "Sign in" button of the "Sign in again to do this" dialog (WF-19) needs an action; the web app has no re-authentication call. (2) The backend deletes the data before Firebase, so a failing Firebase `deleteUser` leaves a Firebase account without product data (ADR-02 accepts this). (3) The wireframe intro says the name is "anonymised"; R-016-03 keeps the name.
+- Options: (1) The button signs the person out, which leads to the sign-in screen; after signing in the person deletes again with a recent sign-in. (2) The screen then signs the person out so that the session ends; the person can retry as ADR-02 describes. (3) The intro says the e-mail is removed from the History and the name stays (R-016-03, D-16).
+- Human response: none
+- Resolution: as listed, pending review. Server: `DELETE /me` (`AccountService`) checks `auth_time` within 5 minutes, locks the user's groups in id order, refuses with `SOLE_OWNER` and `groups[]` (also groups in Trash), removes the e-mail from the History entries the user caused, records the id in `deleted_accounts` and deletes the user (memberships cascade). The daily removal of old `deleted_accounts` rows (ADR-08) is not in this story's tasks.
+- Overrides: none

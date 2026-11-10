@@ -56,6 +56,13 @@ public class HistoryRepository {
     }
   }
 
+  /** Removes the e-mail address from the entries the user caused; the name stays (R-016-03). */
+  public void removeActorEmail(String userId) {
+    jdbc.sql("UPDATE history_entries SET actor_email = NULL WHERE actor_id = ?")
+        .param(userId)
+        .update();
+  }
+
   /** Marks the entries of the contact erased and removes its label and values (BR-06). */
   public void anonymiseContact(UUID contactId) {
     jdbc.sql(

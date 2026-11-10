@@ -2,6 +2,7 @@ package app.contactgroups.repository;
 
 import app.contactgroups.domain.DeletedGroup;
 import app.contactgroups.domain.GroupAccess;
+import app.contactgroups.domain.GroupRef;
 import app.contactgroups.domain.GroupSummary;
 import app.contactgroups.domain.Role;
 import java.sql.ResultSet;
@@ -29,6 +30,28 @@ public class GroupRepository {
 
   public GroupRepository(JdbcClient jdbc) {
     this.jdbc = jdbc;
+  }
+
+  /**
+   * Locks every group of the user in id order (ADR-03), so that a parallel role change waits, then
+   * lists the groups, also those in Trash, in which the user is the only Owner (R-016-02,
+   * EX-016-01).
+   */
+  public List<GroupRef> lockAndFindSoleOwned(String userId) {
+    jdbc.sql(
+            "SELECT g.id FROM groups g JOIN memberships m ON m.group_id = g.id"
+                + " WHERE m.user_id = ? ORDER BY g.id FOR UPDATE OF g")
+        .param(userId)
+        .query(UUID.class)
+        .list();
+    return jdbc.sql(
+            "SELECT g.id, g.name FROM groups g JOIN memberships m ON m.group_id = g.id"
+                + " WHERE m.user_id = ? AND m.role = 'OWNER' AND NOT EXISTS (SELECT 1 FROM"
+                + " memberships o WHERE o.group_id = g.id AND o.role = 'OWNER' AND o.user_id <> ?)"
+                + " ORDER BY g.name COLLATE \"sl-SI-x-icu\", g.id")
+        .params(userId, userId)
+        .query((rs, n) -> new GroupRef(rs.getObject("id", UUID.class), rs.getString("name")))
+        .list();
   }
 
   public void insert(UUID id, String name, String creatorId, Instant now) {
