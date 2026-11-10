@@ -1,0 +1,63 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:check (default-cli) @ contact-groups-backend ---
+[INFO] Spotless.Java is keeping 170 files clean - 1 needs changes to be clean, 0 were already clean, 169 were skipped because caching determined they were already clean
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.262 s
+[INFO] Finished at: 2026-11-10T22:40:03Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.diffplug.spotless:spotless-maven-plugin:2.46.1:check (default-cli) on project contact-groups-backend: The following files had format violations:
+[ERROR]     src/test/java/app/contactgroups/it/MigrationIT.java
+[ERROR]         @@ -17,9 +17,9 @@
+[ERROR]          import·org.testcontainers.junit.jupiter.Testcontainers;
+[ERROR]          
+[ERROR]          /**
+[ERROR]         -·*·NFR-13:·the·schema·comes·only·from·versioned,·forward-only·Flyway·migrations.·The·migrations·run·on
+[ERROR]         -·*·an·empty·database·and·on·a·database·left·by·an·earlier·release·(version·1,·holding·data),·and·the
+[ERROR]         -·*·migration·list·has·no·gaps,·no·repeatable·and·no·undo·scripts.
+[ERROR]         +·*·NFR-13:·the·schema·comes·only·from·versioned,·forward-only·Flyway·migrations.·The·migrations·run
+[ERROR]         +·*·on·an·empty·database·and·on·a·database·left·by·an·earlier·release·(version·1,·holding·data),·and
+[ERROR]         +·*·the·migration·list·has·no·gaps,·no·repeatable·and·no·undo·scripts.
+[ERROR]          ·*/
+[ERROR]          @Testcontainers
+[ERROR]          class·MigrationIT·{
+[ERROR]         @@ -86,8 +86,10 @@
+[ERROR]          ····assertThat(result.migrationsExecuted).isGreaterThan(0);
+[ERROR]          ····assertThat(latest.info().pending()).isEmpty();
+[ERROR]          ····assertThat(jdbc.queryForObject("SELECT·count(*)·FROM·users",·Integer.class)).isEqualTo(1);
+[ERROR]         -····assertThat(jdbc.queryForObject("SELECT·count(*)·FROM·history_entries",·Integer.class)).isEqualTo(1);
+[ERROR]         -····assertThat(jdbc.queryForObject("SELECT·name·FROM·groups",·String.class)).isEqualTo("Konferenca");
+[ERROR]         +····assertThat(jdbc.queryForObject("SELECT·count(*)·FROM·history_entries",·Integer.class))
+[ERROR]         +········.isEqualTo(1);
+[ERROR]         +····assertThat(jdbc.queryForObject("SELECT·name·FROM·groups",·String.class))
+[ERROR]         +········.isEqualTo("Konferenca");
+[ERROR]          ··}
+[ERROR]          
+[ERROR]          ··@Test
+[ERROR]         @@ -106,7 +108,10 @@
+[ERROR]          ····assertThat(names).isNotEmpty();
+[ERROR]          ····assertThat(names).allMatch(n·->·n.matches("V\\d+__[a-z0-9_]+\\.sql"));
+[ERROR]          ····List<Integer>·versions·=
+[ERROR]         -········names.stream().map(n·->·Integer.parseInt(n.substring(1,·n.indexOf("__")))).sorted().toList();
+[ERROR]         +········names.stream()
+[ERROR]         +············.map(n·->·Integer.parseInt(n.substring(1,·n.indexOf("__"))))
+[ERROR]         +············.sorted()
+[ERROR]         +············.toList();
+[ERROR]          ····for·(int·i·=·0;·i·<·versions.size();·i++)·{
+[ERROR]          ······assertThat(versions.get(i)).as("version·at·position·%d",·i·+·1).isEqualTo(i·+·1);
+[ERROR]          ····}
+[ERROR] Run 'mvn spotless:apply' to fix these violations.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

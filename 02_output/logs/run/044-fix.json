@@ -1,0 +1,11 @@
+{
+  "command": "/fix F-01 note: customer saw MVP: no. The customer has not seen the grey MVP; this is a research run and the developer stands in for the customer. Customer confirmation stays open on the D-14 list.",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "6a2eaa9d-f353-4319-84ca-803adc61d4c5",
+  "total_cost_usd": 0.4278498,
+  "result": "F-01 is fixed, but I haven't re-run E2E-01 or E2E-03 in the browser. That needs the Compose stack, so the developer or `/verify` has to do it. The full frontend suite passes (199 tests) when run with `--maxWorkers=2 --testTimeout=30000`. At default settings 1–4 tests hit the 5 s timeout under load.\n\n- **Test or app:** I checked whether the frozen test was wrong, and it isn't. AC-005-01 says the contact is \"stored and shown\", and the WF-10 wireframe shows \"The contact was saved.\" as a status message after Save. The app only showed it on edit, not on create. No test change was needed.\n- **Fix:** The create now opens the new contact's page with the save confirmation (`ContactPage.tsx`). I first extended the create test in `contact-page.test.tsx` to expect the message, and it failed before the change. The fix is commit `b717413`.\n- **Your note:** I recorded it as D-49. The customer has not seen the grey MVP, and confirmation stays open on the D-14 list. The handover commit is `315e27b`.\n- **Still open:** F-02 to F-04 (High) are not done. `00_progress.md` now says the next command is `/fix F-02`.\n- **Resolution column:** `06_verification-report.md` doesn't exist yet, so the resolution column wasn't filled. The status is only in `00_progress.md` and the decision log.",
+  "stderr": ""
+}

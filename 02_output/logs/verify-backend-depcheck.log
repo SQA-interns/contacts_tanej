@@ -1,0 +1,371 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- dependency-check:12.1.6:check (default-cli) @ contact-groups-backend ---
+[INFO] Checking for updates
+[WARNING] An NVD API Key was not provided - it is highly recommended to use an NVD API key as the update can take a VERY long time without an API Key
+[INFO] NVD API has 423,856 records in this update
+[INFO] Downloaded 10,000/423,856 (2%)
+[INFO] Downloaded 20,000/423,856 (5%)
+[INFO] Downloaded 30,000/423,856 (7%)
+[INFO] Downloaded 40,000/423,856 (9%)
+[INFO] Downloaded 50,000/423,856 (12%)
+[INFO] Downloaded 60,000/423,856 (14%)
+[INFO] Downloaded 70,000/423,856 (17%)
+[INFO] Downloaded 80,000/423,856 (19%)
+[INFO] Downloaded 90,000/423,856 (21%)
+[INFO] Downloaded 100,000/423,856 (24%)
+[INFO] Downloaded 110,000/423,856 (26%)
+[INFO] Downloaded 120,000/423,856 (28%)
+[INFO] Downloaded 130,000/423,856 (31%)
+[INFO] Downloaded 140,000/423,856 (33%)
+[INFO] Downloaded 150,000/423,856 (35%)
+[INFO] Downloaded 160,000/423,856 (38%)
+[INFO] Downloaded 170,000/423,856 (40%)
+[INFO] Downloaded 180,000/423,856 (42%)
+[INFO] Downloaded 190,000/423,856 (45%)
+[INFO] Downloaded 200,000/423,856 (47%)
+[INFO] Downloaded 210,000/423,856 (50%)
+[INFO] Downloaded 220,000/423,856 (52%)
+[INFO] Downloaded 230,000/423,856 (54%)
+[INFO] Downloaded 240,000/423,856 (57%)
+[INFO] Downloaded 250,000/423,856 (59%)
+[INFO] Downloaded 260,000/423,856 (61%)
+[INFO] Downloaded 270,000/423,856 (64%)
+[INFO] Downloaded 280,000/423,856 (66%)
+[INFO] Downloaded 290,000/423,856 (68%)
+[INFO] Downloaded 300,000/423,856 (71%)
+[INFO] Downloaded 310,000/423,856 (73%)
+[INFO] Downloaded 320,000/423,856 (75%)
+[INFO] Downloaded 330,000/423,856 (78%)
+[INFO] Downloaded 340,000/423,856 (80%)
+[ERROR] Failed to process CVE-2026-6785
+org.owasp.dependencycheck.data.nvdcve.DatabaseException: Error updating 'CVE-2026-6785'; Value too long for column "URL CHARACTER VARYING(1000)": "'https://bugzilla.mozilla.org/buglist.cgi?bug_id=1935995%2C1999158%2C2015952%2C2... (1585)"; SQL statement:
+INSERT INTO reference (cveid, name, url, source) VALUES (?, ?, ?, ?) [22001-232]
+    at org.owasp.dependencycheck.data.nvdcve.CveDB.updateVulnerability (CveDB.java:1104)
+    at org.owasp.dependencycheck.data.update.nvd.api.NvdApiProcessor.updateCveDb (NvdApiProcessor.java:119)
+    at org.owasp.dependencycheck.data.update.nvd.api.NvdApiProcessor.call (NvdApiProcessor.java:96)
+    at org.owasp.dependencycheck.data.update.nvd.api.NvdApiProcessor.call (NvdApiProcessor.java:40)
+    at java.util.concurrent.FutureTask.run (FutureTask.java:317)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker (ThreadPoolExecutor.java:1144)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run (ThreadPoolExecutor.java:642)
+    at java.lang.Thread.run (Thread.java:1583)
+[ERROR] Failed to process CVE-2026-6786
+org.owasp.dependencycheck.data.nvdcve.DatabaseException: Error updating 'CVE-2026-6786'; Value too long for column "URL CHARACTER VARYING(1000)": "'https://bugzilla.mozilla.org/buglist.cgi?bug_id=2010727%2C2019004%2C2019224%2C2... (1115)"; SQL statement:
+INSERT INTO reference (cveid, name, url, source) VALUES (?, ?, ?, ?) [22001-232]
+    at org.owasp.dependencycheck.data.nvdcve.CveDB.updateVulnerability (CveDB.java:1104)
+    at org.owasp.dependencycheck.data.update.nvd.api.NvdApiProcessor.updateCveDb (NvdApiProcessor.java:119)
+    at org.owasp.dependencycheck.data.update.nvd.api.NvdApiProcessor.call (NvdApiProcessor.java:96)
+    at org.owasp.dependencycheck.data.update.nvd.api.NvdApiProcessor.call (NvdApiProcessor.java:40)
+    at java.util.concurrent.FutureTask.run (FutureTask.java:317)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker (ThreadPoolExecutor.java:1144)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run (ThreadPoolExecutor.java:642)
+    at java.lang.Thread.run (Thread.java:1583)
+[INFO] Downloaded 350,000/423,856 (83%)
+[INFO] Downloaded 360,000/423,856 (85%)
+[INFO] Downloaded 370,000/423,856 (87%)
+[INFO] Downloaded 380,000/423,856 (90%)
+[INFO] Downloaded 390,000/423,856 (92%)
+[INFO] Downloaded 400,000/423,856 (94%)
+[INFO] Downloaded 410,000/423,868 (97%)
+[INFO] Downloaded 420,000/423,868 (99%)
+[INFO] Downloaded 423,868/423,868 (100%)
+[INFO] Completed processing batch 1/212 (0%) in 1,948ms
+[INFO] Completed processing batch 2/212 (1%) in 1,201ms
+[INFO] Completed processing batch 3/212 (1%) in 1,963ms
+[INFO] Completed processing batch 4/212 (2%) in 960ms
+[INFO] Completed processing batch 5/212 (2%) in 1,547ms
+[INFO] Completed processing batch 6/212 (3%) in 940ms
+[INFO] Completed processing batch 7/212 (3%) in 720ms
+[INFO] Completed processing batch 8/212 (4%) in 705ms
+[INFO] Completed processing batch 9/212 (4%) in 1,069ms
+[INFO] Completed processing batch 10/212 (5%) in 5,078ms
+[INFO] Completed processing batch 11/212 (5%) in 712ms
+[INFO] Completed processing batch 12/212 (6%) in 789ms
+[INFO] Completed processing batch 13/212 (6%) in 813ms
+[INFO] Completed processing batch 14/212 (7%) in 782ms
+[INFO] Completed processing batch 15/212 (7%) in 846ms
+[INFO] Completed processing batch 16/212 (8%) in 918ms
+[INFO] Completed processing batch 17/212 (8%) in 996ms
+[INFO] Completed processing batch 18/212 (8%) in 1,256ms
+[INFO] Completed processing batch 19/212 (9%) in 1,338ms
+[INFO] Completed processing batch 20/212 (9%) in 1,131ms
+[INFO] Completed processing batch 21/212 (10%) in 1,364ms
+[INFO] Completed processing batch 22/212 (10%) in 1,314ms
+[INFO] Completed processing batch 23/212 (11%) in 2,200ms
+[INFO] Completed processing batch 24/212 (11%) in 2,103ms
+[INFO] Completed processing batch 25/212 (12%) in 1,485ms
+[INFO] Completed processing batch 26/212 (12%) in 1,479ms
+[INFO] Completed processing batch 27/212 (13%) in 1,646ms
+[INFO] Completed processing batch 28/212 (13%) in 1,594ms
+[INFO] Completed processing batch 29/212 (14%) in 1,414ms
+[INFO] Completed processing batch 30/212 (14%) in 1,096ms
+[INFO] Completed processing batch 31/212 (15%) in 1,200ms
+[INFO] Completed processing batch 32/212 (15%) in 1,027ms
+[INFO] Completed processing batch 33/212 (16%) in 841ms
+[INFO] Completed processing batch 34/212 (16%) in 826ms
+[INFO] Completed processing batch 35/212 (17%) in 901ms
+[INFO] Completed processing batch 36/212 (17%) in 711ms
+[INFO] Completed processing batch 37/212 (17%) in 668ms
+[INFO] Completed processing batch 38/212 (18%) in 890ms
+[INFO] Completed processing batch 39/212 (18%) in 729ms
+[INFO] Completed processing batch 40/212 (19%) in 588ms
+[INFO] Completed processing batch 41/212 (19%) in 671ms
+[INFO] Completed processing batch 42/212 (20%) in 663ms
+[INFO] Completed processing batch 43/212 (20%) in 572ms
+[INFO] Completed processing batch 44/212 (21%) in 252ms
+[INFO] Completed processing batch 45/212 (21%) in 219ms
+[INFO] Completed processing batch 46/212 (22%) in 582ms
+[INFO] Completed processing batch 47/212 (22%) in 696ms
+[INFO] Completed processing batch 48/212 (23%) in 641ms
+[INFO] Completed processing batch 49/212 (23%) in 530ms
+[INFO] Completed processing batch 50/212 (24%) in 483ms
+[INFO] Completed processing batch 51/212 (24%) in 485ms
+[INFO] Completed processing batch 52/212 (25%) in 312ms
+[INFO] Completed processing batch 53/212 (25%) in 508ms
+[INFO] Completed processing batch 54/212 (25%) in 477ms
+[INFO] Completed processing batch 55/212 (26%) in 570ms
+[INFO] Completed processing batch 56/212 (26%) in 494ms
+[INFO] Completed processing batch 57/212 (27%) in 440ms
+[INFO] Completed processing batch 58/212 (27%) in 467ms
+[INFO] Completed processing batch 59/212 (28%) in 513ms
+[INFO] Completed processing batch 60/212 (28%) in 345ms
+[INFO] Completed processing batch 61/212 (29%) in 447ms
+[INFO] Completed processing batch 62/212 (29%) in 681ms
+[INFO] Completed processing batch 63/212 (30%) in 763ms
+[INFO] Completed processing batch 64/212 (30%) in 462ms
+[INFO] Completed processing batch 65/212 (31%) in 641ms
+[INFO] Completed processing batch 66/212 (31%) in 468ms
+[INFO] Completed processing batch 67/212 (32%) in 407ms
+[INFO] Completed processing batch 68/212 (32%) in 431ms
+[INFO] Completed processing batch 69/212 (33%) in 492ms
+[INFO] Completed processing batch 70/212 (33%) in 445ms
+[INFO] Completed processing batch 71/212 (33%) in 438ms
+[INFO] Completed processing batch 72/212 (34%) in 418ms
+[INFO] Completed processing batch 73/212 (34%) in 438ms
+[INFO] Completed processing batch 74/212 (35%) in 463ms
+[INFO] Completed processing batch 75/212 (35%) in 408ms
+[INFO] Completed processing batch 76/212 (36%) in 481ms
+[INFO] Completed processing batch 77/212 (36%) in 400ms
+[INFO] Completed processing batch 78/212 (37%) in 417ms
+[INFO] Completed processing batch 79/212 (37%) in 408ms
+[INFO] Completed processing batch 80/212 (38%) in 583ms
+[INFO] Completed processing batch 81/212 (38%) in 468ms
+[INFO] Completed processing batch 82/212 (39%) in 746ms
+[INFO] Completed processing batch 83/212 (39%) in 403ms
+[INFO] Completed processing batch 84/212 (40%) in 545ms
+[INFO] Completed processing batch 85/212 (40%) in 397ms
+[INFO] Completed processing batch 86/212 (41%) in 481ms
+[INFO] Completed processing batch 87/212 (41%) in 457ms
+[INFO] Completed processing batch 88/212 (42%) in 452ms
+[INFO] Completed processing batch 89/212 (42%) in 314ms
+[INFO] Completed processing batch 90/212 (42%) in 455ms
+[INFO] Completed processing batch 91/212 (43%) in 476ms
+[INFO] Completed processing batch 92/212 (43%) in 432ms
+[INFO] Completed processing batch 93/212 (44%) in 577ms
+[INFO] Completed processing batch 94/212 (44%) in 462ms
+[INFO] Completed processing batch 95/212 (45%) in 568ms
+[INFO] Completed processing batch 96/212 (45%) in 418ms
+[INFO] Completed processing batch 97/212 (46%) in 388ms
+[INFO] Completed processing batch 98/212 (46%) in 406ms
+[INFO] Completed processing batch 99/212 (47%) in 405ms
+[INFO] Completed processing batch 100/212 (47%) in 520ms
+[INFO] Completed processing batch 101/212 (48%) in 486ms
+[INFO] Completed processing batch 102/212 (48%) in 336ms
+[INFO] Completed processing batch 103/212 (49%) in 398ms
+[INFO] Completed processing batch 104/212 (49%) in 467ms
+[INFO] Completed processing batch 105/212 (50%) in 326ms
+[INFO] Completed processing batch 106/212 (50%) in 341ms
+[INFO] Completed processing batch 107/212 (50%) in 472ms
+[INFO] Completed processing batch 108/212 (51%) in 349ms
+[INFO] Completed processing batch 109/212 (51%) in 476ms
+[INFO] Completed processing batch 110/212 (52%) in 413ms
+[INFO] Completed processing batch 111/212 (52%) in 499ms
+[INFO] Completed processing batch 112/212 (53%) in 651ms
+[INFO] Completed processing batch 113/212 (53%) in 365ms
+[INFO] Completed processing batch 114/212 (54%) in 413ms
+[INFO] Completed processing batch 115/212 (54%) in 459ms
+[INFO] Completed processing batch 116/212 (55%) in 492ms
+[INFO] Completed processing batch 117/212 (55%) in 475ms
+[INFO] Completed processing batch 118/212 (56%) in 408ms
+[INFO] Completed processing batch 119/212 (56%) in 471ms
+[INFO] Completed processing batch 120/212 (57%) in 439ms
+[INFO] Completed processing batch 121/212 (57%) in 328ms
+[INFO] Completed processing batch 122/212 (58%) in 278ms
+[INFO] Completed processing batch 123/212 (58%) in 271ms
+[INFO] Completed processing batch 124/212 (58%) in 223ms
+[INFO] Completed processing batch 125/212 (59%) in 322ms
+[INFO] Completed processing batch 126/212 (59%) in 419ms
+[INFO] Completed processing batch 127/212 (60%) in 388ms
+[INFO] Completed processing batch 128/212 (60%) in 349ms
+[INFO] Completed processing batch 129/212 (61%) in 327ms
+[INFO] Completed processing batch 130/212 (61%) in 389ms
+[INFO] Completed processing batch 131/212 (62%) in 448ms
+[INFO] Completed processing batch 132/212 (62%) in 333ms
+[INFO] Completed processing batch 133/212 (63%) in 390ms
+[INFO] Completed processing batch 134/212 (63%) in 537ms
+[INFO] Completed processing batch 135/212 (64%) in 329ms
+[INFO] Completed processing batch 136/212 (64%) in 260ms
+[INFO] Completed processing batch 137/212 (65%) in 219ms
+[INFO] Completed processing batch 138/212 (65%) in 209ms
+[INFO] Completed processing batch 139/212 (66%) in 214ms
+[INFO] Completed processing batch 140/212 (66%) in 321ms
+[INFO] Completed processing batch 141/212 (67%) in 339ms
+[INFO] Completed processing batch 142/212 (67%) in 217ms
+[INFO] Completed processing batch 143/212 (67%) in 411ms
+[INFO] Completed processing batch 144/212 (68%) in 209ms
+[INFO] Completed processing batch 145/212 (68%) in 295ms
+[INFO] Completed processing batch 146/212 (69%) in 235ms
+[INFO] Completed processing batch 147/212 (69%) in 271ms
+[INFO] Completed processing batch 148/212 (70%) in 366ms
+[INFO] Completed processing batch 149/212 (70%) in 338ms
+[INFO] Completed processing batch 150/212 (71%) in 259ms
+[INFO] Completed processing batch 151/212 (71%) in 356ms
+[INFO] Completed processing batch 152/212 (72%) in 291ms
+[INFO] Completed processing batch 153/212 (72%) in 293ms
+[INFO] Completed processing batch 154/212 (73%) in 347ms
+[INFO] Completed processing batch 155/212 (73%) in 254ms
+[INFO] Completed processing batch 156/212 (74%) in 263ms
+[INFO] Completed processing batch 157/212 (74%) in 254ms
+[INFO] Completed processing batch 158/212 (75%) in 318ms
+[INFO] Completed processing batch 159/212 (75%) in 243ms
+[INFO] Completed processing batch 160/212 (75%) in 314ms
+[INFO] Completed processing batch 161/212 (76%) in 253ms
+[INFO] Completed processing batch 162/212 (76%) in 274ms
+[INFO] Completed processing batch 163/212 (77%) in 182ms
+[INFO] Completed processing batch 164/212 (77%) in 462ms
+[INFO] Completed processing batch 165/212 (78%) in 204ms
+[INFO] Completed processing batch 166/212 (78%) in 285ms
+[INFO] Completed processing batch 167/212 (79%) in 806ms
+[INFO] Completed processing batch 168/212 (79%) in 495ms
+[INFO] Completed processing batch 169/212 (80%) in 412ms
+[INFO] Completed processing batch 170/212 (80%) in 307ms
+[INFO] Completed processing batch 171/212 (81%) in 408ms
+[INFO] Completed processing batch 172/212 (81%) in 355ms
+[INFO] Completed processing batch 173/212 (82%) in 255ms
+[INFO] Completed processing batch 174/212 (82%) in 288ms
+[INFO] Completed processing batch 175/212 (83%) in 224ms
+[INFO] Completed processing batch 176/212 (83%) in 369ms
+[INFO] Completed processing batch 177/212 (83%) in 294ms
+[INFO] Completed processing batch 178/212 (84%) in 203ms
+[INFO] Completed processing batch 179/212 (84%) in 249ms
+[INFO] Completed processing batch 180/212 (85%) in 248ms
+[INFO] Completed processing batch 181/212 (85%) in 190ms
+[INFO] Completed processing batch 182/212 (86%) in 236ms
+[INFO] Completed processing batch 183/212 (86%) in 186ms
+[INFO] Completed processing batch 184/212 (87%) in 222ms
+[INFO] Completed processing batch 185/212 (87%) in 655ms
+[INFO] Completed processing batch 186/212 (88%) in 173ms
+[INFO] Completed processing batch 187/212 (88%) in 354ms
+[INFO] Completed processing batch 188/212 (89%) in 243ms
+[INFO] Completed processing batch 189/212 (89%) in 136ms
+[INFO] Completed processing batch 190/212 (90%) in 201ms
+[INFO] Completed processing batch 191/212 (90%) in 184ms
+[INFO] Completed processing batch 192/212 (91%) in 162ms
+[INFO] Completed processing batch 193/212 (91%) in 121ms
+[INFO] Completed processing batch 194/212 (92%) in 145ms
+[INFO] Completed processing batch 195/212 (92%) in 221ms
+[INFO] Completed processing batch 196/212 (92%) in 104ms
+[INFO] Completed processing batch 197/212 (93%) in 158ms
+[INFO] Completed processing batch 198/212 (93%) in 104ms
+[INFO] Completed processing batch 199/212 (94%) in 126ms
+[INFO] Completed processing batch 200/212 (94%) in 129ms
+[INFO] Completed processing batch 201/212 (95%) in 156ms
+[INFO] Completed processing batch 202/212 (95%) in 161ms
+[INFO] Completed processing batch 203/212 (96%) in 84ms
+[INFO] Completed processing batch 204/212 (96%) in 180ms
+[INFO] Completed processing batch 205/212 (97%) in 93ms
+[INFO] Completed processing batch 206/212 (97%) in 547ms
+[INFO] Completed processing batch 207/212 (98%) in 118ms
+[INFO] Completed processing batch 208/212 (98%) in 78ms
+[INFO] Completed processing batch 209/212 (99%) in 125ms
+[INFO] Completed processing batch 210/212 (99%) in 96ms
+[INFO] Completed processing batch 211/212 (100%) in 69ms
+[INFO] Completed processing batch 212/212 (100%) in 43ms
+[INFO] Updating CISA Known Exploited Vulnerability list: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+[INFO] Begin database defrag
+[INFO] End database defrag (5854 ms)
+[INFO] Check for updates complete (2293689 ms)
+[INFO] 
+
+Dependency-Check is an open source tool performing a best effort analysis of 3rd party dependencies; false positives and false negatives may exist in the analysis performed by the tool. Use of the tool and the reporting provided constitutes acceptance for use in an AS IS condition, and there are NO warranties, implied or otherwise, with regard to the analysis or its use. Any use of the tool and the reporting provided is at the user's risk. In no event shall the copyright holder or OWASP be held liable for any damages whatsoever arising out of or in connection with the use of this tool, the analysis performed, or the resulting report.
+
+
+   About ODC: https://dependency-check.github.io/DependencyCheck/general/internals.html
+   False Positives: https://dependency-check.github.io/DependencyCheck/general/suppression.html
+
+💖 Sponsor: https://github.com/sponsors/jeremylong
+
+
+[INFO] Analysis Started
+[INFO] Finished Archive Analyzer (0 seconds)
+[INFO] Finished File Name Analyzer (0 seconds)
+[INFO] Finished Jar Analyzer (0 seconds)
+[INFO] Finished Dependency Merging Analyzer (0 seconds)
+[INFO] Finished Hint Analyzer (0 seconds)
+[INFO] Finished Version Filter Analyzer (0 seconds)
+[INFO] Created CPE Index (1 seconds)
+[INFO] Finished CPE Analyzer (3 seconds)
+[INFO] Finished False Positive Analyzer (0 seconds)
+[INFO] Finished NVD CVE Analyzer (0 seconds)
+[INFO] Finished RetireJS Analyzer (3 seconds)
+[WARNING] Disabling OSS Index analyzer due to missing user/password credentials. Authentication is now required: https://ossindex.sonatype.org/doc/auth-required
+[INFO] Finished Vulnerability Suppression Analyzer (0 seconds)
+[INFO] Finished Known Exploited Vulnerability Analyzer (0 seconds)
+[INFO] Finished Dependency Bundling Analyzer (0 seconds)
+[INFO] Finished Unused Suppression Rule Analyzer (0 seconds)
+[INFO] Analysis Complete (8 seconds)
+[INFO] Writing HTML report to: /w/../logs/dependency-check/dependency-check-report.html
+[WARNING] 
+
+One or more dependencies were identified with known vulnerabilities in contact-groups-backend:
+
+commons-lang3-3.17.0.jar (pkg:maven/org.apache.commons/commons-lang3@3.17.0, cpe:2.3:a:apache:commons_lang:3.17.0:*:*:*:*:*:*:*) : CVE-2025-48924
+log4j-api-2.24.3.jar (pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3, cpe:2.3:a:apache:log4j:2.24.3:*:*:*:*:*:*:*) : CVE-2026-34479, CVE-2026-34477, CVE-2026-49844
+spring-core-6.2.19.jar (pkg:maven/org.springframework/spring-core@6.2.19, cpe:2.3:a:pivotal_software:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:springsource:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_framework:6.2.19:*:*:*:*:*:*:*) : CVE-2026-47884, CVE-2026-47890, CVE-2026-47891, CVE-2026-47892, CVE-2026-59313, CVE-2026-59283, CVE-2026-47885, CVE-2026-47886, CVE-2026-47888, CVE-2026-47889, CVE-2026-47893, CVE-2026-59282, CVE-2026-47883, CVE-2026-47887, CVE-2026-59281, CVE-2026-59280, CVE-2026-59314
+spring-security-core-6.5.11.jar (pkg:maven/org.springframework.security/spring-security-core@6.5.11, cpe:2.3:a:pivotal_software:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_security:6.5.11:*:*:*:*:*:*:*) : CVE-2026-59270, CVE-2026-41707, CVE-2026-47841, CVE-2026-47842, CVE-2026-59276
+spring-security-oauth2-resource-server-6.5.11.jar (pkg:maven/org.springframework.security/spring-security-oauth2-resource-server@6.5.11, cpe:2.3:a:pivotal:spring_security_oauth:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:pivotal_software:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:pivotal_software:spring_security_oauth:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_security:6.5.11:*:*:*:*:*:*:*) : CVE-2026-59270, CVE-2026-41707, CVE-2026-47841, CVE-2026-47842, CVE-2026-59276
+spring-security-web-6.5.11.jar (pkg:maven/org.springframework.security/spring-security-web@6.5.11, cpe:2.3:a:pivotal_software:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:web_project:web:6.5.11:*:*:*:*:*:*:*) : CVE-2026-59270, CVE-2026-41707, CVE-2026-47841, CVE-2026-47842, CVE-2026-59276
+spring-web-6.2.19.jar (pkg:maven/org.springframework/spring-web@6.2.19, cpe:2.3:a:pivotal_software:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:springsource:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:web_project:web:6.2.19:*:*:*:*:*:*:*) : CVE-2026-47884, CVE-2026-47890, CVE-2026-47891, CVE-2026-47892, CVE-2026-59313, CVE-2026-59283, CVE-2026-47885, CVE-2026-47886, CVE-2026-47888, CVE-2026-47889, CVE-2026-47893, CVE-2026-59282, CVE-2026-47883, CVE-2026-47887, CVE-2026-59281, CVE-2026-59280, CVE-2026-59314
+swagger-ui-5.28.1.jar: swagger-ui-bundle.js (pkg:javascript/DOMPurify@3.2.4) : CVE-2026-116803, CVE-2026-49978, CVE-2026-49458, CVE-2026-49459, CVE-2026-41240, CVE-2026-0540, CVE-2026-65902, CVE-2026-65914, CVE-2025-15599, CVE-2026-65898, CVE-2026-65899, CVE-2026-65900, CVE-2026-65901, CVE-2026-65903, CVE-2026-65912, CVE-2026-65913, CVE-2026-66010, CVE-2026-41238, CVE-2026-41239, CVE-2026-75838, CVE-2026-109345, CVE-2026-116802
+swagger-ui-5.28.1.jar: swagger-ui-es-bundle.js (pkg:javascript/DOMPurify@3.2.4) : CVE-2026-116803, CVE-2026-49978, CVE-2026-49458, CVE-2026-49459, CVE-2026-41240, CVE-2026-0540, CVE-2026-65902, CVE-2026-65914, CVE-2025-15599, CVE-2026-65898, CVE-2026-65899, CVE-2026-65900, CVE-2026-65901, CVE-2026-65903, CVE-2026-65912, CVE-2026-65913, CVE-2026-66010, CVE-2026-41238, CVE-2026-41239, CVE-2026-75838, CVE-2026-109345, CVE-2026-116802
+
+
+See the dependency-check report for more details.
+
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  38:34 min
+[INFO] Finished at: 2026-11-10T23:19:07Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.owasp:dependency-check-maven:12.1.6:check (default-cli) on project contact-groups-backend: 
+[ERROR] 
+[ERROR] One or more dependencies were identified with vulnerabilities that have a CVSS score greater than or equal to '7.0': 
+[ERROR] 
+[ERROR] log4j-api-2.24.3.jar (pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3, cpe:2.3:a:apache:log4j:2.24.3:*:*:*:*:*:*:*): CVE-2026-34479(6.9)
+[ERROR] spring-core-6.2.19.jar (pkg:maven/org.springframework/spring-core@6.2.19, cpe:2.3:a:pivotal_software:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:springsource:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_framework:6.2.19:*:*:*:*:*:*:*): CVE-2026-47885(7.5), CVE-2026-47884(9.8), CVE-2026-47886(7.5), CVE-2026-47892(9.8), CVE-2026-47891(9.8), CVE-2026-47893(7.5), CVE-2026-47890(9.8), CVE-2026-59313(9.8), CVE-2026-59283(9.1), CVE-2026-47889(7.5), CVE-2026-47888(7.5), CVE-2026-59282(7.5)
+[ERROR] spring-security-core-6.5.11.jar (pkg:maven/org.springframework.security/spring-security-core@6.5.11, cpe:2.3:a:pivotal_software:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_security:6.5.11:*:*:*:*:*:*:*): CVE-2026-47841(7.4), CVE-2026-41707(7.4), CVE-2026-59270(9.1)
+[ERROR] spring-security-oauth2-resource-server-6.5.11.jar (pkg:maven/org.springframework.security/spring-security-oauth2-resource-server@6.5.11, cpe:2.3:a:pivotal:spring_security_oauth:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:pivotal_software:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:pivotal_software:spring_security_oauth:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_security:6.5.11:*:*:*:*:*:*:*): CVE-2026-47841(7.4), CVE-2026-41707(7.4), CVE-2026-59270(9.1)
+[ERROR] spring-security-web-6.5.11.jar (pkg:maven/org.springframework.security/spring-security-web@6.5.11, cpe:2.3:a:pivotal_software:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_security:6.5.11:*:*:*:*:*:*:*, cpe:2.3:a:web_project:web:6.5.11:*:*:*:*:*:*:*): CVE-2026-47841(7.4), CVE-2026-41707(7.4), CVE-2026-59270(9.1)
+[ERROR] spring-web-6.2.19.jar (pkg:maven/org.springframework/spring-web@6.2.19, cpe:2.3:a:pivotal_software:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:springsource:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:vmware:spring_framework:6.2.19:*:*:*:*:*:*:*, cpe:2.3:a:web_project:web:6.2.19:*:*:*:*:*:*:*): CVE-2026-47885(7.5), CVE-2026-47884(9.8), CVE-2026-47886(7.5), CVE-2026-47892(9.8), CVE-2026-47891(9.8), CVE-2026-47893(7.5), CVE-2026-47890(9.8), CVE-2026-59313(9.8), CVE-2026-59283(9.1), CVE-2026-47889(7.5), CVE-2026-47888(7.5), CVE-2026-59282(7.5)
+[ERROR] swagger-ui-5.28.1.jar: swagger-ui-bundle.js (pkg:javascript/DOMPurify@3.2.4): CVE-2026-116803(10.0), CVE-2026-65898(5.1)
+[ERROR] swagger-ui-5.28.1.jar: swagger-ui-es-bundle.js (pkg:javascript/DOMPurify@3.2.4): CVE-2026-116803(10.0), CVE-2026-65898(5.1)
+[ERROR] 
+[ERROR] See the dependency-check report for more details.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Nov 10, 2026 11:19:00 PM org.apache.lucene.store.MemorySegmentIndexInputProvider <init>
+INFO: Using MemorySegmentIndexInput and native madvise support with Java 21 or later; to disable start with -Dorg.apache.lucene.store.MMapDirectory.enableMemorySegments=false
+Nov 10, 2026 11:19:00 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.

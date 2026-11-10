@@ -1,0 +1,11 @@
+{
+  "command": "/fix F-03 D-50: 1 - a human-approved fix of a frozen-test defect, as in D-44. Use getByLabel('Role', { exact: true }) in E2E-02 and AC-003-01 only; leave E2E-07 and the app's 'Role of {name}' label unchanged. Update docs/03_acceptance-manifest.sha256 and record the change.",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "510f7936-a4b3-45e0-a1e0-2947dd234cb2",
+  "total_cost_usd": 0.22835900000000003,
+  "result": "F-03 is fixed and committed as 1bce3b5, but I did not re-run E2E-02 or AC-003-01 in a browser. They need the Compose stack, so `/verify` has to run them.\n\n- **Test change (D-50, option 1):** E2E-02 (`e2e/e2e-02-team-work.spec.ts:35`) and AC-003-01 (`acceptance/groups-members.spec.ts:101`) now use `getByLabel('Role', { exact: true })`. E2E-07 and the app's \"Role of {name}\" label are unchanged.\n- **Manifest:** I updated both lines in `docs/03_acceptance-manifest.sha256` to the new hashes.\n- **Decision log:** D-50 now has your answer and the resolution recorded.\n- **Not done:** I did not fill a resolution column for F-03. The F-03 row is in `docs/04_review-INC-1.md`, and `docs/06_verification-report.md` has no F-03 entry.\n- **Handover:** `docs/00_progress.md` now shows nothing waiting. The next command is still `/fix F-04`, which stays open as a High finding.",
+  "stderr": ""
+}

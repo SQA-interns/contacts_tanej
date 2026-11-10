@@ -1,0 +1,11 @@
+{
+  "command": "/implement T-N01 (the NFR tasks T-N01 to T-N12 of INC-1 follow US-016, `docs/02_tasks.md`; then `/review INC-1`)",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "9b51ea2a-342c-49c9-9370-9e39f5638fb6",
+  "total_cost_usd": 0.847287,
+  "result": "T-N01 is done and committed (`b65d774`). The load test meets NFR-01, NFR-02 and NFR-04. I stopped there because the skill treats T-N01 as one session. T-N02 is next.\n\nI ran it against the Compose stack for 60 s with 10,000 contacts, 20 parallel users and 100 users. It passes on all counts:\n\n| Check | Result | Limit |\n|---|---|---|\n| NFR-01: list, search and filter, 95th percentile | 543 ms | 1,000 ms |\n| NFR-02: open a contact, 95th percentile | 17 ms | 500 ms |\n| NFR-04: error responses | 0 of 1,740 requests | none |\n\nEX-009-08 (text search, 93 ms) and EX-010-07 (three conditions, 64 ms) also pass.\n\nThe slowest search is a two-word search with accents (\"Šuster Maja\"). Its 95th percentile was 695 ms on this run, 995 ms on an earlier 30 s run. It holds today, but a bigger data set or slower host could push it over 1 s. I recorded this as a watch item in D-46 with a possible fix and did not change production code.\n\nThe measurement ran on the same machine as the stack, so network time isn't included. I'd repeat it on the deployed system in phase 6, as DoD-P06 asks.\n\n- **Run it:** `node scripts/perf/load-test.mjs [--duration 60] [--skip-seed]`, with the stack up. It creates 100 test accounts in the emulator and loads `scripts/perf/seed-10000.sql`.\n- **Files:** the result is in `out/logs/perf-load-test.log`, and the readings are in D-46. `docs/00_progress.md` now points to `/implement T-N02`, then T-N03 to T-N12, then `/review INC-1`.\n- **Still open:** the browser tests AC-016-02, 05 and 06 have not been run yet.",
+  "stderr": ""
+}

@@ -617,3 +617,25 @@
 - Trigger: app defects behind the failures of AC-001-04, EX-001-07 and AC-008-03.
 - Resolution: (1) `lib/auth.ts` `observe`: the SDK reloads a stored person at start, so `emailVerified` is already true while the stored ID token still has `email_verified: false`, and the API answered 403 EMAIL_NOT_VERIFIED ("Something went wrong"). The app now compares the claim of the token with the person and gets a new token when they differ (tests in `auth.test.ts`). (2) AC-008-03: the key suggestions were a native `<datalist>`, whose options are never visible; they are now a visible listbox (`role=listbox`/`option`, the field is a combobox; a click puts the key in; any other key can still be typed; tests in `contact-page.test.tsx`). (3) AC-001-04: the nginx CSP `frame-src` did not allow the Authentication Emulator, so the popup could not relay its result ("No matching frame") and the app stayed on the sign-in screen. New variable `CSP_FRAME_EXTRA` (template, Dockerfile, `docker-compose.yml`: emulator addresses; `docker-compose.prod.yml`: empty, production unchanged). The sign-in works in Chromium; AC-001-04 itself still fails in 3 of 4 runs for a test-side reason, see D-53.
 - Overrides: none
+
+## D-55: second increment (US-020 to US-022) is not built; hidden and frozen tests fail (F-V02, F-V01)
+- Timestamp: 2026-11-11
+- Session: S7 verify (run 1)
+- Class: block
+- Type: blocking
+- Trigger: `00_progress.md` lists US-020 to US-022 as "ready"; 52 backend ITs, 38 browser tests, E2E-06 and 8 held-out cases of R-020 to R-022 fail because the code does not exist. DoD-P10 and DoD-R-13 cannot pass without it.
+- Options: (1) (proposed) Build the second increment now: `/implement US-020`, `/implement US-021`, `/implement US-022`, then `/verify` again. (2) Take the second increment out of this release: this changes DoD-P10 and E2E-06 (a change of the requirement; the human removes the frozen tests and the held-out cases of US-020 to US-022). (3) Accept it as a known limitation of this release with a note in the release notes.
+- Human response: pending
+- Resolution: pending
+- Overrides: none
+
+## D-56: backend dependency scan reports Critical and High advisories (F-V13)
+- Timestamp: 2026-11-11
+- Session: S7 verify (run 1)
+- Class: approval
+- Type: blocking
+- Trigger: `out/logs/verify-backend-depcheck.log` (dependency-check-maven 12.1.6, NVD without key): `spring-core` and `spring-web` 6.2.19 (12 CVEs, up to 9.8), `spring-security-*` 6.5.11 (up to 9.1), DOMPurify 3.2.4 inside `swagger-ui` 5.28.1 (CVE-2026-116803, 10.0). The matches are by CPE and may be false positives; no reachability analysis has been done. D-13 recorded other advisories and does not name these.
+- Options: (1) (proposed) `/fix F-V13` checks, per advisory, whether the affected code is reachable and whether a fixed version exists on the pinned lines (Spring Boot 3.5.x managed versions); it records the result and brings any version change or any lowering of a Critical or High back to you for approval. (2) Move Spring Boot to a newer 3.5.x or 4.x (you name the version; a change to `tech-stack.md`). (3) Accept the open advisories as a known limitation with a reason (needs your approval for every Critical and High).
+- Human response: pending
+- Resolution: pending
+- Overrides: none

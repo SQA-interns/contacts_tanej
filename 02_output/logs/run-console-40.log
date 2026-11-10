@@ -1,0 +1,1 @@
+﻿RUN_STATUS {"status":"done","last":"R review INC-1","result":"done","gate":"not passed (DoD-I-02: F-01 to F-04 High open; report `docs/04_review-INC-1.md`)","next":"/fix F-01","waiting":"nothing","log":"C:\\Users\\tanej\\Documents\\LAB\\tanej_sdd-workflow_contacts_v001\\02_output\\logs\\run\\043-review.json"}

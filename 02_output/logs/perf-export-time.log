@@ -1,9 +1,9 @@
-Export timing 2026-11-10T14:17:58.677Z  api=http://localhost:8080  runs=3
+Export timing 2026-11-10T22:43:35.620Z  api=http://localhost:8080  runs=3
 
 | Export | runs | times (ms) | max | file | rows in sheet |
 |---|---|---|---|---|---|
-| 1,000 ticked contacts (NFR-03) | 3 | 64, 61, 53 | 64 ms | 42 KiB | 1001 |
-| 10,000 contacts by filter (NFR-15) | 3 | 335, 355, 279 | 355 ms | 360 KiB | 10001 |
+| 1,000 ticked contacts (NFR-03) | 3 | 289, 88, 94 | 289 ms | 42 KiB | 1001 |
+| 10,000 contacts by filter (NFR-15) | 3 | 552, 498, 450 | 552 ms | 360 KiB | 10001 |
 
-PASS NFR-03 1,000 contacts: slowest 64 ms (limit 10000 ms)
-PASS NFR-15 10,000 contacts: no error, backend not restarted or OOM-killed (before: 0 false 2026-11-10T12:49:16.974068912Z; after: 0 false 2026-11-10T12:49:16.974068912Z); time recorded only: 355 ms
+PASS NFR-03 1,000 contacts: slowest 289 ms (limit 10000 ms)
+PASS NFR-15 10,000 contacts: no error, backend not restarted or OOM-killed (before: 0 false 2026-11-10T19:21:18.517955962Z; after: 0 false 2026-11-10T19:21:18.517955962Z); time recorded only: 552 ms

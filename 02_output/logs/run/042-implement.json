@@ -1,0 +1,11 @@
+{
+  "command": "/implement T-N04 note: results of the developer's rerun 2026-11-10 about 19:18 UTC. restore.sh PASS: PASS NFR-06 15 tables with identical row counts and checksums (logs/backup-restore-test.log); the source database held only 1 group and 4 contacts. clean-host-test.sh: stack built from 723 committed files plus .env and healthy (backend, db, emulator, frontend); E2E-01 then failed only at getByText('The contact was saved.'), the known D-48 failure (logs/clean-host-test.log); NFR-12 counts as met up to E2E-01, re-run this script after /fix. Commit the two logs with T-N04 and T-N10 (never the backups/ dump), update 00_progress.md, and hand over with next /review INC-1. Do no other work.",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "b1b2155d-d189-485a-b8e8-d08fc58bc48c",
+  "total_cost_usd": 0.1674835,
+  "result": "I've committed the two logs and the updated `00_progress.md` as `d6f1250`. I ran no other work and did not re-run either script.\n\n- **T-N04 (NFR-06):** `restore.sh` passed. All 15 tables have identical row counts and checksums. The source database held only 1 group and 4 contacts. The `backups/` dump is not committed, and `02_output/backups/` is in `.gitignore`.\n- **T-N10 (NFR-12):** the clean-host test built the stack from 723 committed files plus `.env`, and all four services came up healthy. E2E-01 then failed only at `getByText('The contact was saved.')`, the known D-48 failure. NFR-12 counts as met up to E2E-01. Re-run the script after `/fix`.\n\n`00_progress.md` now has Result `done` and \"Waiting for: nothing\". The next command is `/review INC-1`.\n\nThe other uncommitted files in the working tree, the `run-console-*.log` files and `logs/run/*.json`, are untouched.",
+  "stderr": ""
+}

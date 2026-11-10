@@ -1,0 +1,1 @@
+﻿RUN_STATUS {"status":"done","last":"S8 fix F-03 D-50: 1","result":"done","gate":"not passed (DoD-I-02: F-04 High open; report `docs/04_review-INC-1.md`)","next":"/fix F-04","waiting":"nothing","log":"C:\\Users\\tanej\\Documents\\LAB\\tanej_sdd-workflow_contacts_v001\\02_output\\logs\\run\\047-fix.json"}
