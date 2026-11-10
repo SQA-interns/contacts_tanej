@@ -77,9 +77,13 @@ export function InviteForm({ onInvite }: InviteFormProps) {
             )}
           </div>
           <div className="flex flex-col gap-1">
-            <Label htmlFor={`${id}-role`}>
-              {t('groups.columns.role')}
-            </Label>
+            <div className="flex items-baseline gap-1">
+              <Label htmlFor={`${id}-role`}>{t('groups.columns.role')}</Label>
+              {/* visible required marker outside the label, so the label text stays exactly "Role" (D-50, D-52) */}
+              <span aria-hidden="true" className="text-text-muted">
+                *
+              </span>
+            </div>
             <select
               id={`${id}-role`}
               required

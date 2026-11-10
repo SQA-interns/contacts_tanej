@@ -90,6 +90,15 @@ describe('invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08
     expect(screen.getByLabelText(/E-mail/)).toHaveValue('');
   });
 
+  it('labels the invite role exactly "Role" with a visible required marker outside the label', async () => {
+    const { api } = membersApi([]);
+    renderApp('/groups/g-1/members', { auth: signedIn(), api });
+    const role = await screen.findByLabelText('Role', { exact: true });
+    expect(role).toBeRequired();
+    const marker = role.parentElement?.querySelector('[aria-hidden="true"]');
+    expect(marker).toHaveTextContent('*');
+  });
+
   it('shows the reason of a refusal and keeps what was typed', async () => {
     const { api } = membersApi([], { status: 409, code: 'ALREADY_MEMBER' });
     renderApp('/groups/g-1/members', { auth: signedIn(), api });

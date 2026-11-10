@@ -239,7 +239,7 @@ test('AC-016-05 cancelling the confirmation deletes nothing', async ({ page }) =
   await dialog(page).getByRole('button', { name: 'Cancel' }).click();
   await expect(dialog(page)).toHaveCount(0);
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Account' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Account', exact: true })).toBeVisible();
   const again = await Client.of(PETRA);
   expect((await again.call('GET', '/me')).status).toBe(200);
 });
