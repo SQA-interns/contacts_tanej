@@ -6,6 +6,7 @@ import io.github.bucket4j.TimeMeter;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,7 +20,7 @@ class RateLimiter {
 
   private final int limit;
   private final TimeMeter meter;
-  private final ConcurrentHashMap<String, Bucket> buckets = new ConcurrentHashMap<>();
+  private final ConcurrentMap<String, Bucket> buckets = new ConcurrentHashMap<>();
 
   RateLimiter(int limit, Clock clock) {
     this.limit = limit;
