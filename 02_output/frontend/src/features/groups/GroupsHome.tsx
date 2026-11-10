@@ -13,7 +13,7 @@ import { RoleBadge } from './RoleBadge';
 
 type GroupSummary = components['schemas']['GroupSummary'];
 
-type Dialog = { mode: 'create' } | null;
+type Dialog = { mode: 'create' } | { mode: 'rename'; group: GroupSummary } | null;
 
 /**
  * WF-05, the address "/" of a verified person: loading, error, the empty state of US-001, or the
@@ -37,12 +37,26 @@ export function GroupsHome() {
     void navigate(`/groups/${created.id}`);
   }
 
+  async function rename(group: GroupSummary, name: string) {
+    await api.request<GroupSummary>('PATCH', `/groups/${group.id}`, { name });
+    await queryClient.invalidateQueries({ queryKey: ['groups'] });
+    await queryClient.invalidateQueries({ queryKey: ['group', group.id] });
+    setDialog(null);
+  }
+
   if (groups.isPending) return <StatePanel state="loading" />;
   if (groups.isError) return <StatePanel state="error" onRetry={() => void groups.refetch()} />;
 
   const dialogElement =
     dialog?.mode === 'create' ? (
       <GroupNameDialog mode="create" onSubmit={create} onClose={() => setDialog(null)} />
+    ) : dialog?.mode === 'rename' ? (
+      <GroupNameDialog
+        mode="rename"
+        initialName={dialog.group.name}
+        onSubmit={(name) => rename(dialog.group, name)}
+        onClose={() => setDialog(null)}
+      />
     ) : null;
 
   if (groups.data.length === 0) {
@@ -69,6 +83,9 @@ export function GroupsHome() {
               <th scope="col" className="px-4 py-3">
                 {t('groups.columns.role')}
               </th>
+              <th scope="col" className="px-4 py-3">
+                <span className="sr-only">{t('groups.columns.actions')}</span>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -81,6 +98,13 @@ export function GroupsHome() {
                 </td>
                 <td className="px-4 py-2">
                   <RoleBadge role={group.role} />
+                </td>
+                <td className="px-4 py-2 text-right">
+                  {group.role === 'OWNER' && (
+                    <Button variant="ghost" onClick={() => setDialog({ mode: 'rename', group })}>
+                      {t('groups.rename')}
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}
