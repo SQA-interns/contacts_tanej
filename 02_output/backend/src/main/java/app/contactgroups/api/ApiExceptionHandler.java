@@ -3,6 +3,7 @@ package app.contactgroups.api;
 import app.contactgroups.domain.ApiException;
 import app.contactgroups.domain.ErrorCode;
 import app.contactgroups.domain.FieldProblem;
+import app.contactgroups.service.AccessService;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ public class ApiExceptionHandler {
   private static final Logger LOG = LoggerFactory.getLogger(ApiExceptionHandler.class);
 
   @ExceptionHandler(ApiException.class)
-  ResponseEntity<ErrorResponse> refused(ApiException e) {
+  static ResponseEntity<ErrorResponse> refused(ApiException e) {
     return respond(ErrorResponse.of(e.code(), e.getMessage(), e.fields()));
   }
 
@@ -80,7 +81,7 @@ public class ApiExceptionHandler {
   }
 
   private static ResponseEntity<ErrorResponse> notFound() {
-    return respond(ErrorResponse.of(ErrorCode.NOT_FOUND, ApiException.NOT_FOUND_MESSAGE));
+    return refused(AccessService.notFound());
   }
 
   private static ResponseEntity<ErrorResponse> invalid(List<FieldProblem> fields) {

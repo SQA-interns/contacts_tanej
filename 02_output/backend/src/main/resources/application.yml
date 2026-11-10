@@ -8,6 +8,9 @@ spring:
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
+    hikari:
+      # a stopped database must make the health check answer 503 quickly (R-017-12)
+      connection-timeout: 3000
   flyway:
     enabled: true
     locations: classpath:db/migration
@@ -32,20 +35,6 @@ server:
     include-exception: false
   tomcat:
     max-swallow-size: 2MB
-
-management:
-  endpoints:
-    web:
-      base-path: /
-      exposure:
-        include: health
-      path-mapping:
-        health: health
-  endpoint:
-    health:
-      show-details: never
-      probes:
-        enabled: true
 
 logging:
   level:
