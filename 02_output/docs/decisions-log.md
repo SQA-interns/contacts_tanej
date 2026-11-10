@@ -395,3 +395,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-35: US-008 readings (attributes in the save path)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-008
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) The contract does not say what a save without `attributes` does. (2) Field names and codes of a refused attribute. (3) A value with spaces around it. (4) History for attributes. (5) The attribute rows and their tests were written in the same step (screen code before its tests, as in D-33, D-34).
+- Options: (1) `attributes` absent keeps them; a list replaces them (as tags, D-34). (2) `attributes[i].key` REQUIRED (empty after trim), TOO_LONG, DUPLICATE_KEY (the later of two equal keys ignoring case); `attributes[i].value` TOO_LONG; `attributes` TOO_MANY. (3) Only the key is trimmed (EX-008-06); the value is kept as typed. (4) One `ATTRIBUTE_CHANGED` entry per key added, removed or given another value (field `attribute:<key>`, old and new value); an attribute-only save makes a new version and revision. (5) Recorded here. A row added in the form and left empty is dropped on save.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
