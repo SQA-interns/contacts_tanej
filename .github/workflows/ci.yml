@@ -68,6 +68,8 @@ jobs:
         run: npm run build
       - name: Dependency scan (SB-08, SR-19; allow-list D-08)
         run: npm run scan
+      - name: Licences, forbidden imports, SCM search (NFR-14, SR-19)
+        run: node ../scripts/licence-check.mjs
       - name: Browser tests (NFR-07, NFR-08, NFR-09)
         run: |
           npx playwright install --with-deps chromium firefox webkit

@@ -516,3 +516,25 @@
 - Human response: none
 - Resolution: as listed, pending review. Server: `DELETE /me` (`AccountService`) checks `auth_time` within 5 minutes, locks the user's groups in id order, refuses with `SOLE_OWNER` and `groups[]` (also groups in Trash), removes the e-mail from the History entries the user caused, records the id in `deleted_accounts` and deletes the user (memberships cascade). The daily removal of old `deleted_accounts` rows (ADR-08) is not in this story's tasks.
 - Overrides: none
+
+## D-46: NFR timing readings (T-N01, T-N02)
+- Timestamp: 2026-11-10
+- Session: S5 implement T-N01 to T-N03
+- Class: assumption
+- Type: non-blocking
+- Trigger: The load test with 10,000 contacts (`scripts/perf/load-test.mjs`) gave p95 search 543 ms and open contact 17 ms with no errors in 1,740 requests (`out/logs/perf-load-test.log`). The two-word search with accents takes about 550 to 700 ms. This record was referenced in `00_progress.md` but was missing from the log; it is written here from that log.
+- Options: (1) Accept as measured, since NFR-01 and NFR-02 pass. (2) Add an index for the folded two-word search later if the time grows.
+- Human response: none
+- Resolution: (1), a watch item for `/review INC-1`. Export timing is in `out/logs/perf-export-time.log` (NFR-15 records the time only).
+- Overrides: none
+
+## D-47: Build-only npm packages with a licence outside the allowed list (T-N12, NFR-14)
+- Timestamp: 2026-11-10
+- Session: S5 implement T-N12
+- Class: assumption
+- Type: non-blocking
+- Trigger: `scripts/licence-check.mjs` finds five build-scope packages whose licence field is not an allowed SPDX id: argparse 3.0.4 (PSF-2.0), deep-freeze (public domain), url-template (BSD), fuzzy (a `licenses` array, MIT), valid-url (no field; MIT in its repository). They come through `firebase-tools` (the emulator) or `swagger-parser` (contract tooling); none is in an image or the web bundle. Two Maven test-scope dependencies (archunit-junit5, spring-security-test) are not in `tech-stack.md`; they are recorded with Apache-2.0 in this log (D-24, "Backend, test scope").
+- Options: (1) Accept them as reviewed build-only exceptions, listed in `BUILD_REVIEWED` of the script (proposed). (2) Replace the tools. (3) Add them to `tech-stack.md` (needs the human).
+- Human response: none
+- Resolution: (1), pending review. The MIT licences of fuzzy and valid-url are not read from a file in the repository: please confirm them in `/review`.
+- Overrides: none

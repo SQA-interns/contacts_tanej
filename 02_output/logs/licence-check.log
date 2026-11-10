@@ -1,0 +1,6 @@
+2026-11-10T18:29:49.014Z
+npm: 180 runtime and 1335 build or test packages checked
+npm licences: MIT 1203, Apache-2.0 152, ISC 74, BSD-3-Clause 29, MPL-2.0 13, BSD-2-Clause 13, BlueOak-1.0.0 10, Python-2.0 5, CC0-1.0 3, MIT-0 2, (MIT OR CC0-1.0) 2, "UNKNOWN" 2, PSF-2.0 1, CC-BY-4.0 1, public domain 1, (BSD-2-Clause OR MIT OR Apache-2.0) 1, (WTFPL OR MIT) 1, 0BSD 1, BSD 1
+maven: 17 direct dependencies, each listed in tech-stack.md with a licence
+sources: 313 files searched for forbidden imports and for SCM
+PASS NFR-14 nothing forbidden found
