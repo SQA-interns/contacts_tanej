@@ -5,6 +5,12 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
+- Session: R review INC-1
+- Result: done
+- Gate: not passed (DoD-I-02: F-01 to F-04 High open; report `docs/04_review-INC-1.md`)
+- Notes for the next session: 4 High (F-01 no save confirmation after create; F-02 320 px overflow and table instead of cards; F-03 E2E-02 `Role` label match; F-04 "Group not found" heading and "Group" navigation). Per D-48 the next session is `/fix`: check each failing E2E for a test defect first and bring test changes to the developer as decisions. Medium: F-05 WebKit focus, F-06 missing `Red:` lines, F-07 commit size and subject length (release notes), F-08 deleted_accounts cleanup and AC-016 browser tests, F-09 JaCoCo.
+
+## Previous
 - Session: S5 implement T-N04 (log commit after the developer's re-run of 2026-11-10, about 19:18 UTC)
 - Result: done
 - Gate: not applicable (NFR tasks)
@@ -21,7 +27,7 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /review INC-1
+- Command: /fix F-01
 - Waiting for: nothing
 
 ## Stories
