@@ -3,6 +3,9 @@
 .env.*
 !.env.example
 
+# Database dumps of the backup test hold test personal data: never commit
+02_output/backups/
+
 # Held-out tests: the implementer never sees them (AGENTS.md)
 02_output/hidden-tests/
 

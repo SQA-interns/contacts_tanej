@@ -5,8 +5,9 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S5 implement T-N04 to T-N12 (T-N02 is the label of the session that runs T-N03 to T-N12)
-- Result: blocked on the developer for T-N04 and T-N10 (scripts written, not run); NFR findings open in D-48.
+- Session: S5 implement T-N04 D-48: 1 (script fixes after the developer's run of 2026-11-10)
+- Result: done for the scripts; blocked on the developer's re-run. backup.sh passed; restore.sh (ambiguous `h` in the summary SQL, silent exit) and clean-host-test.sh (git -C with a POSIX path) are fixed but not run again by me. `02_output/backups/` added to `.gitignore`. D-48 answered 1: `/fix` after `/review INC-1` (check the failing E2E for test defects first, test changes go to the developer as decisions; NFR-09 focus check in `/verify`).
+- Earlier session: S5 implement T-N04 to T-N12 (T-N02 is the label of the session that runs T-N03 to T-N12). Result then: blocked on the developer for T-N04 and T-N10; NFR findings open in D-48.
 - Done: T-N03 (passing restart run committed), T-N11 (`MigrationIT`, 4 tests pass), T-N12 (`scripts/licence-check.mjs` passes, CI step added, D-47). Specs written and run: T-N05 (E2E in 3 engines: E2E-01, 02, 03, 06, 08 fail in all three, so NFR-07 not met), T-N06 (NFR-08 fails at 320 px, passes at 768 and 1280), T-N07 (axe clean everywhere, WebKit keyboard focus fails at Tab stop 4), T-N08 (passes), T-N09 (first contact 2.7 s, empty and error states pass). Details and suggested severities: D-48.
 - For the developer, from `02_output/` (Git Bash), : T-N04 (stack up): `./scripts/backup.sh` then `./scripts/restore.sh` (log `logs/backup-restore-test.log`). T-N10: `docker compose --env-file ../.env down` then `./scripts/clean-host-test.sh` (log `logs/clean-host-test.log`), then `docker compose --env-file ../.env up -d` again.
 - Still open: the install guide text for the daily backup and 14-day retention (phase 7); the manual Safari/Edge check (NFR-07).
@@ -19,8 +20,8 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /review INC-1 (after the developer has run T-N04 and T-N10 and given the results; if one fails: /implement T-N04 or T-N10 with the log)
-- Waiting for: the developer's run of `scripts/backup.sh` + `scripts/restore.sh` (T-N04) and `scripts/clean-host-test.sh` (T-N10); D-48 for the fix session
+- Command: /review INC-1 (after the developer has re-run `./scripts/restore.sh` (T-N04) and `./scripts/clean-host-test.sh` (T-N10; its E2E-01 step is expected to fail until `/fix`) and given the results; if restore.sh or an earlier step fails: /implement T-N04 or T-N10 with the log)
+- Waiting for: the developer's re-run of `restore.sh` and `clean-host-test.sh`
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |

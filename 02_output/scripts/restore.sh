@@ -44,17 +44,23 @@ say "Restoring ..."
 
 # One line per table: name|row count|md5 of all rows in a fixed order.
 SUMMARY_SQL=$(cat <<'SQL'
-do $$ declare r record; c bigint; h text; begin
-  create temp table summary(t text, n bigint, h text) on commit drop;
+do $$ declare r record; v_cnt bigint; v_hash text; begin
+  create temp table summary(tbl text, cnt bigint, hsh text) on commit drop;
   for r in select tablename from pg_tables where schemaname = 'public' order by tablename loop
-    execute format('select count(*), coalesce(md5(string_agg(x::text, ''|'' order by x::text)), '''') from %I x', r.tablename) into c, h;
-    insert into summary values (r.tablename, c, h);
+    execute format('select count(*), coalesce(md5(string_agg(x::text, ''|'' order by x::text)), '''') from %I x', r.tablename) into v_cnt, v_hash;
+    insert into summary(tbl, cnt, hsh) values (r.tablename, v_cnt, v_hash);
   end loop;
-  raise notice '%', (select string_agg(t || '|' || n || '|' || h, E'\n' order by t) from summary);
+  raise notice '%', (select string_agg(s.tbl || '|' || s.cnt || '|' || s.hsh, E'\n' order by s.tbl) from summary s);
 end $$;
 SQL
 )
-summary() { "$@" exec -T db psql -q -U contacts -d contacts -c "$SUMMARY_SQL" 2>&1 | sed -e 's/^NOTICE:  //' -e 's/^psql:.*NOTICE:  //'; }
+# Runs the summary in one database; a failing psql call is logged as FAIL (no silent exit under set -e).
+summary() {
+  local out
+  out="$("$@" exec -T db psql -q -v ON_ERROR_STOP=1 -U contacts -d contacts -c "$SUMMARY_SQL" 2>&1)" \
+    || { say "$out"; fail "the summary query failed (see above)"; }
+  echo "$out" | sed -e 's/^NOTICE:  //' -e 's/^psql:.*NOTICE:  //'
+}
 A="$(summary "${src[@]}")"
 B="$(summary "${dst[@]}")"
 say "Source database:"; say "$A"

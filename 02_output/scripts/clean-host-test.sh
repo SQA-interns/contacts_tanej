@@ -36,7 +36,7 @@ trap cleanup EXIT
 
 say "Clean host test $(date -u +%FT%TZ), commit $(git rev-parse --short HEAD)"
 say "Copying the committed sources to $CLEAN ..."
-git -C "$ROOT" archive HEAD 02_output | tar -x -C "$CLEAN"
+(cd "$ROOT" && git archive HEAD 02_output) | tar -x -C "$CLEAN"
 cp ../.env "$CLEAN/.env"
 say "Files in the copy: $(find "$CLEAN" -type f | wc -l | tr -d ' '); .env copied, nothing else added"
 
