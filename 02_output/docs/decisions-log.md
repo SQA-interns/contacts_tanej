@@ -362,3 +362,14 @@
 - Human response: none
 - Resolution: option 1, pending review
 - Overrides: none
+
+## D-32: US-003 readings and one frozen browser failure
+- Timestamp: 2026-11-10
+- Session: S5 implement US-003
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) The specification does not say what happens to an expired row of the same group and address when the Owner invites again, while the unique index (group, e-mail) would refuse the insert. (2) A missing or unknown role has no field code in the specification. (3) `acceptFor` runs for `GET /me` and `GET /groups` as specified; a group in Trash still gets the membership (the list hides it). (4) `AC-003-08` (`groups-members.spec.ts`) fails in WebKit only (Chromium and Firefox pass): the frozen helper `verifyEmail` finds no verification e-mail in the emulator for `ivan@example.com`. No invitation code is involved, and the API side of AC-003-08 passes. The cause was not investigated further.
+- Options: (1) The expired row is deleted in the create transaction before the insert. (2) 400 `VALIDATION_FAILED` for the field `role` with the code `INVALID_VALUE`. (3) As specified. (4) Leave the frozen test unchanged and the story `in progress`; you decide whether `verifyEmail` should wait for the e-mail (frozen file).
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
