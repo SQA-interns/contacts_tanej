@@ -417,3 +417,14 @@
 - Human response: none
 - Resolution: as listed, pending review
 - Overrides: none
+
+## D-37: US-007 readings (rename and delete a tag)
+- Timestamp: 2026-11-10
+- Session: S5 implement US-007
+- Class: assumption
+- Type: non-blocking
+- Trigger: (1) Order of checks and the unknown tag. (2) Locking against a save that changes the same contacts. (3) What a rename to the exact same name does. (4) History entry shape. (5) The Manage tags screen and its tests were written in the same step (screen code before its tests, as in D-33 to D-35). (6) The Tags tab for a Viewer.
+- Options: (1) Member (404), then role (a Viewer gets 403 even for an unknown tag), then the tag (404; a tag no contact carries does not exist). (2) The contacts that carry the tag are locked in id order before the tag row changes, as a save locks its contact first, so there is no deadlock; a name that clashes at that moment through the unique index gives the same 409 `TAG_NAME_TAKEN`. (3) 200 with the tag, no change, no History entry, no revision bump (EX-007-01). (4) One `TAG_RENAMED` or `TAG_DELETED` entry per affected contact, one change set, field `tag` with old and new value (delete: new value empty); a change of capitalisation only is a rename. `revision` grows, `versionNumber` does not (R-007-06, D-19). (5) Recorded here. (6) The Tags tab is shown to Owner and Editor only (AC-007-07 in the frozen browser test); a Viewer who types the address sees the list without controls.
+- Human response: none
+- Resolution: as listed, pending review
+- Overrides: none
