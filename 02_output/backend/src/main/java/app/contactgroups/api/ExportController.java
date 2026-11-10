@@ -46,7 +46,8 @@ public class ExportController {
     @ApiResponse(responseCode = "401"),
     @ApiResponse(responseCode = "403"),
     @ApiResponse(responseCode = "404"),
-    @ApiResponse(responseCode = "413")
+    @ApiResponse(responseCode = "413"),
+    @ApiResponse(responseCode = "429")
   })
   public ResponseEntity<byte[]> export(
       @AuthenticationPrincipal Jwt jwt,

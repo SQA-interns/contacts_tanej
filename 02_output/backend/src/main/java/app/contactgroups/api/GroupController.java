@@ -1,5 +1,6 @@
 package app.contactgroups.api;
 
+import app.contactgroups.domain.DeletedGroup;
 import app.contactgroups.domain.GroupSummary;
 import app.contactgroups.service.GroupService;
 import app.contactgroups.service.InvitationService;
@@ -93,5 +94,48 @@ public class GroupController {
       @PathVariable UUID groupId,
       @RequestBody GroupNameRequest request) {
     return groups.rename(groupId, jwt.getSubject(), request.name());
+  }
+
+  @PostMapping("/groups/{groupId}/trash")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(operationId = "trashGroup")
+  @ApiResponses({
+    @ApiResponse(responseCode = "204"),
+    @ApiResponse(responseCode = "400"),
+    @ApiResponse(responseCode = "401"),
+    @ApiResponse(responseCode = "403"),
+    @ApiResponse(responseCode = "404"),
+    @ApiResponse(responseCode = "409")
+  })
+  public void trash(
+      @AuthenticationPrincipal Jwt jwt,
+      @PathVariable UUID groupId,
+      @RequestBody GroupNameRequest request) {
+    groups.trash(groupId, jwt.getSubject(), request.name());
+  }
+
+  @PostMapping("/groups/{groupId}/restore")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(operationId = "restoreGroup")
+  @ApiResponses({
+    @ApiResponse(responseCode = "204"),
+    @ApiResponse(responseCode = "401"),
+    @ApiResponse(responseCode = "403"),
+    @ApiResponse(responseCode = "404"),
+    @ApiResponse(responseCode = "409")
+  })
+  public void restore(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID groupId) {
+    groups.restore(groupId, jwt.getSubject());
+  }
+
+  @GetMapping("/deleted-groups")
+  @Operation(operationId = "listDeletedGroups")
+  @ApiResponses({
+    @ApiResponse(responseCode = "200"),
+    @ApiResponse(responseCode = "401"),
+    @ApiResponse(responseCode = "403")
+  })
+  public List<DeletedGroup> deleted(@AuthenticationPrincipal Jwt jwt) {
+    return groups.deletedFor(jwt.getSubject());
   }
 }

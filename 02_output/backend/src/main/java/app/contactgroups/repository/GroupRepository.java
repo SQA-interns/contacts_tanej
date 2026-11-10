@@ -1,5 +1,7 @@
 package app.contactgroups.repository;
 
+import app.contactgroups.domain.DeletedGroup;
+import app.contactgroups.domain.GroupAccess;
 import app.contactgroups.domain.GroupSummary;
 import app.contactgroups.domain.Role;
 import java.sql.ResultSet;
@@ -63,6 +65,79 @@ public class GroupRepository {
         .params(userId, groupId)
         .query((rs, n) -> summary(rs))
         .optional();
+  }
+
+  /**
+   * The group in any state with the user's role, only when the user is a member, and locks its row
+   * until the end of the transaction. Only delete and restore may see a group in Trash (D-17).
+   */
+  public Optional<GroupAccess> lockAnyOfMember(UUID groupId, String userId) {
+    return jdbc.sql(
+            "SELECT g.id, g.name, g.state, m.role FROM groups g JOIN memberships m"
+                + " ON m.group_id = g.id WHERE m.user_id = ? AND g.id = ? FOR UPDATE OF g")
+        .params(userId, groupId)
+        .query(
+            (rs, n) ->
+                new GroupAccess(
+                    rs.getObject("id", UUID.class),
+                    rs.getString("name"),
+                    Role.valueOf(rs.getString("role")),
+                    "TRASHED".equals(rs.getString("state"))))
+        .optional();
+  }
+
+  public void trash(UUID groupId, Instant now) {
+    jdbc.sql("UPDATE groups SET state = 'TRASHED', trashed_at = ? WHERE id = ?")
+        .params(Timestamp.from(now), groupId)
+        .update();
+  }
+
+  public void restore(UUID groupId) {
+    jdbc.sql("UPDATE groups SET state = 'ACTIVE', trashed_at = NULL WHERE id = ?")
+        .param(groupId)
+        .update();
+  }
+
+  /** The groups in Trash of which the user is an Owner, oldest deletion first (R-015-04). */
+  public List<DeletedGroup> findTrashedOfOwner(String userId, Instant now) {
+    return jdbc.sql(
+            "SELECT g.id, g.name, g.trashed_at FROM groups g JOIN memberships m"
+                + " ON m.group_id = g.id WHERE m.user_id = ? AND m.role = 'OWNER'"
+                + " AND g.state = 'TRASHED' ORDER BY g.trashed_at, g.id")
+        .param(userId)
+        .query(
+            (rs, n) ->
+                DeletedGroup.of(
+                    rs.getObject("id", UUID.class),
+                    rs.getString("name"),
+                    rs.getTimestamp("trashed_at").toInstant(),
+                    now))
+        .list();
+  }
+
+  /** The ids of the groups in Trash since {@code cutoff} or earlier (R-015-06, EX-015-02). */
+  public List<UUID> expired(Instant cutoff) {
+    return jdbc.sql(
+            "SELECT id FROM groups WHERE state = 'TRASHED' AND trashed_at <= ?"
+                + " ORDER BY trashed_at, id")
+        .param(Timestamp.from(cutoff))
+        .query(UUID.class)
+        .list();
+  }
+
+  /** Locks the group if it is in Trash since {@code cutoff} or earlier; empty otherwise. */
+  public Optional<UUID> lockExpired(UUID groupId, Instant cutoff) {
+    return jdbc.sql(
+            "SELECT id FROM groups WHERE id = ? AND state = 'TRASHED' AND trashed_at <= ?"
+                + " FOR UPDATE")
+        .params(groupId, Timestamp.from(cutoff))
+        .query(UUID.class)
+        .optional();
+  }
+
+  /** Deletes the group; the database cascades to everything that belongs to it (ADR-08). */
+  public void delete(UUID groupId) {
+    jdbc.sql("DELETE FROM groups WHERE id = ?").param(groupId).update();
   }
 
   public void rename(UUID groupId, String name) {

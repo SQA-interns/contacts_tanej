@@ -2,6 +2,7 @@ package app.contactgroups.service;
 
 import app.contactgroups.domain.TrashedContact;
 import app.contactgroups.repository.ContactRepository;
+import app.contactgroups.repository.GroupRepository;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -22,12 +23,21 @@ public class TrashCleanupService {
   private static final Logger LOG = LoggerFactory.getLogger(TrashCleanupService.class);
 
   private final ContactRepository contacts;
+  private final GroupRepository groups;
   private final TrashService trash;
+  private final GroupService groupService;
   private final Clock clock;
 
-  public TrashCleanupService(ContactRepository contacts, TrashService trash, Clock clock) {
+  public TrashCleanupService(
+      ContactRepository contacts,
+      GroupRepository groups,
+      TrashService trash,
+      GroupService groupService,
+      Clock clock) {
     this.contacts = contacts;
+    this.groups = groups;
     this.trash = trash;
+    this.groupService = groupService;
     this.clock = clock;
   }
 
@@ -45,6 +55,18 @@ public class TrashCleanupService {
         trash.eraseExpired(ids[1], ids[0], cutoff);
       } catch (RuntimeException e) {
         LOG.error("Erasing an expired contact failed; the next run tries again", e);
+      }
+    }
+    purgeGroups(cutoff);
+  }
+
+  /** Deletes the groups in Trash for 30 days with all their data (R-015-06, EX-015-02). */
+  private void purgeGroups(Instant cutoff) {
+    for (UUID groupId : groups.expired(cutoff)) {
+      try {
+        groupService.purgeExpired(groupId, cutoff);
+      } catch (RuntimeException e) {
+        LOG.error("Purging an expired group failed; the next run tries again", e);
       }
     }
   }

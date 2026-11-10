@@ -2,8 +2,11 @@ package app.contactgroups.service;
 
 import app.contactgroups.domain.ApiException;
 import app.contactgroups.domain.ChangeSet;
+import app.contactgroups.domain.DeletedGroup;
 import app.contactgroups.domain.ErrorCode;
 import app.contactgroups.domain.FieldChange;
+import app.contactgroups.domain.FieldProblem;
+import app.contactgroups.domain.GroupAccess;
 import app.contactgroups.domain.GroupName;
 import app.contactgroups.domain.GroupSummary;
 import app.contactgroups.domain.HistoryEventType;
@@ -11,6 +14,7 @@ import app.contactgroups.domain.Role;
 import app.contactgroups.repository.GroupRepository;
 import app.contactgroups.repository.MembershipRepository;
 import java.time.Clock;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -84,13 +88,7 @@ public class GroupService {
     if (name.equals(group.name())) {
       return group;
     }
-    List<String> owners = memberships.ownerIds(groupId);
-    owners.forEach(groups::lockOwnerNames);
-    for (String owner : owners) {
-      if (groups.ownerHasName(owner, name, groupId)) {
-        throw nameTaken();
-      }
-    }
+    requireNameFreeForOwners(groupId, name);
     groups.rename(groupId, name);
     history.record(
         ChangeSet.of(
@@ -100,6 +98,86 @@ public class GroupService {
                 HistoryEventType.GROUP_RENAMED,
                 List.of(new FieldChange("name", group.name(), name)))));
     return group.withName(name);
+  }
+
+  /**
+   * An Owner moves the group to Trash after typing its exact name (R-015-01, R-015-02, EX-015-04).
+   * A non-Owner gets 403 for an active group and 404 for one in Trash (R-015-03, R-015-07); an
+   * Owner who meets a group already in Trash gets 409 (EX-015-05).
+   */
+  @Transactional
+  public void trash(UUID groupId, String userId, String typedName) {
+    GroupAccess group = lockAny(groupId, userId);
+    if (group.trashed()) {
+      throw group.role() == Role.OWNER ? groupInTrash() : AccessService.notFound();
+    }
+    if (group.role() != Role.OWNER) {
+      throw AccessService.forbidden();
+    }
+    if (!group.name().equals(typedName == null ? "" : typedName.strip())) {
+      throw new ApiException(
+          ErrorCode.VALIDATION_FAILED,
+          "The request is not valid.",
+          List.of(new FieldProblem("name", "NAME_MISMATCH", "The name does not match.")));
+    }
+    groups.trash(groupId, clock.instant());
+    recordEvent(groupId, userId, HistoryEventType.GROUP_DELETED);
+  }
+
+  /**
+   * An Owner brings a group in Trash back (R-015-05). Everyone else, and a group not in Trash, get
+   * 404 (D-17). The name rule applies for every Owner of the group (R-015-10).
+   */
+  @Transactional
+  public void restore(UUID groupId, String userId) {
+    GroupAccess group = lockAny(groupId, userId);
+    if (!group.trashed() || group.role() != Role.OWNER) {
+      throw AccessService.notFound();
+    }
+    requireNameFreeForOwners(groupId, group.name());
+    groups.restore(groupId);
+    recordEvent(groupId, userId, HistoryEventType.GROUP_RESTORED);
+  }
+
+  /** The groups in Trash of which the user is an Owner (R-015-04). */
+  @Transactional(readOnly = true)
+  public List<DeletedGroup> deletedFor(String userId) {
+    return groups.findTrashedOfOwner(userId, clock.instant());
+  }
+
+  /**
+   * Deletes the group with everything in it if it is still in Trash since {@code cutoff} or
+   * earlier; a group restored or purged meanwhile is left alone (R-015-06).
+   */
+  @Transactional
+  public boolean purgeExpired(UUID groupId, Instant cutoff) {
+    if (groups.lockExpired(groupId, cutoff).isEmpty()) {
+      return false;
+    }
+    groups.delete(groupId);
+    return true;
+  }
+
+  private GroupAccess lockAny(UUID groupId, String userId) {
+    return groups.lockAnyOfMember(groupId, userId).orElseThrow(AccessService::notFound);
+  }
+
+  private void requireNameFreeForOwners(UUID groupId, String name) {
+    List<String> owners = memberships.ownerIds(groupId);
+    owners.forEach(groups::lockOwnerNames);
+    for (String owner : owners) {
+      if (groups.ownerHasName(owner, name, groupId)) {
+        throw nameTaken();
+      }
+    }
+  }
+
+  private void recordEvent(UUID groupId, String userId, HistoryEventType type) {
+    history.record(ChangeSet.of(groupId, userId, ChangeSet.Event.group(type, List.of())));
+  }
+
+  private static ApiException groupInTrash() {
+    return new ApiException(ErrorCode.GROUP_IN_TRASH, "The group is in Trash.");
   }
 
   private static ApiException nameTaken() {
