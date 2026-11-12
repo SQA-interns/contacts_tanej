@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ApiError, type ApiClient } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -398,5 +398,77 @@ describe('a save refused as a conflict (R-005-08, AC-005-07)', () => {
     await userEvent.click(await screen.findByRole('button', { name: 'Reload with the current values' }));
     expect(await screen.findByLabelText('Phone')).toHaveValue('+386 41 555 123');
     expect(screen.queryByText('This contact was changed by someone else.')).not.toBeInTheDocument();
+  });
+});
+
+describe('deleting a contact (R-012-01)', () => {
+  it('asks first, then moves the contact to Trash and shows the list', async () => {
+    const { api, calls } = contactsApi((_method, path) => (path.endsWith('/trash') ? undefined : ana));
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Delete contact' }));
+    expect(screen.getByText(/The contact moves to Trash/)).toBeInTheDocument();
+    await userEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Delete contact' }));
+    await waitFor(() =>
+      expect(calls.some((c) => c.startsWith('POST /groups/g-1/contacts/c-1/trash'))).toBe(true),
+    );
+    expect(await screen.findByRole('heading', { name: 'Konferenca 2026' })).toBeInTheDocument();
+  });
+
+  it('does nothing when the user cancels', async () => {
+    const { api, calls } = contactsApi(() => ana);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Delete contact' }));
+    await userEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Cancel' }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(calls.some((c) => c.includes('/trash'))).toBe(false);
+  });
+
+  it('stays on the contact when the move to Trash is refused', async () => {
+    const { api } = contactsApi((_method, path) =>
+      path.endsWith('/trash') ? refusal(409, { code: 'CONTACT_IN_TRASH' }) : ana,
+    );
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Delete contact' }));
+    await userEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Delete contact' }));
+    expect(await screen.findByRole('heading', { name: 'Ana Novak', level: 1 })).toBeInTheDocument();
+  });
+});
+
+describe('leaving and failing', () => {
+  it('goes back to the list with Cancel on the form', async () => {
+    const { api } = contactsApi(() => ana);
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Cancel' }));
+    expect(await screen.findByRole('heading', { name: 'Konferenca 2026' })).toBeInTheDocument();
+  });
+
+  it('goes back to the list with Cancel on the conflict screen', async () => {
+    const { api } = contactsApi((method) =>
+      method === 'PUT' ? refusal(409, { code: 'CONFLICT', current: { ...ana, revision: 2 } }) : ana,
+    );
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.type(await screen.findByLabelText('Company'), '2');
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Cancel' }));
+    expect(await screen.findByRole('heading', { name: 'Konferenca 2026' })).toBeInTheDocument();
+  });
+
+  it('shows a general message when the save fails without an API answer', async () => {
+    const { api } = contactsApi((method) => (method === 'PUT' ? new Error('network') : ana));
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.type(await screen.findByLabelText('Company'), '2');
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Something went wrong. Please try again.');
+  });
+
+  it('shows the error state and loads again with "Try again"', async () => {
+    let loads = 0;
+    const { api } = contactsApi(() => {
+      loads += 1;
+      return loads === 1 ? refusal(500, { code: 'INTERNAL_ERROR' }) : ana;
+    });
+    renderApp('/groups/g-1/contacts/c-1', { auth: signedIn(), api });
+    await userEvent.click(await screen.findByRole('button', { name: 'Try again' }));
+    expect(await screen.findByLabelText('Phone')).toHaveValue('+386 40 123 456');
   });
 });

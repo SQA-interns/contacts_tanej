@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ApiError, type ApiClient } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -118,5 +118,59 @@ describe('Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12)', ()
       'href',
       '/groups/g-1/duplicates',
     );
+  });
+});
+
+describe('Duplicates tab, merge choice and failures', () => {
+  it('lets the user untick a contact, which disables Merge below two (R-022-01)', async () => {
+    open([certain]);
+    await userEvent.click((await screen.findAllByRole('button', { name: 'Find duplicates' }))[0]!);
+    const set = (await screen.findAllByRole('listitem'))[0]!;
+    const merge = within(set).getByRole('button', { name: 'Merge' });
+    expect(merge).toBeEnabled();
+    await userEvent.click(within(set).getByRole('checkbox', { name: 'Nova' }));
+    expect(merge).toBeDisabled();
+    await userEvent.click(within(set).getByRole('checkbox', { name: 'Nova' }));
+    expect(merge).toBeEnabled();
+  });
+
+  it('leaves the list when Merge is pressed', async () => {
+    open([certain]);
+    await userEvent.click((await screen.findAllByRole('button', { name: 'Find duplicates' }))[0]!);
+    const set = (await screen.findAllByRole('listitem'))[0]!;
+    await userEvent.click(within(set).getByRole('button', { name: 'Merge' }));
+    await waitFor(() => expect(screen.queryByText('Certain')).not.toBeInTheDocument());
+  });
+
+  it('shows the error and keeps the set when "Not a duplicate" is refused', async () => {
+    const { api: groups } = groupsApi([konferenca, skupno]);
+    const api: ApiClient = {
+      ...groups,
+      request: (async (method: string, path: string, body?: unknown) => {
+        if (path.endsWith('/duplicates/search')) return { sets: [certain] };
+        if (path.endsWith('/duplicates/dismissals')) {
+          throw new ApiError(403, { status: 403, code: 'FORBIDDEN', message: 'x' });
+        }
+        return groups.request(method, path, body);
+      }) as ApiClient['request'],
+    };
+    renderApp('/groups/g-1/duplicates', { auth: signedIn(), api });
+    await userEvent.click((await screen.findAllByRole('button', { name: 'Find duplicates' }))[0]!);
+    await userEvent.click(await screen.findByRole('button', { name: 'Not a duplicate' }));
+    expect(await screen.findByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText('Certain')).toBeInTheDocument();
+  });
+
+  it('searches again with "Try again" after a failed search', async () => {
+    let attempts = 0;
+    open([certain], async () => {
+      attempts += 1;
+      if (attempts === 1) throw new ApiError(503, { status: 503, code: 'UNAVAILABLE', message: 'x' });
+      return { sets: [certain] };
+    });
+    await userEvent.click((await screen.findAllByRole('button', { name: 'Find duplicates' }))[0]!);
+    await userEvent.click(await screen.findByRole('button', { name: 'Try again' }));
+    expect(await screen.findByText('Certain')).toBeInTheDocument();
+    expect(attempts).toBe(2);
   });
 });
