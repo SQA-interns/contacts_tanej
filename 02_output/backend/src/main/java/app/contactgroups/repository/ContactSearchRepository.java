@@ -59,6 +59,19 @@ public class ContactSearchRepository {
     return rows.stream().map(r -> r.withTags(tags.getOrDefault(r.id(), List.of()))).toList();
   }
 
+  /** The rows of the given active contacts of the group with their tags (duplicate sets). */
+  public List<ContactRow> byIds(UUID groupId, List<UUID> ids) {
+    List<ContactRow> rows =
+        jdbc.sql(
+                "SELECT c.* FROM contacts c WHERE c.group_id = ? AND c.state = 'ACTIVE'"
+                    + " AND c.id = ANY (?) ORDER BY c.created_at, c.id")
+            .params(groupId, ids.toArray(UUID[]::new))
+            .query((rs, n) -> row(rs))
+            .list();
+    Map<UUID, List<String>> tags = tagsOf(rows);
+    return rows.stream().map(r -> r.withTags(tags.getOrDefault(r.id(), List.of()))).toList();
+  }
+
   /** The chosen column first, then last name, first name and id so that the order is stable. */
   static String orderBy(ContactSort sort) {
     String column = "c." + sort.field().column();

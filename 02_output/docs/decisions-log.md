@@ -662,3 +662,14 @@
 - [ASSUMPTION] (a) The `VERSION_RESTORED` entry carries the number as its first change: field `version`, old value empty, new value the number; then one change per differing field, `tag` (old or new name) per tag removed or added, and `attribute:<key>` per attribute changed (same shape as `CONTACT_EDITED`, `TAG_CHANGED`, `ATTRIBUTE_CHANGED`). The History screen shows the unknown field `version` by its raw name. (b) `GET /versions/{number}` returns the stored snapshot as it is, with `tags` and `attributes`; the web app reads them from it. The contract schema was not changed (input side); `/design` or the developer may add the two properties to `VersionDetail.snapshot`. (c) OQ-020-01 (versions hold personal data and go with the contact, Q-29b) stays open: the customer has not confirmed; versions cascade with the contact as before (R-019-07).
 - Resolution: applied as above; no money, rights or new personal data involved (the data was already stored by US-019).
 - Overrides: none
+
+## D-59: frozen test AC-021-05 cannot create its contacts (BR-05), so it cannot pass
+- Timestamp: 2026-11-12
+- Session: S5 implement US-021
+- Class: approval
+- Type: non-blocking for the session; `Us021DuplicatesAcceptanceIT.AC_021_05` stays red until answered
+- Trigger: `AC_021_05_contactsWithOnlyAPhoneAreNeverMatched` creates two contacts with only `phone` through `POST /contacts`. BR-05 (at least one of first name, last name, e-mail, company; also a table CHECK) refuses them with 400 `REQUIRED_ONE_OF`, so the test fails in its set-up, before any duplicate code runs. R-021-05 holds anyway: `DuplicateRepository.candidates` leaves out contacts with none of the four fields, and `DuplicateDetector` needs a key (e-mail, or first and last name plus company or phone). The other 20 tests of `Us021DuplicatesAcceptanceIT` pass.
+- Options: (1) (proposed) Approve a change to the frozen test: expect the 400 `REQUIRED_ONE_OF` for the two phone-only contacts (the rule cannot be broken through the API) and update `docs/03_acceptance-manifest.sha256`. (2) Delete the test and cover R-021-05 with the unit test `DuplicateDetectorTest` only. (3) Leave it red and list it as a known limitation.
+- Human response: none
+- Resolution: pending review (frozen test not changed)
+- Overrides: none
