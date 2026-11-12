@@ -53,4 +53,39 @@ describe('API client', () => {
     const { fileName } = await client.download('/groups/1/exports', { language: 'sl' });
     expect(fileName).toBe('Konferenca 2026_2026-11-09.xlsx');
   });
+
+  it('falls back to export.xlsx without a Content-Disposition file name', async () => {
+    const client = createApiClient('/api', async () => 't', (() =>
+      Promise.resolve(new Response('x', { status: 200 }))) as unknown as typeof fetch);
+    const { fileName, blob } = await client.download('/groups/1/exports', {});
+    expect(fileName).toBe('export.xlsx');
+    expect(blob.size).toBe(1);
+  });
+
+  it('sends the export request as a POST with a JSON body', async () => {
+    const fetcher = vi.fn(() => Promise.resolve(new Response('x', { status: 200 })));
+    const client = createApiClient('/api', async () => 't', fetcher as unknown as typeof fetch);
+    await client.download('/groups/1/exports', { language: 'sl' });
+    const [, init] = fetcher.mock.calls[0] as unknown as [string, RequestInit];
+    expect(init.method).toBe('POST');
+    expect(init.body).toBe('{"language":"sl"}');
+  });
+
+  it('asks for JSON and sets Content-Type only when it sends a body', async () => {
+    const fetcher = vi.fn(() => respond(200, {}));
+    const client = createApiClient('/api', async () => 't', fetcher as unknown as typeof fetch);
+    await client.request('GET', '/a');
+    await client.request('PUT', '/b', { n: 1 });
+    const [, get] = fetcher.mock.calls[0] as unknown as [string, RequestInit];
+    const [, put] = fetcher.mock.calls[1] as unknown as [string, RequestInit];
+    expect(get.headers).toEqual({ Accept: 'application/json', Authorization: 'Bearer t' });
+    expect(get.body).toBeUndefined();
+    expect(put.headers).toEqual({
+      Accept: 'application/json',
+      Authorization: 'Bearer t',
+      'Content-Type': 'application/json',
+    });
+    expect(put.body).toBe('{"n":1}');
+    expect(put.method).toBe('PUT');
+  });
 });
