@@ -1,0 +1,401 @@
+[32m23:34:19 (11320) INFO ProjectReader[39m Found 6 of 760 file(s) to be mutated.
+[32m23:34:19 (11320) INFO Instrumenter[39m Instrumented 6 source file(s) with 191 mutant(s)
+[32m23:34:23 (11320) INFO ConcurrencyTokenProvider[39m Creating 4 test runner process(es).
+[32m23:34:27 (11320) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m23:36:25 (11320) INFO DryRunExecutor[39m Initial test run succeeded. Ran 215 tests in 1 minute and 58 seconds (net 49082.08549999997 ms, overhead 69438.91450000003 ms).
+[33m23:36:25 (11320) WARN MutantTestPlanner[39m Detected 21 static mutants (11% of total) that are estimated to take 66% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants
+  (disable "warnings.slow" to ignore this warning)
+
+All tests
+  app/shell.test.tsx
+    ✘ web app shell shows the Slovenian UI by default (R-018-01) (covered 0)
+    ✘ web app shell switches to English at once and remembers the choice (R-018-02, R-018-03) (covered 0)
+    ✘ web app shell shows the navigation to a verified person (covered 0)
+    ✘ web app shell shows "not found" for an unknown address (covered 0)
+    ✘ web app shell falls back to Slovenian for an unknown stored language (EX-018-01) (covered 0)
+    ✘ web app shell refuses a configuration with a missing value (NFR-12) (covered 0)
+  features
+    account/account.test.tsx
+      ✘ the Account screen (R-016-01, R-016-02, R-016-07) shows name and e-mail and deletes nothing when the dialog is cancelled (covered 0)
+      ✘ the Account screen (R-016-01, R-016-02, R-016-07) deletes the product data first and then the Firebase account (covered 0)
+      ~ the Account screen (R-016-01, R-016-02, R-016-07) names the groups the person alone owns and keeps the account (covered 1)
+      ~ the Account screen (R-016-01, R-016-02, R-016-07) asks to sign in again when the sign-in is too old (covered 1)
+    auth/auth-screens.test.tsx
+      ✘ sign in (R-001-01, R-001-07, AC-001-05) asks a signed-out person to sign in, whatever the address (covered 0)
+      ✘ sign in (R-001-01, R-001-07, AC-001-05) signs in with e-mail and password and shows the empty state (covered 0)
+      ✘ sign in (R-001-01, R-001-07, AC-001-05) shows an alert and stays when Firebase refuses the password (covered 0)
+      ✘ sign in (R-001-01, R-001-07, AC-001-05) signs in with Google, and stays quiet when the window is closed (covered 0)
+      ✘ register (R-001-02..04, AC-001-07, EX-001-01..05) registers and shows the verify screen (covered 0)
+      ✘ register (R-001-02..04, AC-001-07, EX-001-01..05) refuses a password of 7 characters with the reason, before Firebase is called (covered 0)
+      ✘ register (R-001-02..04, AC-001-07, EX-001-01..05) refuses an empty name and keeps what was typed (covered 0)
+      ✘ register (R-001-02..04, AC-001-07, EX-001-01..05) shows the refusal of Firebase for an e-mail that is taken (covered 0)
+      ✘ reset password (R-001-06, AC-001-06) starts the reset flow and confirms without saying whether the account exists (covered 0)
+      ✘ verify your e-mail (R-001-05, AC-001-02, EX-001-06) is the only screen for an unverified person, at every address (covered 0)
+      ✘ verify your e-mail (R-001-05, AC-001-02, EX-001-06) sends the message again and says so (covered 0)
+      ✘ verify your e-mail (R-001-05, AC-001-02, EX-001-06) shows the refusal when Firebase says too many requests (covered 0)
+      ✘ verify your e-mail (R-001-05, AC-001-02, EX-001-06) signs out (covered 0)
+      ✘ verified person (R-001-08, R-001-09, AC-001-03, AC-001-08) sees the empty state with one button when in no group (covered 0)
+      ✘ verified person (R-001-08, R-001-09, AC-001-03, AC-001-08) signs out from the user menu and sees the sign-in screen (covered 0)
+      ✘ verified person (R-001-08, R-001-09, AC-001-03, AC-001-08) is sent from the sign-in screen to the app when already signed in (covered 0)
+    contacts
+      contact-filter.test.tsx
+        ✓ the filter dialog (R-010-01 to R-010-07, R-010-09) offers exactly the seven conditions and no way to save a filter (killed 8)
+        ~ the filter dialog (R-010-01 to R-010-07, R-010-09) shows only the fields of the chosen condition (covered 11)
+        ~ the filter dialog (R-010-01 to R-010-07, R-010-09) refuses an empty condition and keeps the dialog open (covered 11)
+        ✓ the filter dialog (R-010-01 to R-010-07, R-010-09) sends the tags typed, including the one not yet confirmed with Enter (killed 1)
+        ~ active conditions (R-010-08, R-010-10, R-010-11) shows each condition as a chip that can be removed, and keeps the search text (covered 33)
+        ~ active conditions (R-010-08, R-010-10, R-010-11) goes back to page 1 when a condition is added (covered 25)
+        ~ active conditions (R-010-08, R-010-10, R-010-11) shows "No contacts match" for a filter without result and clears search and conditions (covered 20)
+        ~ active conditions (R-010-08, R-010-10, R-010-11) "Clear all" removes every chip at once and leaves "Filter" a single button (covered 25)
+      contact-list.test.tsx
+        ~ the contact list (R-009-01, R-009-02, R-009-09) shows the columns, the total, the tags and a link to the contact (covered 17)
+        ~ the contact list (R-009-01, R-009-02, R-009-09) cannot sort by the tags column (covered 11)
+        ~ the contact list (R-009-01, R-009-02, R-009-09) pages with numbered buttons and asks for the page chosen (covered 11)
+        ~ search and sort (R-009-03, R-009-08, R-009-10) sends the search text and keeps it when the sort changes (covered 14)
+        ~ search and sort (R-009-03, R-009-08, R-009-10) goes back to page 1 when the search text changes (covered 14)
+        ~ search and sort (R-009-03, R-009-08, R-009-10) a Viewer has the same search and sort (R-009-10) (covered 11)
+        ~ the empty and no-match states (R-009-05, R-009-06) offers "Add contact" in an empty group to an Owner (covered 11)
+        ~ the empty and no-match states (R-009-05, R-009-06) shows a Viewer the text without the button (covered 11)
+        ~ the empty and no-match states (R-009-05, R-009-06) shows "No contacts match" and "Clear filters" restores the list (covered 14)
+        ~ the empty and no-match states (R-009-05, R-009-06) shows the error state when the list cannot be loaded (covered 11)
+        ✘ page numbers shows the first, the last and the neighbours of the current page (covered 0)
+      contact-page.test.tsx
+        ~ the Add contact button (R-005-01, R-005-09) is offered to an Owner and an Editor and not to a Viewer (covered 11)
+        ~ the Add contact button (R-005-01, R-005-09) is not offered to a Viewer (covered 11)
+        ~ the new contact form (R-005-01, R-005-03, EX-005-10) shows the 11 fields with the country as a list of names, never as free text (AC-005-10) (covered 11)
+        ~ the new contact form (R-005-01, R-005-03, EX-005-10) sends the typed values and opens the new contact after the save (R-005-01) (covered 19)
+        ✓ the new contact form (R-005-01, R-005-03, EX-005-10) names every refused field with its reason and keeps what was typed (R-005-03, EX-005-10) (killed 1)
+        ~ the new contact form (R-005-01, R-005-03, EX-005-10) explains the one-of-four rule at the form and at the first name (R-005-02, AC-005-02) (covered 27)
+        ~ opening and saving a contact (R-005-06, R-005-07) shows the contact in a form and saves it with the revision it was opened with (covered 18)
+        ~ opening and saving a contact (R-005-06, R-005-07) shows a Viewer the values as text, with no form, no Save (R-005-09, AC-005-08) (covered 18)
+        ~ opening and saving a contact (R-005-06, R-005-07) shows a contact in Trash read-only with the notice (R-005-10) (covered 18)
+        ~ opening and saving a contact (R-005-06, R-005-07) tells the user the contact went to Trash while editing (EX-005-12) (covered 19)
+        ✘ opening and saving a contact (R-005-06, R-005-07) shows the not-found page for a contact that is not there (EX-005-11) (covered 0)
+        ~ the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10) shows the tags as chips and removes one with its button (R-006-06) (covered 18)
+        ~ the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10) adds a tag with Enter and sends all tags with the save (R-006-01) (covered 18)
+        ~ the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10) takes a tag that was typed but not confirmed along with the save (covered 18)
+        ~ the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10) suggests the tags of the group while typing and never forces one (R-006-10) (covered 18)
+        ~ the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10) names the refused tag with the reason and keeps the typed tags (R-006-03, AC-006-03) (covered 26)
+        ~ the tags of a contact (R-006-01, R-006-06, R-006-09, R-006-10) shows a Viewer the tags as text and no control to change them (R-006-09, AC-006-07) (covered 18)
+        ~ the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08) adds a row with Add attribute and sends key and value as text with the save (R-008-01, R-008-06) (covered 18)
+        ~ the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08) shows the attributes of the contact in rows and removes one (R-008-07) (covered 18)
+        ~ the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08) drops a row that was added and left empty (covered 18)
+        ~ the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08) suggests the keys of the group while typing and never forces one (R-008-05) (covered 18)
+        ~ the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08) puts a clicked suggestion into the key field (covered 18)
+        ~ the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08) names the refused attribute with the reason and keeps the typed rows (R-008-02, AC-008-02) (covered 26)
+        ~ the attributes of a contact (R-008-01, R-008-02, R-008-05, R-008-07, R-008-08) shows a Viewer the attributes as text and no control to change them (R-008-08, AC-008-07) (covered 18)
+        ~ a save refused as a conflict (R-005-08, AC-005-07) shows the message, the current values and the own entries, and overwrites nothing (covered 19)
+        ~ a save refused as a conflict (R-005-08, AC-005-07) continues from the current values after "Reload with the current values" (covered 19)
+        ~ deleting a contact (R-012-01) asks first, then moves the contact to Trash and shows the list (covered 29)
+        ~ deleting a contact (R-012-01) does nothing when the user cancels (covered 18)
+        ~ deleting a contact (R-012-01) stays on the contact when the move to Trash is refused (covered 18)
+        ~ leaving and failing goes back to the list with Cancel on the form (covered 29)
+        ~ leaving and failing goes back to the list with Cancel on the conflict screen (covered 30)
+        ~ leaving and failing shows a general message when the save fails without an API answer (covered 18)
+        ~ leaving and failing shows the error state and loads again with "Try again" (covered 18)
+      contact-values.test.ts
+        ✓ contact values limits notes to 5000, the phone to 30 and every other field to 255 (BR-05) (killed 9)
+        ✓ contact values returns empty values for no contact and a copy each time (killed 4)
+        ✓ contact values shows missing fields of a contact as empty strings (killed 1)
+        ✓ contact values titles a contact by its name, else its e-mail, else its company (killed 8)
+        ✓ contact values maps the refused fields of a 400 to their codes and ignores other failures (killed 7)
+        ✓ filter chip texts names every condition type with its values (R-010-11) (killed 30)
+        ✓ date and time in the project time zone formats a summer and a winter instant in Ljubljana time (R-018-04, R-018-05) (killed 7)
+      trash.test.tsx
+        ~ Trash view (R-012-02, R-012-03, R-012-04, R-012-08) lists the contact with its days left and gives an Owner both actions (covered 19)
+        ~ Trash view (R-012-02, R-012-03, R-012-04, R-012-08) gives an Editor "Restore" but not "Delete forever" (covered 19)
+        ✘ Trash view (R-012-02, R-012-03, R-012-04, R-012-08) shows a Viewer no Trash tab and no Trash view (covered 0)
+        ~ Trash view (R-012-02, R-012-03, R-012-04, R-012-08) restores a contact and says so (covered 19)
+        ~ Trash view (R-012-02, R-012-03, R-012-04, R-012-08) erases only after the confirmation and keeps the contact on Cancel (AC-012-09) (covered 19)
+    duplicates
+      duplicates.test.tsx
+        ✘ Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12) searches only when the user presses "Find duplicates" (R-021-08) (covered 0)
+        ✘ Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12) shows each set with its kind, the reasons and its contacts (covered 0)
+        ✘ Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12) says "No duplicates found" when there is no set (covered 0)
+        ✘ Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12) hides a set after "Not a duplicate" and sends exactly its contacts (covered 0)
+        ✘ Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12) shows the error state with "Try again" when the search fails (covered 0)
+        ✘ Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12) shows a Viewer no Duplicates tab and no button (R-021-11) (covered 0)
+        ✘ Duplicates tab (R-021-01, R-021-07, R-021-09, R-021-11, R-021-12) has the Duplicates tab for an Owner (covered 0)
+        ✘ Duplicates tab, merge choice and failures lets the user untick a contact, which disables Merge below two (R-022-01) (covered 0)
+        ✘ Duplicates tab, merge choice and failures leaves the list when Merge is pressed (covered 0)
+        ~ Duplicates tab, merge choice and failures shows the error and keeps the set when "Not a duplicate" is refused (covered 1)
+        ✘ Duplicates tab, merge choice and failures searches again with "Try again" after a failed search (covered 0)
+      merge.test.tsx
+        ✘ merge rules of the screen (R-022-02, R-022-03, R-022-04, EX-022-03) puts the oldest contact first and the lower id first on the same time (covered 0)
+        ~ merge rules of the screen (R-022-02, R-022-03, R-022-04, EX-022-03) preselects the first non-empty value, the oldest contact first (covered 4)
+        ✘ merge rules of the screen (R-022-02, R-022-03, R-022-04, EX-022-03) combines the tags once ignoring the case (covered 0)
+        ✘ merge rules of the screen (R-022-02, R-022-03, R-022-04, EX-022-03) finds the keys with different values only (covered 0)
+        ~ Merge screen (WF-17) shows the contacts, the revert hint and blocks Confirm until a conflict is chosen (covered 4)
+        ~ Merge screen (WF-17) sends the revisions, the chosen values and the attribute choice on Confirm (covered 18)
+        ~ Merge screen (WF-17) sends nothing on Cancel (R-022-14) (covered 4)
+        ~ Merge screen (WF-17) names the tag limit when the server refuses (R-022-09) (covered 4)
+        ✘ Merge screen (WF-17) shows a Viewer no merge screen (R-022-13) (covered 0)
+    export
+      export-hooks.test.tsx
+        ✓ useExport downloads the file under its name through a temporary link, then is done (R-011-04) (killed 15)
+        ✓ useExport is busy while the request runs (killed 1)
+        ✓ useExport tells too many contacts from any other failure (R-011-09) (killed 12)
+        ✓ useSelection ticks and unticks rows and keeps them across calls (R-011-01) (killed 12)
+        ✓ useSelection leaves "all results" when one row is unticked and keeps the rest of the page (R-011-02) (killed 2)
+        ✓ useSelection clears the ids and "all results" (killed 3)
+      export.test.tsx
+        ~ select and export (US-011) keeps Export disabled while nothing is ticked and counts the ticks over pages (covered 18)
+        ~ select and export (US-011) clears the selection when the search text changes (covered 21)
+        ✓ select and export (US-011) exports the ticked ids in the language of the screen (killed 1)
+        ~ select and export (US-011) exports the current filter for "select all N results" (covered 24)
+        ~ select and export (US-011) shows the refusal for more than 10,000 contacts and no success text (covered 34)
+        ✓ select and export (US-011) shows another failure as a general error (killed 1)
+        ~ select and export (US-011) shows a Viewer no tick boxes and no Export button (covered 11)
+    groups
+      group-page.test.tsx
+        ~ open a group (R-002-06, R-002-07, AC-002-03) shows the name, the role and the empty group of a member (covered 11)
+        ✘ open a group (R-002-06, R-002-07, AC-002-03) shows "Group not found" and nothing else for a group that is not available (covered 0)
+        ✘ open a group (R-002-06, R-002-07, AC-002-03) shows the error state with "Try again" when the group cannot be loaded (covered 0)
+      group-rename.test.tsx
+        ✘ rename group dialog (R-002-08, AC-002-08, AC-002-09) offers Rename to an Owner only (R-002-08) (covered 0)
+        ✘ rename group dialog (R-002-08, AC-002-08, AC-002-09) starts with the current name and shows the new name in the list (covered 0)
+        ~ rename group dialog (R-002-08, AC-002-08, AC-002-09) keeps the name and shows the reason when another own group has the name (covered 1)
+        ✘ rename group dialog (R-002-08, AC-002-08, AC-002-09) refuses an empty name before the server is asked (covered 0)
+      group-trash.test.tsx
+        ✘ delete group dialog (R-015-01, R-015-02, R-015-07, AC-015-01, AC-015-02) offers Delete group to an Owner only (covered 0)
+        ✘ delete group dialog (R-015-01, R-015-02, R-015-07, AC-015-01, AC-015-02) deletes the group when the exact name is typed and removes it from the list (covered 0)
+        ✘ delete group dialog (R-015-01, R-015-02, R-015-07, AC-015-01, AC-015-02) keeps the dialog open and the typed text when the name differs in case (covered 0)
+        ✘ delete group dialog (R-015-01, R-015-02, R-015-07, AC-015-01, AC-015-02) closes without deleting on Cancel (covered 0)
+        ~ Deleted groups (R-015-04, R-015-05, R-015-10, AC-015-08) lists each group in Trash with the days left (covered 11)
+        ✘ Deleted groups (R-015-04, R-015-05, R-015-10, AC-015-08) shows an empty state when nothing is in Trash (covered 0)
+        ~ Deleted groups (R-015-04, R-015-05, R-015-10, AC-015-08) restores a group and says so (covered 11)
+        ~ Deleted groups (R-015-04, R-015-05, R-015-10, AC-015-08) explains a name clash and keeps the group in the list (covered 12)
+        ✘ Deleted groups (R-015-04, R-015-05, R-015-10, AC-015-08) shows an error with Try again when the list cannot be loaded (covered 0)
+      groups-list.test.tsx
+        ✘ groups list (R-002-04, AC-002-02, UI-14) shows each group as a link with the role of the person (covered 0)
+        ✘ groups list (R-002-04, AC-002-02, UI-14) shows the roles in Slovenian when that language is active (covered 0)
+        ✘ groups list (R-002-04, AC-002-02, UI-14) shows the loading state, then an error with "Try again" that loads again (covered 0)
+        ✘ groups list (R-002-04, AC-002-02, UI-14) offers a Create group button above the list (covered 0)
+        ~ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) creates the group from the empty state and opens it with the name as heading (covered 11)
+        ✘ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) refuses a name of spaces only with the reason and sends nothing (covered 0)
+        ✘ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) accepts exactly 100 characters and refuses 101 with the reason (covered 0)
+        ~ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) keeps the dialog and the typed name when the name is taken, and shows the reason (covered 1)
+        ✘ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) shows the text of the server refusal of the name field (covered 0)
+        ~ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) shows the text of any other refusal in the dialog (covered 1)
+        ~ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) blocks a second click while the request runs (UI-12) (covered 11)
+        ✘ create group dialog (R-002-01, R-002-02, AC-002-01, AC-002-04, AC-002-05) closes with Cancel and sends nothing; the next opening starts empty (covered 0)
+      mobile-layout.test.tsx
+        ✘ mobile layout of lists (F-02) turns the groups table into cards with a label before the role (covered 0)
+        ~ mobile layout of lists (F-02) lets the tab row of a group wrap (covered 11)
+    history
+      contact-history.test.tsx
+        ~ Contact History tab (R-013-07, R-013-09, R-013-12) shows who, when, the field and the old and new value, in the project time zone (covered 11)
+        ~ Contact History tab (R-013-07, R-013-09, R-013-12) shows an old value that was empty as "empty", not as missing (covered 11)
+        ~ Contact History tab (R-013-07, R-013-09, R-013-12) shows the erasure marker instead of the values of an erased contact (covered 11)
+        ~ Contact History tab (R-013-07, R-013-09, R-013-12) shows a creation as one line without the first values (covered 11)
+        ✘ Contact History tab (R-013-07, R-013-09, R-013-12) says so when there is no History yet (covered 0)
+        ~ Contact History tab (R-013-07, R-013-09, R-013-12) offers a History tab to an Owner and none to a Viewer (covered 18)
+        ~ Contact History tab (R-013-07, R-013-09, R-013-12) keeps the Group navigation on a contact page, with one History link (E2E-03, F-04) (covered 18)
+        ~ Contact History tab (R-013-07, R-013-09, R-013-12) shows a Viewer no History tab (covered 12)
+      group-history.test.tsx
+        ~ Group History (R-014-01 to R-014-08) offers the History tab to an Owner and shows the entries (covered 22)
+        ~ Group History (R-014-01 to R-014-08) shows an export entry with the number of contacts, as "2 contacts exported" (E2E-03, F-04) (covered 11)
+        ~ Group History (R-014-01 to R-014-08) shows a Viewer no History tab (covered 11)
+        ~ Group History (R-014-01 to R-014-08) sends the person, the event type and the days when the filter is applied (covered 11)
+        ~ Group History (R-014-01 to R-014-08) says "No events match" with "Clear filters" and clears them (covered 11)
+        ~ Group History (R-014-01 to R-014-08) refuses an end before the start with the reason and keeps the list (covered 11)
+        ~ Group History (R-014-01 to R-014-08) names an erased contact with the erasure marker, not its name (BR-06) (covered 11)
+        ✘ Group History (R-014-01 to R-014-08) shows the empty state of a group without History (covered 0)
+    members
+      invitations.test.tsx
+        ~ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) lists the pending invitations with role and expiry and cancels one (covered 11)
+        ✘ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) shows the empty state when nothing is pending (covered 0)
+        ~ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) invites with the chosen role, lists the invitation and clears the address (covered 11)
+        ✘ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) labels the invite role exactly "Role" with a visible required marker outside the label (covered 0)
+        ~ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) shows the reason of a refusal and keeps what was typed (covered 1)
+        ✘ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) shows an invalid address as invalid (covered 0)
+        ~ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) tells that the limit of 20 is reached (covered 11)
+        ✘ invitations on the Members tab (R-003-01, R-003-04, R-003-07, R-003-08, R-003-11) shows an Editor neither the form nor the invitations and does not ask for them (covered 0)
+      members.test.tsx
+        ✘ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) lists every member with name, e-mail and role and gives an Owner the controls (covered 0)
+        ✘ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) shows an Editor or Viewer the list without role selects and without Remove (covered 0)
+        ✘ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) changes a role with the select and sends it to the server (covered 0)
+        ✘ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) removes a member only after the confirmation (covered 0)
+        ✘ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) cancelling the confirmation removes nobody (covered 0)
+        ✘ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) leaving the group goes to the group list (covered 0)
+        ~ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) shows the last-Owner message and keeps the Owner when leaving is refused (covered 1)
+        ✘ the member list of the Members tab (R-004-01, R-004-02, R-004-04, R-004-06, R-004-07) shows the group list when the server says the group is gone (EX-004-03) (covered 0)
+    tags/manage-tags.test.tsx
+      ✘ Manage tags (R-007-01, R-007-05, R-007-07) lists the tags with their contact counts and gives an Owner rename and delete (covered 0)
+      ✘ Manage tags (R-007-01, R-007-05, R-007-07) shows a Viewer neither the Tags tab nor a control (covered 0)
+      ✘ Manage tags (R-007-01, R-007-05, R-007-07) renames a tag and shows the new name (covered 0)
+      ~ Manage tags (R-007-01, R-007-05, R-007-07) keeps the dialog and the typed name when the name is taken (UI-13) (covered 1)
+      ✘ Manage tags (R-007-01, R-007-05, R-007-07) shows the reason for a name with a space (covered 0)
+      ✘ Manage tags (R-007-01, R-007-05, R-007-07) deletes only after the second click and lists no tag afterwards (covered 0)
+    versions/versions.test.tsx
+      ~ Versions tab (R-020-01 to R-020-03, R-020-07, R-020-09) lists the versions newest first with who and when (covered 11)
+      ~ Versions tab (R-020-01 to R-020-03, R-020-07, R-020-09) opens a version read-only (covered 15)
+      ~ Versions tab (R-020-01 to R-020-03, R-020-07, R-020-09) highlights only the rows that differ in the comparison (covered 15)
+      ~ Versions tab (R-020-01 to R-020-03, R-020-07, R-020-09) shows a Viewer no Versions tab (covered 12)
+      ~ Restore (R-020-04, R-020-06, R-020-08, R-020-09) changes nothing when the dialog is cancelled (covered 11)
+      ~ Restore (R-020-04, R-020-06, R-020-08, R-020-09) sends the revision the tab opened with after the confirmation (covered 11)
+      ~ Restore (R-020-04, R-020-06, R-020-08, R-020-09) says so when the version equals the current contact (covered 12)
+      ~ Restore (R-020-04, R-020-06, R-020-08, R-020-09) tells the user to restore the contact from Trash first (covered 12)
+      ~ Restore (R-020-04, R-020-06, R-020-08, R-020-09) shows a conflict as the usual conflict text (covered 12)
+  lib
+    api/client.test.ts
+      ✓ API client sends the ID token as a bearer token and returns the JSON body (killed 10)
+      ✓ API client sends no Authorization header without a token and returns nothing for 204 (killed 1)
+      ✓ API client turns a failure into an ApiError with the code and Retry-After (R-017-10) (killed 6)
+      ✓ API client keeps going when the failure body is not JSON (killed 3)
+      ✓ API client reads the file name of an export from Content-Disposition (R-011-06) (killed 6)
+      ✓ API client falls back to export.xlsx without a Content-Disposition file name (killed 2)
+      ✓ API client sends the export request as a POST with a JSON body (killed 3)
+      ✓ API client asks for JSON and sets Content-Type only when it sends a body (killed 7)
+    format.test.ts
+      ✓ formatDateTime (R-018-04, R-018-05) AC-018-04 shows summer time of Europe/Ljubljana in both languages (killed 4)
+      ~ formatDateTime (R-018-04, R-018-05) EX-018-03 shows winter time as 23:30 (covered 12)
+      ~ formatDateTime (R-018-04, R-018-05) pads hours and minutes and keeps the day unpadded in Slovenian (covered 12)
+      ~ formatDateTime (R-018-04, R-018-05) does not depend on the time zone of the machine (covered 11)
+      ✓ formatDecimal (R-018-04) uses a comma in Slovenian and a point in English (killed 4)
+      ✓ countryName (R-018-06) AC-018-05 names Slovenia in the active language (killed 6)
+      ✓ countryName (R-018-06) gives back the code of an unknown country instead of nothing (killed 1)
+
+[Survived] ArrayDeclaration
+src/features/contacts/contactValues.ts:42:53
+-     return Object.fromEntries((failure.body.errors ?? []).map((e) => [e.field, e.code]));
++     return Object.fromEntries((failure.body.errors ?? ["Stryker was here"]).map((e) => [e.field, e.code]));
+Tests ran:
+    contact values maps the refused fields of a 400 to their codes and ignores other failures
+
+
+[Survived] ArrayDeclaration
+src/features/export/useSelection.ts:15:6
+-     }, []);
++     }, ["Stryker was here"]);
+Tests ran:
+    the Add contact button (R-005-01, R-005-09) is offered to an Owner and an Editor and not to a Viewer
+    the Add contact button (R-005-01, R-005-09) is not offered to a Viewer
+    deleting a contact (R-012-01) asks first, then moves the contact to Trash and shows the list
+  and 36 more tests!
+
+
+[Survived] ArrayDeclaration
+src/features/export/useSelection.ts:31:53
+-     const selectAll = useCallback(() => setAll(true), []);
++     const selectAll = useCallback(() => setAll(true), ["Stryker was here"]);
+Tests ran:
+    the Add contact button (R-005-01, R-005-09) is offered to an Owner and an Editor and not to a Viewer
+    the Add contact button (R-005-01, R-005-09) is not offered to a Viewer
+    deleting a contact (R-012-01) asks first, then moves the contact to Trash and shows the list
+  and 36 more tests!
+
+
+[Survived] ConditionalExpression
+src/lib/api/client.ts:43:13
+-         body: body === undefined ? undefined : JSON.stringify(body),
++         body: false ? undefined : JSON.stringify(body),
+Tests ran:
+    API client sends the ID token as a bearer token and returns the JSON body
+    API client sends no Authorization header without a token and returns nothing for 204
+    API client turns a failure into an ApiError with the code and Retry-After (R-017-10)
+  and 5 more tests!
+
+
+[Survived] StringLiteral
+src/lib/api/client.ts:59:69
+-         const header = response.headers.get('Content-Disposition') ?? '';
++         const header = response.headers.get('Content-Disposition') ?? "Stryker was here!";
+Tests ran:
+    API client falls back to export.xlsx without a Content-Disposition file name
+    API client sends the export request as a POST with a JSON body
+
+
+[Survived] StringLiteral
+src/lib/format.ts:25:50
+-     return `${part.year}-${part.month!.padStart(2, '0')}-${part.day!.padStart(2, '0')} ${time}`;
++     return `${part.year}-${part.month!.padStart(2, "")}-${part.day!.padStart(2, '0')} ${time}`;
+Tests ran:
+    formatDateTime (R-018-04, R-018-05) AC-018-04 shows summer time of Europe/Ljubljana in both languages
+    formatDateTime (R-018-04, R-018-05) EX-018-03 shows winter time as 23:30
+    formatDateTime (R-018-04, R-018-05) pads hours and minutes and keeps the day unpadded in Slovenian
+  and 30 more tests!
+
+
+[Survived] StringLiteral
+src/lib/format.ts:25:80
+-     return `${part.year}-${part.month!.padStart(2, '0')}-${part.day!.padStart(2, '0')} ${time}`;
++     return `${part.year}-${part.month!.padStart(2, '0')}-${part.day!.padStart(2, "")} ${time}`;
+Tests ran:
+    formatDateTime (R-018-04, R-018-05) AC-018-04 shows summer time of Europe/Ljubljana in both languages
+    formatDateTime (R-018-04, R-018-05) EX-018-03 shows winter time as 23:30
+    formatDateTime (R-018-04, R-018-05) pads hours and minutes and keeps the day unpadded in Slovenian
+  and 30 more tests!
+
+
+[Survived] StringLiteral
+src/lib/format.ts:4:34
+-   export const PROJECT_TIME_ZONE = 'Europe/Ljubljana';
++   export const PROJECT_TIME_ZONE = "";
+Ran all tests for this mutant.
+
+[Survived] StringLiteral
+src/lib/format.ts:6:47
+-   const dateTimeParts = new Intl.DateTimeFormat('en-GB', {
++   const dateTimeParts = new Intl.DateTimeFormat("", {
+Ran all tests for this mutant.
+
+[Survived] StringLiteral
+src/lib/format.ts:8:9
+-     year: 'numeric',
++     year: "",
+Ran all tests for this mutant.
+
+[Survived] StringLiteral
+src/lib/format.ts:9:10
+-     month: 'numeric',
++     month: "",
+Ran all tests for this mutant.
+
+[Survived] StringLiteral
+src/lib/format.ts:10:8
+-     day: 'numeric',
++     day: "",
+Ran all tests for this mutant.
+
+[Survived] StringLiteral
+src/lib/format.ts:11:9
+-     hour: '2-digit',
++     hour: "",
+Ran all tests for this mutant.
+
+[Survived] StringLiteral
+src/lib/format.ts:12:11
+-     minute: '2-digit',
++     minute: "",
+Ran all tests for this mutant.
+
+[Survived] StringLiteral
+src/lib/format.ts:13:14
+-     hourCycle: 'h23',
++     hourCycle: "",
+Ran all tests for this mutant.
+
+Ran 4.49 tests per mutant on average.
+--------------------|------------------|----------|-----------|------------|----------|----------|
+                    | % Mutation score |          |           |            |          |          |
+File                |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+--------------------|--------|---------|----------|-----------|------------|----------|----------|
+All files           |  92.15 |   92.15 |      176 |         0 |         15 |        0 |        0 |
+ features           |  97.46 |   97.46 |      115 |         0 |          3 |        0 |        0 |
+  contacts          |  98.55 |   98.55 |       68 |         0 |          1 |        0 |        0 |
+   conditions.ts    | 100.00 |  100.00 |       39 |         0 |          0 |        0 |        0 |
+   contactValues.ts |  96.67 |   96.67 |       29 |         0 |          1 |        0 |        0 |
+  export            |  95.92 |   95.92 |       47 |         0 |          2 |        0 |        0 |
+   useExport.ts     | 100.00 |  100.00 |       30 |         0 |          0 |        0 |        0 |
+   useSelection.ts  |  89.47 |   89.47 |       17 |         0 |          2 |        0 |        0 |
+ lib                |  83.56 |   83.56 |       61 |         0 |         12 |        0 |        0 |
+  api               |  95.12 |   95.12 |       39 |         0 |          2 |        0 |        0 |
+   client.ts        |  95.12 |   95.12 |       39 |         0 |          2 |        0 |        0 |
+  format.ts         |  68.75 |   68.75 |       22 |         0 |         10 |        0 |        0 |
+--------------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m23:43:51 (11320) INFO MutationTestReportHelper[39m Final mutation score of 92.15 is greater than or equal to break threshold 0
+[32m23:43:51 (11320) INFO JsonReporter[39m Your report can be found at: file:///C:/Users/tanej/Documents/LAB/tanej_sdd-workflow_contacts_v001/02_output/logs/stryker-round.json
+[32m23:43:51 (11320) INFO MutationTestExecutor[39m Done in 9 minutes and 32 seconds.

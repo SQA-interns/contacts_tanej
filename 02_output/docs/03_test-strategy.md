@@ -125,8 +125,8 @@ Hidden suite, run once through `hidden.json`: 251 cases (216 backend, 35 browser
 |---|---|---|---|---|---|---|
 | backend | unit (surefire, 118 tests) | 118 / 0 | not measured separately | not measured separately | not measured | JUnit 5, Maven Surefire |
 | backend | non-unit (failsafe: integration, acceptance; 492 tests) | 492 / 0 | not measured separately | not measured separately | not measured | JUnit 5, Testcontainers, Failsafe |
-| backend | all levels (610 tests, one JaCoCo report, `mvn clean verify`, scope: `app.contactgroups` without `ContactGroupsApplication`) | 610 / 0 | 97.05 % (2499 of 2575 lines) | 89.07 % | not measured: PIT 1.20.4 ran 0 tests (948 mutants, all NO_COVERAGE), no JUnit 5 plugin, D-63 | JaCoCo 0.8.13, PIT 1.20.4 |
-| frontend | unit (Vitest, 243 tests; 11 added in this session) | 243 / 0 | 95.63 % (1162 of 1215 lines) | 86.75 % (773 of 891) | not measured: the Stryker run was stopped at the 2 h limit of a background command, no report, D-64 | Vitest 3 with the v8 provider, Stryker 10 |
+| backend | all levels (610 tests, one JaCoCo report, `mvn clean verify`, scope: `app.contactgroups` without `ContactGroupsApplication`) | 610 / 0 | 97.05 % (2499 of 2575 lines) | 89.07 % | not measured: PIT 1.20.4 with `pitest-junit5-plugin` 1.2.3 (approved, D-63; the plugin is the only addition to `tech-stack.md`'s list) passed its baseline (0 failing without mutation, after `-Dspring.profiles.active=test` was added to its `jvmArgs`) but was stopped at the 2 h limit, no report, D-65 | JaCoCo 0.8.13, PIT 1.20.4 |
+| frontend | unit (Vitest, 259 tests after round 1: 243 + 16 new in `contact-values.test.ts`, `export-hooks.test.tsx`, `client.test.ts`) | 259 / 0 (full suite, 31 files) | 95.63 % measured before round 1 (1162 of 1215 lines); not re-measured | 86.75 % (773 of 891), same | full run by the developer (Stryker 10, 263 min, `reports/mutation/mutation.json`, copy of the figures in D-64): 3643 mutants, killed 2298 + timeout 4, survived 1176, no coverage 165; **raw 63.18 %**, scoreCovered 2302 / 3478 = 66.19 %, adjusted = raw (no equivalent justified yet). Round 1 on 6 files (see below) adds 51 kills: estimated overall 2353 / 3643 = **64.6 %** (estimate, not a full run) | Vitest 4.1 with the v8 provider, Stryker 10 |
 | frontend | non-unit (Playwright acceptance and e2e) | not run in this session | not measured (browser tests are not under a coverage tool) | not measured | not applicable | Playwright |
 | frontend | all levels | not merged | not merged: the unit figure is the only one measured and a lower bound of `all` | not merged | not measured | Vitest v8 |
 
@@ -136,10 +136,13 @@ Note on the backend JaCoCo file: a first `verify` failed in `jacoco:report` with
 
 | Component | Line threshold met | Mutation threshold met | Shortfall (points) | Survivor rounds | Tests at first mutation run | Decision |
 |---|---|---|---|---|---|---|
-| backend | yes (97.05 % >= 95 %) | not measured | not known | 0 | 0 run by PIT (tool not activated) | D-63 (blocking: PIT JUnit 5 plugin) |
-| frontend | yes (95.63 % unit-only >= 95 %) | not measured | not known | 0 | none (run stopped at the time limit) | D-64 (non-blocking) |
+| backend | yes (97.05 % >= 95 %) | not measured | not known | 0 | PIT baseline passed with the full suite (228 test classes); run stopped at 2 h, no report | D-63 applied; D-65 (non-blocking, waits for the developer to run PIT outside the agent) |
+| frontend | yes (95.63 % unit-only >= 95 %) | no (raw 63.18 % in the full run; about 64.6 % with round 1) | about 25 points (90 − 64.6); not final | 1 of 3 (round 2 and 3 not done) | full suite, 236 tests with coverage (Stryker dry run; Vitest 243, the 7 others, `architecture.test.ts` 4 and `locales.test.ts` 3, run no mutated code) | D-64 applied; shortfall decision only after round 3 |
+
+Survivor round 1 (frontend, `--mutate` on 6 files, config `stryker.round.config.json`, report `out/logs/stryker-round.json`, log `out/logs/quality-frontend-stryker-round1.log`): conditions.ts 13 → 0 survivors, contactValues.ts 13 → 1, useExport.ts 12 → 0, client.ts 14 → 2, useSelection.ts 4 → 2, format.ts 10 → 10 (module-level `Intl` option strings; not yet analysed, none counted as equivalent). Totals for these files 66 → 15 survivors (score 92.15 %). Largest remaining survivor counts are in UI components, from the developer's run: FilterDialog 144, VersionsPage 89, MergePage 79, ContactForm 71, ContactPage 57, AttributeRows 53, TagInput 46, ContactTable 43, HistoryFilters 43, TrashPage 37. About 930 more kills are needed for 90 %; rounds 2 and 3 (next `/quality-gate`) start with these files, using `node` wrapper + `stryker.round.config.json` with `--mutate` (never the default `stryker.config.json`: its report path is the developer's full report `reports/mutation/mutation.json`, which this session left untouched; a copy into `out/logs/` was refused by the permission check).
 
 ## Equivalent mutants (phase 5)
 
 | Component | Class and method | Mutation | Why it cannot change behaviour |
 |---|---|---|---|
+| none yet | | | No survivor is counted as equivalent so far (raw = adjusted). |
