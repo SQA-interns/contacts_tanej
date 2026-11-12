@@ -673,3 +673,21 @@
 - Human response: 1 (approved by the developer: the set-up is impossible under BR-05; the test asserts that both phone-only contacts are refused with 400 `REQUIRED_ONE_OF` and that Find duplicates then returns no set; record that R-021-05 is guaranteed by BR-05 and EX-021-07 (company only, never matched) covers the case that can happen; update `docs/03_acceptance-manifest.sha256`)
 - Resolution: `AC_021_05_contactsWithOnlyAPhoneAreNeverMatched` in `Us021DuplicatesAcceptanceIT` changed as approved (the only edit; no other frozen test touched). R-021-05 is guaranteed by BR-05 (API and table CHECK); the case that can occur, contacts with only the same company, is covered by EX-021-07. The hash of the file in the manifest was updated.
 - Overrides: none
+
+## D-60: frozen test AC-017-01 expects more than 40 operations; the contract has 40
+- Timestamp: 2026-11-12
+- Session: S5 implement US-022
+- Class: approval
+- Type: non-blocking for the session; `Us017SecuredApiAcceptanceIT.AC_017_01` stays red until answered
+- Trigger: `AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken` asserts `hasSizeGreaterThan(40)` on the operations of `openapi.yaml`. The contract has exactly 40 operations, all implemented since `POST /merges` exists. The size check runs before any call, so the test fails on its own number, not on a missing endpoint (the earlier note that it waited for US-022 was wrong).
+- Options: (1) (proposed) Approve a change to the frozen test: `hasSize(40)` (or `isGreaterThanOrEqualTo(40)`) and update `docs/03_acceptance-manifest.sha256`. (2) Add a 41st operation to the contract (changes the specification; not proposed). (3) Leave it red and list it as a known limitation.
+- Human response: none
+- Overrides: none
+
+## D-61: choices made for the merge (US-022)
+- Timestamp: 2026-11-12
+- Session: S5 implement US-022
+- Class: assumption
+- Type: non-blocking
+- Notes: [ASSUMPTION] (a) The History entry `CONTACTS_MERGED` belongs to the survivor (its `contactId`) and lists the merged-away contacts by id (field `merged`) with the chosen values, so that erasing a contact leaves no name of it in another contact's entry (BR-06). (b) Survivor ties and lock order use the text form of the id, which orders like PostgreSQL's `uuid` (Java's `UUID.compareTo` is signed and does not). (c) The merge screen takes the contacts ticked in a set (all ticked at first, at least two); WF-17's "at most 5 contacts" message is not in any rule and was not built. (d) Merged-away contacts are linked in `contact_merges`; the survivor's History tab shows their entries flagged `linkedFrom` (R-022-06). OQ-022-01 (customer confirmation of the destructive flow) stays open as already recorded.
+- Overrides: none

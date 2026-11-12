@@ -273,7 +273,10 @@
       "email": "Isti e-poštni naslov",
       "company": "Isto ime in podjetje",
       "phone": "Isto ime in telefon"
-    }
+    },
+    "merge": "Združi",
+    "pick": "Izberi {{name}} za združitev",
+    "tab": "Dvojniki"
   },
   "versions": {
     "tab": "Različice",
@@ -478,5 +481,18 @@
     "reauthText": "Zaradi varnosti vas prosimo, da se pred izbrisom računa znova prijavite.",
     "reauthAction": "Prijava",
     "deleting": "Brisanje …"
+  },
+  "merge": {
+    "crumb": "Združitev",
+    "title": "Združi kontakte",
+    "fields": "Polja",
+    "survivor": "Ostane (najstarejši)",
+    "joining": "Kontakt za združitev",
+    "tags": "Združene oznake",
+    "conflicts": "Neskladni atributi",
+    "conflictsHint": "Isti ključ, različne vrednosti. Izberite eno za vsak ključ.",
+    "revertHint": "Združitev lahko pozneje razveljavite v zavihku Različice kontakta.",
+    "confirm": "Potrdi združitev",
+    "merging": "Združevanje …"
   }
 }

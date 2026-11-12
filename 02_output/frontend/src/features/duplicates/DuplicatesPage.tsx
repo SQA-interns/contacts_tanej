@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext } from 'react-router';
+import { useNavigate, useOutletContext } from 'react-router';
 import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
 import { StatePanel } from '@/components/ui/state-panel';
@@ -99,6 +99,17 @@ export function DuplicatesPage() {
 
 function SetItem({ set, onDismiss }: { set: DuplicateSet; onDismiss: () => void }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const group = useOutletContext<GroupSummary>();
+  const [picked, setPicked] = useState(() => new Set(set.contacts.map((c) => c.id)));
+  const toggle = (id: string) =>
+    setPicked((current) => {
+      const next = new Set(current);
+      if (!next.delete(id)) next.add(id);
+      return next;
+    });
+  const ids = set.contacts.map((c) => c.id).filter((id) => picked.has(id));
+  const mergeUrl = `/groups/${group.id}/duplicates/merge?ids=${ids.join(',')}`;
   const reasons = set.reasons
     .map((r, i) => (i === 0 ? t(REASON_KEY[r]) : lowerFirst(t(REASON_KEY[r]))))
     .join(', ');
@@ -113,15 +124,24 @@ function SetItem({ set, onDismiss }: { set: DuplicateSet; onDismiss: () => void 
         </div>
         <div className="flex flex-wrap gap-2">
           {set.contacts.map((c) => (
-            <span key={c.id} className="rounded-control border border-border px-2 py-1 break-words">
-              {labelOf(c)}
-            </span>
+            <label
+              key={c.id}
+              className="flex min-h-11 items-center gap-2 rounded-control border border-border px-2 py-1 break-words"
+            >
+              <input type="checkbox" checked={picked.has(c.id)} onChange={() => toggle(c.id)} />
+              <span>{labelOf(c)}</span>
+            </label>
           ))}
         </div>
       </div>
-      <Button variant="ghost" onClick={onDismiss}>
-        {t('duplicates.notDuplicate')}
-      </Button>
+      <div className="flex flex-wrap gap-2">
+        <Button disabled={picked.size < 2} onClick={() => void navigate(mergeUrl)}>
+          {t('duplicates.merge')}
+        </Button>
+        <Button variant="ghost" onClick={onDismiss}>
+          {t('duplicates.notDuplicate')}
+        </Button>
+      </div>
     </li>
   );
 }

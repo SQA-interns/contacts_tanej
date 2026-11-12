@@ -273,7 +273,10 @@
       "email": "Same e-mail address",
       "company": "Same name and company",
       "phone": "Same name and phone"
-    }
+    },
+    "merge": "Merge",
+    "pick": "Pick {{name}} for the merge",
+    "tab": "Duplicates"
   },
   "versions": {
     "tab": "Versions",
@@ -478,5 +481,18 @@
     "reauthText": "For your safety we ask you to sign in again before deleting the account.",
     "reauthAction": "Sign in",
     "deleting": "Deleting …"
+  },
+  "merge": {
+    "crumb": "Merge",
+    "title": "Merge contacts",
+    "fields": "Fields",
+    "survivor": "Survivor (the oldest, stays)",
+    "joining": "Contact to join",
+    "tags": "Combined tags",
+    "conflicts": "Attribute conflicts",
+    "conflictsHint": "Same key, different values. Choose one per key.",
+    "revertHint": "You can revert a merge later from the contact’s Versions tab.",
+    "confirm": "Confirm merge",
+    "merging": "Merging …"
   }
 }
