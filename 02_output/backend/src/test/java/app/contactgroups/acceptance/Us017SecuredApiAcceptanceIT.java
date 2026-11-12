@@ -87,7 +87,7 @@ class Us017SecuredApiAcceptanceIT extends AcceptanceBase {
   void AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken() {
     String gid = group(ANA, "Konferenca 2026");
     List<Operation> ops = contract();
-    assertThat(ops).hasSizeGreaterThan(40);
+    assertThat(ops.size()).isGreaterThanOrEqualTo(40);
     for (Operation op : ops) {
       Res r = call(op, gid, null);
       if (op.path().equals("/health")) {

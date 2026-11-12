@@ -681,7 +681,8 @@
 - Type: non-blocking for the session; `Us017SecuredApiAcceptanceIT.AC_017_01` stays red until answered
 - Trigger: `AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken` asserts `hasSizeGreaterThan(40)` on the operations of `openapi.yaml`. The contract has exactly 40 operations, all implemented since `POST /merges` exists. The size check runs before any call, so the test fails on its own number, not on a missing endpoint (the earlier note that it waited for US-022 was wrong).
 - Options: (1) (proposed) Approve a change to the frozen test: `hasSize(40)` (or `isGreaterThanOrEqualTo(40)`) and update `docs/03_acceptance-manifest.sha256`. (2) Add a 41st operation to the contract (changes the specification; not proposed). (3) Leave it red and list it as a known limitation.
-- Human response: none
+- Human response: 1 with `isGreaterThanOrEqualTo(40)` (approved by the developer: the size check only guards that the contract was read fully; the loop checks every operation, including any added later; update `docs/03_acceptance-manifest.sha256`)
+- Resolution: line 90 of `Us017SecuredApiAcceptanceIT` changed to `assertThat(ops.size()).isGreaterThanOrEqualTo(40)` (the only edit); the hash of the file in the manifest was updated.
 - Overrides: none
 
 ## D-61: choices made for the merge (US-022)
