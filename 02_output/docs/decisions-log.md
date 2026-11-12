@@ -692,3 +692,13 @@
 - Type: non-blocking
 - Notes: [ASSUMPTION] (a) The History entry `CONTACTS_MERGED` belongs to the survivor (its `contactId`) and lists the merged-away contacts by id (field `merged`) with the chosen values, so that erasing a contact leaves no name of it in another contact's entry (BR-06). (b) Survivor ties and lock order use the text form of the id, which orders like PostgreSQL's `uuid` (Java's `UUID.compareTo` is signed and does not). (c) The merge screen takes the contacts ticked in a set (all ticked at first, at least two); WF-17's "at most 5 contacts" message is not in any rule and was not built. (d) Merged-away contacts are linked in `contact_merges`; the survivor's History tab shows their entries flagged `linkedFrom` (R-022-06). OQ-022-01 (customer confirmation of the destructive flow) stays open as already recorded.
 - Overrides: none
+
+## D-62: Design: final theme (baseline)
+- Timestamp: 2026-11-12
+- Session: D design
+- Class: assumption
+- Type: non-blocking
+- Trigger: `run-config.md` says "Design round: skip", so `/design` applies the baseline final theme without asking.
+- Notes: `data-theme` in `index.html` switched from `wireframe` to `final`. Tokens are those of `tokens.final.css` (neutral greys, indigo-600 accent, system sans-serif, 8/12 px radii, light and dark by system setting); the customer named no colour or typeface (`ui-design.md`), so no project override applies. No component, route, text or test changed. Screenshots of 18 screens at the three widths (UI-22), light and dark: `out/logs/screens/design-1/before` (wireframe) and `after` (final), with `axe-summary.json`: 108 captures each, no Critical or Serious axe violation, no horizontal overflow. This also covers DoD-I-04 for WF-12, WF-16, WF-17.
+- Human response: not asked (Design round: skip)
+- Overrides: none

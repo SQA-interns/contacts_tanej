@@ -1,0 +1,740 @@
+[
+ {
+  "screen": "sign-in",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "register",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "reset-password",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "sign-in",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "register",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "reset-password",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "sign-in",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "register",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "reset-password",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": []
+ },
+ {
+  "screen": "groups",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contacts",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-new",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-history",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "versions",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "tags",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "trash",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "group-history",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "members",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "duplicates",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "merge",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "deleted-groups",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "account",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "not-found",
+  "size": "mobile",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "groups",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contacts",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-new",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-history",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "versions",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "tags",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "trash",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "group-history",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "members",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "duplicates",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "merge",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "deleted-groups",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "account",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "not-found",
+  "size": "tablet",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "groups",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contacts",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-new",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-history",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "versions",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "tags",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "trash",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "group-history",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "members",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "duplicates",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "merge",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "deleted-groups",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "account",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "not-found",
+  "size": "desktop",
+  "scheme": "light",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "sign-in",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "register",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "reset-password",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "sign-in",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "register",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "reset-password",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "sign-in",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "register",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "reset-password",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": []
+ },
+ {
+  "screen": "groups",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contacts",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-new",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-history",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "versions",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "tags",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "trash",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "group-history",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "members",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "duplicates",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "merge",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "deleted-groups",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "account",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "not-found",
+  "size": "mobile",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "groups",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contacts",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-new",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-history",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "versions",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "tags",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "trash",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "group-history",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "members",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "duplicates",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "merge",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "deleted-groups",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "account",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "not-found",
+  "size": "tablet",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "groups",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contacts",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-new",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "contact-history",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "versions",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "tags",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "trash",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "group-history",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "members",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "duplicates",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "merge",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "deleted-groups",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "account",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ },
+ {
+  "screen": "not-found",
+  "size": "desktop",
+  "scheme": "dark",
+  "overflow": false,
+  "violations": []
+ }
+]
