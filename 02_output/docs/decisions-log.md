@@ -702,3 +702,25 @@
 - Notes: `data-theme` in `index.html` switched from `wireframe` to `final`. Tokens are those of `tokens.final.css` (neutral greys, indigo-600 accent, system sans-serif, 8/12 px radii, light and dark by system setting); the customer named no colour or typeface (`ui-design.md`), so no project override applies. No component, route, text or test changed. Screenshots of 18 screens at the three widths (UI-22), light and dark: `out/logs/screens/design-1/before` (wireframe) and `after` (final), with `axe-summary.json`: 108 captures each, no Critical or Serious axe violation, no horizontal overflow. This also covers DoD-I-04 for WF-12, WF-16, WF-17.
 - Human response: not asked (Design round: skip)
 - Overrides: none
+
+## D-63: backend mutation run needs the PIT JUnit 5 plugin (not in tech-stack.md)
+- Timestamp: 2026-11-12
+- Session: S6 quality-gate resume
+- Class: block (a dependency not in `tech-stack.md`)
+- Type: blocking (backend mutation only)
+- Trigger: the check of procedure step 3 failed. `pitest-maven:mutationCoverage` (PIT 1.20.4, scope `app.contactgroups.*`, no exclusion but the entry point) generated 948 mutants and ran 0 tests ("Line Coverage (for mutated classes only): 0/2509", "Ran 0 tests", all mutants NO_COVERAGE; `out/logs/quality-backend-pit.log`). PIT 1.20.4 finds no JUnit 5 tests without the plugin `org.pitest:pitest-junit5-plugin`, which is in neither `pom.xml` nor `tech-stack.md` (line 100 lists only `pitest-maven`). The suite itself is green (118 unit + 492 integration tests) and JaCoCo gives 97.05 % lines. No mutation score is recorded.
+- Options: (1) (proposed) Approve adding `org.pitest:pitest-junit5-plugin` (Apache-2.0, current release compatible with PIT 1.20.4) as a dependency of the `pitest-maven` plugin only (not of the application) and add it to `tech-stack.md`; the next `/quality-gate` then runs the full mutation run once. (2) Use another way to run PIT that does not need the plugin (none known for JUnit 5). (3) Record the backend mutation score as not measured, with the reason.
+- Human response: none
+- Resolution: pending review
+- Overrides: none
+
+## D-64: frontend mutation run did not finish in the longest background time
+- Timestamp: 2026-11-12
+- Session: S6 quality-gate resume
+- Class: open
+- Type: non-blocking
+- Trigger: `stryker run` (Stryker 10, vitest runner, `perTest` coverage, concurrency 4, scope `src/**/*.{ts,tsx}` as in `quality-requirements.md`) was started once and stopped by the harness after 2 h (the maximum of a background command), with no report written. No mutation score is recorded.
+- Options: (1) (proposed) The developer runs `npx stryker run` in `02_output/frontend` outside the agent (or in a runner session with a longer limit) and the next `/quality-gate` reads `reports/mutation/mutation.json` and does the survivor rounds. (2) Re-run with the same scope in several slices by file group, each below 2 h (same scope, only split; the totals are added). (3) Record the frontend mutation score as not measured.
+- Human response: none
+- Resolution: pending review (option 1 or 2 proposed)
+- Overrides: none

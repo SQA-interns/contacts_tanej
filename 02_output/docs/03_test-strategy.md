@@ -123,11 +123,21 @@ Hidden suite, run once through `hidden.json`: 251 cases (216 backend, 35 browser
 
 | Component | Level | Tests passed / failed | Line coverage | Branch coverage | Mutation score (raw / adjusted, scope) | Tools |
 |---|---|---|---|---|---|---|
+| backend | unit (surefire, 118 tests) | 118 / 0 | not measured separately | not measured separately | not measured | JUnit 5, Maven Surefire |
+| backend | non-unit (failsafe: integration, acceptance; 492 tests) | 492 / 0 | not measured separately | not measured separately | not measured | JUnit 5, Testcontainers, Failsafe |
+| backend | all levels (610 tests, one JaCoCo report, `mvn clean verify`, scope: `app.contactgroups` without `ContactGroupsApplication`) | 610 / 0 | 97.05 % (2499 of 2575 lines) | 89.07 % | not measured: PIT 1.20.4 ran 0 tests (948 mutants, all NO_COVERAGE), no JUnit 5 plugin, D-63 | JaCoCo 0.8.13, PIT 1.20.4 |
+| frontend | unit (Vitest, 243 tests; 11 added in this session) | 243 / 0 | 95.63 % (1162 of 1215 lines) | 86.75 % (773 of 891) | not measured: the Stryker run was stopped at the 2 h limit of a background command, no report, D-64 | Vitest 3 with the v8 provider, Stryker 10 |
+| frontend | non-unit (Playwright acceptance and e2e) | not run in this session | not measured (browser tests are not under a coverage tool) | not measured | not applicable | Playwright |
+| frontend | all levels | not merged | not merged: the unit figure is the only one measured and a lower bound of `all` | not merged | not measured | Vitest v8 |
+
+Note on the backend JaCoCo file: a first `verify` failed in `jacoco:report` with "malformed input around byte 2" (F-V09). Cause: a corrupt `target/jacoco.exec` left from an earlier interrupted run (the stack trace is in `ExecutionDataReader`). `mvn clean verify` removed it and the report works; no configuration change was needed. Log: `out/logs/quality-backend-verify.log`.
 
 ## Quality gate (phase 5)
 
 | Component | Line threshold met | Mutation threshold met | Shortfall (points) | Survivor rounds | Tests at first mutation run | Decision |
 |---|---|---|---|---|---|---|
+| backend | yes (97.05 % >= 95 %) | not measured | not known | 0 | 0 run by PIT (tool not activated) | D-63 (blocking: PIT JUnit 5 plugin) |
+| frontend | yes (95.63 % unit-only >= 95 %) | not measured | not known | 0 | none (run stopped at the time limit) | D-64 (non-blocking) |
 
 ## Equivalent mutants (phase 5)
 
