@@ -1,0 +1,43 @@
+
+
+
+
+Running 3 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/3] [chromium] › e2e\accessibility.spec.ts:49:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus
+
+
+
+
+[1A[2K[2/3] [firefox] › e2e\accessibility.spec.ts:49:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus
+
+
+
+
+[1A[2K[3/3] [webkit] › e2e\accessibility.spec.ts:49:1 › NFR-09 keyboard only: sign in, open the list, create a contact, with a visible focus
+[1A[2K  3 passed (1.1m)
+[1A[2K[2m[WebServer] [22m(node:20180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K[2m[WebServer] [22m
+[2m[WebServer] [22m(!) Some chunks are larger than 500 kB after minification. Consider:
+[2m[WebServer] [22m- Using dynamic import() to code-split the application
+[2m[WebServer] [22m- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[2m[WebServer] [22m- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[1A[2K[2m[WebServer] [22m(node:23260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:35960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:35960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:31520) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:31520) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:30148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:30148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

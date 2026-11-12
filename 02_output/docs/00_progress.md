@@ -5,12 +5,13 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S7 verify run 1
+- Session: S8 fix F-V04 F-V05 F-V06 F-V08 F-V10 F-V13 D-55: 1 D-56: 1
 - Result: blocked
-- Gate: not passed (phase 6: F-V01 hidden suite 62 of 251 fail, F-V02 INC-2 not built, F-V03 final theme not applied, F-V04 WebKit language switch, F-V13 backend dependency advisories)
-- Notes for the next session: Report: `docs/06_verification-report.md` "Run 1". Waits on D-55 (build INC-2 or not) and D-56 (Spring/DOMPurify advisories). `/fix` can start with F-V03 (theme), F-V04, F-V05, F-V06, F-V08, F-V10 without an answer. Playwright at 2 workers gives 47 false failures; re-run failures with 1 worker. Not run (needed approval): restart-test.sh, restore.sh, clean-host-test.sh. Backend coverage still unmeasurable (JaCoCo malformed input), frontend lines 94.61 %. Stack: dev Compose is up; load-test left 100 perf accounts and 10,000 seed contacts in it.
+- Gate: not passed (phase 6: F-V02 INC-2 not built, F-V03 theme, F-V13 Spring Security not assessed, F-V06 waits on D-57, F-V01 to be re-measured)
+- Notes for the next session: Fixed: F-V08 `44f6e8e`, F-V10 `e42dbeb`, F-V05 `ce02792` (non-frozen test defect). F-V04 not reproduced (42 of 42 pass in WebKit, 1 worker). F-V06 is a frozen-test defect, D-57 proposes a one-line wait (needs the developer). F-V13: D-56 resolution; Spring Security 6.5.11 CVEs not assessed (no web search allowed here): developer to allow a search or name a Boot version; proposed swap of `springdoc-...-webmvc-ui` for `-api`. D-55: 1 means INC-2 is built next, in the order given by the developer (see D-55 resolution). Run Playwright with 1 worker. Dev Compose stack is up (rebuilt at HEAD).
 
 ## Previous
+- Session: S7 verify run 1 (blocked; report `docs/06_verification-report.md` "Run 1"; not run for lack of approval: restart-test.sh, restore.sh, clean-host-test.sh; frontend lines 94.61 %, backend JaCoCo "malformed input" F-V09)
 - Session: S5 implement T-N04 (log commit after the developer's re-run of 2026-11-10, about 19:18 UTC)
 - Result: done
 - Gate: not applicable (NFR tasks)
@@ -27,8 +28,8 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /fix F-V03 F-V04 (or answer D-55, D-56: `/fix D-55: 1`)
-- Waiting for: D-55, D-56
+- Command: /implement US-020 (then US-021, US-022, /review INC-2, /design, /quality-gate, /verify)
+- Waiting for: D-57 (non-blocking for INC-2), D-56 part (c) Spring Security
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |

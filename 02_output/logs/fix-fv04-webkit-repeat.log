@@ -1,0 +1,82 @@
+
+
+
+
+Running 42 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/42] [webkit] › acceptance\us018-language.spec.ts:45:3 › Slovenian by default › AC-018-01 and EX-018-01 the first visit shows Slovenian, whatever the browser language
+[1A[2K[2/42] [webkit] › acceptance\us018-language.spec.ts:64:3 › the choice is remembered › AC-018-03 English chosen once is shown again on the next visit in the same browser
+[1A[2K[3/42] [webkit] › acceptance\us018-language.spec.ts:82:1 › AC-018-02 switching the language changes the labels at once and keeps the typed text
+[1A[2K[4/42] [webkit] › acceptance\us018-language.spec.ts:96:1 › AC-018-04 a time is shown as 2. 7. 2026 00:30 in Slovenian and 2026-07-02 00:30 in English
+[1A[2K[5/42] [webkit] › acceptance\us018-language.spec.ts:115:1 › EX-018-03 in winter the time is shown as 23:30
+[1A[2K[6/42] [webkit] › acceptance\us018-language.spec.ts:132:1 › AC-018-05 Slovenia is shown as "Slovenija" in Slovenian and "Slovenia" in English
+[1A[2K[7/42] [webkit] › acceptance\us018-language.spec.ts:156:1 › AC-018-06 the order of Čuk, Cerar, Sever, Šuster is the same in the English and the Slovenian UI
+[1A[2K[8/42] [webkit] › acceptance\us018-language.spec.ts:177:1 › AC-018-07 tags and attributes are unchanged when the language changes
+[1A[2K[9/42] [webkit] › acceptance\us018-language.spec.ts:204:1 › EX-018-02 a server error is shown in the active language
+[1A[2K[10/42] [webkit] › acceptance\us018-language.spec.ts:226:1 › EX-018-04 no screen shows a text key instead of a text, in either language
+[1A[2K[11/42] [webkit] › checks\shell.spec.ts:66:1 › the language switch changes all texts at once and the choice survives a reload (R-018-02, R-018-03)
+[1A[2K[12/42] [webkit] › e2e\language.spec.ts:51:1 › NFR-10 the switch changes every signed-out screen
+[1A[2K[13/42] [webkit] › e2e\language.spec.ts:60:1 › NFR-10 the switch changes every screen of the main flows
+[1A[2K[14/42] [webkit] › e2e\language.spec.ts:79:3 › reload › NFR-10 the language survives a reload on a signed-in screen
+
+
+
+
+[1A[2K[15/42] [webkit] › acceptance\us018-language.spec.ts:45:3 › Slovenian by default › AC-018-01 and EX-018-01 the first visit shows Slovenian, whatever the browser language
+[1A[2K[16/42] [webkit] › acceptance\us018-language.spec.ts:64:3 › the choice is remembered › AC-018-03 English chosen once is shown again on the next visit in the same browser
+[1A[2K[17/42] [webkit] › acceptance\us018-language.spec.ts:82:1 › AC-018-02 switching the language changes the labels at once and keeps the typed text
+[1A[2K[18/42] [webkit] › acceptance\us018-language.spec.ts:96:1 › AC-018-04 a time is shown as 2. 7. 2026 00:30 in Slovenian and 2026-07-02 00:30 in English
+[1A[2K[19/42] [webkit] › acceptance\us018-language.spec.ts:115:1 › EX-018-03 in winter the time is shown as 23:30
+[1A[2K[20/42] [webkit] › acceptance\us018-language.spec.ts:132:1 › AC-018-05 Slovenia is shown as "Slovenija" in Slovenian and "Slovenia" in English
+[1A[2K[21/42] [webkit] › acceptance\us018-language.spec.ts:156:1 › AC-018-06 the order of Čuk, Cerar, Sever, Šuster is the same in the English and the Slovenian UI
+[1A[2K[22/42] [webkit] › acceptance\us018-language.spec.ts:177:1 › AC-018-07 tags and attributes are unchanged when the language changes
+[1A[2K[23/42] [webkit] › acceptance\us018-language.spec.ts:204:1 › EX-018-02 a server error is shown in the active language
+[1A[2K[24/42] [webkit] › acceptance\us018-language.spec.ts:226:1 › EX-018-04 no screen shows a text key instead of a text, in either language
+[1A[2K[25/42] [webkit] › checks\shell.spec.ts:66:1 › the language switch changes all texts at once and the choice survives a reload (R-018-02, R-018-03)
+[1A[2K[26/42] [webkit] › e2e\language.spec.ts:51:1 › NFR-10 the switch changes every signed-out screen
+[1A[2K[27/42] [webkit] › e2e\language.spec.ts:60:1 › NFR-10 the switch changes every screen of the main flows
+[1A[2K[28/42] [webkit] › e2e\language.spec.ts:79:3 › reload › NFR-10 the language survives a reload on a signed-in screen
+
+
+
+
+[1A[2K[29/42] [webkit] › acceptance\us018-language.spec.ts:45:3 › Slovenian by default › AC-018-01 and EX-018-01 the first visit shows Slovenian, whatever the browser language
+[1A[2K[30/42] [webkit] › acceptance\us018-language.spec.ts:64:3 › the choice is remembered › AC-018-03 English chosen once is shown again on the next visit in the same browser
+[1A[2K[31/42] [webkit] › acceptance\us018-language.spec.ts:82:1 › AC-018-02 switching the language changes the labels at once and keeps the typed text
+[1A[2K[32/42] [webkit] › acceptance\us018-language.spec.ts:96:1 › AC-018-04 a time is shown as 2. 7. 2026 00:30 in Slovenian and 2026-07-02 00:30 in English
+[1A[2K[33/42] [webkit] › acceptance\us018-language.spec.ts:115:1 › EX-018-03 in winter the time is shown as 23:30
+[1A[2K[34/42] [webkit] › acceptance\us018-language.spec.ts:132:1 › AC-018-05 Slovenia is shown as "Slovenija" in Slovenian and "Slovenia" in English
+[1A[2K[35/42] [webkit] › acceptance\us018-language.spec.ts:156:1 › AC-018-06 the order of Čuk, Cerar, Sever, Šuster is the same in the English and the Slovenian UI
+[1A[2K[36/42] [webkit] › acceptance\us018-language.spec.ts:177:1 › AC-018-07 tags and attributes are unchanged when the language changes
+[1A[2K[37/42] [webkit] › acceptance\us018-language.spec.ts:204:1 › EX-018-02 a server error is shown in the active language
+[1A[2K[38/42] [webkit] › acceptance\us018-language.spec.ts:226:1 › EX-018-04 no screen shows a text key instead of a text, in either language
+[1A[2K[39/42] [webkit] › checks\shell.spec.ts:66:1 › the language switch changes all texts at once and the choice survives a reload (R-018-02, R-018-03)
+[1A[2K[40/42] [webkit] › e2e\language.spec.ts:51:1 › NFR-10 the switch changes every signed-out screen
+[1A[2K[41/42] [webkit] › e2e\language.spec.ts:60:1 › NFR-10 the switch changes every screen of the main flows
+[1A[2K[42/42] [webkit] › e2e\language.spec.ts:79:3 › reload › NFR-10 the language survives a reload on a signed-in screen
+[1A[2K  42 passed (4.8m)
+[1A[2K[2m[WebServer] [22m(node:26764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K[2m[WebServer] [22m
+[2m[WebServer] [22m(!) Some chunks are larger than 500 kB after minification. Consider:
+[2m[WebServer] [22m- Using dynamic import() to code-split the application
+[2m[WebServer] [22m- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[2m[WebServer] [22m- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[1A[2K[2m[WebServer] [22m(node:37492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:32584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:32584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:28116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:28116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:38884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:38884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
