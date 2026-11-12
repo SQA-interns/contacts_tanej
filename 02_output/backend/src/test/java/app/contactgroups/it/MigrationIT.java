@@ -17,9 +17,9 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 /**
- * NFR-13: the schema comes only from versioned, forward-only Flyway migrations. The migrations run on
- * an empty database and on a database left by an earlier release (version 1, holding data), and the
- * migration list has no gaps, no repeatable and no undo scripts.
+ * NFR-13: the schema comes only from versioned, forward-only Flyway migrations. The migrations run
+ * on an empty database and on a database left by an earlier release (version 1, holding data), and
+ * the migration list has no gaps, no repeatable and no undo scripts.
  */
 @Testcontainers
 class MigrationIT {
@@ -86,8 +86,10 @@ class MigrationIT {
     assertThat(result.migrationsExecuted).isGreaterThan(0);
     assertThat(latest.info().pending()).isEmpty();
     assertThat(jdbc.queryForObject("SELECT count(*) FROM users", Integer.class)).isEqualTo(1);
-    assertThat(jdbc.queryForObject("SELECT count(*) FROM history_entries", Integer.class)).isEqualTo(1);
-    assertThat(jdbc.queryForObject("SELECT name FROM groups", String.class)).isEqualTo("Konferenca");
+    assertThat(jdbc.queryForObject("SELECT count(*) FROM history_entries", Integer.class))
+        .isEqualTo(1);
+    assertThat(jdbc.queryForObject("SELECT name FROM groups", String.class))
+        .isEqualTo("Konferenca");
   }
 
   @Test
@@ -106,7 +108,10 @@ class MigrationIT {
     assertThat(names).isNotEmpty();
     assertThat(names).allMatch(n -> n.matches("V\\d+__[a-z0-9_]+\\.sql"));
     List<Integer> versions =
-        names.stream().map(n -> Integer.parseInt(n.substring(1, n.indexOf("__")))).sorted().toList();
+        names.stream()
+            .map(n -> Integer.parseInt(n.substring(1, n.indexOf("__"))))
+            .sorted()
+            .toList();
     for (int i = 0; i < versions.size(); i++) {
       assertThat(versions.get(i)).as("version at position %d", i + 1).isEqualTo(i + 1);
     }
