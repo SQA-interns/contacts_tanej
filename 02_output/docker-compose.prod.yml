@@ -1,7 +1,7 @@
 # Delivered stack (Q-17a, ADR-10): no emulator; the customer's Firebase project; TLS in `proxy`.
 # Start:  docker compose -f docker-compose.prod.yml --env-file ../.env up -d
 # Needs in .env: DB_PASSWORD, FIREBASE_PROJECT_ID, FIREBASE_WEB_API_KEY, FIREBASE_AUTH_DOMAIN, APP_ALLOWED_ORIGIN
-# Needs in ./certs: tls.crt and tls.key (the install guide says how to get them).
+# Needs in ./certs: tls.crt and tls.key (the install guide says how to get them); the proxy runs as uid 101, so both must be readable by it.
 # A customer who runs their own HTTPS front proxy deletes `proxy` and publishes `frontend` behind theirs.
 name: contact-groups
 
@@ -56,6 +56,8 @@ services:
   proxy:
     image: nginx:1.29.1
     restart: unless-stopped
+    # SB-11: not root. tls.key must be readable by uid 101 (for example chmod 644 certs/tls.key).
+    user: "101:101"
     depends_on:
       frontend: { condition: service_healthy }
     ports:
