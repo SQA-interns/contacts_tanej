@@ -29,7 +29,7 @@ The handover between sessions. Every session reads it first and updates it last.
 
 ## Next
 - Command: /implement US-022 (T-52, then T-53), then /review INC-2, /design, /quality-gate, /verify
-- Waiting for: D-59 (approval, does not block US-022)
+- Waiting for: nothing (D-59 answered 1 and applied: frozen test AC_021_05 changed, manifest updated; the US-022 build itself is still to do)
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
@@ -54,5 +54,5 @@ The handover between sessions. Every session reads it first and updates it last.
 | US-014 | 1 (MVP) | done (D-44 resolved; browser tests of the story passed in the previous session) | DoD-S-01 to 07 met |
 | US-016 | 1 (MVP) | done (browser AC-016-02, 05, 06 not run) | DoD-S-01 met for the API; 02 to 07 met |
 | US-020 | 2 | done (EX-020-05 frozen API test waits for US-022 merge) | DoD-S-01 met except EX-020-05; 02 to 07 met |
-| US-021 | 2 | done (frozen AC-021-05 cannot pass: D-59) | DoD-S-01 met except AC-021-05; 02 to 07 met |
+| US-021 | 2 | done (D-59 applied: AC-021-05 now asserts the BR-05 refusal) | DoD-S-01 to 07 met |
 | US-022 | 2 | ready | |

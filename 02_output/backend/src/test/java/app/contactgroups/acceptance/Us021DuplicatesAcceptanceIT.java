@@ -88,8 +88,12 @@ class Us021DuplicatesAcceptanceIT extends AcceptanceBase {
 
   @Test
   void AC_021_05_contactsWithOnlyAPhoneAreNeverMatched() {
-    contact("phone", "+386 41 555 123");
-    contact("phone", "+386 41 555 123");
+    // D-59: BR-05 refuses a contact with only a phone, so R-021-05 holds by BR-05;
+    // EX-021-07 covers the case that can happen (company only).
+    for (int i = 0; i < 2; i++) {
+      post(MARKO, "/groups/" + gid + "/contacts", j("phone", "+386 41 555 123"))
+          .expectFieldError("firstName", "REQUIRED_ONE_OF");
+    }
     assertThat(sets(MARKO)).isEmpty();
   }
 
