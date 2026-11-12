@@ -4,6 +4,7 @@ import app.contactgroups.domain.ContactVersion;
 import app.contactgroups.domain.VersionSummary;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,24 @@ public class VersionRepository {
                     rs.getString("user_name"),
                     rs.getTimestamp("created_at").toInstant()))
         .list();
+  }
+
+  /** One version of the contact with its snapshot, if it exists. */
+  public Optional<ContactVersion> find(UUID contactId, int number) {
+    return jdbc.sql(
+            "SELECT number, snapshot::text AS snapshot, user_id, user_name, created_at FROM"
+                + " contact_versions WHERE contact_id = ? AND number = ?")
+        .params(contactId, number)
+        .query(
+            (rs, row) ->
+                new ContactVersion(
+                    contactId,
+                    rs.getInt("number"),
+                    rs.getString("snapshot"),
+                    rs.getString("user_id"),
+                    rs.getString("user_name"),
+                    rs.getTimestamp("created_at").toInstant()))
+        .optional();
   }
 
   public int count(UUID contactId) {

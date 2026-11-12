@@ -26,7 +26,7 @@ function useFieldLabel() {
   const { t, i18n } = useTranslation();
   return (field: string) => {
     if (field.startsWith('attribute:')) return field.slice('attribute:'.length);
-    const key = ['tag', 'name', 'contacts'].includes(field)
+    const key = ['tag', 'name', 'contacts', 'version'].includes(field)
       ? `history.field.${field}`
       : `contact.field.${field}`;
     return i18n.exists(key) ? t(key) : field;

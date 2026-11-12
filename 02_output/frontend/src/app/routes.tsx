@@ -9,6 +9,7 @@ import { SignInPage } from '@/features/auth/SignInPage';
 import { ContactPage } from '@/features/contacts/ContactPage';
 import { GroupHistoryPage } from '@/features/history/GroupHistoryPage';
 import { ContactHistoryPage } from '@/features/history/ContactHistoryPage';
+import { VersionsPage } from '@/features/versions/VersionsPage';
 import { ContactListPage } from '@/features/contacts/ContactListPage';
 import { TrashPage } from '@/features/contacts/TrashPage';
 import { DeletedGroupsPage } from '@/features/groups/DeletedGroupsPage';
@@ -68,6 +69,7 @@ export const routes: RouteObject[] = [
                   { path: 'contacts/new', element: <ContactPage /> },
                   { path: 'contacts/:contactId', element: <ContactPage /> },
                   { path: 'contacts/:contactId/history', element: <ContactHistoryPage /> },
+                  { path: 'contacts/:contactId/versions', element: <VersionsPage /> },
                 ],
               },
               { path: '*', element: <NotFoundPage /> },

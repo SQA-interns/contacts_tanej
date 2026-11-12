@@ -5,10 +5,10 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S8 fix F-V04 F-V05 F-V06 F-V08 F-V10 F-V13 D-55: 1 D-56: 1
-- Result: blocked
-- Gate: not passed (phase 6: F-V02 INC-2 not built, F-V03 theme, F-V13 Spring Security not assessed, F-V06 waits on D-57, F-V01 to be re-measured)
-- Notes for the next session: Fixed: F-V08 `44f6e8e`, F-V10 `e42dbeb`, F-V05 `ce02792` (non-frozen test defect). F-V04 not reproduced (42 of 42 pass in WebKit, 1 worker). F-V06 is a frozen-test defect, D-57 proposes a one-line wait (needs the developer). F-V13: D-56 resolution; Spring Security 6.5.11 CVEs not assessed (no web search allowed here): developer to allow a search or name a Boot version; proposed swap of `springdoc-...-webmvc-ui` for `-api`. D-55: 1 means INC-2 is built next, in the order given by the developer (see D-55 resolution). Run Playwright with 1 worker. Dev Compose stack is up (rebuilt at HEAD).
+- Session: S5 implement US-020
+- Result: done
+- Gate: not applicable (story; phase 4 continues with US-021, US-022)
+- Notes for the next session: US-020 built (T-48, T-49). Backend: `VersionService.get/restore`, `VersionController` (GET one, POST restore), `VersionRepository.find`; `Us020VersionRestoreAcceptanceIT` 13 of 14 pass, EX-020-05 waits for `POST /merges` (US-022, T-52). Web: `features/versions/*` (list, read-only view, compare, restore dialog), tab link on the contact page, routes, en and sl texts; the 6 frozen AC-020 browser tests pass in Chromium, Firefox, WebKit; 216 unit tests pass. D-58: History entry names the number as field `version`; contract `VersionDetail.snapshot` lacks `tags` and `attributes` (not changed, input side); OQ-020-01 still open. The compose stack was rebuilt for this run. Run Playwright with 1 worker. Earlier: S8 fix F-V13 F-V06 D-56 D-57 (loop 1 results in `docs/06_verification-report.md`).
 
 ## Previous
 - Session: S7 verify run 1 (blocked; report `docs/06_verification-report.md` "Run 1"; not run for lack of approval: restart-test.sh, restore.sh, clean-host-test.sh; frontend lines 94.61 %, backend JaCoCo "malformed input" F-V09)
@@ -28,8 +28,8 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /implement US-020 (then US-021, US-022, /review INC-2, /design, /quality-gate, /verify)
-- Waiting for: D-57 (non-blocking for INC-2), D-56 part (c) Spring Security
+- Command: /implement US-021 (then US-022, /review INC-2, /design, /quality-gate, /verify)
+- Waiting for: nothing
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
@@ -53,4 +53,5 @@ The handover between sessions. Every session reads it first and updates it last.
 | US-013 | 1 (MVP) | in progress (T-41 to T-43 done; EX-013-03 waits on US-016; browser AC-013-01, 08 pass, AC-013-10 waits on US-014) | DoD-S-01 not met; 02 to 07 met |
 | US-014 | 1 (MVP) | done (D-44 resolved; browser tests of the story passed in the previous session) | DoD-S-01 to 07 met |
 | US-016 | 1 (MVP) | done (browser AC-016-02, 05, 06 not run) | DoD-S-01 met for the API; 02 to 07 met |
-| US-020 to US-022 | 2 | ready | |
+| US-020 | 2 | done (EX-020-05 frozen API test waits for US-022 merge) | DoD-S-01 met except EX-020-05; 02 to 07 met |
+| US-021, US-022 | 2 | ready | |

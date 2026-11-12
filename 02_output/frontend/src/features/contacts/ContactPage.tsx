@@ -96,6 +96,9 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
           <Link to={`${back}/contacts/${contact.id}/history`} className="underline">
             {t('history.tab')}
           </Link>
+          <Link to={`${back}/contacts/${contact.id}/versions`} className="underline">
+            {t('versions.tab')}
+          </Link>
         </nav>
       )}
       {trashed && (

@@ -258,6 +258,30 @@
       "action": "Leave group"
     }
   },
+  "versions": {
+    "tab": "Versions",
+    "number": "Version",
+    "version": "Version {{number}}",
+    "who": "Who",
+    "when": "When",
+    "actions": "Actions",
+    "view": "View",
+    "compare": "Compare",
+    "restore": "Restore",
+    "restoreTitle": "Restore this version",
+    "restoreText": "The contact gets the values of this version. A new version is recorded; nothing is lost.",
+    "restored": "The version was restored.",
+    "nothingToChange": "There is nothing to change: the contact already has these values.",
+    "inTrash": "The contact is in Trash. Restore it from Trash first, then restore the version.",
+    "back": "Back to versions",
+    "compareTitle": "Compare versions",
+    "field": "Field",
+    "currentContact": "Current contact",
+    "changed": "Changed",
+    "highlightHint": "Highlighted rows differ.",
+    "emptyTitle": "No versions yet",
+    "emptyText": "A version is recorded each time the contact is saved."
+  },
   "history": {
     "tab": "History",
     "title": "History",
@@ -268,7 +292,8 @@
     "field": {
       "tag": "Tag",
       "name": "Name",
-      "contacts": "Contacts exported"
+      "contacts": "Contacts exported",
+      "version": "Restored version"
     },
     "event": {
       "CONTACT_CREATED": "Contact created",

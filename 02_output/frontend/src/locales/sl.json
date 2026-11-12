@@ -258,6 +258,30 @@
       "action": "Zapusti skupino"
     }
   },
+  "versions": {
+    "tab": "Različice",
+    "number": "Različica",
+    "version": "Različica {{number}}",
+    "who": "Kdo",
+    "when": "Kdaj",
+    "actions": "Dejanja",
+    "view": "Ogled",
+    "compare": "Primerjaj",
+    "restore": "Obnovi",
+    "restoreTitle": "Obnovi to različico",
+    "restoreText": "Kontakt dobi vrednosti te različice. Zabeležena bo nova različica; nič se ne izgubi.",
+    "restored": "Različica je obnovljena.",
+    "nothingToChange": "Ni ničesar za spremeniti: kontakt že ima te vrednosti.",
+    "inTrash": "Kontakt je v košu. Najprej ga obnovite iz koša, nato obnovite različico.",
+    "back": "Nazaj na različice",
+    "compareTitle": "Primerjava različic",
+    "field": "Polje",
+    "currentContact": "Trenutni kontakt",
+    "changed": "Spremenjeno",
+    "highlightHint": "Označene vrstice se razlikujejo.",
+    "emptyTitle": "Še ni različic",
+    "emptyText": "Različica se zabeleži ob vsakem shranjevanju kontakta."
+  },
   "history": {
     "tab": "Zgodovina",
     "title": "Zgodovina",
@@ -268,7 +292,8 @@
     "field": {
       "tag": "Oznaka",
       "name": "Ime",
-      "contacts": "Izvoženi stiki"
+      "contacts": "Izvoženi stiki",
+      "version": "Obnovljena različica"
     },
     "event": {
       "CONTACT_CREATED": "Stik ustvarjen",

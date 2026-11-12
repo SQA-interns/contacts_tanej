@@ -49,6 +49,21 @@ class SecurityHeadersIT extends AcceptanceBase {
     assertThat(other.headers().firstValue("Access-Control-Allow-Origin")).isEmpty();
   }
 
+  /** D-56 (c), CVE-2026-41707: DPoP is not active, so a DPoP-scheme credential is refused. */
+  @Test
+  void aDpopAuthorizationHeaderIsRefused() throws Exception {
+    var r =
+        HttpClient.newHttpClient()
+            .send(
+                HttpRequest.newBuilder(URI.create("http://localhost:" + port + "/me"))
+                    .header("Authorization", "DPoP " + token(ANA))
+                    .header("DPoP", "eyJhbGciOiJFUzI1NiJ9.e30.c2ln")
+                    .GET()
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+    assertThat(r.statusCode()).isEqualTo(401);
+  }
+
   @Test
   void theErrorAnswersAreJsonInUtf8() throws Exception {
     var r = send("/me", null, null);
