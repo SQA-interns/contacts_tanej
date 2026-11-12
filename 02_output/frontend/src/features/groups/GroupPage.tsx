@@ -82,6 +82,9 @@ export function GroupPage() {
           </>
         )}
         <GroupTab to={`/groups/${group.data.id}/members`} label={t('groups.tabs.members')} />
+        {group.data.role !== 'VIEWER' && (
+          <GroupTab to={`/groups/${group.data.id}/duplicates`} label={t('groups.tabs.duplicates')} />
+        )}
       </nav>
       <Outlet context={group.data} />
     </>

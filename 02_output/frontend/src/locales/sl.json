@@ -139,7 +139,8 @@
       "tags": "Oznake",
       "trash": "Koš",
       "members": "Člani",
-      "history": "Zgodovina"
+      "history": "Zgodovina",
+      "duplicates": "Dvojniki"
     },
     "noContacts": {
       "title": "Še ni kontaktov",
@@ -256,6 +257,22 @@
       "title": "Zapusti skupino",
       "text": "Izgubite dostop do te skupine.",
       "action": "Zapusti skupino"
+    }
+  },
+  "duplicates": {
+    "find": "Poišči dvojnike",
+    "searching": "Iskanje …",
+    "intro": "V tej skupini poišči kontakte, ki so verjetno ista oseba.",
+    "listLabel": "Skupine dvojnikov",
+    "certain": "Zanesljivo",
+    "probable": "Verjetno",
+    "notDuplicate": "Ni dvojnik",
+    "noneTitle": "Dvojnikov ni",
+    "noneText": "Vsi kontakti v tej skupini so videti različni.",
+    "reason": {
+      "email": "Isti e-poštni naslov",
+      "company": "Isto ime in podjetje",
+      "phone": "Isto ime in telefon"
     }
   },
   "versions": {

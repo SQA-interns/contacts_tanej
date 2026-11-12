@@ -139,7 +139,8 @@
       "tags": "Tags",
       "trash": "Trash",
       "members": "Members",
-      "history": "History"
+      "history": "History",
+      "duplicates": "Duplicates"
     },
     "noContacts": {
       "title": "No contacts yet",
@@ -256,6 +257,22 @@
       "title": "Leave group",
       "text": "You lose access to this group.",
       "action": "Leave group"
+    }
+  },
+  "duplicates": {
+    "find": "Find duplicates",
+    "searching": "Searching …",
+    "intro": "Search this group for contacts that are probably the same person.",
+    "listLabel": "Duplicate sets",
+    "certain": "Certain",
+    "probable": "Probable",
+    "notDuplicate": "Not a duplicate",
+    "noneTitle": "No duplicates found",
+    "noneText": "Every contact in this group looks different.",
+    "reason": {
+      "email": "Same e-mail address",
+      "company": "Same name and company",
+      "phone": "Same name and phone"
     }
   },
   "versions": {
