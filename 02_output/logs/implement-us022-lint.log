@@ -1,0 +1,42 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- spotless:2.46.1:check (default-cli) @ contact-groups-backend ---
+[INFO] Spotless.Java is keeping 185 files clean - 0 needs changes to be clean, 0 were already clean, 185 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] >>> pmd:3.27.0:check (default-cli) > :pmd @ contact-groups-backend >>>
+[INFO] 
+[INFO] --- pmd:3.27.0:pmd (pmd) @ contact-groups-backend ---
+[WARNING] Unable to locate Source XRef to link to -- DISABLED
+[INFO] PMD version: 7.14.0
+[WARNING] Unable to find a URL to the parent project. The parent menu will NOT be added.
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:2.0.0-M9 skin
+[INFO] 
+[INFO] <<< pmd:3.27.0:check (default-cli) < :pmd @ contact-groups-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- pmd:3.27.0:check (default-cli) @ contact-groups-backend ---
+[INFO] 
+[INFO] >>> pmd:3.27.0:cpd-check (default-cli) > :cpd @ contact-groups-backend >>>
+[INFO] 
+[INFO] --- pmd:3.27.0:cpd (cpd) @ contact-groups-backend ---
+[WARNING] Unable to locate Source XRef to link to -- DISABLED
+[WARNING] Unable to find a URL to the parent project. The parent menu will NOT be added.
+[INFO] Rendering content with org.apache.maven.skins:maven-fluido-skin:jar:2.0.0-M9 skin
+[INFO] 
+[INFO] <<< pmd:3.27.0:cpd-check (default-cli) < :cpd @ contact-groups-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- pmd:3.27.0:cpd-check (default-cli) @ contact-groups-backend ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.440 s
+[INFO] Finished at: 2026-11-12T12:06:41Z
+[INFO] ------------------------------------------------------------------------
+
+EXIT 0

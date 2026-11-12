@@ -10,6 +10,7 @@ import app.contactgroups.repository.ContactRepository;
 import app.contactgroups.repository.HistoryRepository;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.function.IntFunction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,15 +59,27 @@ public class HistoryService {
     return page(
         history.countByContact(contactId),
         requestedPage,
-        offset -> history.pageByContact(contactId, ContactPage.PAGE_SIZE, offset));
+        offset -> history.pageByContact(contactId, ContactPage.PAGE_SIZE, offset),
+        e -> {
+          var view = HistoryEntryView.of(e);
+          boolean merged = e.contactId() != null && !e.contactId().equals(contactId);
+          return merged ? view.linkedFrom(e.contactId()) : view;
+        });
   }
 
   private static HistoryPage page(
       int total, Integer requestedPage, IntFunction<List<HistoryEntry>> load) {
+    return page(total, requestedPage, load, HistoryEntryView::of);
+  }
+
+  private static HistoryPage page(
+      int total,
+      Integer requestedPage,
+      IntFunction<List<HistoryEntry>> load,
+      Function<HistoryEntry, HistoryEntryView> view) {
     int wanted = requestedPage == null ? 1 : requestedPage;
     int page = Math.min(Math.max(1, wanted), ContactPage.lastPage(total));
-    var items =
-        load.apply((page - 1) * ContactPage.PAGE_SIZE).stream().map(HistoryEntryView::of).toList();
+    var items = load.apply((page - 1) * ContactPage.PAGE_SIZE).stream().map(view).toList();
     return new HistoryPage(items, total, page, ContactPage.PAGE_SIZE);
   }
 

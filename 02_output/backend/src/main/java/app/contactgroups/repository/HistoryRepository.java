@@ -146,8 +146,16 @@ public class HistoryRepository {
     }
   }
 
+  /** Entries about the contact and about the contacts merged into it (R-022-06). */
+  private static final String OF_CONTACT =
+      "(contact_id = ? OR contact_id IN (SELECT merged_id FROM contact_merges"
+          + " WHERE survivor_id = ?))";
+
   public int countByContact(UUID contactId) {
-    return count("contact_id = ?", contactId);
+    return jdbc.sql("SELECT count(*) FROM history_entries WHERE " + OF_CONTACT)
+        .params(contactId, contactId)
+        .query(Integer.class)
+        .single();
   }
 
   /** One page of the group's entries, newest first, with their changes. */
@@ -157,7 +165,17 @@ public class HistoryRepository {
 
   /** One page of the entries about one contact, newest first, with their changes. */
   public List<HistoryEntry> pageByContact(UUID contactId, int limit, int offset) {
-    return page("contact_id = ?", contactId, limit, offset);
+    return jdbc
+        .sql(
+            "SELECT * FROM history_entries WHERE "
+                + OF_CONTACT
+                + " ORDER BY seq DESC LIMIT ? OFFSET ?")
+        .params(contactId, contactId, limit, offset)
+        .query((rs, n) -> entry(rs))
+        .list()
+        .stream()
+        .map(e -> e.withChanges(changesOf(e.id())))
+        .toList();
   }
 
   private int count(String where, UUID id) {

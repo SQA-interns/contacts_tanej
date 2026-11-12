@@ -1,7 +1,11 @@
 package app.contactgroups.api;
 
+import app.contactgroups.domain.Contact;
+import app.contactgroups.domain.Contact.Attribute;
+import app.contactgroups.domain.ContactInput;
 import app.contactgroups.domain.DuplicateSet;
 import app.contactgroups.service.DuplicateService;
+import app.contactgroups.service.MergeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -21,9 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class DuplicateController {
 
   private final DuplicateService duplicates;
+  private final MergeService merges;
 
-  public DuplicateController(DuplicateService duplicates) {
+  public DuplicateController(DuplicateService duplicates, MergeService merges) {
     this.duplicates = duplicates;
+    this.merges = merges;
   }
 
   /** The found sets (contract {@code DuplicateSearchResult}). */
@@ -60,5 +66,35 @@ public class DuplicateController {
       @PathVariable UUID groupId,
       @RequestBody DismissalRequest request) {
     duplicates.dismiss(groupId, jwt.getSubject(), request.contactIds());
+  }
+
+  /** The body of the merge (contract {@code MergeRequest}). */
+  public record MergeRequest(
+      List<MergeService.Pick> contacts, ContactInput fields, List<Attribute> attributeChoices) {}
+
+  @PostMapping("/groups/{groupId}/merges")
+  @Operation(operationId = "mergeContacts")
+  @ApiResponses({
+    @ApiResponse(responseCode = "200"),
+    @ApiResponse(responseCode = "400"),
+    @ApiResponse(responseCode = "401"),
+    @ApiResponse(responseCode = "403"),
+    @ApiResponse(responseCode = "404"),
+    @ApiResponse(responseCode = "409"),
+    @ApiResponse(responseCode = "413"),
+    @ApiResponse(responseCode = "429")
+  })
+  public Contact merge(
+      @AuthenticationPrincipal Jwt jwt,
+      @PathVariable UUID groupId,
+      @RequestBody MergeRequest request) {
+    return merges.merge(
+        groupId,
+        jwt.getSubject(),
+        request.contacts(),
+        request.fields() == null
+            ? new ContactInput(null, null, null, null, null, null, null, null, null, null, null)
+            : request.fields(),
+        request.attributeChoices());
   }
 }

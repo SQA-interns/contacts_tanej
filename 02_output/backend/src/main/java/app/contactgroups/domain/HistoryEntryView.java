@@ -16,7 +16,25 @@ public record HistoryEntryView(
     Role role,
     Instant createdAt,
     boolean erased,
-    List<Change> changes) {
+    List<Change> changes,
+    UUID linkedFrom) {
+
+  /** The same entry flagged as belonging to a merged-away contact (R-022-06). */
+  public HistoryEntryView linkedFrom(UUID mergedId) {
+    return new HistoryEntryView(
+        id,
+        changeSetId,
+        eventType,
+        contactId,
+        contactLabel,
+        actor,
+        subjectName,
+        role,
+        createdAt,
+        erased,
+        changes,
+        mergedId);
+  }
 
   /** Who made the change; the e-mail is absent after the account deletion (D-16). */
   public record Actor(String id, String name, String email) {}
@@ -45,7 +63,8 @@ public record HistoryEntryView(
         e.role(),
         e.createdAt(),
         e.erased(),
-        changes);
+        changes,
+        null);
   }
 
   private static String orEmpty(String value) {
