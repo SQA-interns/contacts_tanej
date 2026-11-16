@@ -1,9 +1,9 @@
-Restart test 2026-11-10T18:16:41Z
+Restart test 2026-11-16T18:33:47Z
 Writing a group and a contact ...
-  group 68670618-37f6-4c86-bf8d-1f94c3f55f43, contact fb55500c-418c-4fc0-866e-8d29ad30562e
+  group 24ee0152-4962-4c18-9deb-0f96f13b0fb2, contact 01501a06-b005-40e0-acda-69b7faa186e3
 Restarting backend and database ...
- Container contact-groups-backend-1 Restarting 
  Container contact-groups-db-1 Restarting 
+ Container contact-groups-backend-1 Restarting 
  Container contact-groups-db-1 Started 
  Container contact-groups-backend-1 Started 
 Waiting for /health ...

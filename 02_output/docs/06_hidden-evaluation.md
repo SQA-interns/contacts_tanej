@@ -162,3 +162,59 @@ Results of the held-out suite, run by the runner on a copy of the project. Failu
 | R-018-02 | combination |
 | R-018-03 | boundary |
 | R-010-10 | other |
+
+## Run 4
+
+- Commit: f510756
+- Date: 2026-11-16T18:22:15.680Z
+- Manifest: ok
+- Tests: 251, passed: 234, failed: 17
+- Exit code: 0
+
+| Rule | Case category |
+|---|---|
+| unknown rule | combination |
+| unknown rule | other |
+| unknown rule | combination |
+| unknown rule | combination |
+| unknown rule | invalid |
+| unknown rule | combination |
+| unknown rule | combination |
+| unknown rule | boundary |
+| unknown rule | other |
+| unknown rule | invalid |
+| unknown rule | boundary |
+| unknown rule | other |
+| R-001-06 | other |
+| R-018-01 | other |
+| R-018-02 | combination |
+| R-018-03 | boundary |
+| R-010-10 | other |
+
+## Run 5
+
+- Commit: f510756
+- Date: 2026-11-16T18:56:40.002Z
+- Manifest: ok
+- Tests: 251, passed: 234, failed: 17
+- Exit code: 0
+
+| Rule | Case category |
+|---|---|
+| unknown rule | combination |
+| unknown rule | other |
+| unknown rule | combination |
+| unknown rule | combination |
+| unknown rule | invalid |
+| unknown rule | combination |
+| unknown rule | combination |
+| unknown rule | boundary |
+| unknown rule | other |
+| unknown rule | invalid |
+| unknown rule | boundary |
+| unknown rule | other |
+| R-001-06 | other |
+| R-018-01 | other |
+| R-018-02 | combination |
+| R-018-03 | boundary |
+| R-010-10 | other |

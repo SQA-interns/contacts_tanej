@@ -1,6 +1,6 @@
-Clean host test 2026-11-10T19:19:04Z, commit f82d614
-Copying the committed sources to /tmp/contacts-clean-RvYdSE ...
-Files in the copy: 723; .env copied, nothing else added
+Clean host test 2026-11-16T18:34:45Z, commit f510756
+Copying the committed sources to /tmp/contacts-clean-CYr18y ...
+Files in the copy: 1236; .env copied, nothing else added
 docker compose up --build --wait (several minutes on a cold cache) ...
  Image contact-groups-clean-emulator Building 
  Image contact-groups-clean-backend Building 
@@ -9,16 +9,16 @@ docker compose up --build --wait (several minutes on a cold cache) ...
 #1 reading from stdin 1.79kB done
 #1 DONE 0.0s
 
-#2 [frontend internal] load build definition from Dockerfile
-#2 transferring dockerfile: 1.14kB 0.0s done
-#2 DONE 0.1s
+#2 [emulator internal] load build definition from Dockerfile
+#2 transferring dockerfile: 769B 0.0s done
+#2 DONE 0.0s
 
 #3 [backend internal] load build definition from Dockerfile
-#3 transferring dockerfile: 788B 0.1s done
+#3 transferring dockerfile: 788B 0.0s done
 #3 DONE 0.1s
 
-#4 [emulator internal] load build definition from Dockerfile
-#4 transferring dockerfile: 769B 0.0s done
+#4 [frontend internal] load build definition from Dockerfile
+#4 transferring dockerfile: 1.16kB 0.0s done
 #4 DONE 0.1s
 
 #5 [backend internal] load metadata for docker.io/library/maven:3.9.11-eclipse-temurin-21
@@ -27,204 +27,190 @@ docker compose up --build --wait (several minutes on a cold cache) ...
 #6 [frontend internal] load metadata for docker.io/library/node:24.13.0-slim
 #6 ...
 
-#7 [auth] library/eclipse-temurin:pull token for registry-1.docker.io
-#7 DONE 0.0s
+#7 [frontend internal] load metadata for docker.io/library/nginx:1.29.1
+#7 DONE 0.1s
 
-#8 [auth] library/nginx:pull token for registry-1.docker.io
-#8 DONE 0.0s
-
-#9 [auth] library/node:pull token for registry-1.docker.io
-#9 DONE 0.0s
-
-#10 [frontend internal] load metadata for docker.io/library/nginx:1.29.1
-#10 ...
+#8 [backend internal] load metadata for docker.io/library/eclipse-temurin:21.0.8_9-jre
+#8 DONE 0.8s
 
 #6 [frontend internal] load metadata for docker.io/library/node:24.13.0-slim
-#6 DONE 1.4s
+#6 DONE 0.8s
 
-#10 [frontend internal] load metadata for docker.io/library/nginx:1.29.1
-#10 DONE 1.6s
+#9 [backend internal] load .dockerignore
+#9 transferring context: 72B 0.0s done
+#9 DONE 0.1s
 
-#11 [emulator internal] load .dockerignore
-#11 ...
+#10 [emulator internal] load .dockerignore
+#10 transferring context: 2B 0.0s done
+#10 DONE 0.1s
 
-#12 [backend internal] load metadata for docker.io/library/eclipse-temurin:21.0.8_9-jre
-#12 DONE 1.6s
+#11 [frontend internal] load .dockerignore
+#11 transferring context: 123B 0.0s done
+#11 DONE 0.1s
 
-#11 [emulator internal] load .dockerignore
-#11 transferring context:
-#11 transferring context: 2B done
-#11 DONE 0.3s
+#12 [backend internal] load build context
+#12 DONE 0.0s
 
-#13 [backend internal] load .dockerignore
-#13 transferring context: 72B 0.0s done
-#13 DONE 0.2s
+#13 [backend build 1/6] FROM docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237
+#13 resolve docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237
+#13 ...
 
 #14 [emulator internal] load build context
 #14 DONE 0.0s
 
-#15 [frontend internal] load .dockerignore
-#15 transferring context: 123B 0.0s done
-#15 DONE 0.2s
+#15 [frontend internal] load build context
+#15 DONE 0.0s
 
-#16 [backend internal] load build context
-#16 DONE 0.0s
+#16 [backend stage-1 1/4] FROM docker.io/library/eclipse-temurin:21.0.8_9-jre@sha256:66bb900643426ad01996d25bada7d56751913f9cec3b827fcb715d2ec9a0fbfc
+#16 resolve docker.io/library/eclipse-temurin:21.0.8_9-jre@sha256:66bb900643426ad01996d25bada7d56751913f9cec3b827fcb715d2ec9a0fbfc 0.1s done
+#16 DONE 0.1s
 
-#17 [backend build 1/6] FROM docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237
-#17 resolve docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237
-#17 ...
+#13 [backend build 1/6] FROM docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237
+#13 resolve docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237 0.1s done
+#13 DONE 0.1s
 
-#18 [emulator 1/5] FROM docker.io/library/node:24.13.0-slim@sha256:4660b1ca8b28d6d1906fd644abe34b2ed81d15434d26d845ef0aced307cf4b6f
-#18 resolve docker.io/library/node:24.13.0-slim@sha256:4660b1ca8b28d6d1906fd644abe34b2ed81d15434d26d845ef0aced307cf4b6f 0.1s done
-#18 DONE 0.1s
-
-#17 [backend build 1/6] FROM docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237
-#17 resolve docker.io/library/maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237 0.1s done
+#17 [frontend 1/5] FROM docker.io/library/node:24.13.0-slim@sha256:4660b1ca8b28d6d1906fd644abe34b2ed81d15434d26d845ef0aced307cf4b6f
+#17 resolve docker.io/library/node:24.13.0-slim@sha256:4660b1ca8b28d6d1906fd644abe34b2ed81d15434d26d845ef0aced307cf4b6f 0.1s done
 #17 DONE 0.1s
 
-#19 [backend stage-1 1/4] FROM docker.io/library/eclipse-temurin:21.0.8_9-jre@sha256:66bb900643426ad01996d25bada7d56751913f9cec3b827fcb715d2ec9a0fbfc
-#19 resolve docker.io/library/eclipse-temurin:21.0.8_9-jre@sha256:66bb900643426ad01996d25bada7d56751913f9cec3b827fcb715d2ec9a0fbfc 0.1s done
-#19 DONE 0.1s
+#18 [frontend stage-1 1/5] FROM docker.io/library/nginx:1.29.1@sha256:8adbdcb969e2676478ee2c7ad333956f0c8e0e4c5a7463f4611d7a2e7a7ff5dc
+#18 resolve docker.io/library/nginx:1.29.1@sha256:8adbdcb969e2676478ee2c7ad333956f0c8e0e4c5a7463f4611d7a2e7a7ff5dc 0.1s done
+#18 DONE 0.1s
 
-#20 [frontend stage-1 1/5] FROM docker.io/library/nginx:1.29.1@sha256:8adbdcb969e2676478ee2c7ad333956f0c8e0e4c5a7463f4611d7a2e7a7ff5dc
-#20 resolve docker.io/library/nginx:1.29.1@sha256:8adbdcb969e2676478ee2c7ad333956f0c8e0e4c5a7463f4611d7a2e7a7ff5dc 0.1s done
-#20 DONE 0.1s
+#12 [backend internal] load build context
+#12 ...
 
 #14 [emulator internal] load build context
 #14 transferring context: 2.12kB 0.1s done
 #14 DONE 0.1s
 
-#21 [emulator 3/5] WORKDIR /srv
+#19 [emulator 2/5] RUN npm install --global --no-fund --no-audit firebase-tools@15.35.0  && npm cache clean --force
+#19 CACHED
+
+#20 [emulator 3/5] WORKDIR /srv
+#20 CACHED
+
+#21 [emulator 4/5] COPY --chown=node:node firebase.json seed-emulator.mjs ./
 #21 CACHED
 
-#22 [emulator 2/5] RUN npm install --global --no-fund --no-audit firebase-tools@15.35.0  && npm cache clean --force
+#22 [emulator 5/5] RUN chown node:node /srv
 #22 CACHED
 
-#23 [emulator 4/5] COPY --chown=node:node firebase.json seed-emulator.mjs ./
-#23 CACHED
+#12 [backend internal] load build context
+#12 ...
 
-#24 [emulator 5/5] RUN chown node:node /srv
-#24 CACHED
+#23 [emulator] exporting to image
+#23 exporting layers 0.0s done
+#23 exporting manifest sha256:cbc1bd6f51d762a6af6ad1117bcf415d0f44752af5fc2158c2f2f979658d641d done
+#23 exporting config sha256:bb566b1f5bf45952d35ac84e4750f3ae84aaa51533d5a2b8248984960a3adc24 done
+#23 exporting attestation manifest sha256:44911976dc9e2f93827d985014286ae7befd00ad6ebee8bccd7526c09377f6fc 0.0s done
+#23 exporting manifest list sha256:9012a07ef55fba10c2d092c69acac3c363b8509f7b26975f3941fd10c9256a7f 0.0s done
+#23 naming to docker.io/library/contact-groups-clean-emulator:latest done
+#23 unpacking to docker.io/library/contact-groups-clean-emulator:latest 0.0s done
+#23 DONE 0.3s
 
-#25 [emulator] exporting to image
-#25 exporting layers 0.0s done
-#25 exporting manifest sha256:cbc1bd6f51d762a6af6ad1117bcf415d0f44752af5fc2158c2f2f979658d641d
-#25 exporting manifest sha256:cbc1bd6f51d762a6af6ad1117bcf415d0f44752af5fc2158c2f2f979658d641d 0.2s done
-#25 exporting config sha256:bb566b1f5bf45952d35ac84e4750f3ae84aaa51533d5a2b8248984960a3adc24
-#25 exporting config sha256:bb566b1f5bf45952d35ac84e4750f3ae84aaa51533d5a2b8248984960a3adc24 0.1s done
-#25 exporting attestation manifest sha256:f0b923972a6e465943f35f6646eee27173daa3ac4946f6d9dd9c85e9861eab74
-#25 exporting attestation manifest sha256:f0b923972a6e465943f35f6646eee27173daa3ac4946f6d9dd9c85e9861eab74 0.1s done
-#25 exporting manifest list sha256:359a7b79cad6cea22f40502125d098bbb118845120ab2c8d51217e87540c734c
-#25 exporting manifest list sha256:359a7b79cad6cea22f40502125d098bbb118845120ab2c8d51217e87540c734c 0.1s done
-#25 naming to docker.io/library/contact-groups-clean-emulator:latest 0.0s done
-#25 unpacking to docker.io/library/contact-groups-clean-emulator:latest 0.0s done
-#25 DONE 0.9s
+#12 [backend internal] load build context
+#12 ...
 
-#26 [frontend internal] load build context
-#26 transferring context: 1.31MB 1.4s done
-#26 DONE 1.4s
+#24 [emulator] resolving provenance for metadata file
+#24 DONE 0.1s
 
-#27 [frontend build 3/6] COPY package.json package-lock.json ./
+#12 [backend internal] load build context
+#12 transferring context: 664.42kB 1.4s done
+#12 DONE 1.4s
+
+#25 [backend build 4/6] RUN mvn -B -ntp -q dependency:go-offline
+#25 CACHED
+
+#26 [backend build 6/6] RUN mvn -B -ntp -q -DskipTests package
+#26 CACHED
+
+#27 [backend stage-1 2/4] RUN useradd --system --uid 10001 --no-create-home app
 #27 CACHED
 
-#28 [frontend build 4/6] RUN npm ci --no-fund --no-audit
+#28 [backend stage-1 3/4] WORKDIR /app
 #28 CACHED
 
-#29 [frontend stage-1 3/5] COPY docker/default.conf.template /etc/nginx/templates/default.conf.template
+#29 [backend build 2/6] WORKDIR /w
 #29 CACHED
 
-#30 [frontend stage-1 4/5] COPY docker/40-config.sh /docker-entrypoint.d/40-config.sh
+#30 [backend build 5/6] COPY src src
 #30 CACHED
 
-#31 [frontend build 6/6] RUN npm run build
+#31 [backend build 3/6] COPY pom.xml ./
 #31 CACHED
 
-#32 [frontend stage-1 2/5] RUN sed -i -e '/^user /d' -e 's|^pid .*;|pid /tmp/nginx.pid;|' /etc/nginx/nginx.conf  && rm -f /etc/nginx/conf.d/default.conf  && chown -R 101:0 /var/cache/nginx /etc/nginx/conf.d /usr/share/nginx/html  && chmod -R g+w /var/cache/nginx /etc/nginx/conf.d /usr/share/nginx/html
+#32 [backend stage-1 4/4] COPY --from=build /w/target/contact-groups-backend.jar app.jar
 #32 CACHED
 
-#33 [frontend build 5/6] COPY . .
-#33 CACHED
+#33 [backend] exporting to image
+#33 exporting layers done
+#33 exporting manifest sha256:d8e74c5567242ae35f7741e20c3ffd81cd475d6c303607999159686173064c8f 0.1s done
+#33 exporting config sha256:0823f8030b7627fb485ed56494b2c3bce00323a2ce0781702a0565a6a39e6c7d
+#33 ...
 
-#34 [frontend build 2/6] WORKDIR /w
+#15 [frontend internal] load build context
+#15 transferring context: 1.48MB 1.6s done
+#15 DONE 1.6s
+
+#34 [frontend build 3/6] COPY package.json package-lock.json ./
 #34 CACHED
 
-#35 [frontend stage-1 5/5] COPY --from=build --chown=101:0 /w/dist /usr/share/nginx/html
+#35 [frontend build 5/6] COPY . .
 #35 CACHED
 
-#36 [frontend] exporting to image
-#36 exporting layers 0.0s done
-#36 exporting manifest sha256:c0e28fe26d25bccd2646d3ce49e51a4819592cab0446894532bb632b422a4715
-#36 ...
+#36 [frontend stage-1 2/5] RUN sed -i -e '/^user /d' -e 's|^pid .*;|pid /tmp/nginx.pid;|' /etc/nginx/nginx.conf  && rm -f /etc/nginx/conf.d/default.conf  && chown -R 101:0 /var/cache/nginx /etc/nginx/conf.d /usr/share/nginx/html  && chmod -R g+w /var/cache/nginx /etc/nginx/conf.d /usr/share/nginx/html
+#36 CACHED
 
-#16 [backend internal] load build context
-#16 transferring context: 616.65kB 1.5s done
-#16 DONE 1.6s
-
-#37 [backend build 2/6] WORKDIR /w
+#37 [frontend build 4/6] RUN npm ci --no-fund --no-audit
 #37 CACHED
 
-#38 [backend build 4/6] RUN mvn -B -ntp -q dependency:go-offline
+#38 [frontend stage-1 3/5] COPY docker/default.conf.template /etc/nginx/templates/default.conf.template
 #38 CACHED
 
-#39 [backend build 6/6] RUN mvn -B -ntp -q -DskipTests package
+#39 [frontend build 2/6] WORKDIR /w
 #39 CACHED
 
-#40 [backend stage-1 3/4] WORKDIR /app
+#40 [frontend build 6/6] RUN npm run build
 #40 CACHED
 
-#41 [backend build 5/6] COPY src src
+#41 [frontend stage-1 4/5] COPY docker/40-config.sh /docker-entrypoint.d/40-config.sh
 #41 CACHED
 
-#42 [backend build 3/6] COPY pom.xml ./
+#42 [frontend stage-1 5/5] COPY --from=build --chown=101:0 /w/dist /usr/share/nginx/html
 #42 CACHED
 
-#43 [backend stage-1 2/4] RUN useradd --system --uid 10001 --no-create-home app
-#43 CACHED
+#33 [backend] exporting to image
+#33 exporting config sha256:0823f8030b7627fb485ed56494b2c3bce00323a2ce0781702a0565a6a39e6c7d 0.1s done
+#33 exporting attestation manifest sha256:68cf78d95c9db4a82740e882abe8b77d237056f781848231c0e04e2b68c0cac6
+#33 exporting attestation manifest sha256:68cf78d95c9db4a82740e882abe8b77d237056f781848231c0e04e2b68c0cac6 0.1s done
+#33 exporting manifest list sha256:d13a6da946c5d3739c0d20a4f03a40424e4d90ca8c63f82f8fdea025f7ad1c78 0.1s done
+#33 naming to docker.io/library/contact-groups-clean-backend:latest 0.0s done
+#33 unpacking to docker.io/library/contact-groups-clean-backend:latest 0.0s done
+#33 DONE 0.6s
 
-#44 [backend stage-1 4/4] COPY --from=build /w/target/contact-groups-backend.jar app.jar
-#44 CACHED
+#43 [frontend] exporting to image
+#43 exporting layers 0.0s done
+#43 exporting manifest sha256:dc03967c51414c4f54410c34b4a18f635266ef336a0118803c5e165a12aff2e4 0.1s done
+#43 exporting config sha256:b4a8a553ae4114172946ffa9bd117a393910c0ef3e2677aee1e7a9f4e259f15e 0.1s done
+#43 exporting attestation manifest sha256:1ff123ef102eb4e2c8584186d63718e66c5831bb9c67263f2d9ea05b2f5969e7 0.1s done
+#43 exporting manifest list sha256:2a71b421fa990c176e7ffdcbe8dae2310ab69019be920cc83d6c30f5f5c0e70b 0.0s done
+#43 naming to docker.io/library/contact-groups-clean-frontend:latest done
+#43 unpacking to docker.io/library/contact-groups-clean-frontend:latest 0.0s done
+#43 DONE 0.4s
 
-#36 [frontend] exporting to image
-#36 exporting manifest sha256:c0e28fe26d25bccd2646d3ce49e51a4819592cab0446894532bb632b422a4715 0.1s done
-#36 exporting config sha256:9ce5d2085354da4852e3e99696c82896c076c21f918bdcc4ec88258573554fa3
-#36 exporting config sha256:9ce5d2085354da4852e3e99696c82896c076c21f918bdcc4ec88258573554fa3 0.1s done
-#36 exporting attestation manifest sha256:6dd385c33f3fbddff627f5d8183bbcb6d2ccf2905527b2eecec82ffbd35cb30b
-#36 exporting attestation manifest sha256:6dd385c33f3fbddff627f5d8183bbcb6d2ccf2905527b2eecec82ffbd35cb30b 0.1s done
-#36 exporting manifest list sha256:b30cb002b715dd4ece3762be747a869bb704c6b00610508fc514eda0f666f23e 0.1s done
-#36 naming to docker.io/library/contact-groups-clean-frontend:latest 0.0s done
-#36 unpacking to docker.io/library/contact-groups-clean-frontend:latest
-#36 ...
+#44 [backend] resolving provenance for metadata file
+#44 DONE 0.1s
 
-#45 [emulator] resolving provenance for metadata file
-#45 DONE 0.1s
-
-#36 [frontend] exporting to image
-#36 unpacking to docker.io/library/contact-groups-clean-frontend:latest 0.0s done
-#36 DONE 0.7s
-
-#46 [backend] exporting to image
-#46 exporting layers 0.0s done
-#46 exporting manifest sha256:cb7fd14846f0babb72763372252ddd617ab63d594ace82a23ffc70f3d0120fe1 0.1s done
-#46 exporting config sha256:aefef0786466039821da8bbc45f6ac194483f1f1e512a17cd5a82760ea2950bf 0.2s done
-#46 exporting attestation manifest sha256:91b15e4ac13634d0a5e6ce47ed9d0dea92397fe0aed954be6b2a69b61614b9ad 0.1s done
-#46 exporting manifest list sha256:f534a91a301e567b0d909a8ff0149a238bc081c113c83f766294226bb1064e55 0.1s done
-#46 naming to docker.io/library/contact-groups-clean-backend:latest 0.0s done
-#46 unpacking to docker.io/library/contact-groups-clean-backend:latest
-#46 unpacking to docker.io/library/contact-groups-clean-backend:latest 0.0s done
-#46 DONE 0.7s
-
-#47 [frontend] resolving provenance for metadata file
-#47 DONE 0.4s
-
-#48 [backend] resolving provenance for metadata file
-#48 DONE 0.0s
+#45 [frontend] resolving provenance for metadata file
+#45 DONE 0.0s
  Image contact-groups-clean-emulator Built 
  Image contact-groups-clean-backend Built 
  Image contact-groups-clean-frontend Built 
  Network contact-groups-clean_default Creating 
- Volume contact-groups-clean_contacts-db Creating 
- Volume contact-groups-clean_contacts-db Creating 
  Network contact-groups-clean_default Creating 
+ Volume contact-groups-clean_contacts-db Creating 
+ Volume contact-groups-clean_contacts-db Creating 
  Volume contact-groups-clean_contacts-db Created 
  Volume contact-groups-clean_contacts-db Created 
  Network contact-groups-clean_default Created 
@@ -251,58 +237,23 @@ docker compose up --build --wait (several minutes on a cold cache) ...
  Container contact-groups-clean-backend-1 Healthy 
  Container contact-groups-clean-frontend-1 Starting 
  Container contact-groups-clean-frontend-1 Started 
- Container contact-groups-clean-frontend-1 Waiting 
- Container contact-groups-clean-db-1 Waiting 
  Container contact-groups-clean-emulator-1 Waiting 
  Container contact-groups-clean-backend-1 Waiting 
- Container contact-groups-clean-backend-1 Healthy 
+ Container contact-groups-clean-frontend-1 Waiting 
+ Container contact-groups-clean-db-1 Waiting 
  Container contact-groups-clean-db-1 Healthy 
+ Container contact-groups-clean-backend-1 Healthy 
  Container contact-groups-clean-emulator-1 Healthy 
  Container contact-groups-clean-frontend-1 Healthy 
-PASS stack healthy: backend=Up 33 seconds (healthy) db=Up 56 seconds (healthy) emulator=Up 55 seconds (healthy) frontend=Up 17 seconds (healthy) 
+PASS stack healthy: backend=Up 33 seconds (healthy) db=Up 56 seconds (healthy) emulator=Up 55 seconds (healthy) frontend=Up 16 seconds (healthy) 
 Running E2E-01 in Chromium ...
 
 Running 1 test using 1 worker
 
-  x  1 [chromium] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use (11.1s)
+  ok 1 [chromium] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use (6.4s)
 
-
-  1) [chromium] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ───────────────────────────
-
-    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
-
-    Locator:  getByText('The contact was saved.')
-    Expected: visible
-    Received: <element(s) not found>
-    Timeout:  5000ms
-
-    Call log:
-    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
-    [2m  - waiting for getByText('The contact was saved.')[22m
-
-
-      38 |   await page.getByLabel('Value').last().fill('spletnoProgramiranje');
-      39 |   await page.getByRole('button', { name: 'Save', exact: true }).click();
-    > 40 |   await expect(page.getByText('The contact was saved.')).toBeVisible();
-         |                                                          ^
-      41 |
-      42 |   await openTab(page, 'Contacts');
-      43 |   await page.getByLabel('Search').fill('udelez');
-        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\e2e\e2e-01-first-use.spec.ts:40:58
-
-    Error Context: test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-chromium\error-context.md
-
-    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
-    test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-chromium\trace.zip
-    Usage:
-
-        npx playwright show-trace test-results\e2e-e2e-01-first-use-E2E-01-J1-First-use-chromium\trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-  1 failed
-    [chromium] › e2e\e2e-01-first-use.spec.ts:8:1 › E2E-01 J1 First use ────────────────────────────
-FAIL E2E-01 failed (see log)
+  1 passed (9.4s)
+PASS NFR-12 E2E-01 passes on the clean copy
  Container contact-groups-clean-frontend-1 Stopping 
  Container contact-groups-clean-frontend-1 Stopped 
  Container contact-groups-clean-frontend-1 Removing 

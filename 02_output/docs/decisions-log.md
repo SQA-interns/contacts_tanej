@@ -820,6 +820,6 @@
 - Trigger: F-V01 (High) was open in runs 1, 2 and 3. Hidden evaluation Run 3 (commit `df309a9` = HEAD): 234 of 251 pass, 17 fail (Run 2: 47, Run 1: 62): R-001-06 (other), R-018-01 (other), R-018-02 (combination), R-018-03 (boundary), R-010-10 (other) and 12 "unknown rule" (5 combination, 2 invalid, 2 boundary, 3 other). The local tests of those rules pass. No cause is known; the language hypothesis of D-68 does not explain the improvement from Run 2 to Run 3 either.
 - Options: (1) Accept F-V01 as a known limitation (17 held-out cases, release-note text below) and go to `/release`. (2) Show the human the failing hidden tests (the developer reads them outside the agent and tells `/fix` what they assume). (3) Change the requirement the failing cases rest on (R-001, R-018, R-010, named by the developer).
 - Release-note text for option 1: "Hidden-suite failures (17 of 251) remain open: R-001-06, R-018-01 to -03, R-010-10 and 12 cases of no named rule. The app opens in Slovenian by default (R-018-01); a cause was not found."
-- Human response: none
-- Resolution: pending; the session ended here as step 1 requires.
+- Human response: 1 (accept F-V01 as a known limitation with the drafted release-note text, then continue to `/release`), given as `/verify D-71: 1`, 2026-11-16
+- Resolution: option 1 applied in `/verify` run 4. F-V01 and F-V04 closed as accepted. `/release` puts the release-note text above into `release-notes.md` ("Known limitations").
 - Overrides: none

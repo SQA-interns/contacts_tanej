@@ -1,0 +1,18 @@
+HTTP :18080 / -> 301 location=https://localhost/
+HTTPS / -> 200
+  strict-transport-security: max-age=31536000; includeSubDomains
+  content-security-policy: default-src 'self'; script-src 'self' https://apis.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com ; frame-src https://accounts.google.com https://*.firebaseapp.com ; frame-ancestors 'none'; base-uri 'none'; form-action 'self'
+  x-content-type-options: nosniff
+  x-frame-options: undefined
+  referrer-policy: no-referrer
+  permissions-policy: camera=(), microphone=(), geolocation=()
+  server: nginx
+/api/health -> 200 {"status":"UP"}
+/api/groups without token -> 401
+/api/groups with forged token -> 401
+/config.js -> 200; emulator mentioned: false
+  window.__APP_CONFIG__ = { firebaseProjectId: "verify-placeholder-project", firebaseApiKey: "<redacted>", firebaseAuthDomain: "verify-placeholder.firebaseapp.com", firebaseAuthEmulatorUrl: "", apiBaseUrl: "/api", }; 
+/api/v3/api-docs -> 401
+/api/actuator/env -> 401
+error body of unknown path (no stack/internals?): 401 {"status":401,"code":"UNAUTHENTICATED","message":"Sign in to continue."}
+CORS evil origin allow-origin header: undefined

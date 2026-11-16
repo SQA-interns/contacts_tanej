@@ -1,0 +1,14 @@
+Verify run 5, production deployment start (2026-11-16, HEAD f510756). Summary of the raw output (the full build output was 170 lines, all image layers CACHED).
+
+Scratch copy of docker-compose.prod.yml (outside the repository): project name contact-groups-verify5, absolute build contexts, host ports 18080 (HTTP) and 18443 (HTTPS), placeholder values only (no .env value used), self-signed certificate (2 days) made with the openssl of the nginx:1.29.1 image.
+
+docker compose up --build --wait -d  -> exit 0
+ Image contact-groups-verify5-backend  Built (all layers cached: same sources as the dev rebuild at HEAD)
+ Image contact-groups-verify5-frontend Built (all layers cached, includes `npm run build` = tsc + vite)
+ db        Healthy
+ backend   Healthy (Spring Boot 3.5.16, Flyway applied 2 migrations to an empty schema, started in 9.7 s)
+ frontend  Healthy
+ proxy     Started. First start failed with "cannot load certificate key ... Permission denied": the test key was 0600 root; the compose file and the install guide say tls.key must be readable by uid 101. After chmod 644 and a restart the proxy ran (uid 101, not root).
+
+docker compose down -v -> all four containers, network and volume removed.
+Live checks: see verify5-prod-live.log.

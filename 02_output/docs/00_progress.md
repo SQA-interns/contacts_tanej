@@ -5,10 +5,12 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S7 verify run 3 (self-check; report `docs/06_verification-report.md` "Run 3")
-- Result: blocked
-- Gate: phase 6 not passed (F-V01 High: 17 of 251 hidden cases fail, open in three runs; approval decision D-71)
-- Notes for the next session: Run 3 at `df309a9`: backend 118 + 492 tests pass, spotless, PMD, CPD; `tsc`, prettier, eslint, `audit.mjs`, licence check, traceability, gitleaks, `.env` search all clean; F-V13, F-V14, F-V15, F-V16, F-V17 closed. Vitest and Playwright flake under load (F-V07; failing tests pass alone). Not run, needs the developer's permission to run scripts: `restart-test.sh`, `restore.sh`, `clean-host-test.sh`, production Compose build and start (NFR-05, NFR-06, NFR-12, DoD-R-16). Answer D-71 as `/verify D-71: 1` (accept as known limitation, then `/release`), `2` or `3`.
+- Session: S7 verify run 5 (self-check; report `docs/06_verification-report.md` "Run 5"; developer's script evidence recorded, production set built and started by this session)
+- Result: done
+- Gate: phase 6 passed with accepted limitations: no Critical or High open (F-V01 accepted, D-71: 1; 12 Spring CVEs accepted, D-70); manifests match (input 73, acceptance 43, hidden ok); no secret leaked; NFR-05, NFR-06, NFR-12 PASS (developer's scripts at `f510756`); production Compose set builds and starts healthy, live checks pass. Hidden suite 234 of 251 (same 17), passes only through D-71.
+- Notes for the next session: `/release` puts the F-V01 text of D-71 and the F-V07 flake note (D-69) into `release-notes.md`, records D-66 (frontend mutation 77.9 % estimate), and lists under "Must be tested manually by a human": sign-in and core flows on the production configuration with a real Firebase project (none here, so DoD-P06 and DoD-P09 are partly met), manual Safari/Edge (NFR-07), CSV in Excel, a person's first-contact walkthrough. Install guide must say `certs/tls.key` has to be readable by uid 101 (the production proxy crashed on a 0600 key in this run; fix is `chmod 644`). No code change since run 3.
+- Previous session: S7 verify run 4 D-71: 1 (F-V01 accepted; no script evidence yet; see Run 4 in the report)
+- Previous session: S7 verify run 3 (blocked, D-71 asked). Run 3 at `df309a9`: backend 118 + 492 tests pass, spotless, PMD, CPD; `tsc`, prettier, eslint, `audit.mjs`, licence check, traceability, gitleaks, `.env` search all clean; F-V13, F-V14, F-V15, F-V16, F-V17 closed. Vitest and Playwright flake under load (F-V07; failing tests pass alone). Not run, needs the developer's permission to run scripts: `restart-test.sh`, `restore.sh`, `clean-host-test.sh`, production Compose build and start (NFR-05, NFR-06, NFR-12, DoD-R-16). Answer D-71 as `/verify D-71: 1` (accept as known limitation, then `/release`), `2` or `3`.
 - Previous session: S8 fix F-V13 D-70: 2 (answer applied, no code change)
 - Notes (S8): D-70 round 2: all 12 Spring Framework 6.2.19 CVEs accepted as known limitations, each with evidence (dependency tree `out/logs/verify4-backend-dependency-tree.log`, grep, all controllers checked for CVE-2026-59282: no object binding of query or form params). `release-notes.md` not edited (not in the `/fix` Writes list); text for it is in D-70 and D-68. Next is `/verify` (run 3).
 - Previous fix session (round 3): S8 fix F-V01 F-V13 D-68: 1 D-70: 3 (answers applied, no code change; 3 of 12 CVEs accepted, 9 waited for the developer, now answered above).
@@ -41,8 +43,8 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /verify D-71: <1, 2 or 3>
-- Waiting for: D-71
+- Command: /release
+- Waiting for: nothing
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |

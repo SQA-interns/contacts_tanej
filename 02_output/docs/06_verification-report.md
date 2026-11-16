@@ -345,3 +345,89 @@ Backend `verify`, `spotless:check`, `pmd:check`, `pmd:cpd-check`: BUILD SUCCESS.
 | F-V11, F-V12, F-06, F-07, F-08 | Low, Medium | | unchanged | open |
 
 Run 3 of at most 3 rounds. F-V01 has now been open in three runs, so step 1 applies: D-71 asks the developer. Next: `/verify` again only after D-71 is answered; with option 1 the run may go to `/release`.
+
+## Run 4
+
+**This is a self-check by the agent in a separate session (S7, phase 6), not an independent review.** Commit under test: `f510756` (HEAD; the runner's hidden evaluation Run 4 is for the same commit). Date: 2026-11-16. Trigger: D-71 answered `1` (accept F-V01 as a known limitation with the drafted release-note text).
+
+Scope: a short run. `git diff --name-only df309a9 HEAD` lists nothing outside `02_output/docs/` and `02_output/logs/` (no production code, test, configuration or `pom.xml` change since run 3). The run 3 results for the suites, `tsc`, prettier, eslint, spotless, PMD, CPD, Playwright, NFR load tests, scanners, licence check and traceability were therefore not re-run and stand as recorded in "Run 3". Re-checked here: manifests, hidden evaluation, `.env` search.
+
+| Check | Result |
+|---|---|
+| Input manifest | 73 of 73 match (CRLF normalised) |
+| Acceptance manifest | 43 of 43 match |
+| Hidden manifest | ok per the runner (Run 4) |
+| Hidden evaluation | Run 4, commit `f510756` = HEAD: 251 tests, 234 passed, 17 failed; the same 17 cases as Run 3 (F-V01) |
+| `.env` values (2 of length 6 or more) in files | no file listed |
+| `.env` values in commit messages | 0 |
+| Working tree | only the runner's `06_hidden-evaluation.md` and run logs changed; committed here |
+
+Still not run (needs the developer's permission to run scripts; unchanged from run 3): `restart-test.sh`, `restore.sh`, `clean-host-test.sh`, production Compose build and start, manual Safari/Edge check. Earlier evidence stands (`restore.sh` PASS, clean-host up to the D-48 E2E-01 failure) but was not repeated after the last fixes. DoD-R-14 (NFR-05, NFR-06, NFR-12), DoD-R-16, DoD-P06 and DoD-P09 therefore have no current evidence; this is an evidence gap, not a new finding. The frontend mutation shortfall (D-66) is unchanged.
+
+### Findings, run 4
+
+| F | Severity | Resolution |
+|---|---|---|
+| F-V01 | High | **Accepted as a known limitation by the developer (D-71: 1).** 17 of 251 held-out cases fail (R-001-06, R-018-01 to -03, R-010-10 and 12 of no named rule); cause not found. Release-note text in D-71. DoD-R-05 and DoD-R-13 are met only by this acceptance. |
+| F-V04 | Medium | Follows F-V01: accepted with it |
+| F-V07, F-V11, F-V12, F-06, F-07, F-08, D-66 | Medium, Low | unchanged; F-V07 goes to the release notes (D-69) |
+
+No finding is open that needs `/fix`. Next: `/release`.
+
+## Run 5
+
+**This is a self-check by the agent in a separate session (S7, phase 6), not an independent review.** Commit under test: `f510756` (HEAD; the runner's hidden evaluation "Run 5" in `06_hidden-evaluation.md` is for this commit). Date: 2026-11-16. Trigger: the developer ran the scripts and asked for their evidence to be recorded and for the production build and start to be done in this session.
+
+Step 1 (run 4 or later needs an approval decision) is already met: D-71 was answered `1` by the developer, and the developer started this run on purpose. No new decision was needed.
+
+Scope: `git diff --name-only df309a9 HEAD` and `git status` list nothing outside `02_output/docs/` and `02_output/logs/`: no production code, test, configuration or `pom.xml` change since run 3. The run 3 results for the suites, `tsc`, prettier, eslint, spotless, PMD, CPD, Playwright, load tests, scanners, licence check and traceability stand ("Run 3"). Re-checked or newly checked here: manifests, hidden evaluation, `.env` search, the developer's script evidence, the production build and start.
+
+| Check | Result |
+|---|---|
+| Input manifest | 73 of 73 match (CRLF normalised) |
+| Acceptance manifest | 43 of 43 match |
+| Hidden manifest | ok per the runner |
+| Hidden evaluation | commit `f510756` = HEAD: 251 tests, 234 passed, 17 failed; the same 17 cases as Runs 3 and 4 (F-V01, accepted by D-71) |
+| `.env` values (2 of length 6 or more) in 1,317 files | no file listed (done in Node, values not printed) |
+| `.env` values in commit messages | 0 |
+
+### Evidence from the developer's script runs (HEAD `f510756`, 2026-11-16 19:33-19:36; not run by this session)
+
+| NFR | Script and log | Result |
+|---|---|---|
+| NFR-05 | `scripts/restart-test.sh`, `out/logs/restart-test.log` | PASS: backend and database restarted, `/health` 200, contact, tag, attribute and group read back unchanged |
+| NFR-06 | `scripts/backup.sh` then `scripts/restore.sh`, `out/logs/backup-run.log`, `backup-restore-test.log` | PASS: dump `contacts-20261116T183416Z.dump`; 15 tables with identical row counts and checksums after restore |
+| NFR-12 | `scripts/clean-host-test.sh`, `out/logs/clean-host-test.log` | PASS: stack built from committed files plus `.env`, healthy; E2E-01 passed on the clean copy (the D-48 failure of earlier runs is gone) |
+
+I read the logs; I did not repeat the scripts. The source of the restore test held 3 contacts and 2 groups (small data).
+
+### Production deployment (DoD-R-16)
+
+Method: a scratch copy of `docker-compose.prod.yml` outside the repository (absolute build contexts, host ports 18080 and 18443, project name `contact-groups-verify5`, placeholder values for all five required variables, self-signed certificate; no `.env` value used). Raw output: `out/logs/verify5-prod-up.log` (summary) and `out/logs/verify5-prod-live.log`.
+
+- `docker compose up --build --wait -d`: exit 0; db, backend, frontend healthy; Flyway applied both migrations to an empty schema; Spring Boot 3.5.16 started in 9.7 s. All image layers were cached (same sources as the dev rebuild at HEAD).
+- The proxy first crashed with "cannot load certificate key: Permission denied". Cause: my test key was 0600 root and the proxy runs as uid 101 (SB-11, F-V10). The compose file and the F-V10 note already say the key must be readable by uid 101; after `chmod 644` and a restart it ran as a non-root user. This is a scratch-setup error, not a product defect, but it confirms that the install guide (phase 7) must say it.
+- Live checks through the proxy: HTTP answers 301 to HTTPS (the `Location` has no port because the scratch ports differ from 80 and 443); HTTPS 200 with `Strict-Transport-Security: max-age=31536000; includeSubDomains`, a CSP with `frame-ancestors 'none'`, `nosniff`, `Referrer-Policy: no-referrer`, a Permissions-Policy, and no `X-Frame-Options` (covered by the CSP); `/api/health` 200; `/api/groups` without a token 401 and with a forged token 401; `/api/v3/api-docs` and `/api/actuator/env` 401; an unknown path gives a short JSON body with no stack or internals; a foreign `Origin` gets no `Access-Control-Allow-Origin`; served `config.js` has an empty emulator URL and no emulator in the CSP.
+- Backend log: only startup lines and "Request refused method=GET path=(no match) status=401 user=-"; no token, password, e-mail or request internals.
+- The stack was removed with `down -v`.
+- Limit: no real Firebase project, so sign-in, and therefore the core flows and the load tests, could not be run against the production configuration. J1 to J5 pass on the dev stack (run 3) and E2E-01 on the clean-host copy.
+
+### Definition of Done, changes since run 3
+
+| DoD | Result | Evidence |
+|---|---|---|
+| DoD-R-05 no open Critical or High | Met by acceptance | F-V01 accepted by D-71 |
+| DoD-R-09 READMEs work from a clean checkout | Met | `clean-host-test.sh` PASS |
+| DoD-R-13 hidden suite passes | Met only by the acceptance in D-71 | 234 of 251, same 17 |
+| DoD-R-14 every NFR checked and met | Met | NFR-05, NFR-06, NFR-12 now evidenced (above); NFR-01 to NFR-04, NFR-07 to NFR-11, NFR-13 to NFR-15 as in Run 3 (NFR-07 manual Safari and Edge still open) |
+| DoD-R-16 production build and start; threats controlled | Met | above; SB-04, SB-11, SB-12, SR-04, SR-20 checked live |
+| DoD-P06 NFR-01 to NFR-09 on the deployed system | Partly | NFR-05, NFR-06, NFR-12 on the dev and clean-host stacks, load NFR on the dev stack; the production set was started but could not be loaded without a Firebase project |
+| DoD-P07 OWASP ASVS L2, no Critical or High open | Met by acceptance | F-V01 (a held-out failure), D-70 (12 Spring CVEs) accepted; no ASVS checklist file was produced |
+| DoD-P09 demo J1 to J5 from the delivered files | Partly | dev stack and clean-host copy, not the production set (no Firebase project) |
+| all other DoD-R and DoD-P | unchanged from Run 3 and Run 4 | |
+
+### Findings, run 5
+
+No new finding. F-V01 and F-V04 stay accepted (D-71). F-V07 (flakes, goes to the release notes, D-69), D-66 (frontend mutation estimate 77.9 %), F-V11, F-V12, F-06, F-07, F-08 unchanged (Low or Medium, none blocks).
+
+Gate (phase 6): no Critical or High open; manifests match; no secret leaked; hidden suite passes only through the D-71 acceptance. Limits to carry into the release notes under "Must be tested manually by a human": sign-in and the core flows against the production configuration with a real Firebase project, manual Safari and Edge check (NFR-07), opening the CSV export in Excel, a person's first-contact walkthrough. Next: `/release`.
