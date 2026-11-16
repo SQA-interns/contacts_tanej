@@ -262,3 +262,86 @@ Backend `verify`, `spotless:check`, `pmd:check`, `pmd:cpd-check`: BUILD SUCCESS 
 | F-V11, F-V12, F-06, F-07, F-08 | Low, Medium | | unchanged | open |
 
 Run 2 of at most 3 rounds; no finding has been open for three runs. Next: `/fix`.
+
+## Run 3
+
+**This is a self-check by the agent in a separate session (S7, phase 6), not an independent review.** Commit under test: `df309a9` (HEAD; the runner's hidden evaluation Run 3 is for the same commit). Date: 2026-11-16. Result: **gate not passed**, 1 High finding open (F-V01, open in runs 1, 2 and 3: approval decision D-71 recorded, no further `/fix` loop until the developer answers).
+
+Method: manifests re-hashed (CRLF normalised); `tsc`, prettier, eslint; vitest with coverage; backend `mvn verify spotless:check pmd:check pmd:cpd-check` in the Maven image; images rebuilt at HEAD with `docker compose up --build -d`; Playwright full run (3 engines, 399 tests, 1 worker); load and export scripts; `audit.mjs`, `licence-check.mjs`, `check-traceability.mjs`, `check-tasks.mjs`; gitleaks 8.28.0; `.env` value search. Raw output: `out/logs/verify3-backend-verify.log`, `verify3-playwright.log`. Backend dependency scan not repeated: no change to `pom.xml` or to `backend/src/main` or `frontend/src` since `f552ccf`; the scan of the fix session (`verify3-backend-depcheck.log`, `verify4-backend-dependency-tree.log`) and its acceptance of 12 Spring Framework CVEs (D-70) stand.
+
+**Not run (permission to run scripts that restart containers, restore the database and build the production set was not given in this session):** `restart-test.sh`, `restore.sh`, `clean-host-test.sh`, production Compose build and start with production configuration, manual Safari/Edge check, a person's first-contact walkthrough. Not every screen was compared with its wireframe in this session (specs only). The mutation shortfall of the frontend is unchanged (D-66, estimate 77.9 %, not re-measured).
+
+### Definition of Done
+
+| DoD | Result | Evidence |
+|---|---|---|
+| DoD-R-01 full suite passes; frozen hashes match | Met except flakes | Input manifest 73 of 73 (38 only after CRLF to LF, F-V12); acceptance 43 of 43; hidden manifest ok per the runner. Backend 118 unit and 492 integration tests, 0 failures, BUILD SUCCESS (21 min). Vitest: three full runs gave 372, 373 and 374 of 377 with different timing failures each time; the failing files pass alone (57 of 57) (F-V07). Playwright 396 of 399; the 3 failures (Chromium `AC-011-06`, WebKit `E2E-05`, WebKit `language.spec.ts:60`) pass on repeat; `language.spec.ts:60` failed 3 of 3 once in a `--repeat-each=3` run and passed in the next runs (F-V07). |
+| DoD-R-02 format, lint, type check, static analysis | Met | `tsc --noEmit`, prettier, eslint clean; spotless, PMD, CPD pass; the frontend image builds at HEAD. |
+| DoD-R-03 quality gate per component | **Not met** | Coverage not re-measured (no production change since run 2: backend lines 97.12 %, frontend lines 97.03 %). Frontend mutation below 90 % (estimate 77.9 %), accepted for this run in D-66. |
+| DoD-R-04 architecture constraints | Met | `ArchitectureTest` passes. |
+| DoD-R-05 no open Critical or High | **Not met** | F-V01. |
+| DoD-R-06 runtime and core flows | Met | E2E-01 to E2E-08 pass in three engines (E2E-05 WebKit once timed out, passes on repeat). |
+| DoD-R-07 AC, EX, R trace to a test and a commit | Met | 638 of 638 ids mapped; every story has tasks. |
+| DoD-R-08 final theme, three widths, a11y | Met by specs | Responsive and accessibility specs pass in 3 engines. |
+| DoD-R-09 READMEs work from a clean checkout | Partly | `npm run build` and the image build pass at HEAD; the clean-host script was not run. |
+| DoD-R-10 release notes | Not verified | Phase 7. |
+| DoD-R-11 decisions resolved; inputs unchanged | Met, some pending | Manifests match; D-71 added. |
+| DoD-R-12 commit rules | Met | Working tree clean apart from the runner's `06_hidden-evaluation.md` and logs, committed here. |
+| DoD-R-13 hidden suite passes | **Not met** | Run 3, commit `df309a9` = HEAD, manifest ok: 251 tests, 234 passed, 17 failed (Run 2: 47, Run 1: 62). |
+| DoD-R-14 every NFR checked and met | **Not met** | NFR-05, NFR-06, NFR-12 not re-evidenced (scripts not run). |
+| DoD-R-15 CI passes | Met locally | Frontend checks, audit, licence check, backend verify pass; no remote runner result seen. |
+| DoD-R-16 production build and start; threats controlled | **Not met** | Production set not started in this session. |
+| DoD-P01 E2E-01 to E2E-08 | Met | See DoD-R-06. |
+| DoD-P02 first contact under 120 s | Met | By test; no walkthrough by a person. |
+| DoD-P03 search and filter under 1 s | Met | NFR-01 below. |
+| DoD-P04 export opens in Excel | Met by test | Manual opening in Excel is a release-notes item. |
+| DoD-P05 isolation, non-member 404 | Met | AC-017-07, E2E-04. |
+| DoD-P06 NFR-01 to NFR-09 on the deployed system | **Not met** | Measured on the dev stack only. |
+| DoD-P07 OWASP ASVS 5.0 L2, no Critical or High open | **Not met** | F-V01 open (a held-out failure, not a scanner finding); no ASVS checklist produced. Scanner findings: none open (D-70 accepts 12 Spring CVEs). |
+| DoD-P08 delivery exists | Phase 7 | |
+| DoD-P09 demo J1 to J5 | Partly | Dev stack only. |
+| DoD-P10 second increment finished, J6 passes | Met | E2E-06 and the acceptance tests of US-020 to US-022 pass. |
+| DoD-P11 verification report exists | Met | This file. |
+
+### NFR
+
+| NFR | Measured | Pass value | Result |
+|---|---|---|---|
+| NFR-01 | `load-test.mjs --duration 60`, 20 users, 10,000 contacts: all searches together p95 154 ms and 151 ms (two runs); "text with accents" p95 1267 ms in the first run (right after the rebuild, 64 samples) and 185 ms in the second | under 1,000 ms | Pass (the single-request figure exceeded 1,000 ms once; watch item D-46) |
+| NFR-02 | open a contact p95 17 ms, 25 ms | under 500 ms | Pass |
+| NFR-03 | 1,000 contacts: slowest of 3 runs 593 ms, 1001 rows | under 10 s | Pass |
+| NFR-04 | 0 errors of 1,720 and 1,752 requests | none | Pass |
+| NFR-05, NFR-06 | `restart-test.sh`, `restore.sh` not run | | Not re-evidenced |
+| NFR-07 | three engines pass (3 flakes pass on repeat); manual Safari and Edge not done | all pass | Pass for the engines, manual open |
+| NFR-08, NFR-09, NFR-10, NFR-11 | responsive, accessibility, language and state specs pass (NFR-10 WebKit flake, F-V07) | | Pass |
+| NFR-12 | image build and `tsc` pass at HEAD; `clean-host-test.sh` not run | passes | Not re-evidenced |
+| NFR-13 | `MigrationIT` passes | both start | Pass |
+| NFR-14 | `licence-check.mjs` PASS | none forbidden | Pass |
+| NFR-15 | 10,000 contacts export 1077 ms (slowest of 3), backend not restarted or OOM-killed | no error | Pass |
+
+### Threats and controls
+
+Rows covered by tests pass again (492 backend integration tests incl. AC-017-* and `SecurityHeadersIT`; E2E-04, E2E-07; AC-012-03). Secrets (SB-03, SR-12): gitleaks over 221 commits, no leaks; `.env` value search over 1,309 files: no file listed, 0 commit-message hits. Dependencies (SB-08, SR-19): `audit.mjs` passes (1 advisory allowed by D-08); backend scan as above, 12 Spring Framework CVEs accepted by D-70. Root process in the proxy (SB-11), live header and TLS checks (SB-12, SB-14, SR-20): not re-started, no production start in this session (results of run 1 stand).
+
+### CI and deployment
+
+Backend `verify`, `spotless:check`, `pmd:check`, `pmd:cpd-check`: BUILD SUCCESS. Frontend: eslint, tsc, prettier, audit, licence check pass; vitest flakes under load (F-V07). Dev Compose stack rebuilt at HEAD: backend and frontend images built, all four containers healthy. The production deployment files were not built or started here.
+
+### Traceability
+
+`check-traceability.mjs`: 638 ids defined, 638 mapped. `check-tasks.mjs`: every story has tasks, none above six.
+
+### Findings, run 3
+
+| F | Severity | Source | Finding | Resolution |
+|---|---|---|---|---|
+| F-V01 | High | hidden evaluation Run 3 | 17 held-out cases fail (Run 2: 47, Run 1: 62): R-001-06 (other), R-018-01 (other), R-018-02 (combination), R-018-03 (boundary), R-010-10 (other), and 12 "unknown rule" (5 combination, 2 invalid, 2 boundary, 3 other). Run 3 shows that the 18 scattered cases of Run 2 (R-009, R-011, R-014, R-020, R-021, R-022) and R-001-01 to -05, -07 to -09 and R-018-04 to -08 now pass without a recorded cause; no hypothesis was tested | open for the third run: D-71 (approval) |
+| F-V14, F-V15, F-V17 | | | `tsc`, prettier, licence check pass; image builds | closed |
+| F-V16 | | | `audit.mjs` passes | closed (not reproduced, D-69) |
+| F-V13 | | | accepted per CVE (D-70), no change since | closed as accepted |
+| F-V07 | Medium | tests | Timing flakes: vitest 3 to 5 failures per full run, different tests each time, all pass alone; Playwright 3 failures in one full run, pass on repeat; WebKit `language.spec.ts:60` once 3 of 3 failures in a repeat run | open item for the release notes |
+| F-V04 | Medium | NFR-10, R-018-* | Local language tests pass; hidden R-018-01 to -03 still fail | open (see F-V01) |
+| D-66 | Low | DoD-R-03 | frontend mutation score below 90 % (estimate) | accepted for this run |
+| F-V11, F-V12, F-06, F-07, F-08 | Low, Medium | | unchanged | open |
+
+Run 3 of at most 3 rounds. F-V01 has now been open in three runs, so step 1 applies: D-71 asks the developer. Next: `/verify` again only after D-71 is answered; with option 1 the run may go to `/release`.

@@ -1,0 +1,443 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< app.contactgroups:contact-groups-backend >--------------
+[INFO] Building contact-groups-backend 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (prepare) @ contact-groups-backend ---
+[INFO] argLine set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/w/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contact-groups-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contact-groups-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contact-groups-backend ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contact-groups-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 64 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ contact-groups-backend ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contact-groups-backend ---
+[INFO] Building jar: /w/target/contact-groups-backend.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ contact-groups-backend ---
+[INFO] Replacing main artifact /w/target/contact-groups-backend.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /w/target/contact-groups-backend.jar.original
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ contact-groups-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT
+11:04:09.323 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT]: Us017SecuredApiAcceptanceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:04:10.193 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT
+11:04:11.920 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+11:04:11.943 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+11:04:11.974 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+11:04:14.624 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+11:04:14.633 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is host.docker.internal
+11:04:14.681 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.9.3
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 7612 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+11:04:15.349 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+11:04:15.372 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Failure when attempting to lookup auth config. Please ignore if you don't have images in an authenticated registry. Details: (dockerImageName: testcontainers/ryuk:0.12.0, configFile: /root/.docker/config.json, configEnv: DOCKER_AUTH_CONFIG). Falling back to docker-java default behaviour. Exception message: Status 404: No config supplied. Checked in order: /root/.docker/config.json (file not found), DOCKER_AUTH_CONFIG (not set)
+11:04:15.846 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: 9ee0ea93f34a94cf08eab327ff5bb8634a8b2251fd761746cec414ab8f546b13
+11:04:16.615 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT1.266100224S
+11:04:16.631 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+11:04:16.631 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+11:04:16.633 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+11:04:16.634 [main] INFO tc.postgres:17.6 -- Creating container for image: postgres:17.6
+11:04:16.768 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 is starting: b2fd43f89f87ae10f300fff4225e4eaf910fbadf7b07c7ebd31a712448f6c2f2
+11:04:18.956 [main] INFO tc.postgres:17.6 -- Container postgres:17.6 started in PT2.322656013S
+11:04:18.957 [main] INFO tc.postgres:17.6 -- Container is started (JDBC URL: jdbc:postgresql://host.docker.internal:50072/test?loggerLevel=OFF)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-12T11:04:20.481Z  INFO 139 --- [contact-groups-backend] [           main] a.c.a.Us017SecuredApiAcceptanceIT        : Starting Us017SecuredApiAcceptanceIT using Java 21.0.9 with PID 139 (started by root in /w)
+2026-11-12T11:04:20.484Z  INFO 139 --- [contact-groups-backend] [           main] a.c.a.Us017SecuredApiAcceptanceIT        : The following 1 profile is active: "test"
+2026-11-12T11:04:27.340Z  INFO 139 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-11-12T11:04:27.389Z  INFO 139 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-12T11:04:27.390Z  INFO 139 --- [contact-groups-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.59]
+2026-11-12T11:04:27.515Z  INFO 139 --- [contact-groups-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-12T11:04:27.515Z  INFO 139 --- [contact-groups-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6962 ms
+2026-11-12T11:04:28.564Z  INFO 139 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-12T11:04:29.111Z  INFO 139 --- [contact-groups-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6be03f17
+2026-11-12T11:04:29.117Z  INFO 139 --- [contact-groups-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-12T11:04:29.201Z  INFO 139 --- [contact-groups-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://host.docker.internal:50072/test?loggerLevel=OFF (PostgreSQL 17.6)
+2026-11-12T11:04:29.404Z  INFO 139 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-11-12T11:04:29.417Z  INFO 139 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.117s)
+2026-11-12T11:04:29.460Z  INFO 139 --- [contact-groups-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-11-12T11:04:29.577Z  INFO 139 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-11-12T11:04:29.637Z  INFO 139 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - baseline"
+2026-11-12T11:04:29.808Z  INFO 139 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "2 - history order"
+2026-11-12T11:04:29.842Z  INFO 139 --- [contact-groups-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "public", now at version v2 (execution time 00:00.126s)
+2026-11-12T11:04:33.507Z  INFO 139 --- [contact-groups-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 36491 (http) with context path '/'
+2026-11-12T11:04:33.531Z  INFO 139 --- [contact-groups-backend] [           main] a.c.a.Us017SecuredApiAcceptanceIT        : Started Us017SecuredApiAcceptanceIT in 14.422 seconds (process running for 27.77)
+2026-11-12T11:04:36.174Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-12T11:04:36.174Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-12T11:04:36.176Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-12T11:04:37.651Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-ana
+2026-11-12T11:04:37.667Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-ana
+2026-11-12T11:04:37.752Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/members status=404 user=uid-ana
+2026-11-12T11:04:37.764Z  INFO 139 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-ana
+2026-11-12T11:04:37.961Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/exports status=403 user=uid-petra
+2026-11-12T11:04:38.137Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-marko
+2026-11-12T11:04:38.955Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-boris
+2026-11-12T11:04:38.973Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId} status=404 user=uid-boris
+2026-11-12T11:04:38.992Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/trash status=404 user=uid-boris
+2026-11-12T11:04:39.010Z  INFO 139 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/restore status=404 user=uid-boris
+2026-11-12T11:04:39.027Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/members status=404 user=uid-boris
+2026-11-12T11:04:39.047Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/members/{userId} status=404 user=uid-boris
+2026-11-12T11:04:39.065Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/members/{userId} status=404 user=uid-boris
+2026-11-12T11:04:39.081Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/leave status=404 user=uid-boris
+2026-11-12T11:04:39.095Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/invitations status=404 user=uid-boris
+2026-11-12T11:04:39.111Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/invitations status=404 user=uid-boris
+2026-11-12T11:04:39.128Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/invitations/{invitationId} status=404 user=uid-boris
+2026-11-12T11:04:39.151Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=404 user=uid-boris
+2026-11-12T11:04:39.176Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/search status=404 user=uid-boris
+2026-11-12T11:04:39.197Z  INFO 139 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-12T11:04:39.220Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=PUT path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-12T11:04:39.244Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-boris
+2026-11-12T11:04:39.264Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/trash status=404 user=uid-boris
+2026-11-12T11:04:39.279Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts/{contactId}/restore status=404 user=uid-boris
+2026-11-12T11:04:39.293Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/trash-contacts status=404 user=uid-boris
+2026-11-12T11:04:39.308Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/tags status=404 user=uid-boris
+2026-11-12T11:04:39.327Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=PATCH path=/groups/{groupId}/tags/{tagId} status=404 user=uid-boris
+2026-11-12T11:04:39.342Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=DELETE path=/groups/{groupId}/tags/{tagId} status=404 user=uid-boris
+2026-11-12T11:04:39.356Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/attribute-keys status=404 user=uid-boris
+2026-11-12T11:04:39.372Z  INFO 139 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/companies status=404 user=uid-boris
+2026-11-12T11:04:39.388Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/exports status=404 user=uid-boris
+2026-11-12T11:04:39.405Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-2] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/history status=404 user=uid-boris
+2026-11-12T11:04:39.419Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-3] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/history/actors status=404 user=uid-boris
+2026-11-12T11:04:39.438Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/history status=404 user=uid-boris
+2026-11-12T11:04:39.454Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId}/versions status=404 user=uid-boris
+2026-11-12T11:04:39.475Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/** status=404 user=uid-boris
+2026-11-12T11:04:39.491Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-12T11:04:39.508Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-12T11:04:39.524Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-12T11:04:39.541Z  INFO 139 --- [contact-groups-backend] [-auto-1-exec-10] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/** status=404 user=uid-boris
+2026-11-12T11:04:39.798Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-12T11:04:39.811Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId}/contacts/{contactId} status=404 user=uid-ana
+2026-11-12T11:04:39.879Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:40.064Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:40.070Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:40.074Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:40.137Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:40.286Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-marko
+2026-11-12T11:04:40.481Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-5] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:40.483Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-12T11:04:40.494Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=/groups/{groupId} status=404 user=uid-ana
+2026-11-12T11:04:40.506Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=POST path=/groups/{groupId}/contacts status=403 user=uid-petra
+2026-11-12T11:04:42.886Z  WARN 139 --- [contact-groups-backend] [o-auto-1-exec-4] com.zaxxer.hikari.pool.ProxyConnection   : HikariPool-1 - Connection org.postgresql.jdbc.PgConnection@6be03f17 marked as broken because of SQLSTATE(08003), ErrorCode(0)
+
+org.postgresql.util.PSQLException: This connection has been closed.
+	at org.postgresql.jdbc.PgConnection.checkClosed(PgConnection.java:1050) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgConnection.clearWarnings(PgConnection.java:942) ~[postgresql-42.7.14.jar:42.7.14]
+	at com.zaxxer.hikari.pool.ProxyConnection.close(ProxyConnection.java:258) ~[HikariCP-6.3.3.jar:na]
+	at app.contactgroups.repository.HealthRepository.databaseWorks(HealthRepository.java:24) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.19.jar:6.2.19]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728) ~[spring-aop-6.2.19.jar:6.2.19]
+	at app.contactgroups.repository.HealthRepository$$SpringCGLIB$$0.databaseWorks(<generated>) ~[classes/:na]
+	at app.contactgroups.service.HealthService.databaseWorks(HealthService.java:17) ~[classes/:na]
+	at app.contactgroups.api.HealthController.getHealth(HealthController.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.59.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.59.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:57) ~[tomcat-embed-websocket-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:370) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.BodySizeLimitFilter.doFilterInternal(BodySizeLimitFilter.java:42) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.RateLimitFilter.doFilterInternal(RateLimitFilter.java:44) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.AuthenticationFilter.doFilterInternal(AuthenticationFilter.java:177) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.UserSyncFilter.doFilterInternal(UserSyncFilter.java:46) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.VerifiedEmailFilter.doFilterInternal(VerifiedEmailFilter.java:41) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.doFilterInternal(BearerTokenAuthenticationFilter.java:135) ~[spring-security-oauth2-resource-server-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at app.contactgroups.config.RequestLogFilter.doFilterInternal(RequestLogFilter.java:30) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:379) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.11.jar:6.5.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:348) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:410) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2197) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:976) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:494) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:80) ~[tomcat-embed-core-10.1.59.jar:10.1.59]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-11-12T11:04:43.047Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-7] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-12T11:04:43.053Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-12T11:04:43.058Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-9] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=403 user=uid-ana
+2026-11-12T11:04:46.474Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 3329 ms
+[ERROR] Tests run: 54, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 37.76 s <<< FAILURE! -- in app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT
+[ERROR] app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken -- Time elapsed: 0.203 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting size of:
+  [Operation[method=GET, path=/health, id=getHealth, hasBody=false, statuses=[200, 503]],
+    Operation[method=GET, path=/me, id=getMe, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=DELETE, path=/me, id=deleteAccount, hasBody=false, statuses=[204, 401, 403, 409]],
+    Operation[method=GET, path=/groups, id=listGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=POST, path=/groups, id=createGroup, hasBody=true, statuses=[201, 400, 401, 403, 409, 413, 429]],
+    Operation[method=GET, path=/deleted-groups, id=listDeletedGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=GET, path=/groups/{groupId}, id=getGroup, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}, id=renameGroup, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/trash, id=trashGroup, hasBody=true, statuses=[204, 400, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/restore, id=restoreGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/members, id=listMembers, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/members/{userId}, id=changeRole, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/members/{userId}, id=removeMember, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/leave, id=leaveGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/invitations, id=listInvitations, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/invitations, id=createInvitation, hasBody=true, statuses=[201, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/invitations/{invitationId}, id=cancelInvitation, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts, id=createContact, hasBody=true, statuses=[201, 400, 401, 403, 404, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/search, id=searchContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}, id=getContact, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/contacts/{contactId}, id=saveContact, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/contacts/{contactId}, id=eraseContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/trash, id=trashContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/restore, id=restoreContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/trash-contacts, id=listTrashedContacts, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/tags, id=listTags, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}/tags/{tagId}, id=renameTag, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/tags/{tagId}, id=deleteTag, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/attribute-keys, id=listAttributeKeys, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/companies, id=listCompanies, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/exports, id=exportContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/history, id=listGroupHistory, hasBody=false, statuses=[200, 400, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/history/actors, id=listHistoryActors, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/history, id=listContactHistory, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions, id=listVersions, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions/{number}, id=getVersion, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/versions/{number}/restore, id=restoreVersion, hasBody=true, statuses=[200, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/search, id=findDuplicates, hasBody=false, statuses=[200, 401, 403, 404, 429]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/dismissals, id=dismissDuplicates, hasBody=true, statuses=[204, 400, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/merges, id=mergeContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]]]
+to be greater than 40 but was 40
+	at app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken(Us017SecuredApiAcceptanceIT.java:90)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_11_theOpenApiDescriptionListsEveryEndpointOfTheContract -- Time elapsed: 3.511 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[path /groups/{groupId}/contacts/{contactId}/versions/{number} in /v3/api-docs] 
+Expecting value to be false but was true
+	at app.contactgroups.acceptance.Us017SecuredApiAcceptanceIT.AC_017_11_theOpenApiDescriptionListsEveryEndpointOfTheContract(Us017SecuredApiAcceptanceIT.java:203)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running app.contactgroups.it.OpenApiContractIT
+2026-11-12T11:04:46.606Z  INFO 139 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.OpenApiContractIT]: OpenApiContractIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-12T11:04:46.940Z  INFO 139 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.OpenApiContractIT
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.543 s -- in app.contactgroups.it.OpenApiContractIT
+[INFO] Running app.contactgroups.it.SecurityHeadersIT
+2026-11-12T11:04:47.153Z  INFO 139 --- [contact-groups-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [app.contactgroups.it.SecurityHeadersIT]: SecurityHeadersIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-12T11:04:47.162Z  INFO 139 --- [contact-groups-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration app.contactgroups.ContactGroupsApplication for test class app.contactgroups.it.SecurityHeadersIT
+2026-11-12T11:04:47.220Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-4] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:47.274Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-6] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+2026-11-12T11:04:47.450Z  INFO 139 --- [contact-groups-backend] [o-auto-1-exec-8] a.contactgroups.config.RequestLogFilter  : Request refused method=GET path=(no match) status=401 user=-
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.457 s -- in app.contactgroups.it.SecurityHeadersIT
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   Us017SecuredApiAcceptanceIT.AC_017_01_everyEndpointExceptTheHealthCheckNeedsAToken:90 
+Expecting size of:
+  [Operation[method=GET, path=/health, id=getHealth, hasBody=false, statuses=[200, 503]],
+    Operation[method=GET, path=/me, id=getMe, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=DELETE, path=/me, id=deleteAccount, hasBody=false, statuses=[204, 401, 403, 409]],
+    Operation[method=GET, path=/groups, id=listGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=POST, path=/groups, id=createGroup, hasBody=true, statuses=[201, 400, 401, 403, 409, 413, 429]],
+    Operation[method=GET, path=/deleted-groups, id=listDeletedGroups, hasBody=false, statuses=[200, 401, 403]],
+    Operation[method=GET, path=/groups/{groupId}, id=getGroup, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}, id=renameGroup, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/trash, id=trashGroup, hasBody=true, statuses=[204, 400, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/restore, id=restoreGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/members, id=listMembers, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/members/{userId}, id=changeRole, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/members/{userId}, id=removeMember, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/leave, id=leaveGroup, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/invitations, id=listInvitations, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/invitations, id=createInvitation, hasBody=true, statuses=[201, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/invitations/{invitationId}, id=cancelInvitation, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts, id=createContact, hasBody=true, statuses=[201, 400, 401, 403, 404, 413, 429]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/search, id=searchContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}, id=getContact, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PUT, path=/groups/{groupId}/contacts/{contactId}, id=saveContact, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]],
+    Operation[method=DELETE, path=/groups/{groupId}/contacts/{contactId}, id=eraseContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/trash, id=trashContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/restore, id=restoreContact, hasBody=false, statuses=[204, 401, 403, 404, 409]],
+    Operation[method=GET, path=/groups/{groupId}/trash-contacts, id=listTrashedContacts, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/tags, id=listTags, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=PATCH, path=/groups/{groupId}/tags/{tagId}, id=renameTag, hasBody=true, statuses=[200, 400, 401, 403, 404, 409]],
+    Operation[method=DELETE, path=/groups/{groupId}/tags/{tagId}, id=deleteTag, hasBody=false, statuses=[204, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/attribute-keys, id=listAttributeKeys, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/companies, id=listCompanies, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/exports, id=exportContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 413, 429]],
+    Operation[method=GET, path=/groups/{groupId}/history, id=listGroupHistory, hasBody=false, statuses=[200, 400, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/history/actors, id=listHistoryActors, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/history, id=listContactHistory, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions, id=listVersions, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=GET, path=/groups/{groupId}/contacts/{contactId}/versions/{number}, id=getVersion, hasBody=false, statuses=[200, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/contacts/{contactId}/versions/{number}/restore, id=restoreVersion, hasBody=true, statuses=[200, 401, 403, 404, 409]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/search, id=findDuplicates, hasBody=false, statuses=[200, 401, 403, 404, 429]],
+    Operation[method=POST, path=/groups/{groupId}/duplicates/dismissals, id=dismissDuplicates, hasBody=true, statuses=[204, 400, 401, 403, 404]],
+    Operation[method=POST, path=/groups/{groupId}/merges, id=mergeContacts, hasBody=true, statuses=[200, 400, 401, 403, 404, 409, 413, 429]]]
+to be greater than 40 but was 40
+[ERROR]   Us017SecuredApiAcceptanceIT.AC_017_11_theOpenApiDescriptionListsEveryEndpointOfTheContract:203 [path /groups/{groupId}/contacts/{contactId}/versions/{number} in /v3/api-docs] 
+Expecting value to be false but was true
+[INFO] 
+[ERROR] Tests run: 60, Failures: 2, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ contact-groups-backend ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:20 min
+[INFO] Finished at: 2026-11-12T11:05:00Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project contact-groups-backend: There are test failures.
+[ERROR] 
+[ERROR] See /w/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release

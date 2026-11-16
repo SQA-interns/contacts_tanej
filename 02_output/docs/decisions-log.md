@@ -811,3 +811,15 @@
   - CVE-2026-47888 (`RSocketMessageHandler`): not reachable; no `rsocket-*`, no `spring-messaging`.
   - CVE-2026-59282 (binding user-supplied property paths into a self-growing `List`; `@ModelAttribute` or unannotated object parameters with List fields): checked all controllers in `api/`. Every handler parameter is `@PathVariable` (UUID, String, int), `@RequestParam` (String, Integer, `List<HistoryEventType>` of enums, `LocalDate`: simple parameters, not an object), `@AuthenticationPrincipal Jwt` or `@RequestBody` JSON. The records with List fields (`ContactRequest`, `SearchRequest`, `ExportRequest`) are used only as `@RequestBody` (ContactController:91, 139; SearchController:64; ExportController:55). No `@ModelAttribute`, `@InitBinder`, `WebDataBinder` or other unannotated object parameter in any controller. Not reachable; the stop condition is not met.
 - Resolution (round 2): all 12 CVEs are accepted as known limitations (3 in round 1, 9 now), each with evidence above. No code change. F-V13 closes as accepted; the Spring Security CVEs of D-56 (c) stay accepted. Release-note text for all accepted Spring CVEs: "Spring Framework 6.2.19 has known CVEs whose fixes are available only in 7.0.9 or with Enterprise Support; upgrade to Spring Boot 4 / Framework 7.0.9." `release-notes.md` is not in this skill's Writes list and was not edited; the text is for the next session that may write it.
+
+## D-71: F-V01 open in three verify runs (hidden suite, 17 of 251 failing)
+- Timestamp: 2026-11-16
+- Session: S7 verify run 3
+- Class: open
+- Type: blocking (approval; `/verify` step 1)
+- Trigger: F-V01 (High) was open in runs 1, 2 and 3. Hidden evaluation Run 3 (commit `df309a9` = HEAD): 234 of 251 pass, 17 fail (Run 2: 47, Run 1: 62): R-001-06 (other), R-018-01 (other), R-018-02 (combination), R-018-03 (boundary), R-010-10 (other) and 12 "unknown rule" (5 combination, 2 invalid, 2 boundary, 3 other). The local tests of those rules pass. No cause is known; the language hypothesis of D-68 does not explain the improvement from Run 2 to Run 3 either.
+- Options: (1) Accept F-V01 as a known limitation (17 held-out cases, release-note text below) and go to `/release`. (2) Show the human the failing hidden tests (the developer reads them outside the agent and tells `/fix` what they assume). (3) Change the requirement the failing cases rest on (R-001, R-018, R-010, named by the developer).
+- Release-note text for option 1: "Hidden-suite failures (17 of 251) remain open: R-001-06, R-018-01 to -03, R-010-10 and 12 cases of no named rule. The app opens in Slovenian by default (R-018-01); a cause was not found."
+- Human response: none
+- Resolution: pending; the session ended here as step 1 requires.
+- Overrides: none

@@ -1,0 +1,11 @@
+{
+  "command": "/quality-gate resume",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "exitCode": 0,
+  "session_id": "82176185-5764-4942-9ac4-40e86a10fd0f",
+  "total_cost_usd": 1.6799998,
+  "result": "The quality gate is not passed: the line-coverage gate is met for both components, but neither mutation score could be measured. I stopped the session at that point and recorded the shortfall as two decisions.\n\n| Component | Line coverage | Mutation score |\n|---|---|---|\n| backend (all 610 tests pass) | 97.05 % (JaCoCo) | not measured, see D-63 |\n| frontend (243 unit tests pass) | 95.63 % (unit only) | not measured, see D-64 |\n\n- **Frontend coverage:** it was 93.99 % at the start of the session. I added 11 unit tests for the contact page and the duplicates tab to reach 95.63 %. The frontend figure counts unit tests only, so it is a lower bound for \"all levels\".\n- **Backend JaCoCo:** the earlier \"malformed input\" report error came from a corrupt `target/jacoco.exec`. `mvn clean verify` fixed it, with no configuration change.\n- **Backend mutation (D-63):** PIT ran 0 tests, so all 948 mutants counted as \"no coverage\". It needs `pitest-junit5-plugin`, which is not in `tech-stack.md`, so adding it needs your approval. I proposed approving it.\n- **Frontend mutation (D-64):** Stryker was stopped at the 2-hour limit for a background command and wrote no report. I proposed running it outside the agent, or in slices of the same scope.\n\nCommits: `7020545` (tests), `a5ec6cf` (the `build:` commit excluding the entry point from JaCoCo and PIT), and `6a6b41a` (docs and handover). The unrelated `springdoc` change in `pom.xml` (F-06) is still uncommitted.\n\nNext is `/quality-gate D-63: 1`, once you have answered D-63 and D-64; the answers go into the decisions log.",
+  "stderr": ""
+}

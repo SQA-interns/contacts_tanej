@@ -1,0 +1,32 @@
+﻿node : node:fs:1882
+At line:1 char:302
++ ... tch {} } }; node system/run.mjs --once *> 02_output/logs/run-console- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:fs:1882:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  binding.symlink(
+          ^
+
+Error: EPERM: operation not permitted, symlink 
+'C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\node_modules' -> 
+'C:\Users\tanej\AppData\Local\Temp\hidden-eval-Ke0Fms\02_output\frontend\.stryker-tmp\sandbox-et3QCp\node_modules'
+    at symlinkSync (node:fs:1882:11)
+    at onLink (node:internal/fs/cp/cp-sync:195:12)
+    at getStats (node:internal/fs/cp/cp-sync:74:12)
+    at copyDir (node:internal/fs/cp/cp-sync:176:9)
+    at onDir (node:internal/fs/cp/cp-sync:136:25)
+    at getStats (node:internal/fs/cp/cp-sync:68:12)
+    at copyDir (node:internal/fs/cp/cp-sync:176:9)
+    at onDir (node:internal/fs/cp/cp-sync:136:25)
+    at getStats (node:internal/fs/cp/cp-sync:68:12)
+    at copyDir (node:internal/fs/cp/cp-sync:176:9) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'symlink',
+  path: 'C:\\Users\\tanej\\Documents\\LAB\\tanej_sdd-workflow_contacts_v001\\02_output\\frontend\\node_modules',
+  dest: 'C:\\Users\\tanej\\AppData\\Local\\Temp\\hidden-eval-Ke0Fms\\02_output\\frontend\\.stryker-tmp\\sandbox-et3QCp\
+\node_modules'
+}
+
+Node.js v24.13.0
