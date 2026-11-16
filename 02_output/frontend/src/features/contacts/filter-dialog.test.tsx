@@ -174,7 +174,11 @@ describe('FilterDialog: the tag list', () => {
     const typed = within(dialog()).getByLabelText('Tags');
     await userEvent.type(typed, 'a{Enter}b{Enter}c{Enter}');
     await userEvent.click(within(dialog()).getByRole('button', { name: 'Remove tag b' }));
-    expect(within(dialog()).getAllByRole('listitem').map((li) => li.textContent)).toEqual(['a×', 'c×']);
+    expect(
+      within(dialog())
+        .getAllByRole('listitem')
+        .map((li) => li.textContent),
+    ).toEqual(['a×', 'c×']);
     await userEvent.click(within(dialog()).getByRole('button', { name: 'Remove tag a' }));
     await userEvent.click(within(dialog()).getByRole('button', { name: 'Remove tag c' }));
     expect(within(dialog()).queryByRole('list')).toBeNull();
@@ -193,7 +197,9 @@ describe('FilterDialog: the tag list', () => {
 
 describe('FilterDialog: suggestions', () => {
   it('asks the group for tag names while tags are typed, and offers them in the list of the field', async () => {
-    const { request } = mount((path) => (path.includes('/tags?') ? [{ name: 'alpha' }, { name: 'alps' }] : []));
+    const { request } = mount((path) =>
+      path.includes('/tags?') ? [{ name: 'alpha' }, { name: 'alps' }] : [],
+    );
     expect(request).not.toHaveBeenCalled();
     await pick('Has any of these tags');
     expect(request).not.toHaveBeenCalled();
@@ -201,7 +207,9 @@ describe('FilterDialog: suggestions', () => {
     await userEvent.type(typed, 'al');
     await waitFor(() => expect(request).toHaveBeenCalledWith('GET', '/groups/g%201/tags?q=al'));
     const list = document.getElementById(typed.getAttribute('list') as string) as HTMLElement;
-    await waitFor(() => expect(Array.from(list.querySelectorAll('option')).map((o) => o.value)).toEqual(['alpha', 'alps']));
+    await waitFor(() =>
+      expect(Array.from(list.querySelectorAll('option')).map((o) => o.value)).toEqual(['alpha', 'alps']),
+    );
     expect(list.tagName).toBe('DATALIST');
   });
 
@@ -213,7 +221,9 @@ describe('FilterDialog: suggestions', () => {
     await userEvent.type(tag, ' v ');
     await waitFor(() => expect(request).toHaveBeenCalledWith('GET', '/groups/g%201/tags?q=v'));
     expect(tag.getAttribute('list')).toMatch(/-tag-list$/);
-    await waitFor(() => expect(document.querySelector(`datalist[id="${tag.getAttribute('list')}"] option`)).not.toBeNull());
+    await waitFor(() =>
+      expect(document.querySelector(`datalist[id="${tag.getAttribute('list')}"] option`)).not.toBeNull(),
+    );
   });
 
   it('asks for attribute keys for both attribute conditions, as plain strings', async () => {
@@ -223,7 +233,11 @@ describe('FilterDialog: suggestions', () => {
     await userEvent.type(key, 'L');
     await waitFor(() => expect(request).toHaveBeenCalledWith('GET', '/groups/g%201/attribute-keys?q=L'));
     await waitFor(() =>
-      expect(Array.from(document.querySelectorAll(`datalist[id="${key.getAttribute('list')}"] option`)).map((o) => (o as HTMLOptionElement).value)).toEqual(['Level', 'Lang']),
+      expect(
+        Array.from(document.querySelectorAll(`datalist[id="${key.getAttribute('list')}"] option`)).map(
+          (o) => (o as HTMLOptionElement).value,
+        ),
+      ).toEqual(['Level', 'Lang']),
     );
     request.mockClear();
     await pick('Attribute key equals value');

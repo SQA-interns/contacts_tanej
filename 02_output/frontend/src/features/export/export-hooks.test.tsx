@@ -20,7 +20,9 @@ describe('useExport', () => {
     const blob = new Blob(['x']);
     const download = vi.fn(async () => ({ blob, fileName: 'a b.xlsx' }));
     const clicked: HTMLAnchorElement[] = [];
-    const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function (this: HTMLAnchorElement) {
+    const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function (
+      this: HTMLAnchorElement,
+    ) {
       clicked.push(this);
       expect(document.body.contains(this)).toBe(true);
     });

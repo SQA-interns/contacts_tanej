@@ -46,7 +46,9 @@ describe('contact values', () => {
       ],
     } as never);
     expect(refusedFields(failure)).toEqual({ email: 'INVALID_EMAIL', phone: 'TOO_LONG' });
-    expect(refusedFields(new ApiError(400, { status: 400, code: 'VALIDATION_FAILED', message: 'x' } as never))).toEqual({});
+    expect(
+      refusedFields(new ApiError(400, { status: 400, code: 'VALIDATION_FAILED', message: 'x' } as never)),
+    ).toEqual({});
     expect(refusedFields(new Error('x'))).toEqual({});
   });
 });
@@ -56,13 +58,19 @@ describe('filter chip texts', () => {
     `${key}|${JSON.stringify(params ?? {})}`) as unknown as TFunction;
 
   it('names every condition type with its values (R-010-11)', () => {
-    expect(conditionText({ type: 'TAGS_ALL', tags: ['a', 'b'] }, t, 'en')).toBe('list.filter.chip.all|{"tags":"a, b"}');
-    expect(conditionText({ type: 'TAGS_ANY', tags: ['a', 'b'] }, t, 'en')).toBe('list.filter.chip.any|{"tags":"a, b"}');
+    expect(conditionText({ type: 'TAGS_ALL', tags: ['a', 'b'] }, t, 'en')).toBe(
+      'list.filter.chip.all|{"tags":"a, b"}',
+    );
+    expect(conditionText({ type: 'TAGS_ANY', tags: ['a', 'b'] }, t, 'en')).toBe(
+      'list.filter.chip.any|{"tags":"a, b"}',
+    );
     expect(conditionText({ type: 'TAG_NOT', tag: 'a' }, t, 'en')).toBe('list.filter.chip.not|{"tag":"a"}');
     expect(conditionText({ type: 'ATTRIBUTE_EQUALS', key: 'k', value: 'v' }, t, 'en')).toBe(
       'list.filter.chip.equals|{"key":"k","value":"v"}',
     );
-    expect(conditionText({ type: 'ATTRIBUTE_EXISTS', key: 'k' }, t, 'en')).toBe('list.filter.chip.exists|{"key":"k"}');
+    expect(conditionText({ type: 'ATTRIBUTE_EXISTS', key: 'k' }, t, 'en')).toBe(
+      'list.filter.chip.exists|{"key":"k"}',
+    );
     expect(conditionText({ type: 'COUNTRY', country: 'SI' }, t, 'en')).toBe(
       'list.filter.chip.country|{"country":"Slovenia"}',
     );

@@ -18,7 +18,10 @@ const ana = {
 };
 const stamp = '2026-07-01T22:30:00Z';
 
-function fake(overrides: Reply = () => undefined, versions: unknown = [{ number: 1, userName: 'Marko', createdAt: stamp }]) {
+function fake(
+  overrides: Reply = () => undefined,
+  versions: unknown = [{ number: 1, userName: 'Marko', createdAt: stamp }],
+) {
   const { api: groups } = groupsApi([konferenca, skupno]);
   const calls: { method: string; path: string; body?: unknown }[] = [];
   const api: ApiClient = {
@@ -30,7 +33,12 @@ function fake(overrides: Reply = () => undefined, versions: unknown = [{ number:
         if (own !== undefined) return own;
         if (path.endsWith('/versions')) return versions;
         if (/\/versions\/1$/.test(path))
-          return { number: 1, userName: 'Marko', createdAt: stamp, snapshot: { firstName: 'Ana', lastName: 'Novak', phone: '+386 40 000 111' } };
+          return {
+            number: 1,
+            userName: 'Marko',
+            createdAt: stamp,
+            snapshot: { firstName: 'Ana', lastName: 'Novak', phone: '+386 40 000 111' },
+          };
         if (path.endsWith('/restore')) return { ...ana, revision: 8 };
         return ana;
       }
@@ -52,7 +60,9 @@ describe('VersionsPage: requests and navigation', () => {
     const f = fake();
     open(f);
     await row();
-    await waitFor(() => expect(f.calls.filter((c) => c.path === '/groups/g-1/contacts/c%2F1')).toHaveLength(1));
+    await waitFor(() =>
+      expect(f.calls.filter((c) => c.path === '/groups/g-1/contacts/c%2F1')).toHaveLength(1),
+    );
     expect(f.calls.filter((c) => c.path.endsWith('/versions'))).toEqual([
       { method: 'GET', path: '/groups/g-1/contacts/c%2F1/versions', body: undefined },
     ]);
@@ -86,8 +96,14 @@ describe('VersionsPage: requests and navigation', () => {
     const crumb = screen.getByText(/\/ Contact$/);
     expect(within(crumb).getByRole('link', { name: 'Contacts' })).toHaveAttribute('href', '/groups/g-1');
     const nav = screen.getByRole('navigation', { name: 'Contact' });
-    expect(within(nav).getByRole('link', { name: 'Details' })).toHaveAttribute('href', '/groups/g-1/contacts/c/1');
-    expect(within(nav).getByRole('link', { name: 'History' })).toHaveAttribute('href', '/groups/g-1/contacts/c/1/history');
+    expect(within(nav).getByRole('link', { name: 'Details' })).toHaveAttribute(
+      'href',
+      '/groups/g-1/contacts/c/1',
+    );
+    expect(within(nav).getByRole('link', { name: 'History' })).toHaveAttribute(
+      'href',
+      '/groups/g-1/contacts/c/1/history',
+    );
     expect(within(nav).getByText('Versions')).toHaveAttribute('aria-current', 'page');
     expect(screen.getByText(/\/ Contact$/)).toBeInTheDocument();
   });
@@ -100,7 +116,11 @@ describe('VersionsPage: requests and navigation', () => {
     expect(within(r).getByText('Marko')).toBeInTheDocument();
     expect(r.querySelector('time')).toHaveAttribute('datetime', stamp);
     expect(r.querySelector('time')?.textContent).toMatch(/2026/);
-    expect(within(r).getAllByRole('button').map((b) => b.textContent)).toEqual(['View', 'Compare', 'Restore']);
+    expect(
+      within(r)
+        .getAllByRole('button')
+        .map((b) => b.textContent),
+    ).toEqual(['View', 'Compare', 'Restore']);
   });
 
   it('explains an empty list', async () => {
@@ -113,7 +133,8 @@ describe('VersionsPage: requests and navigation', () => {
   it('shows an error with a retry that reads the list again', async () => {
     let failing = true;
     const f = fake((_m, path) => {
-      if (path.endsWith('/versions') && failing) throw new ApiError(500, { status: 500, code: 'INTERNAL_ERROR', message: 'x' } as never);
+      if (path.endsWith('/versions') && failing)
+        throw new ApiError(500, { status: 500, code: 'INTERNAL_ERROR', message: 'x' } as never);
       return undefined;
     });
     open(f);
@@ -130,7 +151,9 @@ describe('VersionsPage: one version and the comparison', () => {
     open(f);
     await userEvent.click(within(await row()).getByRole('button', { name: 'View' }));
     expect(await screen.findByRole('heading', { name: 'Version 1' })).toBeInTheDocument();
-    expect(f.calls.some((c) => c.path === '/groups/g-1/contacts/c%2F1/versions/1' && c.method === 'GET')).toBe(true);
+    expect(
+      f.calls.some((c) => c.path === '/groups/g-1/contacts/c%2F1/versions/1' && c.method === 'GET'),
+    ).toBe(true);
     expect(screen.getByText('+386 40 000 111')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Details' })).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: 'Back to versions' }));
@@ -145,7 +168,12 @@ describe('VersionsPage: one version and the comparison', () => {
             number: 1,
             userName: 'Marko',
             createdAt: stamp,
-            snapshot: { firstName: 'Ana', lastName: 'Novak', tags: ['vip'], attributes: [{ key: 'Level', value: 'gold' }] },
+            snapshot: {
+              firstName: 'Ana',
+              lastName: 'Novak',
+              tags: ['vip'],
+              attributes: [{ key: 'Level', value: 'gold' }],
+            },
           }
         : undefined,
     );
@@ -177,7 +205,8 @@ describe('VersionsPage: one version and the comparison', () => {
   it('shows a loading panel until the version arrives and an error with a retry when it fails', async () => {
     let failing = true;
     const f = fake((_m, path) => {
-      if (/\/versions\/1$/.test(path) && failing) throw new ApiError(500, { status: 500, code: 'INTERNAL_ERROR', message: 'x' } as never);
+      if (/\/versions\/1$/.test(path) && failing)
+        throw new ApiError(500, { status: 500, code: 'INTERNAL_ERROR', message: 'x' } as never);
       return undefined;
     });
     open(f);
@@ -210,7 +239,9 @@ describe('VersionsPage: after a restore', () => {
   async function restoreFrom(f: ReturnType<typeof fake>) {
     open(f);
     await userEvent.click(within(await row()).getByRole('button', { name: 'Restore' }));
-    await userEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Restore this version' }));
+    await userEvent.click(
+      within(await screen.findByRole('dialog')).getByRole('button', { name: 'Restore this version' }),
+    );
   }
 
   it('says it as a status, reads the list and the contact list again and uses the new revision next time', async () => {
@@ -219,9 +250,15 @@ describe('VersionsPage: after a restore', () => {
     const status = await screen.findByRole('status');
     expect(status).toHaveTextContent('The version was restored.');
     expect(screen.queryByRole('alert')).toBeNull();
-    await waitFor(() => expect(f.calls.filter((c) => c.path.endsWith('/versions') && c.method === 'GET').length).toBeGreaterThan(1));
+    await waitFor(() =>
+      expect(
+        f.calls.filter((c) => c.path.endsWith('/versions') && c.method === 'GET').length,
+      ).toBeGreaterThan(1),
+    );
     await userEvent.click(within(await row()).getByRole('button', { name: 'Restore' }));
-    await userEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Restore this version' }));
+    await userEvent.click(
+      within(await screen.findByRole('dialog')).getByRole('button', { name: 'Restore this version' }),
+    );
     await waitFor(() => expect(f.calls.filter((c) => c.method === 'POST')).toHaveLength(2));
     expect(f.calls.filter((c) => c.method === 'POST')[1]?.body).toEqual({ revision: 8 });
   });
@@ -251,14 +288,17 @@ describe('VersionsPage: after a restore', () => {
   it('clears an earlier message when the next restore starts', async () => {
     let failing = true;
     const f = fake((m) => {
-      if (m === 'POST' && failing) throw new ApiError(409, { status: 409, code: 'NOTHING_TO_CHANGE', message: 'x' } as never);
+      if (m === 'POST' && failing)
+        throw new ApiError(409, { status: 409, code: 'NOTHING_TO_CHANGE', message: 'x' } as never);
       return undefined;
     });
     await restoreFrom(f);
     expect(await screen.findByRole('alert')).toHaveTextContent('nothing to change');
     failing = false;
     await userEvent.click(within(await row()).getByRole('button', { name: 'Restore' }));
-    await userEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Restore this version' }));
+    await userEvent.click(
+      within(await screen.findByRole('dialog')).getByRole('button', { name: 'Restore this version' }),
+    );
     expect(await screen.findByRole('status')).toHaveTextContent('The version was restored.');
     expect(screen.queryByRole('alert')).toBeNull();
   });

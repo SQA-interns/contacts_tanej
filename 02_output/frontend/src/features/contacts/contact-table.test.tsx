@@ -19,7 +19,12 @@ const full: Row = {
   tags: ['vip', 'b'],
 };
 
-function mount(rows: Row[], sort?: Sort, ticks?: Parameters<typeof ContactTable>[0]['ticks'], language = 'en') {
+function mount(
+  rows: Row[],
+  sort?: Sort,
+  ticks?: Parameters<typeof ContactTable>[0]['ticks'],
+  language = 'en',
+) {
   const onSort = vi.fn();
   render(
     <I18nextProvider i18n={setupI18n(language)}>
@@ -86,9 +91,27 @@ describe('ContactTable headers', () => {
   it('hides phone, city and country on tablets, and only those, in header and body', () => {
     mount([full]);
     const heads = screen.getAllByRole('columnheader');
-    expect(heads.map((h) => h.className.includes('max-lg:hidden'))).toEqual([false, false, false, true, false, true, true, false]);
+    expect(heads.map((h) => h.className.includes('max-lg:hidden'))).toEqual([
+      false,
+      false,
+      false,
+      true,
+      false,
+      true,
+      true,
+      false,
+    ]);
     const cells = screen.getAllByRole('cell');
-    expect(cells.map((c) => c.className.includes('max-lg:hidden'))).toEqual([false, false, false, true, false, true, true, false]);
+    expect(cells.map((c) => c.className.includes('max-lg:hidden'))).toEqual([
+      false,
+      false,
+      false,
+      true,
+      false,
+      true,
+      true,
+      false,
+    ]);
     expect(cells.every((c) => c.className.includes('max-md:flex'))).toBe(true);
     expect(cells.every((c) => c.className.includes('px-3'))).toBe(true);
     expect(heads.every((h) => h.className.includes('px-3 py-2'))).toBe(true);
@@ -109,9 +132,23 @@ describe('ContactTable rows', () => {
       'Country',
       'Tags',
     ]);
-    expect(within(cells[0]!).getByRole('link', { name: 'Novak' })).toHaveAttribute('href', '/groups/g-1/contacts/c-1');
-    expect(cells.slice(1, 7).map((c) => c.textContent)).toEqual(['Ana', 'ana@x.si', '+386 1', 'Acme', 'Ljubljana', 'Slovenia']);
-    expect(within(cells[7]!).getAllByRole('listitem').map((li) => li.textContent)).toEqual(['vip', 'b']);
+    expect(within(cells[0]!).getByRole('link', { name: 'Novak' })).toHaveAttribute(
+      'href',
+      '/groups/g-1/contacts/c-1',
+    );
+    expect(cells.slice(1, 7).map((c) => c.textContent)).toEqual([
+      'Ana',
+      'ana@x.si',
+      '+386 1',
+      'Acme',
+      'Ljubljana',
+      'Slovenia',
+    ]);
+    expect(
+      within(cells[7]!)
+        .getAllByRole('listitem')
+        .map((li) => li.textContent),
+    ).toEqual(['vip', 'b']);
     expect(screen.getAllByRole('link')).toHaveLength(1);
   });
 
@@ -145,7 +182,10 @@ describe('ContactTable rows', () => {
   });
 
   it('shows one row per contact in the given order', () => {
-    mount([{ ...full, id: 'a', lastName: 'A' }, { ...full, id: 'b', lastName: 'B' }]);
+    mount([
+      { ...full, id: 'a', lastName: 'A' },
+      { ...full, id: 'b', lastName: 'B' },
+    ]);
     expect(screen.getAllByRole('row')).toHaveLength(3);
     expect(screen.getAllByRole('link').map((l) => l.textContent)).toEqual(['A', 'B']);
   });
@@ -154,7 +194,14 @@ describe('ContactTable rows', () => {
 describe('ContactTable tick boxes', () => {
   it('adds a column and a box per row that reflects and reports the ticking', async () => {
     const onTick = vi.fn();
-    mount([{ ...full, id: 'a' }, { ...full, id: 'b' }], undefined, { isTicked: (id) => id === 'b', onTick });
+    mount(
+      [
+        { ...full, id: 'a' },
+        { ...full, id: 'b' },
+      ],
+      undefined,
+      { isTicked: (id) => id === 'b', onTick },
+    );
     const heads = screen.getAllByRole('columnheader');
     expect(heads).toHaveLength(9);
     expect(heads[0]).toHaveTextContent('Select');

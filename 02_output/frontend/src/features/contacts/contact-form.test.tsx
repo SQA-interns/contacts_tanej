@@ -72,7 +72,9 @@ describe('ContactForm: fields', () => {
     expect(screen.getByLabelText('Country').tagName).toBe('SELECT');
     expect(screen.getByLabelText('Notes').tagName).toBe('TEXTAREA');
     expect(screen.getByLabelText('Notes')).toHaveAttribute('rows', '5');
-    expect(within(screen.getByLabelText('Country')).getByRole('option', { name: 'Choose …' })).toHaveValue('');
+    expect(within(screen.getByLabelText('Country')).getByRole('option', { name: 'Choose …' })).toHaveValue(
+      '',
+    );
     expect(screen.getByRole('heading', { name: 'Details' })).toBeInTheDocument();
   });
 
@@ -92,7 +94,9 @@ describe('ContactForm: fields', () => {
   });
 
   it('shows a refused field with its reason, links it and flags it, for each control kind', () => {
-    mount({ problems: { email: 'INVALID_FORMAT', notes: 'TOO_LONG', country: 'UNKNOWN_COUNTRY', city: 'TOO_LONG' } });
+    mount({
+      problems: { email: 'INVALID_FORMAT', notes: 'TOO_LONG', country: 'UNKNOWN_COUNTRY', city: 'TOO_LONG' },
+    });
     const email = screen.getByLabelText('E-mail');
     expect(email).toHaveAttribute('aria-invalid', 'true');
     const ids = email.getAttribute('aria-describedby')!.split(' ');
@@ -101,13 +105,17 @@ describe('ContactForm: fields', () => {
     expect(document.getElementById(ids[1]!)).toHaveTextContent('Check the e-mail address.');
     const notes = screen.getByLabelText('Notes');
     expect(notes).toHaveAttribute('aria-invalid', 'true');
-    expect(document.getElementById(notes.getAttribute('aria-describedby')!.split(' ')[1]!)).toHaveTextContent('Use at most 5000 characters.');
+    expect(document.getElementById(notes.getAttribute('aria-describedby')!.split(' ')[1]!)).toHaveTextContent(
+      'Use at most 5000 characters.',
+    );
     const country = screen.getByLabelText('Country');
     expect(country).toHaveAttribute('aria-invalid', 'true');
     expect(country.getAttribute('aria-describedby')).toMatch(/-country-error$/);
     const city = screen.getByLabelText('City');
     expect(city.getAttribute('aria-describedby')).toMatch(/-city-error$/);
-    expect(screen.getByText('Use at most 255 characters.', { selector: `p[id$="-city-error"]` })).toBeInTheDocument();
+    expect(
+      screen.getByText('Use at most 255 characters.', { selector: `p[id$="-city-error"]` }),
+    ).toBeInTheDocument();
     expect(screen.getByLabelText('Company')).not.toHaveAttribute('aria-invalid');
   });
 
@@ -120,7 +128,9 @@ describe('ContactForm: fields', () => {
   it('explains "at least one of" as a banner and at the field, as alerts, and only when the first name carries that code', () => {
     mount({ problems: { firstName: 'REQUIRED_ONE_OF' } });
     expect(
-      screen.getAllByRole('alert').filter((a) => a.textContent === 'Enter at least one of first name, last name, e-mail or company.'),
+      screen
+        .getAllByRole('alert')
+        .filter((a) => a.textContent === 'Enter at least one of first name, last name, e-mail or company.'),
     ).toHaveLength(2);
     expect(form().querySelector('div[role="alert"]')).toHaveTextContent('Enter at least one of');
   });
@@ -209,7 +219,12 @@ describe('ContactForm: tags and attributes on save', () => {
   it('shows the refused tags and attributes of the last save', () => {
     mount({
       tags: ['ok', 'bad tag'],
-      problems: { 'tags[1]': 'INVALID_CHARACTERS', tags: 'TOO_MANY', 'attributes[0].key': 'REQUIRED', attributes: 'TOO_MANY' },
+      problems: {
+        'tags[1]': 'INVALID_CHARACTERS',
+        tags: 'TOO_MANY',
+        'attributes[0].key': 'REQUIRED',
+        attributes: 'TOO_MANY',
+      },
       attributes: [{ key: '', value: 'x' }],
     });
     expect(screen.getByText('Tag names use letters, digits, - and _.')).toBeInTheDocument();
@@ -222,7 +237,16 @@ describe('ContactForm: tags and attributes on save', () => {
 
 describe('tagProblems and attributeProblems', () => {
   it('read the place of a refusal from the field name', () => {
-    expect(tagProblems({ tags: 'TOO_MANY', 'tags[2]': 'TOO_LONG', 'tags[x]': 'A', tagsX: 'B', 'xtags[1]': 'C', city: 'D' })).toEqual([
+    expect(
+      tagProblems({
+        tags: 'TOO_MANY',
+        'tags[2]': 'TOO_LONG',
+        'tags[x]': 'A',
+        tagsX: 'B',
+        'xtags[1]': 'C',
+        city: 'D',
+      }),
+    ).toEqual([
       { index: null, code: 'TOO_MANY' },
       { index: 2, code: 'TOO_LONG' },
     ]);
@@ -262,9 +286,17 @@ describe('TagInput', () => {
     await userEvent.clear(box);
     await userEvent.type(box, '{Enter}');
     const list = screen.getByRole('list', { name: 'Tags of this contact' });
-    expect(within(list).getAllByRole('listitem').map((li) => li.textContent)).toEqual(['one×', 'two×', 'three×']);
+    expect(
+      within(list)
+        .getAllByRole('listitem')
+        .map((li) => li.textContent),
+    ).toEqual(['one×', 'two×', 'three×']);
     await userEvent.click(screen.getByRole('button', { name: 'Remove tag two' }));
-    expect(within(list).getAllByRole('listitem').map((li) => li.textContent)).toEqual(['one×', 'three×']);
+    expect(
+      within(list)
+        .getAllByRole('listitem')
+        .map((li) => li.textContent),
+    ).toEqual(['one×', 'three×']);
     await save();
     expect(onSubmit.mock.calls[0]![1]).toEqual(['one', 'three']);
   });
@@ -277,7 +309,12 @@ describe('TagInput', () => {
   });
 
   it('flags the box, links its hint and offers the tags of the group while typing', async () => {
-    const { request } = mount({ reply: () => [{ id: 't1', name: 'alpha' }, { id: 't2', name: 'alps' }] });
+    const { request } = mount({
+      reply: () => [
+        { id: 't1', name: 'alpha' },
+        { id: 't2', name: 'alps' },
+      ],
+    });
     const box = screen.getByLabelText('Tags');
     expect(box).not.toHaveAttribute('aria-invalid');
     expect(request).not.toHaveBeenCalled();
@@ -286,7 +323,11 @@ describe('TagInput', () => {
     await userEvent.type(box, ' al ');
     await waitFor(() => expect(request).toHaveBeenCalledWith('GET', '/groups/g%201/tags?q=al'));
     await waitFor(() =>
-      expect(Array.from(document.querySelectorAll(`datalist[id="${box.getAttribute('list')}"] option`)).map((o) => (o as HTMLOptionElement).value)).toEqual(['alpha', 'alps']),
+      expect(
+        Array.from(document.querySelectorAll(`datalist[id="${box.getAttribute('list')}"] option`)).map(
+          (o) => (o as HTMLOptionElement).value,
+        ),
+      ).toEqual(['alpha', 'alps']),
     );
   });
 
@@ -307,7 +348,12 @@ describe('TagInput', () => {
 
 describe('AttributeRows', () => {
   it('adds an empty row, edits key and value and removes the right row', async () => {
-    const { onSubmit } = mount({ attributes: [{ key: 'A', value: '1' }, { key: 'B', value: '2' }] });
+    const { onSubmit } = mount({
+      attributes: [
+        { key: 'A', value: '1' },
+        { key: 'B', value: '2' },
+      ],
+    });
     await userEvent.click(screen.getByRole('button', { name: 'Add attribute' }));
     expect(screen.getAllByLabelText('Key')).toHaveLength(3);
     const keys = screen.getAllByLabelText('Key') as HTMLInputElement[];
@@ -326,8 +372,15 @@ describe('AttributeRows', () => {
 
   it('shows the refused rows with their reasons next to the row, and whole-list problems below', () => {
     mount({
-      attributes: [{ key: 'A', value: '1' }, { key: 'A', value: '2' }],
-      problems: { 'attributes[1].key': 'DUPLICATE_KEY', 'attributes[0].value': 'TOO_LONG', attributes: 'ODD' },
+      attributes: [
+        { key: 'A', value: '1' },
+        { key: 'A', value: '2' },
+      ],
+      problems: {
+        'attributes[1].key': 'DUPLICATE_KEY',
+        'attributes[0].value': 'TOO_LONG',
+        attributes: 'ODD',
+      },
     });
     const rows = screen.getAllByLabelText('Key') as HTMLInputElement[];
     expect(rows[0]).toHaveAttribute('aria-invalid', 'true');
@@ -338,7 +391,13 @@ describe('AttributeRows', () => {
   });
 
   it('does not flag a row that was not refused', () => {
-    mount({ attributes: [{ key: 'A', value: '1' }, { key: 'B', value: '2' }], problems: { 'attributes[1]': 'REQUIRED' } });
+    mount({
+      attributes: [
+        { key: 'A', value: '1' },
+        { key: 'B', value: '2' },
+      ],
+      problems: { 'attributes[1]': 'REQUIRED' },
+    });
     const keys = screen.getAllByLabelText('Key');
     expect(keys[0]).not.toHaveAttribute('aria-invalid');
     expect(keys[1]).toHaveAttribute('aria-invalid', 'true');
@@ -356,8 +415,16 @@ describe('AttributeRows', () => {
     const listbox = await screen.findByRole('listbox');
     expect(key).toHaveAttribute('aria-expanded', 'true');
     expect(key.getAttribute('aria-controls')).toBe(listbox.id);
-    expect(within(listbox).getAllByRole('option').map((o) => o.textContent)).toEqual(['Level', 'Lang']);
-    expect(within(listbox).getAllByRole('option').map((o) => o.getAttribute('aria-selected'))).toEqual(['false', 'false']);
+    expect(
+      within(listbox)
+        .getAllByRole('option')
+        .map((o) => o.textContent),
+    ).toEqual(['Level', 'Lang']);
+    expect(
+      within(listbox)
+        .getAllByRole('option')
+        .map((o) => o.getAttribute('aria-selected')),
+    ).toEqual(['false', 'false']);
     await userEvent.keyboard('{Escape}');
     expect(screen.queryByRole('listbox')).toBeNull();
     await userEvent.type(key, 'x');
@@ -366,7 +433,9 @@ describe('AttributeRows', () => {
     expect(screen.queryByRole('listbox')).toBeNull();
     await userEvent.click(key);
     const again = await screen.findByRole('listbox');
-    await userEvent.pointer([{ keys: '[MouseLeft>]', target: within(again).getByRole('option', { name: 'Lang' }) }]);
+    await userEvent.pointer([
+      { keys: '[MouseLeft>]', target: within(again).getByRole('option', { name: 'Lang' }) },
+    ]);
     expect(screen.getByLabelText('Key')).toHaveValue('Lang');
     expect(screen.queryByRole('listbox')).toBeNull();
   });

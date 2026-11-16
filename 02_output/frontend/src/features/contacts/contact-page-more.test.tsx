@@ -47,7 +47,9 @@ function setup(answer: Answer, path: string, group = 'g-1') {
     invalidated.push(filters?.queryKey);
     return original(filters as never);
   }) as never;
-  const router = createMemoryRouter(routes, { initialEntries: [path.replace('/groups/g-1', `/groups/${group}`)] });
+  const router = createMemoryRouter(routes, {
+    initialEntries: [path.replace('/groups/g-1', `/groups/${group}`)],
+  });
   render(
     <I18nextProvider i18n={setupI18n('en')}>
       <QueryClientProvider client={client}>
@@ -98,8 +100,14 @@ describe('ContactPage: reading', () => {
     expect(within(crumb).getByRole('link', { name: 'Contacts' })).toHaveAttribute('href', '/groups/g-1');
     const nav = screen.getByRole('navigation', { name: 'Contact' });
     expect(within(nav).getByText('Details')).toHaveAttribute('aria-current', 'page');
-    expect(within(nav).getByRole('link', { name: 'History' })).toHaveAttribute('href', '/groups/g-1/contacts/c/1/history');
-    expect(within(nav).getByRole('link', { name: 'Versions' })).toHaveAttribute('href', '/groups/g-1/contacts/c/1/versions');
+    expect(within(nav).getByRole('link', { name: 'History' })).toHaveAttribute(
+      'href',
+      '/groups/g-1/contacts/c/1/history',
+    );
+    expect(within(nav).getByRole('link', { name: 'Versions' })).toHaveAttribute(
+      'href',
+      '/groups/g-1/contacts/c/1/versions',
+    );
   });
 
   it('has no tabs on the new contact form and shows no Delete', async () => {
@@ -137,7 +145,12 @@ describe('ContactPage: saving', () => {
     expect(await screen.findByRole('status')).toHaveTextContent('The contact was saved.');
     const put = calls.find((c) => c.method === 'PUT')!;
     expect(put.path).toBe('/groups/g-1/contacts/c%2F1');
-    expect(put.body).toMatchObject({ company: 'Acme', tags: ['vip'], attributes: [{ key: 'Level', value: 'gold' }], revision: 4 });
+    expect(put.body).toMatchObject({
+      company: 'Acme',
+      tags: ['vip'],
+      attributes: [{ key: 'Level', value: 'gold' }],
+      revision: 4,
+    });
     expect(invalidated).toContainEqual(['contact', 'g-1', 'c/1']);
   });
 
@@ -148,7 +161,9 @@ describe('ContactPage: saving', () => {
       if (m !== 'PUT') return ana;
       if (first) {
         first = false;
-        return refuse(400, 'VALIDATION_FAILED', { errors: [{ field: 'email', code: 'INVALID_FORMAT', message: 'x' }] });
+        return refuse(400, 'VALIDATION_FAILED', {
+          errors: [{ field: 'email', code: 'INVALID_FORMAT', message: 'x' }],
+        });
       }
       return new Promise((r) => (release = r));
     }, open);
@@ -179,7 +194,10 @@ describe('ContactPage: saving', () => {
   });
 
   it('creates with a POST, replaces the address with the new contact and shows the confirmation there', async () => {
-    const { router, calls } = setup((m) => (m === 'POST' ? { ...ana, id: 'new-1' } : ana), '/groups/g-1/contacts/new');
+    const { router, calls } = setup(
+      (m) => (m === 'POST' ? { ...ana, id: 'new-1' } : ana),
+      '/groups/g-1/contacts/new',
+    );
     await screen.findByRole('heading', { name: 'New contact' });
     await userEvent.type(screen.getByLabelText('Last name'), 'Novak');
     await save();
@@ -233,7 +251,10 @@ describe('ContactPage: refusals', () => {
   });
 
   it('does not read a contact again when a new one is refused for another reason', async () => {
-    const { invalidated } = setup((m) => (m === 'POST' ? refuse(409, 'CONTACT_IN_TRASH') : ana), '/groups/g-1/contacts/new');
+    const { invalidated } = setup(
+      (m) => (m === 'POST' ? refuse(409, 'CONTACT_IN_TRASH') : ana),
+      '/groups/g-1/contacts/new',
+    );
     await screen.findByRole('heading', { name: 'New contact' });
     await userEvent.type(screen.getByLabelText('Last name'), 'N');
     await save();
@@ -285,7 +306,9 @@ describe('ContactPage: the conflict screen and deleting', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Delete contact' }));
     const dialog = await screen.findByRole('dialog');
     expect(within(dialog).getByRole('heading', { name: 'Delete contact' })).toBeInTheDocument();
-    expect(within(dialog).getByText('The contact moves to Trash. You can restore it there for 30 days.')).toBeInTheDocument();
+    expect(
+      within(dialog).getByText('The contact moves to Trash. You can restore it there for 30 days.'),
+    ).toBeInTheDocument();
     expect(calls.some((c) => c.path.endsWith('/trash'))).toBe(false);
     invalidated.length = 0;
     await userEvent.click(within(dialog).getByRole('button', { name: 'Delete contact' }));
@@ -301,11 +324,16 @@ describe('ContactPage: the conflict screen and deleting', () => {
   });
 
   it('refreshes the caches and stays on the contact when the move to Trash is refused', async () => {
-    const { invalidated, router } = setup((m, p) => (p.endsWith('/trash') ? refuse(409, 'ALREADY_IN_TRASH') : ana), open);
+    const { invalidated, router } = setup(
+      (_m, p) => (p.endsWith('/trash') ? refuse(409, 'ALREADY_IN_TRASH') : ana),
+      open,
+    );
     await screen.findByRole('heading', { name: 'Ana Novak' });
     await userEvent.click(screen.getByRole('button', { name: 'Delete contact' }));
     invalidated.length = 0;
-    await userEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Delete contact' }));
+    await userEvent.click(
+      within(await screen.findByRole('dialog')).getByRole('button', { name: 'Delete contact' }),
+    );
     await waitFor(() => expect(invalidated).toContainEqual(['trash', 'g-1']));
     expect(invalidated).toContainEqual(['contacts', 'g-1']);
     expect(invalidated).toContainEqual(['contact', 'g-1', 'c/1']);
@@ -314,7 +342,9 @@ describe('ContactPage: the conflict screen and deleting', () => {
 
   it('shows a contact in Trash read-only with its notice and no Delete', async () => {
     setup(() => ({ ...ana, state: 'TRASHED' }), open);
-    expect(await screen.findByRole('alert')).toHaveTextContent('This contact is in Trash and cannot be edited.');
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'This contact is in Trash and cannot be edited.',
+    );
     expect(screen.queryByRole('button', { name: 'Save' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'Delete contact' })).toBeNull();
     expect(screen.getByRole('navigation', { name: 'Contact' })).toBeInTheDocument();

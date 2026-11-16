@@ -16,13 +16,20 @@ describe('merge helpers on contacts without tags or attributes', () => {
   it('treat missing lists as empty', () => {
     expect(attributeConflicts([bare, bare])).toEqual([]);
     expect(combinedTags([bare, bare])).toEqual([]);
-    expect(attributeConflicts([bare, contact('y', bare.createdAt, { attributes: [{ key: 'k', value: 'v' }] })])).toEqual([]);
+    expect(
+      attributeConflicts([bare, contact('y', bare.createdAt, { attributes: [{ key: 'k', value: 'v' }] })]),
+    ).toEqual([]);
     expect(combinedTags([bare, contact('y', bare.createdAt, { tags: ['t'] })])).toEqual(['t']);
   });
 
   it('keeps the first spelling of a key and every value once', () => {
     const one = contact('1', bare.createdAt, { attributes: [{ key: 'Level', value: 'a' }] });
-    const two = contact('2', bare.createdAt, { attributes: [{ key: 'level', value: 'b' }, { key: 'level', value: 'a' }] });
+    const two = contact('2', bare.createdAt, {
+      attributes: [
+        { key: 'level', value: 'b' },
+        { key: 'level', value: 'a' },
+      ],
+    });
     expect(attributeConflicts([one, two])).toEqual([{ key: 'Level', values: ['a', 'b'] }]);
   });
 
@@ -76,12 +83,17 @@ describe('MergePage: what it asks for', () => {
   it('reads every contact of ids once, with encoded ids, and links back to the duplicates', async () => {
     const fake = open('?ids=b,a');
     await screen.findByText('Survivor (the oldest, stays)');
-    expect(fake.calls.filter((x) => x.method === 'GET').map((x) => x.path).sort()).toEqual([
-      '/groups/g-1/contacts/a',
-      '/groups/g-1/contacts/b',
-    ]);
+    expect(
+      fake.calls
+        .filter((x) => x.method === 'GET')
+        .map((x) => x.path)
+        .sort(),
+    ).toEqual(['/groups/g-1/contacts/a', '/groups/g-1/contacts/b']);
     const crumb = screen.getByText(/\/ Merge$/);
-    expect(within(crumb).getByRole('link', { name: 'Duplicates' })).toHaveAttribute('href', '/groups/g-1/duplicates');
+    expect(within(crumb).getByRole('link', { name: 'Duplicates' })).toHaveAttribute(
+      'href',
+      '/groups/g-1/duplicates',
+    );
   });
 
   it('asks for nothing and shows an error when fewer than two ids are given', async () => {
@@ -110,7 +122,8 @@ describe('MergePage: what it asks for', () => {
       ...groups,
       request: (async (method: string, path: string, body?: unknown) => {
         if (/\/contacts\/[ab]$/.test(path)) {
-          if (failing) throw new ApiError(500, { status: 500, code: 'INTERNAL_ERROR', message: 'x' } as never);
+          if (failing)
+            throw new ApiError(500, { status: 500, code: 'INTERNAL_ERROR', message: 'x' } as never);
           return path.endsWith('/a') ? a : b;
         }
         return groups.request(method, path, body);
@@ -140,7 +153,8 @@ describe('MergePage: the choices', () => {
     open('?ids=a,b');
     await screen.findByText('Survivor (the oldest, stays)');
     const group = screen.getByRole('group', { name: 'Fields' });
-    const rowOf = (label: string) => within(group).getByText(label, { selector: 'span.font-semibold' }).parentElement as HTMLElement;
+    const rowOf = (label: string) =>
+      within(group).getByText(label, { selector: 'span.font-semibold' }).parentElement as HTMLElement;
     const country = within(rowOf('Country')).getAllByRole('radio');
     expect(country.map((r) => (r as HTMLInputElement).checked)).toEqual([true, false]);
     expect(within(rowOf('Country')).getByText('Slovenia')).toBeInTheDocument();
@@ -157,16 +171,25 @@ describe('MergePage: the choices', () => {
     const fake = open('?ids=b,a');
     await screen.findByText('Survivor (the oldest, stays)');
     const group = screen.getByRole('group', { name: 'Fields' });
-    const rowOf = (label: string) => within(group).getByText(label, { selector: 'span.font-semibold' }).parentElement as HTMLElement;
+    const rowOf = (label: string) =>
+      within(group).getByText(label, { selector: 'span.font-semibold' }).parentElement as HTMLElement;
     await userEvent.click(within(rowOf('Company')).getAllByRole('radio')[1]!);
-    expect((within(rowOf('Company')).getAllByRole('radio') as HTMLInputElement[]).map((r) => r.checked)).toEqual([false, true]);
-    expect((within(rowOf('Country')).getAllByRole('radio') as HTMLInputElement[]).map((r) => r.checked)).toEqual([true, false]);
+    expect(
+      (within(rowOf('Company')).getAllByRole('radio') as HTMLInputElement[]).map((r) => r.checked),
+    ).toEqual([false, true]);
+    expect(
+      (within(rowOf('Country')).getAllByRole('radio') as HTMLInputElement[]).map((r) => r.checked),
+    ).toEqual([true, false]);
     await userEvent.click(screen.getByRole('radio', { name: 'python' }));
     await userEvent.click(confirm());
     await waitFor(() => expect(fake.calls.some((x) => x.method === 'POST')).toBe(true));
     const post = fake.calls.find((x) => x.method === 'POST')!;
     expect(post.path).toBe('/groups/g-1/merges');
-    const body = post.body as { fields: Record<string, string>; contacts: unknown[]; attributeChoices: unknown[] };
+    const body = post.body as {
+      fields: Record<string, string>;
+      contacts: unknown[];
+      attributeChoices: unknown[];
+    };
     expect(body.fields.company).toBe('Beta');
     expect(body.fields.country).toBe('SI');
     expect(body.fields.phone).toBe('+386 41 555 123');
@@ -203,8 +226,18 @@ describe('MergePage: the choices', () => {
 
   it('needs one choice per key before Confirm is enabled', async () => {
     const two = {
-      a: contact('a', a.createdAt, { attributes: [{ key: 'One', value: '1' }, { key: 'Two', value: '2' }] }),
-      b: contact('b', b.createdAt, { attributes: [{ key: 'one', value: 'x' }, { key: 'two', value: 'y' }] }),
+      a: contact('a', a.createdAt, {
+        attributes: [
+          { key: 'One', value: '1' },
+          { key: 'Two', value: '2' },
+        ],
+      }),
+      b: contact('b', b.createdAt, {
+        attributes: [
+          { key: 'one', value: 'x' },
+          { key: 'two', value: 'y' },
+        ],
+      }),
     };
     const { api } = mergeApi(undefined, two);
     renderApp('/groups/g-1/duplicates/merge?ids=a,b', { auth: signedIn(), api });
@@ -230,7 +263,8 @@ describe('MergePage: the outcome', () => {
   });
 
   it('names the attribute limit and the tag limit, and uses the usual text for other refusals', async () => {
-    const tooMany = (field: string) => refuse('VALIDATION_FAILED', [{ field, code: 'TOO_MANY', message: 'x' }]);
+    const tooMany = (field: string) =>
+      refuse('VALIDATION_FAILED', [{ field, code: 'TOO_MANY', message: 'x' }]);
     open('?ids=a,c', tooMany('attributes[3]'));
     await screen.findByText('Survivor (the oldest, stays)');
     await userEvent.click(confirm());
