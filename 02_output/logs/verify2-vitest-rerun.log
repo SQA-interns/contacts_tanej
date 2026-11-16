@@ -1,0 +1,15 @@
+
+ RUN  v4.1.11 C:/Users/tanej/Documents/LAB/tanej_sdd-workflow_contacts_v001/02_output/frontend
+
+
+ Test Files  12 passed (12)
+      Tests  170 passed (170)
+   Start at  15:18:08
+   Duration  39.03s (transform 12.43s, setup 16.53s, import 41.14s, tests 102.72s, environment 53.44s)
+
+
+--- stderr ---
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+
+--- exit 0

@@ -1,0 +1,24 @@
+
+ RUN  v4.1.11 C:/Users/tanej/Documents/LAB/tanej_sdd-workflow_contacts_v001/02_output/frontend
+      Coverage enabled with v8
+
+
+ Test Files  37 passed (37)
+      Tests  377 passed (377)
+   Start at  15:59:35
+   Duration  40.34s (transform 12.61s, setup 36.69s, import 75.66s, tests 217.44s, environment 131.04s)
+
+ % Coverage report from v8
+
+=============================== Coverage summary ===============================
+Statements   : 95.33% ( 1329/1394 )
+Branches     : 93.37% ( 832/891 )
+Functions    : 93.24% ( 483/518 )
+Lines        : 97.03% ( 1179/1215 )
+================================================================================
+
+--- stderr ---
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+
+--- exit 0

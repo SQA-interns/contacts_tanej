@@ -133,13 +133,13 @@ Where a control is checked by an automated test, the test result is from this ru
 | F-V03 | High | DoD-R-08 | The final theme is not applied: `src/styles/index.css` imports `tokens.wireframe.css`; `tokens.final.css` is not imported | open |
 | F-V04 | High | NFR-07, NFR-10; R-018-02, R-018-03 | In WebKit the language switch does not show the English heading after clicking `EN` on the sign-in screen (`checks/shell.spec.ts:66`, `e2e/language.spec.ts:60`, `:79`); reproducible with one worker. Matches the failing hidden cases R-018-02 and R-018-03 | not reproduced (S8): on the rebuilt stack at HEAD the three tests and `us018-language.spec.ts` pass in WebKit, 42 of 42 with 3 repeats and 1 worker (`fix-fv04-webkit-repeat.log`); no code change. The cause of the run 1 failure is unknown (a stale image or load); the hidden R-018 cases are re-measured in run 2. Stays open until then |
 | F-V05 | Medium | NFR-09 | WebKit: no visible focus at tab stop 4 (`e2e/accessibility.spec.ts:49`); same as F-05 of the review | fixed `ce02792`: not an app defect; WebKit leaves links out of the Tab order and tab stop 4 was the body (focus on the browser's controls). The non-frozen test now skips body stops in WebKit and checks the focus ring of the group link directly; passes in the three engines (`fix-fv05-webkit-after.log`) |
-| F-V06 | Medium | SR-15, AC-012-03 | After "Delete forever" the contact answers 200 for a moment although the row is gone from the UI; failed in 2 of 2 full runs, passed 3 of 3 alone (`acceptance/trash-history.spec.ts:48`). Either the UI hides the row before the server has erased it, or the erase is not synchronous | cause found, decision D-57 (needs the developer): the erase is synchronous; the open modal dialog hides the page from role queries, so the frozen test's `toHaveCount(0)` passes before the DELETE ends. App unchanged. Stays open until D-57 is answered |
+| F-V06 | Medium | SR-15, AC-012-03 | After "Delete forever" the contact answers 200 for a moment although the row is gone from the UI; failed in 2 of 2 full runs, passed 3 of 3 alone (`acceptance/trash-history.spec.ts:48`). Either the UI hides the row before the server has erased it, or the erase is not synchronous | cause found, decision D-57 (needs the developer): the erase is synchronous; the open modal dialog hides the page from role queries, so the frozen test's `toHaveCount(0)` passes before the DELETE ends. App unchanged. Stays open until D-57 is answered | fixed (D-57: 1): the frozen test AC-012-03 waits for the dialog to close before the row check; manifest updated and verified. Re-measured in `/verify` run 2 |
 | F-V07 | Medium | tests | At 2 workers 47 of 51 INC-1 failures pass when re-run alone: timing sensitivity of the frozen tests or slow responses under load; the evidence of a green run needs one worker | open |
 | F-V08 | Medium | DoD-R-02 | `spotless:check` fails on `MigrationIT.java` (two over-long lines) | fixed `44f6e8e`; `spotless:check` passes |
 | F-V09 | Medium | DoD-R-03 | Backend coverage cannot be measured (JaCoCo "malformed input"); frontend line coverage 94.61 % is below the gate of 95 % | open |
 | F-V10 | Medium | SB-11 | The production `proxy` container (stock `nginx:1.29.1`) runs as uid 0; the other images run non-root | fixed `e42dbeb`: `user: "101:101"` and temp paths in `/tmp`; started as 101 with a test certificate, 301, HTTPS and HSTS work. The customer's `tls.key` must be readable by uid 101 (note for the install guide, phase 7). The whole production set was not rebuilt in this session |
 | F-V11 | Low | SR-06 | The web CSP allows `style-src 'unsafe-inline'` | open |
-| F-V13 | High | SB-08, SR-19, DoD-R-05 | Backend dependency scan reports Critical and High advisories on Spring Framework 6.2.19, Spring Security 6.5.11 and the DOMPurify copy inside swagger-ui 5.28.1 (CVSS up to 10.0; matches are by CPE and may include false positives; two CVE records could not be stored by the scanner because of a database column length, so the NVD data is incomplete). Not covered by an approved decision. Needs: check reachability and fixed versions, then an approval decision (D-13 option 1 path) or a version change by the human | partly assessed, D-56: Spring Framework Criticals and swagger-ui/DOMPurify not reachable (no SSE, no XSLT view; swagger-ui disabled, backend not published in production); Spring Security 6.5.11 **not assessed** (no advisory data available in this session); no version changed. Needs the developer. Open |
+| F-V13 | High | SB-08, SR-19, DoD-R-05 | Backend dependency scan reports Critical and High advisories on Spring Framework 6.2.19, Spring Security 6.5.11 and the DOMPurify copy inside swagger-ui 5.28.1 (CVSS up to 10.0; matches are by CPE and may include false positives; two CVE records could not be stored by the scanner because of a database column length, so the NVD data is incomplete). Not covered by an approved decision. Needs: check reachability and fixed versions, then an approval decision (D-13 option 1 path) or a version change by the human | partly assessed, D-56: Spring Framework Criticals and swagger-ui/DOMPurify not reachable (no SSE, no XSLT view; swagger-ui disabled, backend not published in production); Spring Security 6.5.11 **not assessed** (no advisory data available in this session); no version changed. Needs the developer. Open | second loop (S8, D-56): (c) the three named Spring Security CVEs (59270, 41707, 47841) accepted as a known limitation by the developer, none reachable (no LDAP, no WebAuthn, DPoP not active; new test `SecurityHeadersIT.aDpopAuthorizationHeaderIsRefused`); next-version item in the release notes. (d) `springdoc-...-webmvc-ui` replaced by `-webmvc-api`: swagger-ui and DOMPurify (CVE-2026-116803) leave the build. Two further Spring Security CVEs below 7.0 and the 12 `spring-core`/`spring-web` CPE matches are still not assessed one by one. Re-scan in `/verify` run 2; closed there if the scan shows nothing else at 7.0 or higher that is not covered by a decision |
 | F-V12 | Low | manifest | 38 of 73 input files are checked out with CRLF line endings; the hashes match only after normalising; the content is unchanged. `.gitattributes` exists; the clone setting is the cause | open (human) |
 | (carried) | Medium | review F-06, F-07, F-08 | Missing `Red:` lines, commit size and subject length, `deleted_accounts` cleanup: unchanged | open |
 
@@ -148,3 +148,117 @@ Where a control is checked by an automated test, the test result is from this ru
 | Loop | Findings | Change | Re-verification |
 |---|---|---|---|
 | 1 | F-V04, F-V05, F-V06, F-V08, F-V10, F-V13 | S8: F-V05, F-V08, F-V10 fixed; F-V04 not reproduced; F-V06 and F-V13 wait for the developer (D-57, D-56). F-V01 to F-V03, F-V07, F-V09 to F-V12 not in this loop | `/verify` run 2 after INC-2, theme, quality gate |
+| 2 | F-V13, F-V06 | S8: F-V06 fixed by D-57 (frozen test, manifest updated); F-V13 (c) accepted per CVE by D-56, DPoP refusal test added, springdoc `-ui` replaced by `-api` | `/verify` run 2 (dependency re-scan, AC-012-03) |
+
+## Run 2
+
+**This is a self-check by the agent in a separate session (S7, phase 6), not an independent review.** Commit under test: `2246948` (HEAD; the runner's hidden evaluation Run 2 is for the same commit). Date: 2026-11-16. Result: **gate not passed**, 4 High findings open (F-V01, F-V13, F-V14, F-V16). Developer answer applied: D-66 option 1 (accept the frontend mutation shortfall for this run).
+
+**Mutation threshold not met (D-66, accepted for this run).** The frontend mutation score is below the 90 % threshold. The 77.9 % figure is an **estimate** from per-file Stryker runs (full-run base 2302 of 3643 killed plus the kills of the three survivor rounds), **not a full run**. It was not re-measured here (a full run is a developer task outside the agent, D-66 option 3). Backend mutation (PIT, developer's run, read in S6): 91.1 %, threshold met.
+
+Method: manifests re-hashed (CRLF normalised as in run 1); vitest with coverage; Playwright full run, 1 worker, 3 engines, 399 tests against the dev Compose stack (images built in the design session; `git diff d6ffe07 HEAD` shows only test files changed in `frontend/src` and `backend/src/main` unchanged, so the images equal HEAD production code; a rebuild at HEAD fails, F-V14); backend `mvn verify spotless:check pmd:check pmd:cpd-check` in the Maven image; NFR scripts; gitleaks 8.28.0; `.env` value search; `audit.mjs`, `licence-check.mjs`, `check-traceability.mjs`, `check-tasks.mjs`. Raw output: `out/logs/verify2-*.log`, `gitleaks-verify2.json`. **Not run:** backend `dependency-check` (38 min), `restart-test.sh`, `restore.sh`, `clean-host-test.sh` (would stop at the same build failure), production Compose build and start (same `./frontend` build, same failure), manual Safari/Edge check, a person's first-contact walkthrough.
+
+### Definition of Done
+
+| DoD | Result | Evidence |
+|---|---|---|
+| DoD-R-01 full suite passes; frozen hashes match | Met except flakes | Input manifest 73 of 73 (38 only after CRLF to LF, F-V12); acceptance 43 of 43 (includes the AC-012-03 line); hidden manifest ok per the runner. Vitest: first run 370 of 377 (7 timing failures, all pass re-run alone), second run 377 of 377. Backend: 118 unit and 492 integration tests, 0 failures. Playwright 398 of 399; the one failure (WebKit `e2e/language.spec.ts:60`, 30 s timeout waiting for `main`) passed 9 of 9 on repeat (F-V07). E2E-06 and AC-012-03 pass. |
+| DoD-R-02 format, lint, type check, static analysis | **Not met** | eslint clean; spotless, PMD, CPD pass; `tsc --noEmit` fails (F-V14); prettier fails on 8 test files (F-V15). |
+| DoD-R-03 quality gate per component | **Not met** | Lines: frontend 97.03 % (statements 95.33 %, branches 93.37 %), backend 97.12 % (branches 89.07 %); JaCoCo works now. Mutation: backend 91.1 % met; **frontend below 90 %, estimate 77.9 %, not a full run; accepted for this run by D-66**. |
+| DoD-R-04 architecture constraints | Met | `ArchitectureTest` is in the 118 unit tests, 0 failures. |
+| DoD-R-05 no open Critical or High | **Not met** | F-V01, F-V13, F-V14, F-V16. |
+| DoD-R-06 runtime and core flows | Met | E2E-01 to E2E-08 pass in three engines. |
+| DoD-R-07 AC, EX, R trace to a test and a commit | Met | 638 ids mapped; 66 tasks cover every R, AC, EX. |
+| DoD-R-08 final theme, three widths, a11y | Met | Final theme applied; contacts screen at 1280 px looked at; responsive and accessibility specs pass in 3 engines. Not every screen compared with its wireframe in this session. |
+| DoD-R-09 READMEs work from a clean checkout | **Not met** | A clean build fails at `npm run build` (F-V14). |
+| DoD-R-10 release notes | Not verified | Phase 7. |
+| DoD-R-11 decisions resolved; inputs unchanged | Met, some pending | Manifests match; D-66 answered here; D-55, D-56, D-64 and others "pending review". |
+| DoD-R-12 commit rules | **Not met** | F-06, F-07 carried; `backend/pom.xml`, `acceptance/trash-history.spec.ts`, its manifest line and `release-notes.md` from the fix loops are uncommitted (F-V17). |
+| DoD-R-13 hidden suite passes | **Not met** | Run 2, commit `2246948` = HEAD, manifest ok: 251 tests, 204 passed, 47 failed (F-V01); Run 1 had 62 failures. |
+| DoD-R-14 every NFR checked and met | **Not met** | NFR-12 not met; NFR-05, NFR-06 not re-evidenced; NFR-14 finding. |
+| DoD-R-15 CI passes | **Not met** | Frontend job fails at tsc and prettier; audit (F-V16) and licence check (F-V17) fail; backend job passes locally. |
+| DoD-R-16 production build and start; threats controlled | **Not met** | Production frontend image cannot be built (F-V14); not started. |
+| DoD-P01 E2E-01 to E2E-08 | Met | All pass in three engines, E2E-06 included. |
+| DoD-P02 first contact under 120 s | Met | WebKit 7.8 s; no walkthrough by a person. |
+| DoD-P03 search and filter under 1 s | Met | NFR-01. |
+| DoD-P04 export opens in Excel | Met by test | Manual opening in Excel is a release-notes item. |
+| DoD-P05 isolation, non-member 404 | Met | AC-017-07, E2E-04. |
+| DoD-P06 NFR-01 to NFR-09 on the deployed system | **Not met** | Not run against the production set-up. |
+| DoD-P07 OWASP ASVS 5.0 L2, no Critical or High open | **Not met** | F-V13, F-V16 open; no ASVS checklist produced. |
+| DoD-P08 delivery exists | Phase 7 | |
+| DoD-P09 demo J1 to J5 | Partly | Dev stack only. |
+| DoD-P10 second increment finished, J6 passes | Met | US-020 to US-022 built; E2E-06 and their acceptance tests pass. |
+| DoD-P11 verification report exists | Met | This file. |
+
+### UI and accessibility
+
+Playwright `checks/`, `e2e/responsive`, `e2e/accessibility`, `e2e/language` in Chromium, Firefox, WebKit at 320, 768, 1280 px: all pass except the one WebKit timeout (passed on repeat). No horizontal scroll at 320 px; no Critical or Serious axe violation; WebKit keyboard and language tests pass. Screenshots re-created in `out/logs/screenshots/`.
+
+### NFR
+
+| NFR | Measured | Pass value | Result |
+|---|---|---|---|
+| NFR-01 | `load-test.mjs --duration 60`, 20 users, 10,000 contacts: all searches p95 565 ms; worst (text with accents) p95 796 ms | under 1,000 ms | Pass (watch item D-46) |
+| NFR-02 | open a contact p95 24 ms | under 500 ms | Pass |
+| NFR-03 | 1,000 contacts: slowest of 3 runs 245 ms, 1001 rows | under 10 s | Pass |
+| NFR-04 | 0 errors of 1,740 requests | none | Pass |
+| NFR-05, NFR-06 | not re-run; earlier logs | | Not re-evidenced |
+| NFR-07 | three engines pass (one flake, 9 of 9 on repeat); manual Safari and Edge not done | all pass | Pass for the engines, manual open |
+| NFR-08 | no horizontal scroll at 320 px | none | Pass |
+| NFR-09 | axe clean; WebKit focus test passes | no Critical or Serious | Pass |
+| NFR-10 | key parity and language specs pass | same keys | Pass |
+| NFR-11 | empty and error state specs pass | | Pass |
+| NFR-12 | clean build fails at `tsc` (F-V14) | passes | **Not met** |
+| NFR-13 | `MigrationIT` passes | both start | Pass |
+| NFR-14 | licences fine; `springdoc-openapi-starter-webmvc-api` is in neither `tech-stack.md` nor `decisions-log.md` by that id (F-V17) | none forbidden | **Finding** |
+| NFR-15 | 10,000 contacts export 613 ms, backend not restarted | no error | Pass |
+
+### Threats and controls
+
+Rows covered by tests pass again (492 backend integration tests incl. AC-017-* and `SecurityHeadersIT`; E2E-04, E2E-07). Changes against run 1:
+
+| Threat | Result in run 2 |
+|---|---|
+| Erased data remains (SR-15) | Pass: AC-012-03 passes (F-V06 closed). |
+| Root process in the proxy (SB-11) | Fix of F-V10 not re-started: the production set cannot be built (F-V14). |
+| Secrets (SB-03, SR-12) | Pass: gitleaks over 215 commits, no leaks; `.env` value search: no file listed, 0 commit-message hits. |
+| Dependencies (SB-08, SR-19) | **Finding**: `audit.mjs` fails on High advisories without a decision: `image-size` (GHSA-5p2g-fcmc-qvqq, GHSA-w3rx-r6r6-pgpr) and `nodemailer` (five ids). `npm audit --omit=dev` shows only the `@grpc/grpc-js` chain allowed by D-08, so the new ones sit in build and test tooling (F-V16). Backend `dependency-check` not re-run; the swagger-ui removal in `pom.xml` is uncommitted, so HEAD still has it (F-V13). |
+| Others (injection, forged tokens, History immutability, lost update, formula injection, CORS) | Pass by tests; live header and TLS checks of run 1 not repeated (no production start). |
+| SB-12, SB-14, SR-20 | Not re-checked. |
+
+### CI and deployment
+
+Backend `verify`, `spotless:check`, `pmd:check`, `pmd:cpd-check`: BUILD SUCCESS (8 min 33 s). Frontend: eslint, vitest pass; `tsc`, prettier, `audit.mjs`, `licence-check.mjs` fail. Gitleaks passes. **Production deployment not built:** `docker compose up --build` stops at the frontend image because `npm run build` runs `tsc --noEmit`: error TS6133 at `src/features/contacts/contact-page-more.test.tsx(304,44)`, `'m'` is declared but never read; `docker-compose.prod.yml` builds the same `./frontend`.
+
+### Runtime demonstration
+
+| Component | Environment | Flows exercised | Result |
+|---|---|---|---|
+| backend, db, emulator, frontend | dev Compose stack from earlier images (equal to HEAD production code), seed data | E2E-01 to E2E-08 and all acceptance specs in three engines (399 tests, 1 worker, 24.7 min); load and export scripts | Works; one WebKit timeout, 9 of 9 on repeat |
+| production configuration | not started | | Blocked by F-V14 |
+
+### Traceability
+
+`check-traceability.mjs`: 638 ids defined, 638 mapped. `check-tasks.mjs`: 22 stories, 66 tasks, every R, AC, EX covered. Results per id: `verify2-playwright.log`, `verify2-backend-verify.log`.
+
+### Findings, run 2
+
+| F | Severity | Source | Finding | Resolution |
+|---|---|---|---|---|
+| F-V01 | High | hidden evaluation Run 2 | 47 held-out cases fail (Run 1: 62). Named: R-001-01 to R-001-09 (other, boundary, boundary, other, combination, other, combination, combination, other); R-018-01 to R-018-08 (other, combination, boundary, boundary, other x4); R-009-05 (other), R-009-06 (role), R-009-08, R-009-09 (other); R-010-10, R-010-11 (other); R-011-01 (role), R-011-02 (other), R-011-03 (boundary); R-014-06 (other); R-020-03, R-020-09; R-021-07, R-021-12; R-022-01 (other), R-022-02 (combination), R-022-08, R-022-11 (other); and 12 "unknown rule" (4 combination, 2 invalid, 2 boundary, 4 other). All R-001 and R-018 cases fail together while the local acceptance tests of both pass, so a common cause is possible; `/fix` must analyse from the category only | open |
+| F-V14 | High | DoD-R-02, R-09, R-15, R-16; NFR-12 | `tsc --noEmit` fails on the committed test file `contact-page-more.test.tsx:304` (unused `m`); the frontend image, compose stack, production deployment, clean-host test and CI frontend job fail at HEAD (commit `2246948`, survivor rounds 2 and 3) | open |
+| F-V15 | Medium | DoD-R-02 | `prettier --check` fails on 8 test files of the same commit (contact-form, contact-page-more, contact-table, contact-values, filter-dialog, merge-page, export-hooks, versions-page) | open |
+| F-V16 | High | SB-08, SR-19 | `audit.mjs` fails: High advisories without a decision on `image-size` (2) and `nodemailer` (5), new since run 1, in build and test tooling only. Needs an approval decision (D-08 path) or a tooling update | open |
+| F-V17 | Medium | NFR-14, DoD-R-12 | `licence-check.mjs` fails on `springdoc-openapi-starter-webmvc-api` (not named by id in `tech-stack.md` or `decisions-log.md`); the fix-loop changes (`pom.xml`, `trash-history.spec.ts` with its manifest line, `release-notes.md`) are uncommitted, so HEAD differs from the working tree | open (needs a decision id and a commit) |
+| F-V13 | High | SB-08, SR-19 | Backend dependency scan not re-run this session; the `pom.xml` change is uncommitted; Spring Framework advisories not assessed one by one | open (carried) |
+| F-V07 | Medium | tests | Timing flakes at 1 worker: vitest 7 failures in one full run (377 of 377 in the next), Playwright 1 WebKit timeout (9 of 9 on repeat) | open |
+| F-V04 | Medium | NFR-10, R-018-* | Not reproduced locally (language tests pass in three engines); hidden R-018-01 to -08 still fail | open (see F-V01) |
+| F-V09 | Medium | DoD-R-03 | JaCoCo reports; backend lines 97.12 %, frontend lines 97.03 % | closed |
+| F-V06 | Medium | SR-15 | AC-012-03 passes (D-57) | closed |
+| F-V05, F-V08 | Medium | | keyboard test and spotless pass | closed |
+| F-V10 | Medium | SB-11 | proxy as uid 101; not re-started | closed in run 1, not re-run |
+| F-V02, F-V03 | High | | INC-2 built; final theme applied; tests pass | closed |
+| D-66 | Low | DoD-R-03 | Frontend mutation score below the 90 % threshold, estimate 77.9 % from per-file runs, not a full run; also the FilterDialog stale `aria-invalid` flag | accepted (D-66: 1) |
+| F-V11, F-V12, F-06, F-07, F-08 | Low, Medium | | unchanged | open |
+
+Run 2 of at most 3 rounds; no finding has been open for three runs. Next: `/fix`.

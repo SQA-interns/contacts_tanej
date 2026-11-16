@@ -1,0 +1,14 @@
+Checking formatting...
+
+--- stderr ---
+[warn] src/features/contacts/contact-form.test.tsx
+[warn] src/features/contacts/contact-page-more.test.tsx
+[warn] src/features/contacts/contact-table.test.tsx
+[warn] src/features/contacts/contact-values.test.ts
+[warn] src/features/contacts/filter-dialog.test.tsx
+[warn] src/features/duplicates/merge-page.test.tsx
+[warn] src/features/export/export-hooks.test.tsx
+[warn] src/features/versions/versions-page.test.tsx
+[warn] Code style issues found in 8 files. Run Prettier with --write to fix.
+
+--- exit 1

@@ -1,0 +1,1804 @@
+
+ RUN  v4.1.11 C:/Users/tanej/Documents/LAB/tanej_sdd-workflow_contacts_v001/02_output/frontend
+      Coverage enabled with v8
+
+ ❯ src/features/groups/group-trash.test.tsx (9 tests | 1 failed) 8670ms
+     × offers Delete group to an Owner only 1350ms
+ ❯ src/features/export/export.test.tsx (7 tests | 2 failed) 10784ms
+     × keeps Export disabled while nothing is ticked and counts the ticks over pages 5200ms
+     × clears the selection when the search text changes 620ms
+ ❯ src/features/contacts/contact-filter.test.tsx (8 tests | 1 failed) 17237ms
+     × offers exactly the seven conditions and no way to save a filter 1558ms
+ ❯ src/features/contacts/contact-page-more.test.tsx (24 tests | 1 failed) 25757ms
+     × reads the contact once with the id encoded 1498ms
+ ❯ src/features/contacts/contact-page.test.tsx (33 tests | 2 failed) 47890ms
+     × is offered to an Owner and an Editor and not to a Viewer 1621ms
+     × sends the typed values and opens the new contact after the save (R-005-01) 5042ms
+
+ Test Files  5 failed | 32 passed (37)
+      Tests  7 failed | 370 passed (377)
+   Start at  15:16:37
+   Duration  61.92s (transform 19.76s, setup 56.33s, import 116.44s, tests 311.42s, environment 185.96s)
+
+
+--- stderr ---
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/contacts/contact-filter.test.tsx > the filter dialog (R-010-01 to R-010-07, R-010-09) > offers exactly the seven conditions and no way to save a filter
+TestingLibraryElementError: Unable to find role="button" and name "Filter"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ openDialog src/features/contacts/contact-filter.test.tsx:19:38
+     17|
+     18| async function openDialog() {
+     19|   await userEvent.click(await screen.findByRole('button', { name: 'Fil…
+       |                                      ^
+     20|   return screen.findByRole('dialog');
+     21| }
+ ❯ src/features/contacts/contact-filter.test.tsx:31:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  src/features/contacts/contact-page-more.test.tsx > ContactPage: reading > reads the contact once with the id encoded
+TestingLibraryElementError: Unable to find role="heading" and name "Ana Novak"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mb-4 flex flex-wrap items-center gap-3"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold break-words"[39m
+          [36m>[39m
+            [0mKonferenca 2026[0m
+          [36m</h1>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"inline-block rounded-control border border-border bg-surface px-2 py-0.5 text-sm"[39m
+          [36m>[39m
+            [0mOwner[0m
+          [36m</span>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Group"[39m
+          [33mclass[39m=[32m"mb-4 flex flex-wrap gap-1 border-b border-border"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1"[39m
+          [36m>[39m
+            [0mContacts[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/trash"[39m
+          [36m>[39m
+            [0mTrash[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/tags"[39m
+          [36m>[39m
+            [0mTags[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/members"[39m
+          [36m>[39m
+            [0mMembers[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/duplicates"[39m
+          [36m>[39m
+            [0mDuplicates[0m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mb-4 flex flex-wrap items-center gap-3"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold break-words"[39m
+          [36m>[39m
+            [0mKonferenca 2026[0m
+          [36m</h1>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"inline-block rounded-control border border-border bg-surface px-2 py-0.5 text-sm"[39m
+          [36m>[39m
+            [0mOwner[0m
+          [36m</span>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Group"[39m
+          [33mclass[39m=[32m"mb-4 flex flex-wrap gap-1 border-b border-border"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1"[39m
+          [36m>[39m
+            [0mContacts[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/trash"[39m
+          [36m>[39m
+            [0mTrash[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/tags"[39m
+          [36m>[39m
+            [0mTags[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/members"[39m
+          [36m>[39m
+            [0mMembers[0m
+          [36m</a>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center px-3 hover:bg-surface-raised"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/groups/g-1/duplicates"[39m
+          [36m>[39m
+            [0mDuplicates[0m
+          [36m</a>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/features/contacts/contact-page-more.test.tsx:72:18
+     70|   it('reads the contact once with the id encoded', async () => {
+     71|     const { calls } = setup(() => ana, open);
+     72|     await screen.findByRole('heading', { name: 'Ana Novak' });
+       |                  ^
+     73|     expect(calls.filter((c) => c.method === 'GET')).toEqual([
+     74|       { method: 'GET', path: '/groups/g-1/contacts/c%2F1', body: undef…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/features/contacts/contact-page.test.tsx > the Add contact button (R-005-01, R-005-09) > is offered to an Owner and an Editor and not to a Viewer
+TestingLibraryElementError: Unable to find role="button" and name "Add contact"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/features/contacts/contact-page.test.tsx:64:25
+     62|     const { api } = contactsApi(() => undefined);
+     63|     renderApp('/groups/g-1', { auth: signedIn(), api });
+     64|     expect(await screen.findByRole('button', { name: 'Add contact' }))…
+       |                         ^
+     65|   });
+     66|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/features/contacts/contact-page.test.tsx > the new contact form (R-005-01, R-005-03, EX-005-10) > sends the typed values and opens the new contact after the save (R-005-01)
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/features/contacts/contact-page.test.tsx:91:3
+     89|   });
+     90|
+     91|   it('sends the typed values and opens the new contact after the save …
+       |   ^
+     92|     const { api, calls } = contactsApi((method) => (method === 'POST' …
+     93|     renderApp('/groups/g-1/contacts/new', { auth: signedIn(), api });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  src/features/groups/group-trash.test.tsx > delete group dialog (R-015-01, R-015-02, R-015-07, AC-015-01, AC-015-02) > offers Delete group to an Owner only
+TestingLibraryElementError: Unable to find role="link" and name "Konferenca 2026"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 bg-surface-raised font-semibold"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 bg-surface-raised font-semibold"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-live[39m=[32m"polite"[39m
+          [33mclass[39m=[32m"flex flex-col gap-3"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"sr-only"[39m
+          [36m>[39m
+            [0mLoading …[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-2/3"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-full"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"h-4 animate-pulse rounded-control bg-surface-raised w-1/2"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"border-t border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto max-w-[1200px] px-4 py-4 text-sm text-text-muted md:px-6"[39m
+        [36m>[39m
+          [0mContact Groups[0m
+        [36m</div>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/features/groups/group-trash.test.tsx:63:18
+     61|     const { api } = trashApi();
+     62|     renderApp('/', { auth: signedIn(), api });
+     63|     await screen.findByRole('link', { name: 'Konferenca 2026' });
+       |                  ^
+     64|     expect(screen.getAllByRole('button', { name: 'Delete group' })).to…
+     65|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  src/features/export/export.test.tsx > select and export (US-011) > keeps Export disabled while nothing is ticked and counts the ticks over pages
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/features/export/export.test.tsx:48:3
+     46|   });
+     47|
+     48|   it('keeps Export disabled while nothing is ticked and counts the tic…
+       |   ^
+     49|     const { api } = exportApi(many(60));
+     50|     renderApp('/groups/g-1', { auth: signedIn(), api });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  src/features/export/export.test.tsx > select and export (US-011) > clears the selection when the search text changes
+TestingLibraryElementError: Unable to find an element with the text: 5 selected. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"size-8 rounded-control border border-border bg-surface-raised"[39m
+            [36m/>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-border bg-surface text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px border-transparent bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r2»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m...
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/export/export.test.tsx:69:19
+     67|     await screen.findByText('5 contacts');
+     68|     await userEvent.click(screen.getByLabelText('Select all on this pa…
+     69|     expect(screen.getByText('5 selected')).toBeInTheDocument();
+       |                   ^
+     70|     await userEvent.type(screen.getByLabelText('Search'), 'p');
+     71|     expect(screen.getByText('Nothing selected')).toBeInTheDocument();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+--- exit 1

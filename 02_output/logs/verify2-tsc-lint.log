@@ -1,0 +1,5 @@
+src/features/contacts/contact-page-more.test.tsx(304,44): error TS6133: 'm' is declared but its value is never read.
+
+--- stderr ---
+
+--- exit 2
