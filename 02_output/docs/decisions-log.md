@@ -733,6 +733,18 @@
 - Type: non-blocking
 - Trigger: after D-63 was applied, `mvn org.pitest:pitest-maven:mutationCoverage` (PIT 1.20.4, 1 thread, full suite of 228 test classes with Testcontainers, scope unchanged) passed its baseline (0 tests failing without mutation) and was stopped by the harness after the 2 h maximum of a background command, with 100 of 150 mutation test units created and nine minions already "TIMED_OUT"; no report (`out/logs/quality-backend-pit-run2.log`). No backend mutation score is recorded.
 - Options: (1) (proposed) The developer runs `mvn org.pitest:pitest-maven:mutationCoverage` outside the agent (as for Stryker, D-64), optionally with `-Dthreads=2`; the next `/quality-gate` reads `out/logs/pit/mutations.xml` and does the survivor rounds. (2) Same scope in slices (`-DtargetClasses` by package, each below 2 h; totals added). (3) Record the backend score as not measured.
+- Human response: 1 (the developer ran PIT outside the agent in two runs, merged into `out/logs/pit/mutations.xml`, see `out/logs/pit/partial-run1/RESUME.md`)
+- Resolution: applied. 948 mutants: killed 803, timed out 61, survived 54, no coverage 29, run error 1. Raw score (killed + timed out) 864 / 948 = 91.1 %; killed only 84.7 %. No survivor justified as equivalent, so adjusted = raw. The backend meets both thresholds, so by the stop rule of `general/testing/measurement.md` no backend survivor round was run (the note asked for them; the rule says add no test once the gate is met). The `partial=true` header was ignored as told.
+- Overrides: none
+
+## D-66: frontend mutation shortfall after survivor round 3
+- Timestamp: 2026-11-16
+- Session: S6 quality-gate D-65: 1
+- Class: open
+- Type: non-blocking
+- Trigger: after the third survivor round the frontend is still below the mutation threshold (>= 90 %, adjusted). Rounds 2 and 3 took 582 survivors in 8 UI files to 96; with round 1 (+51) the full-run figures (killed 2302 of 3643) become about 2839 of 3643 = **77.9 %** (estimate from per-file runs, not a full run). Shortfall about 12 points, about 440 more kills. Line threshold met (95.63 %, measured before the rounds).
+- Options: (1) (proposed) Accept the shortfall and continue the run; the finding stays open for `/verify`. (2) A further round on HistoryFilters 43, TrashPage 37, AccountPage 35, ContactListPage 35, DeleteGroupDialog 32, VersionCompare 30, AppShell 28, Pager 28 and others (beyond the three rounds the rule allows; needs the developer's approval). (3) The developer runs one confirming full Stryker run outside the agent.
+- Finding (Low): FilterDialog keeps `aria-invalid` and the "Choose a condition." message after a condition is chosen (the select's change handler does not clear `missing`); production code not changed here.
 - Human response: none
 - Resolution: pending review
 - Overrides: none
