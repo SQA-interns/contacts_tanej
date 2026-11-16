@@ -5,7 +5,11 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S7 verify run 5 (self-check; report `docs/06_verification-report.md` "Run 5"; developer's script evidence recorded, production set built and started by this session)
+- Session: S9 release (run complete)
+- Result: done (run complete)
+- Gate: phase 7 passed: READMEs (root and both components, with "Deploy") work from a clean clone (`npm ci`, `npm run build`, `npm run check`, both Compose files valid, production images build; log `out/logs/release-clean-clone.log`; the stack scripts passed earlier at the same code, `clean-host-test.log`); `release-notes.md` lists manual tests and pending decisions; retrospective written; hidden suite committed (`2768dd1`, 12 of 12 hashes match).
+- Notes for the next session: none; the run is complete. The human reads `docs/release-notes.md` ("Must be tested manually", "Decisions pending review") and `docs/07_retrospective.md`. Backend tests and the full compose start were not repeated in the clean clone (no code change since run 3). `certs/` is not in `.gitignore`: keep the TLS key out of Git.
+- Previous session: S7 verify run 5 (self-check; report `docs/06_verification-report.md` "Run 5"; developer's script evidence recorded, production set built and started by this session)
 - Result: done
 - Gate: phase 6 passed with accepted limitations: no Critical or High open (F-V01 accepted, D-71: 1; 12 Spring CVEs accepted, D-70); manifests match (input 73, acceptance 43, hidden ok); no secret leaked; NFR-05, NFR-06, NFR-12 PASS (developer's scripts at `f510756`); production Compose set builds and starts healthy, live checks pass. Hidden suite 234 of 251 (same 17), passes only through D-71.
 - Notes for the next session: `/release` puts the F-V01 text of D-71 and the F-V07 flake note (D-69) into `release-notes.md`, records D-66 (frontend mutation 77.9 % estimate), and lists under "Must be tested manually by a human": sign-in and core flows on the production configuration with a real Firebase project (none here, so DoD-P06 and DoD-P09 are partly met), manual Safari/Edge (NFR-07), CSV in Excel, a person's first-contact walkthrough. Install guide must say `certs/tls.key` has to be readable by uid 101 (the production proxy crashed on a 0600 key in this run; fix is `chmod 644`). No code change since run 3.
@@ -43,7 +47,7 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /release
+- Command: none (run complete)
 - Waiting for: nothing
 
 ## Stories
