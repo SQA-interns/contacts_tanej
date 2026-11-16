@@ -1,0 +1,64 @@
+clean clone in C:\Users\tanej\AppData\Local\Temp\cg-release-Tn9t19\clone
+
+=== git clone: exit 0 (4 s)
+
+
+=== frontend: npm ci: exit 0 (43 s)
+
+added 1444 packages in 43s
+npm warn deprecated json-ptr@3.1.1: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated uuid@9.0.1: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated eslint@9.36.0: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+
+=== frontend: npm run build: exit 0 (13 s)
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-BulzWPQw.css   19.26 kB │ gzip:   4.80 kB
+dist/assets/index-Rf69_fWp.js   705.34 kB │ gzip: 217.47 kB
+✓ built in 5.54s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+
+=== frontend: npm run check: exit 0 (21 s)
+[90m├────────────[39m[90m┼────────────────[39m[90m┼─────────────[39m[90m┼──────────────[39m[90m┼──────────────[39m[90m┼──────────────────[39m[90m┼───────────────────┤[39m
+[90m│[39m tsx        [90m│[39m 86             [90m│[39m 10072       [90m│[39m 127608       [90m│[39m 46           [90m│[39m 358 (3.55%)      [90m│[39m 4483 (3.51%)      [90m│[39m
+[90m├────────────[39m[90m┼────────────────[39m[90m┼─────────────[39m[90m┼──────────────[39m[90m┼──────────────[39m[90m┼──────────────────[39m[90m┼───────────────────┤[39m
+[90m│[39m css        [90m│[39m 3              [90m│[39m 115         [90m│[39m 731          [90m│[39m 0            [90m│[39m 0 (0%)           [90m│[39m 0 (0%)            [90m│[39m
+[90m├────────────[39m[90m┼────────────────[39m[90m┼─────────────[39m[90m┼──────────────[39m[90m┼──────────────[39m[90m┼──────────────────[39m[90m┼───────────────────┤[39m
+[90m│[39m json       [90m│[39m 2              [90m│[39m 994         [90m│[39m 6396         [90m│[39m 0            [90m│[39m 0 (0%)           [90m│[39m 0 (0%)            [90m│[39m
+[90m├────────────[39m[90m┼────────────────[39m[90m┼─────────────[39m[90m┼──────────────[39m[90m┼──────────────[39m[90m┼──────────────────[39m[90m┼───────────────────┤[39m
+[90m│[39m [1mTotal:[22m     [90m│[39m 178            [90m│[39m 14669       [90m│[39m 174649       [90m│[39m 50           [90m│[39m 440 (3%)         [90m│[39m 5464 (3.13%)      [90m│[39m
+[90m└────────────[39m[90m┴────────────────[39m[90m┴─────────────[39m[90m┴──────────────[39m[90m┴──────────────[39m[90m┴──────────────────[39m[90m┴───────────────────┘[39m
+[90mFound 50 clones.[39m
+[3m[90mDetection time:[39m[23m: 2.171s
+
+
+=== compose config (dev): exit 0 (0 s)
+
+
+=== compose config (prod): exit 0 (0 s)
+
+
+=== compose build (prod: backend + frontend images): exit 0 (4 s)
+#35 DONE 0.2s
+
+#37 [backend] resolving provenance for metadata file
+#37 DONE 0.0s
+
+#38 [frontend] resolving provenance for metadata file
+#38 DONE 0.0s
+ Image contact-groups-backend Building 
+ Image contact-groups-frontend Building 
+ Image contact-groups-frontend Built 
+ Image contact-groups-backend Built 
+
+
+DONE

@@ -25,6 +25,10 @@ Node 24.13.0 and npm 11.6.2 (decision D-01). Install with `npm ci` (versions are
 
 Runtime values are in `/config.js` (`public/config.js` for development against the emulator; written from environment variables when the container starts): `FIREBASE_PROJECT_ID`, `FIREBASE_WEB_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_AUTH_EMULATOR_URL` (empty in production). Nothing is baked into the build.
 
+## Deploy
+
+The image is built from `Dockerfile` (the Vite build served by nginx, non-root) by `../docker-compose.yml` and `../docker-compose.prod.yml`; `/config.js` is written from the environment at container start, so one image serves every environment. In the delivered set the `proxy` service terminates TLS in front of it. Steps for the customer's server: `../README.md` ("Deploy").
+
 ## Rules the tests enforce
 
 No raw colour and no literal text in a component, colours only in `src/styles/tokens.*.css`, the same keys in `sl.json` and `en.json`, Firebase used for Authentication only (`src/architecture.test.ts`, `src/locales/locales.test.ts`). The wireframe theme is active (`data-theme="wireframe"` in `index.html`); the final theme is switched on by `/design`.

@@ -27,6 +27,10 @@ All settings are environment variables (`../docs/02_contracts/configuration.sche
 
 From `02_output/`: `docker compose --env-file ../.env up --build -d`, then `./scripts/seed.sh`. The API is at `http://localhost:8080` (health: `/health`), the web app at `http://localhost:5173`.
 
+## Deploy
+
+The image is built from `Dockerfile` (multi-stage, Temurin 21 base, non-root) by `../docker-compose.yml` (local) and `../docker-compose.prod.yml` (delivered, no emulator, `FIREBASE_AUTH_EMULATOR_HOST` empty). The five required variables come from the repository's `.env`; the steps for the customer's server, the certificate, backup and restore are in `../README.md` ("Deploy"). The container reports health at `/health`; Flyway migrations run at start and go forward only.
+
 ## Troubleshooting
 
 - `Missing required configuration: ...`: set the named variables.
