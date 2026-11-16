@@ -5,11 +5,12 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S8 fix F-V01 F-V13 D-68: 1 D-70: 3 (answers applied, no code change)
+- Session: S8 fix F-V13 D-70: 2 (answer applied, no code change)
 - Result: done
-- Gate: phase 6 not passed (F-V01 High open as release-note item; F-V13 High: 9 of 12 Spring CVEs unassessed)
-- Notes for the next session: D-68: 1 applied, F-V01 stays open (groups 17/12/18 in D-68). D-70: CVE-2026-47884, -59283, -59313 not reachable (grep evidence in D-70); the other 9 could not be assessed (no advisory text, web search not permitted): developer must allow a search, paste the advisories' affected-configuration lines or accept them. `release-notes.md` not edited (not in the `/fix` Writes list); texts for it are in D-68 and D-70. Next is `/verify` (run 3).
-- Previous fix session: S8 fix run 2 (F-V14, F-V15, F-V17 fixed; F-V16 not reproduced). Commits 38aa018 (F-V14, F-V15) and f552ccf (F-V17, uncommitted fix-loop files). D-67 (springdoc id), D-68 (F-V01: no cause from the category; hypothesis Slovenian default vs English selectors; needs developer input), D-69 (F-V16 not reproduced, F-V07 to release notes), D-70 (backend re-scan: 12 Spring Framework 6.2.19 CVEs, up to 9.8, unassessed; needs developer: search, Boot version or acceptance). Rest of D-70 and D-68 answers go in as `/fix D-68: n D-70: n`. Production image build and clean-host test not re-run after the tsc fix: `/verify` run 3 should. Decisions-log and report edits of this session are committed with the handover.
+- Gate: phase 6 not passed (F-V01 High open as release-note item; F-V13 closed as accepted, `/verify` confirms)
+- Notes for the next session: D-70 round 2: all 12 Spring Framework 6.2.19 CVEs accepted as known limitations, each with evidence (dependency tree `out/logs/verify4-backend-dependency-tree.log`, grep, all controllers checked for CVE-2026-59282: no object binding of query or form params). `release-notes.md` not edited (not in the `/fix` Writes list); text for it is in D-70 and D-68. Next is `/verify` (run 3).
+- Previous fix session (round 3): S8 fix F-V01 F-V13 D-68: 1 D-70: 3 (answers applied, no code change; 3 of 12 CVEs accepted, 9 waited for the developer, now answered above).
+- Earlier fix session: S8 fix run 2 (F-V14, F-V15, F-V17 fixed; F-V16 not reproduced). Commits 38aa018 (F-V14, F-V15) and f552ccf (F-V17, uncommitted fix-loop files). D-67 (springdoc id), D-68 (F-V01: no cause from the category; hypothesis Slovenian default vs English selectors; needs developer input), D-69 (F-V16 not reproduced, F-V07 to release notes), D-70 (backend re-scan: 12 Spring Framework 6.2.19 CVEs, up to 9.8, unassessed; needs developer: search, Boot version or acceptance). Rest of D-70 and D-68 answers go in as `/fix D-68: n D-70: n`. Production image build and clean-host test not re-run after the tsc fix: `/verify` run 3 should. Decisions-log and report edits of this session are committed with the handover.
 - Previous session: S7 verify run 2 (D-66: 1, frontend mutation shortfall accepted for this run; the report states 90 % not met and 77.9 % is an estimate from per-file runs)
 - Result: done
 - Gate: phase 6 not passed. High open: F-V01 (47 hidden failures, all R-001 and R-018 cases among them), F-V14 (`tsc` error TS6133 in `contact-page-more.test.tsx:304` breaks `npm run build`, the image and CI), F-V16 (`audit.mjs`: image-size and nodemailer High advisories without a decision, build tooling), F-V13 (backend dependency re-scan not run). Medium: F-V15 (prettier, 8 test files), F-V17 (licence check: springdoc `-api` not named by id; `pom.xml`, `trash-history.spec.ts`, its manifest line, `release-notes.md` uncommitted), F-V07 (flakes).
@@ -39,7 +40,7 @@ The handover between sessions. Every session reads it first and updates it last.
 
 ## Next
 - Command: /verify
-- Waiting for: D-70 (9 Spring CVEs: allow a search, paste advisories or accept; /verify may run first)
+- Waiting for: nothing
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
