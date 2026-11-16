@@ -1,0 +1,4 @@
+{
+  "command": "node 02_output/hidden-tests/run-hidden.mjs",
+  "junit": "02_output/hidden-tests/report/junit.xml"
+}

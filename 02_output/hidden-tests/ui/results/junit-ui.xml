@@ -1,0 +1,860 @@
+<testsuites id="" name="" tests="35" failures="35" skipped="0" errors="0" time="234.63165700000002">
+<testsuite name="hidden-ui.spec.ts" timestamp="2026-11-09T19:18:07.096Z" hostname="chromium" tests="35" failures="35" skipped="0" time="189.912" errors="0">
+<testcase name="R-001-01 other no other provider and no second factor on the sign-in screen" classname="hidden-ui.spec.ts" time="5.959">
+<failure message="hidden-ui.spec.ts:15:1 R-001-01 other no other provider and no second factor on the sign-in screen" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:15:1 › R-001-01 other no other provider and no second factor on the sign-in screen 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  getByRole('button', { name: 'Sign in with Google' })
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Sign in with Google' })
+
+
+      34 |   await expect(
+      35 |     page.getByRole("button", { name: "Sign in with Google" }),
+    > 36 |   ).toBeVisible();
+         |     ^
+      37 |   await expect(
+      38 |     page.getByRole("button", {
+      39 |       name: /facebook|github|apple|microsoft|twitter/i,
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:36:5
+
+    Error Context: results\hidden-ui-R-001-01-other-n-e35b2-actor-on-the-sign-in-screen-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-R-001-01-other-n-e35b2-actor-on-the-sign-in-screen-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="R-001-02 boundary a name of spaces only is refused" classname="hidden-ui.spec.ts" time="30.045">
+<failure message="hidden-ui.spec.ts:27:1 R-001-02 boundary a name of spaces only is refused" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:27:1 › R-001-02 boundary a name of spaces only is refused ─────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Name')
+
+
+      47 | test("R-001-02 boundary a name of spaces only is refused", async ({ page }) => {
+      48 |   await page.goto("/register");
+    > 49 |   await page.getByLabel("Name").fill("     ");
+         |                                 ^
+      50 |   await page.getByLabel("E-mail").fill("nov@example.com");
+      51 |   await page.getByLabel("Password").fill("Geslo1234");
+      52 |   await page.getByRole("button", { name: "Register", exact: true }).click();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:49:33
+
+    Error Context: results\hidden-ui-R-001-02-boundary-a-name-of-spaces-only-is-refused-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-R-001-02-boundary-a-name-of-spaces-only-is-refused-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="R-001-03 boundary a password of 8 spaces is not refused by length and 7 characters are" classname="hidden-ui.spec.ts" time="30.034">
+<failure message="hidden-ui.spec.ts:42:1 R-001-03 boundary a password of 8 spaces is not refused by length and 7 characters are" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:42:1 › R-001-03 boundary a password of 8 spaces is not refused by length and 7 characters are 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Name')
+
+
+      60 | }) => {
+      61 |   await page.goto("/register");
+    > 62 |   await page.getByLabel("Name").fill("Nov Uporabnik");
+         |                                 ^
+      63 |   await page.getByLabel("E-mail").fill("nov@example.com");
+      64 |   await page.getByLabel("Password").fill("Abc1234");
+      65 |   await page.getByRole("button", { name: "Register", exact: true }).click();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:62:33
+
+    Error Context: results\hidden-ui-R-001-03-boundar-d19a0-length-and-7-characters-are-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-R-001-03-boundar-d19a0-length-and-7-characters-are-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="R-001-04 other the verification e-mail is sent to the address that was registered" classname="hidden-ui.spec.ts" time="30.042">
+<failure message="hidden-ui.spec.ts:63:1 R-001-04 other the verification e-mail is sent to the address that was registered" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:63:1 › R-001-04 other the verification e-mail is sent to the address that was registered 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Name')
+
+
+      78 | }) => {
+      79 |   await page.goto("/register");
+    > 80 |   await page.getByLabel("Name").fill("Nov Uporabnik");
+         |                                 ^
+      81 |   await page.getByLabel("E-mail").fill("Drug.Naslov@Example.com");
+      82 |   await page.getByLabel("Password").fill("Geslo1234");
+      83 |   await page.getByRole("button", { name: "Register", exact: true }).click();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:80:33
+
+    Error Context: results\hidden-ui-R-001-04-other-t-95218-address-that-was-registered-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-R-001-04-other-t-95218-address-that-was-registered-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="R-001-05 combination every group address and the groups list show only the verify screen" classname="hidden-ui.spec.ts" time="0.629">
+<failure message="hidden-ui.spec.ts:79:1 R-001-05 combination every group address and the groups list show only the verify screen" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:79:1 › R-001-05 combination every group address and the groups list show only the verify screen 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:99:19
+]]>
+</failure>
+</testcase>
+<testcase name="R-001-06 other the reset flow for an address without an account looks the same" classname="hidden-ui.spec.ts" time="30.03">
+<failure message="hidden-ui.spec.ts:102:1 R-001-06 other the reset flow for an address without an account looks the same" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:102:1 › R-001-06 other the reset flow for an address without an account looks the same 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('link', { name: 'Forgot password?' })
+
+
+      122 | }) => {
+      123 |   await page.goto("/");
+    > 124 |   await page.getByRole("link", { name: "Forgot password?" }).click();
+          |                                                              ^
+      125 |   await page.getByLabel("E-mail").fill("nihce@example.com");
+      126 |   await page.getByRole("button", { name: "Send link" }).click();
+      127 |   await expect(
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:124:62
+
+    Error Context: results\hidden-ui-R-001-06-other-t-8256f-t-an-account-looks-the-same-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-R-001-06-other-t-8256f-t-an-account-looks-the-same-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="R-001-07 combination wrong e-mail and wrong password both show an error and open nothing" classname="hidden-ui.spec.ts" time="30.04">
+<failure message="hidden-ui.spec.ts:117:1 R-001-07 combination wrong e-mail and wrong password both show an error and open nothing" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:117:1 › R-001-07 combination wrong e-mail and wrong password both show an error and open nothing 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByLabel('E-mail')
+
+
+      139 |   ]) {
+      140 |     await page.goto("/");
+    > 141 |     await page.getByLabel("E-mail").fill(email!);
+          |                                     ^
+      142 |     await page.getByLabel("Password").fill(password!);
+      143 |     await page.getByRole("button", { name: "Sign in", exact: true }).click();
+      144 |     await expect(page.getByRole("alert")).toBeVisible();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:141:37
+
+    Error Context: results\hidden-ui-R-001-07-combina-0f47c-w-an-error-and-open-nothing-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-R-001-07-combina-0f47c-w-an-error-and-open-nothing-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="R-001-08 combination after sign out a protected address leads to the sign-in screen" classname="hidden-ui.spec.ts" time="0.606">
+<failure message="hidden-ui.spec.ts:135:1 R-001-08 combination after sign out a protected address leads to the sign-in screen" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:135:1 › R-001-08 combination after sign out a protected address leads to the sign-in screen 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:153:19
+]]>
+</failure>
+</testcase>
+<testcase name="R-001-09 other a user with a group does not see the empty state" classname="hidden-ui.spec.ts" time="0.624">
+<failure message="hidden-ui.spec.ts:153:1 R-001-09 other a user with a group does not see the empty state" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:153:1 › R-001-09 other a user with a group does not see the empty state 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:166:3
+]]>
+</failure>
+</testcase>
+<testcase name="language › R-018-01 other Slovenian is the language of every public screen without a stored choice" classname="hidden-ui.spec.ts" time="5.99">
+<failure message="hidden-ui.spec.ts:170:3 R-018-01 other Slovenian is the language of every public screen without a stored choice" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:170:3 › language › R-018-01 other Slovenian is the language of every public screen without a stored choice 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('main').getByRole('textbox')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('main').getByRole('textbox')
+        9 × locator resolved to 0 elements
+          - unexpected value "0"
+
+
+      184 |       await page.goto(path);
+      185 |       await expect(page.locator("html")).toHaveAttribute("lang", "sl");
+    > 186 |       await expect(page.getByRole("main").getByRole("textbox")).toHaveCount(
+          |                                                                 ^
+      187 |         fields,
+      188 |       );
+      189 |     }
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:186:65
+
+    Error Context: results\hidden-ui-language-R-018-0-6e73f-een-without-a-stored-choice-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-language-R-018-0-6e73f-een-without-a-stored-choice-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="language › R-018-02 combination switching twice returns the same texts" classname="hidden-ui.spec.ts" time="5.927">
+<failure message="hidden-ui.spec.ts:179:3 R-018-02 combination switching twice returns the same texts" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:179:3 › language › R-018-02 combination switching twice returns the same texts 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('main').getByRole('textbox')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('main').getByRole('textbox')
+        9 × locator resolved to 0 elements
+          - unexpected value "0"
+
+
+      194 |   }) => {
+      195 |     await page.goto("/");
+    > 196 |     await expect(page.getByRole("main").getByRole("textbox")).toHaveCount(1);
+          |                                                               ^
+      197 |     await en(page).click();
+      198 |     const english = await page.locator("main").innerText();
+      199 |     await sl(page).click();
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:196:63
+
+    Error Context: results\hidden-ui-language-R-018-0-9e444-wice-returns-the-same-texts-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-language-R-018-0-9e444-wice-returns-the-same-texts-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="language › R-018-03 boundary the choice is per browser and stored under the key language" classname="hidden-ui.spec.ts" time="5.935">
+<failure message="hidden-ui.spec.ts:192:3 R-018-03 boundary the choice is per browser and stored under the key language" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:192:3 › language › R-018-03 boundary the choice is per browser and stored under the key language 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('main').getByRole('textbox')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('main').getByRole('textbox')
+        9 × locator resolved to 0 elements
+          - unexpected value "0"
+
+
+      208 |   }) => {
+      209 |     await page.goto("/");
+    > 210 |     await expect(page.getByRole("main").getByRole("textbox")).toHaveCount(1);
+          |                                                               ^
+      211 |     await en(page).click();
+      212 |     expect(await page.evaluate(() => localStorage.getItem("language"))).toBe(
+      213 |       "en",
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:210:63
+
+    Error Context: results\hidden-ui-language-R-018-0-f6f96-ored-under-the-key-language-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|hidden-ui-language-R-018-0-f6f96-ored-under-the-key-language-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="R-018-04 boundary a time just before midnight in summer and winter" classname="hidden-ui.spec.ts" time="0.608">
+<failure message="hidden-ui.spec.ts:205:1 R-018-04 boundary a time just before midnight in summer and winter" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:205:1 › R-018-04 boundary a time just before midnight in summer and winter 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:227:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-018-05 other the time zone is the same for every user whatever the browser zone" classname="hidden-ui.spec.ts" time="0.466">
+<failure message="hidden-ui.spec.ts:233:1 R-018-05 other the time zone is the same for every user whatever the browser zone" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:233:1 › R-018-05 other the time zone is the same for every user whatever the browser zone 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:246:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-018-06 other more countries in both languages" classname="hidden-ui.spec.ts" time="0.586">
+<failure message="hidden-ui.spec.ts:267:1 R-018-06 other more countries in both languages" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:267:1 › R-018-06 other more countries in both languages ───────────
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:268:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-018-07 other the search and the sort give the same result in both languages" classname="hidden-ui.spec.ts" time="0.601">
+<failure message="hidden-ui.spec.ts:289:1 R-018-07 other the search and the sort give the same result in both languages" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:289:1 › R-018-07 other the search and the sort give the same result in both languages 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:282:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-018-08 other the contact data stays in the language it was written in" classname="hidden-ui.spec.ts" time="0.722">
+<failure message="hidden-ui.spec.ts:307:1 R-018-08 other the contact data stays in the language it was written in" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:307:1 › R-018-08 other the contact data stays in the language it was written in 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:297:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-009-05 other no match with a filter and a search shows one clear button that removes both" classname="hidden-ui.spec.ts" time="0.647">
+<failure message="hidden-ui.spec.ts:329:1 R-009-05 other no match with a filter and a search shows one clear button that removes both" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:329:1 › R-009-05 other no match with a filter and a search shows one clear button that removes both 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:314:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-009-06 role an Editor sees Add contact in the empty group and the text names no Viewer wording" classname="hidden-ui.spec.ts" time="0.644">
+<failure message="hidden-ui.spec.ts:365:1 R-009-06 role an Editor sees Add contact in the empty group and the text names no Viewer wording" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:365:1 › R-009-06 role an Editor sees Add contact in the empty group and the text names no Viewer wording 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:337:3
+]]>
+</failure>
+</testcase>
+<testcase name="R-009-08 other sorting a second time keeps search and page one" classname="hidden-ui.spec.ts" time="0.594">
+<failure message="hidden-ui.spec.ts:380:1 R-009-08 other sorting a second time keeps search and page one" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:380:1 › R-009-08 other sorting a second time keeps search and page one 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:350:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-009-09 other a row opens the contact screen with the same values" classname="hidden-ui.spec.ts" time="0.593">
+<failure message="hidden-ui.spec.ts:402:1 R-009-09 other a row opens the contact screen with the same values" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:402:1 › R-009-09 other a row opens the contact screen with the same values 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:367:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-010-10 other removing one of two chips updates the list at once" classname="hidden-ui.spec.ts" time="0.632">
+<failure message="hidden-ui.spec.ts:423:1 R-010-10 other removing one of two chips updates the list at once" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:423:1 › R-010-10 other removing one of two chips updates the list at once 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:383:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-010-11 other chips appear for each condition type with its values" classname="hidden-ui.spec.ts" time="0.59">
+<failure message="hidden-ui.spec.ts:465:1 R-010-11 other chips appear for each condition type with its values" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:465:1 › R-010-11 other chips appear for each condition type with its values 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:413:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-011-01 role Owner and Editor see select-all on the page and select-all N results and a Viewer does not" classname="hidden-ui.spec.ts" time="0.635">
+<failure message="hidden-ui.spec.ts:498:1 R-011-01 role Owner and Editor see select-all on the page and select-all N results and a Viewer does not" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:498:1 › R-011-01 role Owner and Editor see select-all on the page and select-all N results and a Viewer does not 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:435:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-011-02 other sorting keeps the selection and a new search text clears it" classname="hidden-ui.spec.ts" time="0.603">
+<failure message="hidden-ui.spec.ts:518:1 R-011-02 other sorting keeps the selection and a new search text clears it" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:518:1 › R-011-02 other sorting keeps the selection and a new search text clears it 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:451:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-011-03 boundary unticking the last contact disables Export again" classname="hidden-ui.spec.ts" time="0.594">
+<failure message="hidden-ui.spec.ts:537:1 R-011-03 boundary unticking the last contact disables Export again" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:537:1 › R-011-03 boundary unticking the last contact disables Export again 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:465:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-014-06 other the empty state and the no-match state are different" classname="hidden-ui.spec.ts" time="0.58">
+<failure message="hidden-ui.spec.ts:562:1 R-014-06 other the empty state and the no-match state are different" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:562:1 › R-014-06 other the empty state and the no-match state are different 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:482:3
+]]>
+</failure>
+</testcase>
+<testcase name="R-020-03 other comparing shows tag and attribute differences" classname="hidden-ui.spec.ts" time="0.598">
+<failure message="hidden-ui.spec.ts:575:1 R-020-03 other comparing shows tag and attribute differences" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:575:1 › R-020-03 other comparing shows tag and attribute differences 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:496:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-020-09 other the restore dialog names what it does before anything is changed" classname="hidden-ui.spec.ts" time="0.595">
+<failure message="hidden-ui.spec.ts:620:1 R-020-09 other the restore dialog names what it does before anything is changed" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:620:1 › R-020-09 other the restore dialog names what it does before anything is changed 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:527:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-021-07 other a probable set shows its reason and a certain set its reason" classname="hidden-ui.spec.ts" time="0.604">
+<failure message="hidden-ui.spec.ts:654:1 R-021-07 other a probable set shows its reason and a certain set its reason" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:654:1 › R-021-07 other a probable set shows its reason and a certain set its reason 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:554:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-021-12 other the empty result does not show an error" classname="hidden-ui.spec.ts" time="0.637">
+<failure message="hidden-ui.spec.ts:689:1 R-021-12 other the empty result does not show an error" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:689:1 › R-021-12 other the empty result does not show an error ────
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:579:3
+]]>
+</failure>
+</testcase>
+<testcase name="R-022-01 other the survivor is labelled as the oldest and the other as the contact to join" classname="hidden-ui.spec.ts" time="0.597">
+<failure message="hidden-ui.spec.ts:703:1 R-022-01 other the survivor is labelled as the oldest and the other as the contact to join" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:703:1 › R-022-01 other the survivor is labelled as the oldest and the other as the contact to join 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:592:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-022-02 combination the first non-empty value of the oldest contact is preselected for several fields" classname="hidden-ui.spec.ts" time="0.706">
+<failure message="hidden-ui.spec.ts:729:1 R-022-02 combination the first non-empty value of the oldest contact is preselected for several fields" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:729:1 › R-022-02 combination the first non-empty value of the oldest contact is preselected for several fields 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:606:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-022-08 other the hint is shown on every merge screen" classname="hidden-ui.spec.ts" time="0.621">
+<failure message="hidden-ui.spec.ts:766:1 R-022-08 other the hint is shown on every merge screen" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:766:1 › R-022-08 other the hint is shown on every merge screen ────
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:643:30
+]]>
+</failure>
+</testcase>
+<testcase name="R-022-11 other nothing is merged after the duplicates screen is left" classname="hidden-ui.spec.ts" time="0.598">
+<failure message="hidden-ui.spec.ts:787:1 R-022-11 other nothing is merged after the duplicates screen is left" type="FAILURE">
+<![CDATA[  [chromium] › hidden-ui.spec.ts:787:1 › R-022-11 other nothing is merged after the duplicates screen is left 
+
+    Error: POST /groups gave 500: {"status":500,"code":"INTERNAL_ERROR","message":"Something went wrong."}
+
+       at ..\..\frontend\acceptance\support.ts:170
+
+      168 |     const answer = await this.call(method, path, body);
+      169 |     if (answer.status >= 300)
+    > 170 |       throw new Error(`${method} ${path} gave ${answer.status}: ${JSON.stringify(answer.body)}`);
+          |             ^
+      171 |     return answer.body;
+      172 |   }
+      173 |
+        at Client.ok (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:170:13)
+        at Client.group (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:175:13)
+        at scene (C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\frontend\acceptance\support.ts:267:19)
+        at C:\Users\tanej\Documents\LAB\tanej_sdd-workflow_contacts_v001\02_output\hidden-tests\ui\hidden-ui.spec.ts:660:30
+]]>
+</failure>
+</testcase>
+</testsuite>
+</testsuites>
