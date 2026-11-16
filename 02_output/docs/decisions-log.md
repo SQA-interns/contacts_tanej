@@ -748,3 +748,15 @@
 - Human response: none
 - Resolution: pending review
 - Overrides: none
+
+## D-67: licence record for `org.springdoc:springdoc-openapi-starter-webmvc-api`; commit of the approved fix-loop changes (F-V17)
+- Timestamp: 2026-11-16
+- Session: S8 fix F-V17
+- Class: record
+- Type: non-blocking
+- Trigger: `scripts/licence-check.mjs` finds no tech-stack or decisions-log line naming `org.springdoc:springdoc-openapi-starter-webmvc-api`. The dependency replaced `org.springdoc:springdoc-openapi-starter-webmvc-ui` 2.8.13 with the developer's approval (D-56 (d), 2026-11-12). Licence: Apache-2.0 (same project and version as the listed `-ui` artifact). Scope: runtime; purpose: OpenAPI description (`/v3/api-docs`).
+- Also committed here, all approved earlier: the `pom.xml` change (D-56 (d)), the AC-012-03 wait in `acceptance/trash-history.spec.ts` with its manifest line (D-57: 1), the changed manifest line of `Us017SecuredApiAcceptanceIT` (D-60) and the release-notes entries of D-56 (c).
+- Options: none; this records approved facts.
+- Human response: none needed
+- Resolution: recorded; `licence-check.mjs` re-run in the same session.
+- Overrides: none

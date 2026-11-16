@@ -44,6 +44,7 @@ test('AC-012-03 "Delete forever" by the Owner erases the contact at once', async
   await openTab(page, 'Trash');
   await row(page, 'Novak').getByRole('button', { name: 'Delete forever' }).click();
   await dialog(page).getByRole('button', { name: 'Delete forever' }).click();
+  await expect(dialog(page)).toHaveCount(0);
   await expect(row(page, 'Novak')).toHaveCount(0);
   expect((await owner.call('GET', `/groups/${groupId}/contacts/${contact.id}`)).status).toBe(404);
 });
