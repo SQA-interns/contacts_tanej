@@ -38,12 +38,12 @@ Written by `system/run.mjs --summary`.
 
 | Measure | Value |
 |---|---|
-| Sessions started | 72 |
+| Sessions started | 73 |
 | Sessions failed (exit code) | 2 |
-| Sessions per skill | /to-spec 2, /preflight 4, /clarify 2, /plan 1, /wireframes 2, /acceptance-tests 1, /implement 35, /review 2, /fix 13, /verify 5, /design 1, /quality-gate 4 |
-| Cost reported by the agents (USD) | 107.11 |
+| Sessions per skill | /to-spec 2, /preflight 4, /clarify 2, /plan 1, /wireframes 2, /acceptance-tests 1, /implement 35, /review 2, /fix 13, /verify 5, /design 1, /quality-gate 4, /release 1 |
+| Cost reported by the agents (USD) | 108.11 |
 | Decisions | 71 |
 | Decisions by class (allow / open / block) | 6 / 14 / 18 |
 | Approvals | 2 |
 | Verification runs | 5 |
-| Commits | 226 |
+| Commits | 230 |
