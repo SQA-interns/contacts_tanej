@@ -760,3 +760,36 @@
 - Human response: none needed
 - Resolution: recorded; `licence-check.mjs` re-run in the same session.
 - Overrides: none
+
+## D-68: hidden-suite failures F-V01 cannot be analysed to a cause from the category alone
+- Timestamp: 2026-11-16
+- Session: S8 fix F-V01
+- Class: open
+- Type: non-blocking
+- Trigger: hidden evaluation Run 2 (commit 2246948): 47 of 251 fail, all nine R-001 cases, all eight R-018 cases, and scattered cases of R-009, R-010, R-011, R-014, R-020, R-021, R-022 and 12 "unknown rule". The local tests of the same rules pass (acceptance `us001-sign-in`, `us018-language`, EX-001-01 to EX-001-04, `e2e/language.spec.ts` in three engines, 377 unit tests). Checked: the language switch is in the header on every screen including sign-in and register (`AppShell`), the default is Slovenian (`lib/i18n.ts`, R-018-01), the choice is stored per browser (R-018-03). A common cause that fits the category list: R-001 and R-018 are the rules a browser test reaches first, in the default Slovenian UI, and the visible tests select English by writing `localStorage.language = 'en'` (`acceptance/support.ts:212`), a key no input names; a held-out test written from the inputs alone cannot know it and would meet Slovenian texts where it expects the wireframe's English ones. This is a hypothesis; no input or log confirms it, and the hidden tests may not be read. No production code was changed: making the app open in English for an English browser would break R-018-01 (Q-11) and is a requirement decision, not a defect fix.
+- Options: (1) (proposed) Keep the behaviour (Slovenian by default, R-018-01); F-V01 stays open and goes to the release notes as an open item. (2) Tell the next `/fix` which language and which selectors the hidden tests assume (for example "English labels after clicking the EN button"), so a visible test and a fix can follow. (3) Change the default language for browsers that report English (changes R-018-01; needs a change of the requirement).
+- Human response: none
+- Resolution: pending review
+- Overrides: none
+
+## D-69: F-V16 not reproduced; F-V07 and F-V11, F-V12, F-06, F-07, F-08 handling
+- Timestamp: 2026-11-16
+- Session: S8 fix F-V16, F-V07
+- Class: record
+- Type: non-blocking
+- Trigger: F-V16 names High advisories on `image-size` and `nodemailer` from `audit.mjs`. In this session `node scripts/audit.mjs` passes ("No open High or Critical advisory; 1 allowed by decision (D-08)"); `npm audit --omit=dev` lists only the `@grpc/grpc-js` chain of D-08, and `package-lock.json` holds neither package. The packages come from tooling outside the lockfile of the web app (the verify session's own tools), not from the product. F-V07: timing flakes (vitest 7 timeouts in one of two full runs, one WebKit timeout that passed 9 of 9); this session's full vitest run was 377 of 377.
+- Options: (1) (proposed) Close F-V16 as not reproduced; `/verify` re-runs `audit.mjs` and reports the directory it ran in if it fails again. Record F-V07 as an open item for the release notes (flaky under load, no product defect found). (2) Add `image-size` and `nodemailer` advisories to `audit-allowlist.json` (not done: nothing to allow).
+- Human response: none
+- Resolution: option 1 applied; nothing changed in code.
+- Overrides: none
+
+## D-70: backend dependency re-scan: Spring Framework 6.2.19 advisories still open (F-V13)
+- Timestamp: 2026-11-16
+- Session: S8 fix F-V13
+- Class: approval
+- Type: non-blocking for the session (F-V13 stays High until answered)
+- Trigger: `out/logs/verify3-backend-depcheck.log` (dependency-check 12.1.6, on the committed `pom.xml`). Gone since run 1: swagger-ui and DOMPurify (D-56 (d)). Remaining: (a) `spring-security-core`, `-web` 6.5.11: CVE-2026-47841, CVE-2026-41707, CVE-2026-59270, accepted by the developer in D-56 (c). (b) `spring-core`, `spring-web` 6.2.19: 12 CVEs, CVE-2026-47884, -47892, -47891, -47890, -59313 at 9.8, -59283 at 9.1, six at 7.5 (-47885, -47886, -47893, -47889, -47888, -59282). Only GHSA-j9f9-w8pj-32f8 and GHSA-pc63-qcmh-9cmg were assessed (D-13, D-56: not reachable); these 12 were not, because their advisory texts are not in the repository. (c) `log4j-api` 2.24.3: CVE-2026-34479 at 6.9, below the 7.0 limit. The scan matches by CPE and may include false positives.
+- Options: (1) Allow a web search of the 12 advisories so `/fix` can assess reachability and the fixed 6.2.x version. (2) Name a Spring Boot 3.5.x version that brings a fixed Spring Framework (a change of `tech-stack.md`). (3) Accept as a known limitation per CVE, with your reason, as for D-56 (c).
+- Human response: none
+- Resolution: pending review; nothing changed in code.
+- Overrides: none

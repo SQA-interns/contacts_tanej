@@ -5,7 +5,11 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S7 verify run 2 (D-66: 1, frontend mutation shortfall accepted for this run; the report states 90 % not met and 77.9 % is an estimate from per-file runs)
+- Session: S8 fix run 2 (F-V14, F-V15, F-V17 fixed; F-V16 not reproduced; F-V01 and F-V13 open)
+- Result: done
+- Gate: phase 6 not passed (F-V01 High, F-V13 High open)
+- Notes for the next session: Commits 38aa018 (F-V14, F-V15) and f552ccf (F-V17, uncommitted fix-loop files). D-67 (springdoc id), D-68 (F-V01: no cause from the category; hypothesis Slovenian default vs English selectors; needs developer input), D-69 (F-V16 not reproduced, F-V07 to release notes), D-70 (backend re-scan: 12 Spring Framework 6.2.19 CVEs, up to 9.8, unassessed; needs developer: search, Boot version or acceptance). Rest of D-70 and D-68 answers go in as `/fix D-68: n D-70: n`. Production image build and clean-host test not re-run after the tsc fix: `/verify` run 3 should. Decisions-log and report edits of this session are committed with the handover.
+- Previous session: S7 verify run 2 (D-66: 1, frontend mutation shortfall accepted for this run; the report states 90 % not met and 77.9 % is an estimate from per-file runs)
 - Result: done
 - Gate: phase 6 not passed. High open: F-V01 (47 hidden failures, all R-001 and R-018 cases among them), F-V14 (`tsc` error TS6133 in `contact-page-more.test.tsx:304` breaks `npm run build`, the image and CI), F-V16 (`audit.mjs`: image-size and nodemailer High advisories without a decision, build tooling), F-V13 (backend dependency re-scan not run). Medium: F-V15 (prettier, 8 test files), F-V17 (licence check: springdoc `-api` not named by id; `pom.xml`, `trash-history.spec.ts`, its manifest line, `release-notes.md` uncommitted), F-V07 (flakes).
 - Notes for the next session: Next is `/fix` (run 2 of at most 3 fix rounds). Report: `docs/06_verification-report.md` "Run 2". Passes: backend 118 + 492 tests, spotless, PMD, CPD, JaCoCo lines 97.12 %; frontend 377 of 377, lines 97.03 %; Playwright 398 of 399 (WebKit timeout flake); NFR-01 to NFR-04, NFR-15 pass; gitleaks and `.env` search clean. Not run: backend dependency-check, restart, restore, clean-host, production build. The dev stack runs from images built before the test-only commits.
@@ -33,8 +37,8 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: /fix
-- Waiting for: nothing
+- Command: /verify
+- Waiting for: D-68, D-70 (answers improve the next result; /verify may run first)
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
