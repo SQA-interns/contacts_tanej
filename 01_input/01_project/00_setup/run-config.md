@@ -22,7 +22,7 @@ Settings of the run. How to fill each line: the table below. Start each session 
 
 | Session | Skill | Agent | Model | Effort | Max turns |
 |---|---|---|---|---|---|
-| G, T | `/sdd-grill-me`, `/sdd-to-spec` | | claude-sonnet-5-5 | medium | |
+| G, T, CR | `/sdd-grill-me`, `/sdd-to-spec`, `/sdd-change` | | claude-sonnet-5-5 | medium | |
 | S1 | `/sdd-preflight` | | claude-sonnet-5-5 | medium | |
 | S2 | `/sdd-clarify` | | claude-sonnet-5-5 | medium | |
 | S3 | `/sdd-plan` | | claude-sonnet-5-5 | medium | |

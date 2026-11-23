@@ -32,6 +32,7 @@ Every Markdown file states its audience in the line `> For: …`. A session read
 | 5 Quality gate | S6 | `/sdd-quality-gate` | coverage and mutation thresholds met |
 | 6 Verify | S7, S8 | `/sdd-verify`, `/sdd-fix` (at most three rounds) | release Definition of Done holds |
 | 7 Release | S9 | `/sdd-release` | READMEs work, release notes and retrospective written |
+| Change | CR | `/sdd-change` (later features, between increments or after the release) | the change is approved; phases 0 to 7 run again for it |
 
 Entry and exit at every level: `01_input/00_general/quality/definition-of-ready.md`, `done-story.md`, `done-increment.md`, `done-release.md`. Design stages: `01_input/00_general/design/ui-baseline.md`.
 

@@ -50,7 +50,7 @@ const JOBS_DIR = join(ROOT, "02_output/logs/jobs");
 const JOBS_REQUEST = join(JOBS_DIR, "request.json");
 
 // Sessions that are a conversation with the developer and cannot run headless.
-const INTERACTIVE = new Set(["/sdd-grill-me", "/sdd-design"]);
+const INTERACTIVE = new Set(["/sdd-grill-me", "/sdd-design", "/sdd-change"]);
 
 // The phase whose gate must be listed in 00_progress.md ("Gates") before a skill may start.
 // Phase gates: 0 preflight, 1 clarify, 2 plan + wireframes, 3 acceptance tests,
@@ -491,7 +491,7 @@ function lintTemplate() {
   })(ROOT);
   const md = all.filter((f) => f.endsWith(".md"));
   const alias = { "general/": "01_input/00_general/", "project/": "01_input/01_project/", "skills/": ".claude/skills/", "docs/": "02_output/docs/", "out/": "02_output/" };
-  const agentMade = /(manifest\.sha256|02_adr\/|02_contracts\/|logs\/|scripts\/|US-nnn|06_hidden-evaluation\.md|wireframe\.css|WF-nn)/;
+  const agentMade = /(manifest\.sha256|02_adr\/|02_contracts\/|logs\/|scripts\/|changes\/|US-nnn|CR-nn|06_hidden-evaluation\.md|wireframe\.css|WF-nn)/;
   const defined = {};
   for (const f of md) {
     const text = read(join(ROOT, f));
@@ -552,6 +552,8 @@ function main() {
   if (jobsWaiting) { const r = runJobs(); if (!r.ok) report("failed", { step: "runner jobs", error: r.error }); jobsNote = r.note; }
   if (skill === "/sdd-verify") { const r = hiddenEval(); if (!r.ok) report("failed", { step: "--hidden-eval", error: r.error }); }
   if (skill === "/sdd-release") restoreHidden();
+  // A change request adds hidden cases to the existing suite, so it needs the suite back first.
+  if (skill === "/sdd-acceptance-tests" && !existsSync(HIDDEN_DIR) && existsSync(runConfig().vault)) restoreHidden();
 
   let outcome;
   for (let attempt = 1; attempt <= 2; attempt++) {

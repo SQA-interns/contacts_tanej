@@ -95,9 +95,17 @@ When the run reports that it is complete:
    ```
    Before pushing, check that `git status` does not list `.env`.
 
+### 7. Adding a feature or changing behaviour
+
+After the run, or between two increments during it (when the conductor reports a finished review and nothing waits on you):
+
+1. Open a **new** session in the project folder and type `/sdd-change`. It interviews you about the change only, writes the new and changed stories, and lists what the change touches: stories, screens, endpoints and the frozen tests it replaces.
+2. Approve the change (option 1) in that session, or change or drop it. Close the session.
+3. In the `/sdd-run` session type `/sdd-run resume` (or start a new one). The phases run again from `/sdd-preflight`, for the change only, and end with a new release section.
+
 ## Rules for the whole run
 
-- One `/sdd-run` session per project at a time; the only second session is `/sdd-design` when asked.
+- One `/sdd-run` session per project at a time; the only second sessions are `/sdd-design` and `/sdd-change` when asked or started by you.
 - Never paste a secret into the chat; secrets go only into `.env`.
 - Do not edit inputs, tests or code by hand during the run; changes go through your answers.
 - To change the agent, model or effort of a session, edit `01_input/01_project/00_setup/run-config.md` before step 3.6 (the commit of the inputs).

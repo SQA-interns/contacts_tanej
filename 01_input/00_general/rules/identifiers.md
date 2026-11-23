@@ -19,5 +19,6 @@
 | `ADR-nn` / `T-nn` / `INC-n` | Architecture decision / task / increment | `docs/02_adr/` / `docs/02_tasks.md` |
 | `PA-nn` | Pre-approved finding | `project/00_setup/run-config.md` ("Pre-approved findings") |
 | `F-nn` / `D-nn` | Finding / decision | `docs/04_review-*.md`, `docs/06_verification-report.md` / `docs/decisions-log.md` |
+| `CR-nn` | Change request (a feature or change after the start of the run) | `docs/changes/CR-nn.md`, interview notes in `project/00_intake/changes/` |
 
 Tests, commits and findings reference these IDs. A test name carries the `AC`, `EX` or `R` id it checks.
