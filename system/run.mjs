@@ -11,7 +11,7 @@
 //   node system/run.mjs --once --command "/sdd-clarify D-03: 2"   run this command instead
 //   node system/run.mjs --vault               move the hidden suite out of the project
 //   node system/run.mjs --hidden-eval         run the hidden suite on a copy, write results
-//   node system/run.mjs --restore-hidden      copy the hidden suite back (before /sdd-release)
+//   node system/run.mjs --restore-hidden      copy the hidden suite back (before /sdd-acceptance-tests in a change)
 //   node system/run.mjs --jobs                run the requested long jobs only (manual runs)
 //   node system/run.mjs --env-check           .env keys: filled, empty or missing (never a value)
 //   node system/run.mjs --leak-check          files and commit messages holding a .env value (names only)
@@ -593,10 +593,10 @@ function main() {
     const lastCommit = ([...read(HIDDEN_RESULTS).matchAll(/^- Commit: (\S+)/gm)].pop() || [])[1];
     if (!head || lastCommit !== head) { const r = hiddenEval(); if (!r.ok) report("failed", { step: "--hidden-eval", error: r.error }); }
   }
-  if (skill === "/sdd-release") restoreHidden();
-  // Outside the two sessions that write or commit it, the hidden suite never stays in the project
-  // (after a release it is back on disk; a change run starts with it there).
-  if (!["/sdd-acceptance-tests", "/sdd-release"].includes(skill) && existsSync(HIDDEN_DIR) && existsSync(HIDDEN_MANIFEST)) {
+  // Outside the session that writes it, the hidden suite never stays in the project, and it is
+  // never committed: the product repository keeps only its manifest and results, so no later
+  // session can find it in git history. The developer publishes the vault after the run.
+  if (skill !== "/sdd-acceptance-tests" && existsSync(HIDDEN_DIR) && existsSync(HIDDEN_MANIFEST)) {
     const v = vault(); if (!v.ok) report("failed", { step: "--vault", error: v.error });
   }
   // A change request adds hidden cases to the existing suite, so it needs the suite back first.

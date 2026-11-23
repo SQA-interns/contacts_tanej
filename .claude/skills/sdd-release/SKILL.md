@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 - Id: S9, phase 7. Frame: generate.
 - Reads: `general/engineering-standards.md` (ES-05, ES-06); `project/02_design/architecture.md`; `project/00_setup/environments.md`; `project/02_design/security-requirements.md` (retention); `docs/decisions-log.md`; the last section of `docs/06_verification-report.md`.
-- Writes: `out/README.md`, one README per component, `docs/release-notes.md`, `docs/07_retrospective.md`, the hidden suite commit and its line in `.gitignore`, `docs/00_progress.md`, `out/logs/`.
+- Writes: `out/README.md`, one README per component, `docs/release-notes.md`, `docs/07_retrospective.md`, `docs/00_progress.md`, `out/logs/`.
 - Must not: change production code or tests.
 - Exit (phase 7 gate): every README works from a clean checkout; the release notes list the manual tests and every decision pending review; the retrospective is written.
 
@@ -19,6 +19,6 @@ disable-model-invocation: true
 1. Write `out/README.md` and one README per component (ES-06) with the ES-05 commands and a "Deploy" section for the deployment files.
 2. Follow every README from a clean clone in a temporary folder; fix the README until it works; log in `out/logs/`.
 3. `docs/release-notes.md`: delivered stories by increment; known limitations (accepted findings, shortfalls); manual tests (real external services, items without automated evidence); decisions pending review; data-retention duties; how to deploy.
-4. The runner has put the hidden suite back into `02_output/hidden-tests/`: remove it from `.gitignore` and commit it (`test:`); its hashes must match `docs/03_hidden-manifest.sha256`.
+4. The hidden suite stays in the vault and is never committed to this repository; `docs/03_hidden-manifest.sha256` and `docs/06_hidden-evaluation.md` are its record. In the release notes, under "Hidden suite", state its number of tests, the first and last result and that the developer publishes the vault separately after the run; put the publishing step in the report's "Developer, do this".
 5. `docs/07_retrospective.md`: the "Numbers" section is written by `node system/run.mjs --summary` (run it if it is empty); then what went well, what held the run back (with evidence), and at most five improvements, each marked for the project or the template. Name the first hidden-suite run as the main result and the last one next to it.
 6. Commit each document; add the phase 7 row to "Gates"; hand over (result: run complete).

@@ -4,7 +4,7 @@
 .env
 .env.*
 
-# The hidden suite stays out of git until /sdd-release commits it (/sdd-change puts this line back)
+# The hidden suite is never committed here; it lives in the hidden vault outside the project
 02_output/hidden-tests/
 
 # Local data that may hold personal data or keys

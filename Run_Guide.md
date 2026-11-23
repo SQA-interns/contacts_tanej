@@ -71,10 +71,10 @@ Use this when you want to start every session yourself. Steps 1–3 stay the sam
 2. Open a **new** Claude Code session in the project folder, with the model and effort of that skill's row in `run-config.md`, and type the command. One session per command; close it when it ends.
 3. It ends with its report block. Do the "Developer, do this" steps. If it waits for decisions, start the same command again with your answers, for example `/sdd-clarify D-03: 2, D-04: 1`.
 4. Runner steps you now do yourself, in a terminal in the project folder:
-   - right after `/sdd-acceptance-tests`, and before any other session while `02_output/hidden-tests/` exists (for example after a release, at the start of a change): `node system/run.mjs --vault` (moves the hidden tests out of the project);
+   - right after `/sdd-acceptance-tests`, and before any other session while `02_output/hidden-tests/` exists: `node system/run.mjs --vault` (moves the hidden tests out of the project);
    - before every `/sdd-verify`: `node system/run.mjs --hidden-eval`;
    - when "Waiting for" says `runner jobs`: `node system/run.mjs --jobs`, then start the same command again;
-   - before `/sdd-release`, and before `/sdd-acceptance-tests` in a change: `node system/run.mjs --restore-hidden` (otherwise the change's hidden cases replace the old ones);
+   - before `/sdd-acceptance-tests` in a change: `node system/run.mjs --restore-hidden` (otherwise the change's hidden cases replace the old ones);
    - at the end: `node system/run.mjs --summary`.
 5. A session whose earlier phase gate is missing in "Gates" must not start: run the session that passes it first.
 
@@ -94,6 +94,7 @@ When the run reports that it is complete:
    git push -u origin <branch>
    ```
    Before pushing, check that `git status` does not list `.env`.
+6. The hidden tests are not in the repository: they stay in the hidden vault next to the project folder (`../<folder>.hidden-vault`, or the path in `run-config.md`). When the run, and any change after it, is over, publish the vault where agents of this project never work (its own repository, or a zip next to the results). Anyone can check it against `02_output/docs/03_hidden-manifest.sha256`.
 
 ### 7. Adding a feature or changing behaviour
 
