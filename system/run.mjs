@@ -12,9 +12,16 @@
 //   node system/run.mjs --vault               move the hidden suite out of the project
 //   node system/run.mjs --hidden-eval         run the hidden suite on a copy, write results
 //   node system/run.mjs --restore-hidden      copy the hidden suite back (before /release)
+//   node system/run.mjs --once --force        run even though an earlier phase gate is missing
+//                                            (humans only, never the conductor on its own)
 //
 // The last line of output is always: RUN_STATUS {json}
-// status: ready | done | waiting | interactive | failed | complete
+// status: ready | done | waiting | interactive | paused | refused | failed | complete
+//   paused:  the agent hit its usage limit; nothing was retried
+//   refused: the command needs a phase gate that 00_progress.md ("Gates") does not list
+// Long jobs: a session that hands over with "Waiting for: runner jobs" lists commands in
+// 02_output/logs/jobs/request.json; the runner runs them one at a time, without a time
+// limit, writes <name>.log and <name>.result.json next to it, then starts the next command.
 // No dependencies; Node 18 or newer.
 
 import {
@@ -36,9 +43,24 @@ const HIDDEN_RESULTS = join(DOCS, "06_hidden-evaluation.md");
 const HIDDEN_DIR = join(ROOT, "02_output/hidden-tests");
 const RUN_CONFIG = join(ROOT, "01_input/01_project/00_setup/run-config.md");
 const LOG_DIR = join(ROOT, "02_output/logs/run");
+const JOBS_DIR = join(ROOT, "02_output/logs/jobs");
+const JOBS_REQUEST = join(JOBS_DIR, "request.json");
 
 // Sessions that are a conversation with the developer and cannot run headless.
 const INTERACTIVE = new Set(["/grill-me", "/design"]);
+
+// The phase whose gate must be listed in 00_progress.md ("Gates") before a skill may start.
+// Phase gates: 0 preflight, 1 clarify, 2 plan + wireframes, 3 acceptance tests,
+// 4 every increment built and reviewed and the design applied, 5 quality gate, 6 verify.
+const NEEDS_GATE = {
+  "/clarify": 0, "/plan": 1, "/wireframes": 1, "/acceptance-tests": 2,
+  "/implement": 3, "/review": 3, "/design": 3, "/fix": 3,
+  "/quality-gate": 4, "/verify": 5, "/release": 6,
+};
+
+// Text an agent CLI prints when the account's usage limit stops a session.
+// Checked only when the session ended with an error, so a handover that mentions a limit is not misread.
+const LIMIT_TEXT = /(hit your [^\n]*limit|usage limit reached|limit · resets)/i;
 
 // Tools every Claude session may use without a prompt; project commands come
 // from run-config.md ("Allowed commands").
@@ -99,6 +121,8 @@ function progress() {
   const text = read(PROGRESS);
   const last = section(text, "Last session");
   const next = section(text, "Next");
+  const gates = table(section(text, "Gates"), ["Phase", "Passed in", "Commit"])
+    .map((r) => Number.parseInt(r.Phase, 10)).filter((n) => Number.isInteger(n));
   return {
     lastBlock: last.trim(),
     lastSession: field(last, "Session"),
@@ -106,7 +130,17 @@ function progress() {
     gate: field(last, "Gate"),
     command: field(next, "Command"),
     waiting: field(next, "Waiting for"),
+    gates,
   };
+}
+
+// The gate a command needs, if it is missing; "" when the command may start.
+function missingGate(command, gates) {
+  const need = NEEDS_GATE[command.split(/\s+/)[0]];
+  if (need === undefined) return "";
+  const missing = [];
+  for (let p = 0; p <= need; p++) if (!gates.includes(p)) missing.push(p);
+  return missing.length ? `phase gate(s) ${missing.join(", ")} not listed in 00_progress.md ("Gates")` : "";
 }
 
 function runConfig() {
@@ -193,17 +227,56 @@ function runSession(command) {
   const agent = cfg.agents[row.agent];
   if (!agent) return { ok: false, error: `no adapter for agent "${row.agent}" in run-config.md` };
   const [bin, ...args] = buildArgs(agent, row, command, cfg);
+  const started = new Date();
   const res = spawnSync(bin, args, { cwd: ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const ended = new Date();
   const logFile = nextLogFile(skill);
   let parsed = null;
   try { parsed = JSON.parse(res.stdout); } catch { /* not JSON: keep the raw text */ }
+  const text = `${parsed ? parsed.result ?? "" : res.stdout ?? ""}\n${res.stderr ?? ""}`;
+  const errored = res.status !== 0 || res.error || parsed?.is_error;
+  const limitLine = errored ? (text.split("\n").find((l) => LIMIT_TEXT.test(l)) || "").trim() : "";
   writeFileSync(logFile, JSON.stringify({
     command, agent: row.agent, model: row.model, effort: row.effort, exitCode: res.status,
     error: res.error ? String(res.error) : undefined,
-    session_id: parsed?.session_id, total_cost_usd: parsed?.total_cost_usd,
+    started: started.toISOString(), ended: ended.toISOString(),
+    wall_ms: ended - started, duration_ms: parsed?.duration_ms, num_turns: parsed?.num_turns,
+    usage: parsed?.usage, session_id: parsed?.session_id, total_cost_usd: parsed?.total_cost_usd,
+    usage_limit: limitLine || undefined,
     result: parsed ? parsed.result : res.stdout, stderr: res.stderr,
   }, null, 2));
-  return { ok: res.status === 0 && !res.error, logFile, error: res.error ? String(res.error) : res.status ? `exit code ${res.status}` : "" };
+  return {
+    ok: res.status === 0 && !res.error && !limitLine, logFile, limit: limitLine,
+    error: res.error ? String(res.error) : limitLine || (res.status ? `exit code ${res.status}` : ""),
+  };
+}
+
+// ---------- long jobs a session asks the runner to run (no time limit) ----------
+
+// request.json: [{ "name": "frontend-mutation", "cwd": "02_output/frontend", "command": "npx stryker run" }]
+function runJobs() {
+  if (!existsSync(JOBS_REQUEST)) return { ok: false, error: "02_output/logs/jobs/request.json is missing" };
+  let jobs;
+  try { jobs = JSON.parse(read(JOBS_REQUEST)); } catch (e) { return { ok: false, error: `request.json is not valid JSON: ${e.message}` }; }
+  if (!Array.isArray(jobs) || !jobs.every((j) => /^[a-z0-9-]+$/.test(j.name || "") && j.command)) {
+    return { ok: false, error: "request.json must be a list of { name (a-z, 0-9, -), command, cwd }" };
+  }
+  const requested = statSync(JOBS_REQUEST).mtimeMs;
+  const results = [];
+  for (const job of jobs) { // one at a time: two heavy jobs at once slow each other into timeouts
+    const resultFile = join(JOBS_DIR, `${job.name}.result.json`);
+    if (existsSync(resultFile) && statSync(resultFile).mtimeMs > requested) { // already run for this request
+      results.push(JSON.parse(read(resultFile))); continue;
+    }
+    const started = new Date();
+    const res = spawnSync(job.command, { cwd: resolve(ROOT, job.cwd || "."), shell: true, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
+    const ended = new Date();
+    writeFileSync(join(JOBS_DIR, `${job.name}.log`), `${res.stdout ?? ""}\n${res.stderr ?? ""}`);
+    const result = { name: job.name, command: job.command, cwd: job.cwd || ".", exitCode: res.status, error: res.error ? String(res.error) : undefined, started: started.toISOString(), ended: ended.toISOString(), minutes: Math.round((ended - started) / 60000) };
+    writeFileSync(resultFile, JSON.stringify(result, null, 2));
+    results.push(result);
+  }
+  return { ok: true, note: results.map((r) => `${r.name}: exit ${r.exitCode}, ${r.minutes} min`).join("; ") };
 }
 
 // ---------- hidden evaluation (never shown to an agent) ----------
@@ -263,7 +336,10 @@ function hiddenEval() {
   let cases = [], exitCode = null, error = "";
   try {
     if (!bad.length) {
-      cpSync(ROOT, work, { recursive: true, filter: (src) => !relative(ROOT, src).split(/[\\/]/).includes(".git") });
+      // Skip git data and tool sandboxes: a Stryker sandbox holds links to node_modules
+      // that a copy cannot recreate on Windows without extra rights.
+      const skipDirs = new Set([".git", ".stryker-tmp"]);
+      cpSync(ROOT, work, { recursive: true, filter: (src) => !relative(ROOT, src).split(/[\\/]/).some((p) => skipDirs.has(p)) });
       cpSync(cfg.vault, join(work, "02_output/hidden-tests"), { recursive: true });
       const res = spawnSync(spec.command, { cwd: work, shell: true, encoding: "utf8", maxBuffer: 64 * 1024 * 1024, timeout: 60 * 60 * 1000 });
       exitCode = res.status;
@@ -306,26 +382,41 @@ function restoreHidden() {
 
 function summary() {
   const logs = existsSync(LOG_DIR) ? readdirSync(LOG_DIR).filter((f) => f.endsWith(".json")) : [];
-  let cost = 0, failed = 0;
+  let cost = 0, failed = 0, paused = 0, ms = 0, turns = 0;
+  const tokens = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 };
   const bySkill = {};
   for (const f of logs) {
     const j = JSON.parse(read(join(LOG_DIR, f)));
     const skill = (j.command || "").split(/\s+/)[0];
-    bySkill[skill] = (bySkill[skill] || 0) + 1;
+    const s = (bySkill[skill] ||= { n: 0, ms: 0 });
+    s.n += 1;
+    const d = typeof j.duration_ms === "number" ? j.duration_ms : j.wall_ms || 0;
+    s.ms += d; ms += d;
+    if (typeof j.num_turns === "number") turns += j.num_turns;
+    const u = j.usage || {};
+    tokens.input += u.input_tokens || 0; tokens.output += u.output_tokens || 0;
+    tokens.cacheRead += u.cache_read_input_tokens || 0; tokens.cacheWrite += u.cache_creation_input_tokens || 0;
     if (typeof j.total_cost_usd === "number") cost += j.total_cost_usd;
-    if (j.exitCode) failed += 1;
+    if (j.usage_limit) paused += 1; else if (j.exitCode) failed += 1;
   }
+  const hours = (x) => (x / 3600000).toFixed(1);
   const dlog = read(DECISIONS);
   const count = (re) => (dlog.match(re) || []).length;
   const verifyRuns = (read(join(DOCS, "06_verification-report.md")).match(/^## Run \d+/gm) || []).length;
+  const hidden = [...read(HIDDEN_RESULTS).matchAll(/^- Tests: (\d+), passed: (\d+)/gm)].map((m) => `${m[2]}/${m[1]} (${m[1] > 0 ? ((100 * m[2]) / m[1]).toFixed(1) : "0"} %)`);
   const commits = spawnSync("git", ["rev-list", "--count", "HEAD"], { cwd: ROOT, encoding: "utf8" }).stdout.trim() || "0";
   const rows = [
     ["Sessions started", String(logs.length)], ["Sessions failed (exit code)", String(failed)],
-    ["Sessions per skill", Object.entries(bySkill).map(([k, v]) => `${k} ${v}`).join(", ") || "none"],
+    ["Sessions paused by the usage limit", String(paused)],
+    ["Sessions and agent time per skill (h)", Object.entries(bySkill).map(([k, v]) => `${k} ${v.n} / ${hours(v.ms)}`).join(", ") || "none"],
+    ["Agent time (h)", hours(ms)], ["Model turns", String(turns)],
+    ["Tokens (input / output / cache read / cache write)", `${tokens.input} / ${tokens.output} / ${tokens.cacheRead} / ${tokens.cacheWrite}`],
     ["Cost reported by the agents (USD)", cost ? cost.toFixed(2) : "not reported"],
     ["Decisions", String(count(/^## D-\d+:/gm))],
     ["Decisions by class (allow / open / block)", `${count(/^- Class: allow/gm)} / ${count(/^- Class: open/gm)} / ${count(/^- Class: block/gm)}`],
-    ["Approvals", String(count(/^- Type: approval/gm))],
+    ["Approvals (incl. changes to frozen tests)", String(count(/^- Type: approval/gm))],
+    ["Hidden suite, first run (main result)", hidden[0] || "not run"],
+    ["Hidden suite, last run", hidden.length ? `${hidden[hidden.length - 1]} after ${hidden.length} run(s)` : "not run"],
     ["Verification runs", String(verifyRuns)], ["Commits", commits],
   ];
   const block = "## Numbers\n\nWritten by `system/run.mjs --summary`.\n\n| Measure | Value |\n|---|---|\n" + rows.map(([a, b]) => `| ${a} | ${b} |`).join("\n") + "\n";
@@ -396,17 +487,22 @@ function main() {
   }
 
   const before = progress();
+  const jobsWaiting = /runner jobs/i.test(before.waiting);
   if (!override && (/complete/i.test(before.result) || /^(none|-|)$/i.test(before.command))) report("complete");
-  if (!override && before.waiting && !/^nothing$/i.test(before.waiting)) {
+  if (!override && !jobsWaiting && before.waiting && !/^nothing$/i.test(before.waiting)) {
     report("waiting", { decisions: decisionsWaiting(before.waiting) });
   }
   const command = override || before.command;
   const skill = command.split(/\s+/)[0];
+  const gateProblem = has("--force") ? "" : missingGate(command, before.gates);
+  if (gateProblem) report("refused", { command, error: `${skill} cannot start: ${gateProblem}`, gates: before.gates });
   const designAsk = !/^-\s*Design round:\s*skip/im.test(read(RUN_CONFIG));
   if (INTERACTIVE.has(skill) && (skill !== "/design" || designAsk)) report("interactive", { command });
-  if (!has("--once")) report("ready", { command });
+  if (!has("--once")) report("ready", { command, jobs: jobsWaiting || undefined });
 
-  // Deterministic steps around the sessions: the hidden suite never stays in the project.
+  // Deterministic steps around the sessions: long jobs first, and the hidden suite never stays in the project.
+  let jobsNote;
+  if (jobsWaiting) { const r = runJobs(); if (!r.ok) report("failed", { step: "runner jobs", error: r.error }); jobsNote = r.note; }
   if (skill === "/verify") { const r = hiddenEval(); if (!r.ok) report("failed", { step: "--hidden-eval", error: r.error }); }
   if (skill === "/release") restoreHidden();
 
@@ -414,13 +510,16 @@ function main() {
   for (let attempt = 1; attempt <= 2; attempt++) {
     // A retry tells the session to continue where the failed one stopped (AGENTS.md, "Resume").
     outcome = runSession(attempt === 1 ? command : `${command} resume`);
+    // A usage limit is not a failure of the session: retrying now would hit it again.
+    if (outcome.limit) report("paused", { command, error: outcome.limit, log: outcome.logFile, jobs: jobsNote });
     const after = progress();
     if (outcome.ok && after.lastBlock !== before.lastBlock) {
       if (skill === "/acceptance-tests") { const v = vault(); if (!v.ok) report("failed", { step: "--vault", error: v.error, log: outcome.logFile }); }
       if (/complete/i.test(after.result)) report("complete", { log: outcome.logFile });
+      if (/runner jobs/i.test(after.waiting)) report("done", { log: outcome.logFile, note: "runner jobs requested; the next --once runs them, then the next session" });
       if (after.waiting && !/^nothing$/i.test(after.waiting)) report("waiting", { log: outcome.logFile, decisions: decisionsWaiting(after.waiting) });
       if (/failed/i.test(after.result)) report("failed", { log: outcome.logFile, attempt });
-      report("done", { log: outcome.logFile });
+      report("done", { log: outcome.logFile, jobs: jobsNote });
     }
   }
   report("failed", { log: outcome?.logFile, error: outcome?.error || "the session ended without updating 00_progress.md", attempts: 2 });

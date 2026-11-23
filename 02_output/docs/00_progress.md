@@ -17,3 +17,7 @@ The handover between sessions. Every session reads it first and updates it last.
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
 |---|---|---|---|
+
+## Gates
+| Phase | Passed in | Commit |
+|---|---|---|

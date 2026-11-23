@@ -45,9 +45,15 @@ You are one session of a run. Each session is started by its skill (`/preflight`
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |
+
+## Gates
+| Phase | Passed in | Commit |
 ```
 
-The runner reads `Session`, `Result`, `Command` and `Waiting for`; keep these names.
+The runner reads `Session`, `Result`, `Command`, `Waiting for` and the "Gates" table; keep these names.
+
+- **Gates:** when your session passes a phase gate (its skill's "Exit" names it), add one row: the phase number, your skill, the commit. Phase 2 is added by `/wireframes` (by `/plan` when there is no user interface); phase 4 by `/design`, once every story is done and no review finding Critical or High is open. Never add a row for a gate that did not pass. *Why:* the runner refuses every session whose earlier gates are missing, so no phase is skipped.
+- **Long jobs:** a command that may run longer than your tool allows (a full mutation run, a long scan) is not yours to run. Write `out/logs/jobs/request.json` (`[{ "name", "cwd", "command" }]`, `name` in a-z, 0-9, -), set "Waiting for: runner jobs" and Command to your own skill, and end the session. The runner runs them one at a time without a time limit and starts your skill again; read `out/logs/jobs/<name>.result.json` and `<name>.log`.
 
 ## Never
 
