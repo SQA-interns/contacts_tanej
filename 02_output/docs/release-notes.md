@@ -1,6 +1,6 @@
 # Release notes
 
-> For: agent (writes), human (reads) · Written in: phase 7 (`/release`) · Agent: writes
+> For: agent (writes), human (reads) · Written in: phase 7 (`/sdd-release`) · Agent: writes
 
 ## Delivered
 

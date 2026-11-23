@@ -1,8 +1,8 @@
 # Verification report
 
-> For: agent (writes), human (reads) · Written in: phase 6 (`/verify`; `/fix` fills only the resolution column) · Source: `general/quality/*`, `general/security/*`, `general/design/ui-baseline.md`, `project/*` · Procedure: `skills/verify` · Agent: writes
+> For: agent (writes), human (reads) · Written in: phase 6 (`/sdd-verify`; `/sdd-fix` fills only the resolution column) · Source: `general/quality/*`, `general/security/*`, `general/design/ui-baseline.md`, `project/*` · Procedure: `skills/sdd-verify` · Agent: writes
 
-One section per `/verify` run (`## Run 1`, `## Run 2`, …), each a self-check in a separate session, not an independent review.
+One section per `/sdd-verify` run (`## Run 1`, `## Run 2`, …), each a self-check in a separate session, not an independent review.
 
 ## Definition of Done
 

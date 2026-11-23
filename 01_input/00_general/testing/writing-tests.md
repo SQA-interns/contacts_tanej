@@ -20,7 +20,7 @@ How tests are written and run. Thresholds and figures: `general/testing/measurem
 - Do not leave flaky, skipped or disabled tests; fix them or record a decision. *Why:* a test that may fail teaches everyone to ignore failures.
 - Do not weaken an assertion to make an incorrect implementation pass. *Why:* the test would then certify the defect.
 - Test names contain the `AC`, `EX` or `R` id they verify. Every expected value has a source in the inputs. *Why:* traceability, and a test with an invented value checks the agent's assumption, not the requirement.
-- UI tests find elements by role, label or text, never by CSS class or layout, so a style change cannot break them. *Why:* the look changes after the tests are frozen (`/design`).
+- UI tests find elements by role, label or text, never by CSS class or layout, so a style change cannot break them. *Why:* the look changes after the tests are frozen (`/sdd-design`).
 
 ## UI tests
 
@@ -56,7 +56,7 @@ Where the inputs and the wireframe leave a text or label open, using the frozen 
 For every component with a user interface:
 
 - an automated accessibility check (axe or equivalent) on every screen and state; Critical and Serious violations are High findings;
-- screenshots of every screen at the three widths (UI-22), saved under `out/logs/screens/` and compared with the approved wireframes (`docs/wireframes/`) and, after `/design`, with the UI baseline.
+- screenshots of every screen at the three widths (UI-22), saved under `out/logs/screens/` and compared with the approved wireframes (`docs/wireframes/`) and, after `/sdd-design`, with the UI baseline.
 
 ## Manifest
 

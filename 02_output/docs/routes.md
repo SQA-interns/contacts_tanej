@@ -1,6 +1,6 @@
 # Routes
 
-> For: agent (writes), human (reads) · Written in: `/plan` (planned), `/implement` and `/fix` (built) · Agent: writes
+> For: agent (writes), human (reads) · Written in: `/sdd-plan` (planned), `/sdd-implement` and `/sdd-fix` (built) · Agent: writes
 
 Every page and API endpoint of the product, who may reach it, and whether it exists yet, and the accounts to try it with on the local development stack (`node out/scripts/dev.mjs up`).
 

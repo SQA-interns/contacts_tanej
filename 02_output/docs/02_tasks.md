@@ -1,6 +1,6 @@
 # Tasks and increments
 
-> For: agent (writes), human (reads) · Written in: phase 2 (`/plan`) · Source: stories, `docs/02_specification.md` · Agent: writes
+> For: agent (writes), human (reads) · Written in: phase 2 (`/sdd-plan`) · Source: stories, `docs/02_specification.md` · Agent: writes
 
 ## Increments
 

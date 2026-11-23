@@ -8,4 +8,4 @@ You never need to see a secret value; the tools that run need it, not you.
 - Which keys exist, and whether each is filled: `node system/run.mjs --env-check` (key names and filled, empty or missing; never a value). Whether a value leaked: `node system/run.mjs --leak-check` (file names and a count only). These two are the only parts of `system/` a session runs.
 - Pass values to tools without showing them: `docker compose --env-file .env`, or a project script that loads `.env` itself (Node: `process.loadEnvFile(".env")`) and never prints it.
 - Before saving output from a command that may print an environment, filter it so no value is written.
-- The phase 6 secret-leak check (`skills/verify`) must find nothing.
+- The phase 6 secret-leak check (`skills/sdd-verify`) must find nothing.

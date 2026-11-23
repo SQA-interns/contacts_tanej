@@ -1,6 +1,6 @@
 # Preflight report
 
-> For: agent (writes), human (reads) · Written in: phase 0 (`/preflight`) · Source: `project/00_setup/*` · Procedure: `skills/preflight` · Agent: writes
+> For: agent (writes), human (reads) · Written in: phase 0 (`/sdd-preflight`) · Source: `project/00_setup/*` · Procedure: `skills/sdd-preflight` · Agent: writes
 
 | Check | Source of truth | Result |
 |---|---|---|

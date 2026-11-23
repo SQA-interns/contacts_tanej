@@ -2,7 +2,7 @@
 
 > For: agent · Owner: QA lead · Agent: read-only
 
-Checked by `/verify` for the whole product, together with the project items `DoD-Pnn` in `project/01_requirements/intent.md`; evidence in `docs/06_verification-report.md`.
+Checked by `/sdd-verify` for the whole product, together with the project items `DoD-Pnn` in `project/01_requirements/intent.md`; evidence in `docs/06_verification-report.md`.
 
 | ID | Criterion | Evidence |
 |---|---|---|

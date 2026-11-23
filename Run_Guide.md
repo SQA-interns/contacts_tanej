@@ -8,7 +8,7 @@ Every step from the customer's requirements to the released product. You talk an
 
 - **Claude Code CLI**, installed and signed in: `claude --version` must work in a terminal. The runner starts every session through it. (Using another agent instead, for example Codex: set `Agent` in `01_input/01_project/00_setup/run-config.md` and install and sign in to that CLI.)
 - **Node 18 or newer** (`node --version`) and **git** (`git --version`).
-- **Docker** or the other runtimes the project will use. `/preflight` tells you exactly which tools and versions are missing; install them when it asks.
+- **Docker** or the other runtimes the project will use. `/sdd-preflight` tells you exactly which tools and versions are missing; install them when it asks.
 - **Internet access** during the run (dependency downloads, vulnerability databases, the browser used for screenshots).
 - **Everything the customer gave you**: documents, images, e-mails, notes (PDF, images, Markdown or plain text; convert Word files to PDF first).
 
@@ -19,20 +19,20 @@ Every step from the customer's requirements to the released product. You talk an
 1. Copy the whole `00_Template` folder to `01_Konkretne_Implementacije_Projektov/<nn_Project-name>`. Never work in `00_Template` itself.
 2. Put everything the customer gave you into `<project>/01_input/01_project/00_intake/customer_requirement/`. Only customer material goes there; the agent treats every file in it as coming from the customer.
 
-### 2. Interview: `/grill-me`
+### 2. Interview: `/sdd-grill-me`
 
 1. Open a terminal in the project folder and start Claude Code (`claude`), or open a new session on that folder in the Claude app.
-2. Type `/grill-me`. It reads the whole `customer_requirement/` folder first.
+2. Type `/sdd-grill-me`. It reads the whole `customer_requirement/` folder first.
 3. Answer one question at a time. The agent suggests an answer each time:
    - answer what you know;
    - "you decide" accepts its suggestion (not for price, rights, personal data, security, legal or cancellation topics);
    - "I don't know" leaves the question open.
-4. At the end it lists the open questions. Send them to the customer, then open a new session and type `/grill-me resume` to add the answers.
-5. The interview is done when the agent says the next command is `/to-spec`. Close the session.
+4. At the end it lists the open questions. Send them to the customer, then open a new session and type `/sdd-grill-me resume` to add the answers.
+5. The interview is done when the agent says the next command is `/sdd-to-spec`. Close the session.
 
-### 3. Start the run: `/run`
+### 3. Start the run: `/sdd-run`
 
-Open a **new** session in the project folder and type `/run`. Keep this session open until the run ends. It first prepares the run with you:
+Open a **new** session in the project folder and type `/sdd-run`. Keep this session open until the run ends. It first prepares the run with you:
 
 1. It checks the prerequisites and stops with a message if one is missing.
 2. It creates the git repository (if there is none) and generates all project inputs from the interview.
@@ -45,12 +45,12 @@ Open a **new** session in the project folder and type `/run`. Keep this session 
 
 The agent works through the sessions on its own and reports each one in one line, plus the lines of the session's report that need you: new pages and endpoints, problems, **"Developer, do this"** steps (do them, then reply "done") and files to review. You only act when it asks:
 
-- **Trying the application**: from `/plan` on, the development stack keeps running after every `/implement`. URLs, roles and the development accounts to sign in with are in `02_output/docs/routes.md`; `node 02_output/scripts/dev.mjs up | down | status` starts, stops or checks it.
+- **Trying the application**: from `/sdd-plan` on, the development stack keeps running after every `/sdd-implement`. URLs, roles and the development accounts to sign in with are in `02_output/docs/routes.md`; `node 02_output/scripts/dev.mjs up | down | status` starts, stops or checks it.
 - **Decisions**: numbered options with a suggested one. Reply with the numbers, for example `D-03: 2, D-04: 1`, or "ok" for the suggestions. You are asked only about business consequences, missing tools or versions, and approvals.
 - **Missing tools**: install what it names, then reply "done".
 - **Wireframes**: grey drawings of every screen for mobile, tablet and desktop in `02_output/docs/wireframes/` (the `*_mobile.png`, `*_tablet.png`, `*_desktop.png` files). Show them to the customer if you can, then reply `1` (approved with the customer), `2` (approved by you only) or `3` with the changes per screen, for example `3: WF-03 move filters to the left`.
 - **After the first version (MVP)**: whether the customer has seen the grey application, and their remarks.
-- **Design** (only with design round `ask`): when every story is built, the application looks like the wireframes, complete but grey. Open a **second** session in the project folder, type `/design`, and answer its questions (colours, typeface, mobile, tablet and desktop layout, motion); after each change it shows before and after and asks if it is right. When it is finished, reply "done" in the `/run` session.
+- **Design** (only with design round `ask`): when every story is built, the application looks like the wireframes, complete but grey. Open a **second** session in the project folder, type `/sdd-design`, and answer its questions (colours, typeface, mobile, tablet and desktop layout, motion); after each change it shows before and after and asks if it is right. When it is finished, reply "done" in the `/sdd-run` session.
 - **A session failed**: it shows the error. Reply "again" to retry or "stop".
 - **Usage limit** ("paused"): the session stopped at your plan's limit; it tells you when the limit resets. Reply "continue" after that time.
 - **Refused**: a session would skip a phase whose gate has not passed; the runner does not start it. The conductor names the missing gate and the session that passes it.
@@ -61,20 +61,20 @@ Answer within about an hour. If you must stop, close the session; nothing is los
 
 ### 5. Continue after a stop
 
-Open a new session in the project folder and type `/run resume`. It continues exactly where the run stopped.
+Open a new session in the project folder and type `/sdd-run resume`. It continues exactly where the run stopped.
 
-### 5a. Running the sessions by hand (without `/run`)
+### 5a. Running the sessions by hand (without `/sdd-run`)
 
-Use this when you want to start every session yourself. Steps 1–3 stay the same, except that you do the review and settings of step 3 yourself: generate the inputs with `/to-spec`, answer `01_input/01_project/00_intake/review-checklist.md` by editing the project files, fill `run-config.md`, create `.env` (check it with `node system/run.mjs --env-check`) and make the initial commit. Then repeat:
+Use this when you want to start every session yourself. Steps 1–3 stay the same, except that you do the review and settings of step 3 yourself: generate the inputs with `/sdd-to-spec`, answer `01_input/01_project/00_intake/review-checklist.md` by editing the project files, fill `run-config.md`, create `.env` (check it with `node system/run.mjs --env-check`) and make the initial commit. Then repeat:
 
 1. `node system/run.mjs --status` shows the next command (or `02_output/docs/00_progress.md`, "Next").
 2. Open a **new** Claude Code session in the project folder, with the model and effort of that skill's row in `run-config.md`, and type the command. One session per command; close it when it ends.
-3. It ends with its report block. Do the "Developer, do this" steps. If it waits for decisions, start the same command again with your answers, for example `/clarify D-03: 2, D-04: 1`.
+3. It ends with its report block. Do the "Developer, do this" steps. If it waits for decisions, start the same command again with your answers, for example `/sdd-clarify D-03: 2, D-04: 1`.
 4. Runner steps you now do yourself, in a terminal in the project folder:
-   - right after `/acceptance-tests`: `node system/run.mjs --vault` (moves the hidden tests out of the project);
-   - before every `/verify`: `node system/run.mjs --hidden-eval`;
+   - right after `/sdd-acceptance-tests`: `node system/run.mjs --vault` (moves the hidden tests out of the project);
+   - before every `/sdd-verify`: `node system/run.mjs --hidden-eval`;
    - when "Waiting for" says `runner jobs`: `node system/run.mjs --jobs`, then start the same command again;
-   - before `/release`: `node system/run.mjs --restore-hidden`;
+   - before `/sdd-release`: `node system/run.mjs --restore-hidden`;
    - at the end: `node system/run.mjs --summary`.
 5. A session whose earlier phase gate is missing in "Gates" must not start: run the session that passes it first.
 
@@ -97,7 +97,7 @@ When the run reports that it is complete:
 
 ## Rules for the whole run
 
-- One `/run` session per project at a time; the only second session is `/design` when asked.
+- One `/sdd-run` session per project at a time; the only second session is `/sdd-design` when asked.
 - Never paste a secret into the chat; secrets go only into `.env`.
 - Do not edit inputs, tests or code by hand during the run; changes go through your answers.
 - To change the agent, model or effort of a session, edit `01_input/01_project/00_setup/run-config.md` before step 3.6 (the commit of the inputs).

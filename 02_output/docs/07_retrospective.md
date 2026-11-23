@@ -1,6 +1,6 @@
 # Retrospective
 
-> For: agent (writes), human (reads) · Written in: phase 7 (`/release`) · Source: `docs/decisions-log.md`, `docs/04_review-*.md`, `docs/06_verification-report.md`, `docs/00_progress.md` · Agent: writes
+> For: agent (writes), human (reads) · Written in: phase 7 (`/sdd-release`) · Source: `docs/decisions-log.md`, `docs/04_review-*.md`, `docs/06_verification-report.md`, `docs/00_progress.md` · Agent: writes
 
 ## What went well
 

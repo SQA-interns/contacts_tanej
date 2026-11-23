@@ -1,6 +1,6 @@
 # Interview
 
-> For: agent (reads), human (reviews) · Owner: Product owner · Written by: `/grill-me` · Agent: writes in intake only
+> For: agent (reads), human (reviews) · Owner: Product owner · Written by: `/sdd-grill-me` · Agent: writes in intake only
 
 Notes of the requirements interview. IDs never change once given. Source: `customer: <file>` (from `customer_requirement/`), `customer` (an answer the customer gave the developer) or `developer`. Status: `answered`, `deferred` (with reason) or `open`.
 

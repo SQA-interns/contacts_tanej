@@ -2,7 +2,7 @@
 
 > For: human · Owner: Team lead
 
-A reusable structure that takes a project from the customer's requirements to a working, tested, secure and deployable solution with one coding agent, in a sequence of short sessions (spec-driven development). You interview the customer with `/grill-me`, start `/run`, and then only answer questions. How to run it: `Run_Guide.md`.
+A reusable structure that takes a project from the customer's requirements to a working, tested, secure and deployable solution with one coding agent, in a sequence of short sessions (spec-driven development). You interview the customer with `/sdd-grill-me`, start `/sdd-run`, and then only answer questions. How to run it: `Run_Guide.md`.
 
 ## Who each part is for
 
@@ -22,16 +22,16 @@ Every Markdown file states its audience in the line `> For: …`. A session read
 
 | Phase | Session | Skill | Ends when |
 |---|---|---|---|
-| — | C | `/run` (optional conductor) | the runner reports `complete` |
-| Intake | G, T | `/grill-me`, `/to-spec`, then your review | inputs reviewed and committed |
-| 0 Preflight | S1 | `/preflight` | tools, secrets, dependencies ok; inputs frozen |
-| 1 Clarify | S2 | `/clarify` | every story meets the Definition of Ready |
-| 2 Plan | S3, W | `/plan`, `/wireframes` | specification, contracts, ADRs, skeletons, CI, tasks; wireframes approved |
-| 3 Acceptance tests | S4 | `/acceptance-tests` | visible and hidden tests frozen |
-| 4 Implement | S5, R, S8, D | `/implement US-nnn` per story, `/review INC-n` per increment and `/fix INC-n` for its findings, then `/design` | every story done; the grey app matches the wireframes (milestone); final design applied |
-| 5 Quality gate | S6 | `/quality-gate` | coverage and mutation thresholds met |
-| 6 Verify | S7, S8 | `/verify`, `/fix` (at most three rounds) | release Definition of Done holds |
-| 7 Release | S9 | `/release` | READMEs work, release notes and retrospective written |
+| — | C | `/sdd-run` (optional conductor) | the runner reports `complete` |
+| Intake | G, T | `/sdd-grill-me`, `/sdd-to-spec`, then your review | inputs reviewed and committed |
+| 0 Preflight | S1 | `/sdd-preflight` | tools, secrets, dependencies ok; inputs frozen |
+| 1 Clarify | S2 | `/sdd-clarify` | every story meets the Definition of Ready |
+| 2 Plan | S3, W | `/sdd-plan`, `/sdd-wireframes` | specification, contracts, ADRs, skeletons, CI, tasks; wireframes approved |
+| 3 Acceptance tests | S4 | `/sdd-acceptance-tests` | visible and hidden tests frozen |
+| 4 Implement | S5, R, S8, D | `/sdd-implement US-nnn` per story, `/sdd-review INC-n` per increment and `/sdd-fix INC-n` for its findings, then `/sdd-design` | every story done; the grey app matches the wireframes (milestone); final design applied |
+| 5 Quality gate | S6 | `/sdd-quality-gate` | coverage and mutation thresholds met |
+| 6 Verify | S7, S8 | `/sdd-verify`, `/sdd-fix` (at most three rounds) | release Definition of Done holds |
+| 7 Release | S9 | `/sdd-release` | READMEs work, release notes and retrospective written |
 
 Entry and exit at every level: `01_input/00_general/quality/definition-of-ready.md`, `done-story.md`, `done-increment.md`, `done-release.md`. Design stages: `01_input/00_general/design/ui-baseline.md`.
 
@@ -60,7 +60,7 @@ Every file in `01_input/01_project/`: `00_intake/` (`customer_requirement/` with
 - `02_output/`: documents in `docs/`, logs in `logs/`, all source code and tests, the hidden suite (`01_input/00_general/testing/hidden-evaluation.md`).
 - Repository files at the root: the stack's entries added to `.gitignore`, the CI pipeline, deployment files.
 
-Any change to sections 1 and 2 after `/preflight` is detected by `docs/00_input-manifest.sha256`.
+Any change to sections 1 and 2 after `/sdd-preflight` is detected by `docs/00_input-manifest.sha256`.
 
 ## Rules for editing this template
 

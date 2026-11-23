@@ -2,15 +2,15 @@
 
 > For: agent · Owner: Design lead · Agent: read-only
 
-The default look and behaviour of every user interface, so that a product is modern, responsive and consistent even when the customer gave no design. It applies whenever `project/02_design/ui-design.md` or a design decision (`docs/decisions-log.md`, records with an `Overrides: UI-nn` line) does not say otherwise. Following it is required: "do not invent behaviour" applies to functionality, not to presentation. Procedures: `skills/wireframes`, `skills/build-ui`, `skills/design`.
+The default look and behaviour of every user interface, so that a product is modern, responsive and consistent even when the customer gave no design. It applies whenever `project/02_design/ui-design.md` or a design decision (`docs/decisions-log.md`, records with an `Overrides: UI-nn` line) does not say otherwise. Following it is required: "do not invent behaviour" applies to functionality, not to presentation. Procedures: `skills/sdd-wireframes`, `skills/sdd-build-ui`, `skills/sdd-design`.
 
 ## Design stages
 
 | Stage | Session | Result | Theme |
 |---|---|---|---|
-| 1 Wireframes | `/wireframes` (phase 2) | every screen as a grey wireframe at the three widths (UI-22), approved by the developer | wireframe |
-| 2 Built screens | `/implement` (phase 4) | the working application looks like the approved wireframes: complete, without colour (milestone) | wireframe |
-| 3 Final design | `/design` (phase 4, after the last increment) | colour, typography, imagery, motion and responsive polish | final |
+| 1 Wireframes | `/sdd-wireframes` (phase 2) | every screen as a grey wireframe at the three widths (UI-22), approved by the developer | wireframe |
+| 2 Built screens | `/sdd-implement` (phase 4) | the working application looks like the approved wireframes: complete, without colour (milestone) | wireframe |
+| 3 Final design | `/sdd-design` (phase 4, after the last increment) | colour, typography, imagery, motion and responsive polish | final |
 
 *Why:* structure and flow are agreed while they are cheap to change; colour and motion come last, in token files only, so they never touch logic or tests.
 
@@ -18,7 +18,7 @@ The default look and behaviour of every user interface, so that a product is mod
 
 | ID | Rule |
 |---|---|
-| UI-01 | Use a design-token based styling system and an accessible component library, pinned in `tech-stack.md`. Default for a React web app: Tailwind CSS with CSS-variable tokens, shadcn/ui components (Radix primitives) and Lucide icons. For another stack, choose the equivalent in `/to-spec`. |
+| UI-01 | Use a design-token based styling system and an accessible component library, pinned in `tech-stack.md`. Default for a React web app: Tailwind CSS with CSS-variable tokens, shadcn/ui components (Radix primitives) and Lucide icons. For another stack, choose the equivalent in `/sdd-to-spec`. |
 | UI-02 | No unstyled browser defaults are visible anywhere: every element uses the tokens and components. |
 | UI-03 | Styles live in style or token files (`general/testing/measurement.md`, "Presentation is not logic"); components contain logic and structure. The wireframe and the final theme are two token sets; switching them changes no component. |
 

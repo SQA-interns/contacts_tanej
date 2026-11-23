@@ -11,7 +11,7 @@ The handover between sessions. Every session reads it first and updates it last.
 - Notes for the next session:
 
 ## Next
-- Command: /preflight
+- Command: /sdd-preflight
 - Waiting for: nothing
 
 ## Stories

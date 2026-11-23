@@ -4,7 +4,7 @@
 
 What test counts, coverage, mutation score and code size mean, and the quality gate.
 
-Record every figure in `docs/03_test-strategy.md` (and `docs/06_verification-report.md` when re-measured) with its scope, level and tool. The procedure that reaches the quality gate is `skills/quality-gate`. The project selects mutation paths and exclusions in `project/02_design/quality-requirements.md` ("Mutation scope"); this file never names them.
+Record every figure in `docs/03_test-strategy.md` (and `docs/06_verification-report.md` when re-measured) with its scope, level and tool. The procedure that reaches the quality gate is `skills/sdd-quality-gate`. The project selects mutation paths and exclusions in `project/02_design/quality-requirements.md` ("Mutation scope"); this file never names them.
 
 ## Measurement constraints
 

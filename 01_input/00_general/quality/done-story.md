@@ -2,7 +2,7 @@
 
 > For: agent · Owner: QA lead · Agent: read-only
 
-Checked by `/implement` at the end of every story. Entry condition: `general/quality/definition-of-ready.md`.
+Checked by `/sdd-implement` at the end of every story. Entry condition: `general/quality/definition-of-ready.md`.
 
 | ID | Criterion |
 |---|---|

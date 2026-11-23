@@ -14,27 +14,27 @@ Settings of the run. How to fill each line: the table below. Start each session 
 |---|---|
 | Run label | a short name for this run; use it as the run folder's name |
 | Agent | the default agent of every session without its own in the table below: a name from "Agents" |
-| Permission mode | for Claude Code: `default` (every command not allowed below is refused in a `/run` session and asked for in a manual one), `acceptEdits` or `auto` |
-| Design round | `ask`: after the last increment, `/design` refines the final design with you; `skip`: `/design` applies the baseline final theme without questions |
+| Permission mode | for Claude Code: `default` (every command not allowed below is refused in a `/sdd-run` session and asked for in a manual one), `acceptEdits` or `auto` |
+| Design round | `ask`: after the last increment, `/sdd-design` refines the final design with you; `skip`: `/sdd-design` applies the baseline final theme without questions |
 | Hidden vault | where `system/run.mjs` keeps the hidden suite, outside the project folder; empty means `../<folder>.hidden-vault` |
 
 ## Sessions
 
 | Session | Skill | Agent | Model | Effort | Max turns |
 |---|---|---|---|---|---|
-| G, T | `/grill-me`, `/to-spec` | | claude-sonnet-5-5 | medium | |
-| S1 | `/preflight` | | claude-sonnet-5-5 | medium | |
-| S2 | `/clarify` | | claude-sonnet-5-5 | medium | |
-| S3 | `/plan` | | claude-sonnet-5-5 | medium | |
-| W | `/wireframes` | | claude-sonnet-5-5 | medium | |
-| S4 | `/acceptance-tests` | | claude-sonnet-5-5 | medium | |
-| S5 | `/implement` | | claude-sonnet-5-5 | medium | |
-| R | `/review` | | claude-sonnet-5-5 | medium | |
-| D | `/design` | | claude-sonnet-5-5 | medium | |
-| S6 | `/quality-gate` | | claude-sonnet-5-5 | medium | |
-| S7 | `/verify` | | claude-sonnet-5-5 | medium | |
-| S8 | `/fix` | | claude-sonnet-5-5 | medium | |
-| S9 | `/release` | | claude-sonnet-5-5 | medium | |
+| G, T | `/sdd-grill-me`, `/sdd-to-spec` | | claude-sonnet-5-5 | medium | |
+| S1 | `/sdd-preflight` | | claude-sonnet-5-5 | medium | |
+| S2 | `/sdd-clarify` | | claude-sonnet-5-5 | medium | |
+| S3 | `/sdd-plan` | | claude-sonnet-5-5 | medium | |
+| W | `/sdd-wireframes` | | claude-sonnet-5-5 | medium | |
+| S4 | `/sdd-acceptance-tests` | | claude-sonnet-5-5 | medium | |
+| S5 | `/sdd-implement` | | claude-sonnet-5-5 | medium | |
+| R | `/sdd-review` | | claude-sonnet-5-5 | medium | |
+| D | `/sdd-design` | | claude-sonnet-5-5 | medium | |
+| S6 | `/sdd-quality-gate` | | claude-sonnet-5-5 | medium | |
+| S7 | `/sdd-verify` | | claude-sonnet-5-5 | medium | |
+| S8 | `/sdd-fix` | | claude-sonnet-5-5 | medium | |
+| S9 | `/sdd-release` | | claude-sonnet-5-5 | medium | |
 
 An empty Agent cell uses the default agent. Model and effort are passed to that agent as they are, so write values it understands. `Max turns` caps the model turns of one session (empty: no cap); a session that hits it ends as failed and is retried once with `resume`.
 
@@ -64,6 +64,6 @@ Not pre-approved: any Critical finding, any finding on a different artifact, and
 
 ## Allowed commands
 
-Commands Claude Code sessions may run without asking, in permission-rule syntax, one per line; `system/run.mjs` adds the base set (git, node, npm, npx, docker, file listing and hashing). Add the build, test and scan commands of the stack. `/to-spec` proposes them; the developer confirms. Codex and other agents use their own sandbox instead.
+Commands Claude Code sessions may run without asking, in permission-rule syntax, one per line; `system/run.mjs` adds the base set (git, node, npm, npx, docker, file listing and hashing). Add the build, test and scan commands of the stack. `/sdd-to-spec` proposes them; the developer confirms. Codex and other agents use their own sandbox instead.
 
 - `Bash(<command> *)`

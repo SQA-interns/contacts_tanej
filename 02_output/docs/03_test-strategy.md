@@ -1,6 +1,6 @@
 # Test strategy (as executed)
 
-> For: agent (writes), human (reads) · Written in: phase 3 (`/acceptance-tests`), phase 5 (`/quality-gate`) · Source: `general/testing/writing-tests.md`, `general/testing/measurement.md`, `project/02_design/quality-requirements.md` · Agent: writes
+> For: agent (writes), human (reads) · Written in: phase 3 (`/sdd-acceptance-tests`), phase 5 (`/sdd-quality-gate`) · Source: `general/testing/writing-tests.md`, `general/testing/measurement.md`, `project/02_design/quality-requirements.md` · Agent: writes
 
 ## Test levels and harness
 

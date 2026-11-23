@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Runner for the conductor (/run). Deterministic and agent-agnostic: it reads
+// Runner for the conductor (/sdd-run). Deterministic and agent-agnostic: it reads
 // the handover in 02_output/docs/00_progress.md, starts the next session as a
 // separate non-interactive process of the agent named for that session in
 // run-config.md (Claude Code, Codex, a local model, any command template), and
@@ -8,10 +8,10 @@
 // Usage:
 //   node system/run.mjs --status              report the next step, run nothing
 //   node system/run.mjs --once                run the next session, then report
-//   node system/run.mjs --once --command "/clarify D-03: 2"   run this command instead
+//   node system/run.mjs --once --command "/sdd-clarify D-03: 2"   run this command instead
 //   node system/run.mjs --vault               move the hidden suite out of the project
 //   node system/run.mjs --hidden-eval         run the hidden suite on a copy, write results
-//   node system/run.mjs --restore-hidden      copy the hidden suite back (before /release)
+//   node system/run.mjs --restore-hidden      copy the hidden suite back (before /sdd-release)
 //   node system/run.mjs --jobs                run the requested long jobs only (manual runs)
 //   node system/run.mjs --env-check           .env keys: filled, empty or missing (never a value)
 //   node system/run.mjs --leak-check          files and commit messages holding a .env value (names only)
@@ -50,15 +50,15 @@ const JOBS_DIR = join(ROOT, "02_output/logs/jobs");
 const JOBS_REQUEST = join(JOBS_DIR, "request.json");
 
 // Sessions that are a conversation with the developer and cannot run headless.
-const INTERACTIVE = new Set(["/grill-me", "/design"]);
+const INTERACTIVE = new Set(["/sdd-grill-me", "/sdd-design"]);
 
 // The phase whose gate must be listed in 00_progress.md ("Gates") before a skill may start.
 // Phase gates: 0 preflight, 1 clarify, 2 plan + wireframes, 3 acceptance tests,
 // 4 every increment built and reviewed and the design applied, 5 quality gate, 6 verify.
 const NEEDS_GATE = {
-  "/clarify": 0, "/plan": 1, "/wireframes": 1, "/acceptance-tests": 2,
-  "/implement": 3, "/review": 3, "/design": 3, "/fix": 3,
-  "/quality-gate": 4, "/verify": 5, "/release": 6,
+  "/sdd-clarify": 0, "/sdd-plan": 1, "/sdd-wireframes": 1, "/sdd-acceptance-tests": 2,
+  "/sdd-implement": 3, "/sdd-review": 3, "/sdd-design": 3, "/sdd-fix": 3,
+  "/sdd-quality-gate": 4, "/sdd-verify": 5, "/sdd-release": 6,
 };
 
 // Text an agent CLI prints when the account's usage limit stops a session.
@@ -72,7 +72,7 @@ const BASE_TOOLS = [
   "Bash(git *)", "Bash(ls *)", "Bash(mkdir *)", "Bash(find *)", "Bash(grep *)",
   "Bash(sed -n *)", "Bash(wc *)", "Bash(sha256sum *)", "Bash(shasum *)",
   "Bash(node *)", "Bash(npm *)", "Bash(npx *)", "Bash(docker *)",
-  // Advisory and support-date sources for /preflight, /verify and /fix (v001 could not read them).
+  // Advisory and support-date sources for /sdd-preflight, /sdd-verify and /sdd-fix (v001 could not read them).
   "WebFetch(domain:endoflife.date)", "WebFetch(domain:osv.dev)", "WebFetch(domain:api.osv.dev)",
   "WebFetch(domain:nvd.nist.gov)", "WebFetch(domain:github.com)",
 ];
@@ -515,7 +515,7 @@ function lintTemplate() {
   for (const [id, files] of Object.entries(defined)) if (files.length > 1) errors.push(`${id} is defined ${files.length} times (${files.join(", ")})`);
   const cfg = runConfig();
   for (const dir of readdirSync(join(ROOT, ".claude/skills"))) {
-    if (["build-ui", "grill-me", "run"].includes(dir)) continue; // not started by the runner
+    if (["sdd-build-ui", "sdd-grill-me", "sdd-run"].includes(dir)) continue; // not started by the runner
     if (!cfg.sessions[`/${dir}`]) errors.push(`skill /${dir} has no row in run-config.md ("Sessions")`);
   }
   return errors.length ? { ok: false, error: `${errors.length} problem(s): ` + errors.join(" | ") } : { ok: true, note: `template ok: ${md.length} Markdown files checked` };
@@ -544,14 +544,14 @@ function main() {
   const gateProblem = has("--force") ? "" : missingGate(command, before.gates);
   if (gateProblem) report("refused", { command, error: `${skill} cannot start: ${gateProblem}`, gates: before.gates });
   const designAsk = !/^-\s*Design round:\s*skip/im.test(read(RUN_CONFIG));
-  if (INTERACTIVE.has(skill) && (skill !== "/design" || designAsk)) report("interactive", { command });
+  if (INTERACTIVE.has(skill) && (skill !== "/sdd-design" || designAsk)) report("interactive", { command });
   if (!has("--once")) report("ready", { command, jobs: jobsWaiting || undefined });
 
   // Deterministic steps around the sessions: long jobs first, and the hidden suite never stays in the project.
   let jobsNote;
   if (jobsWaiting) { const r = runJobs(); if (!r.ok) report("failed", { step: "runner jobs", error: r.error }); jobsNote = r.note; }
-  if (skill === "/verify") { const r = hiddenEval(); if (!r.ok) report("failed", { step: "--hidden-eval", error: r.error }); }
-  if (skill === "/release") restoreHidden();
+  if (skill === "/sdd-verify") { const r = hiddenEval(); if (!r.ok) report("failed", { step: "--hidden-eval", error: r.error }); }
+  if (skill === "/sdd-release") restoreHidden();
 
   let outcome;
   for (let attempt = 1; attempt <= 2; attempt++) {
@@ -561,7 +561,7 @@ function main() {
     if (outcome.limit) report("paused", { command, error: outcome.limit, log: outcome.logFile, jobs: jobsNote });
     const after = progress();
     if (outcome.ok && after.lastBlock !== before.lastBlock) {
-      if (skill === "/acceptance-tests") { const v = vault(); if (!v.ok) report("failed", { step: "--vault", error: v.error, log: outcome.logFile }); }
+      if (skill === "/sdd-acceptance-tests") { const v = vault(); if (!v.ok) report("failed", { step: "--vault", error: v.error, log: outcome.logFile }); }
       if (/complete/i.test(after.result)) report("complete", { log: outcome.logFile });
       if (/runner jobs/i.test(after.waiting)) report("done", { log: outcome.logFile, note: "runner jobs requested; the next --once runs them, then the next session" });
       if (after.waiting && !/^nothing$/i.test(after.waiting)) report("waiting", { log: outcome.logFile, decisions: decisionsWaiting(after.waiting) });

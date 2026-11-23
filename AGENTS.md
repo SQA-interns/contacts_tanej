@@ -2,7 +2,7 @@
 
 > For: agent · Owner: Team lead · Agent: read-only
 
-You are one session of a run. Each session is started by its skill (`/preflight`, `/implement US-001`, …), does one job, hands over through files and ends. This file holds what every session needs; everything else you read only when your skill lists it.
+You are one session of a run. Each session is started by its skill (`/sdd-preflight`, `/sdd-implement US-001`, …), does one job, hands over through files and ends. This file holds what every session needs; everything else you read only when your skill lists it.
 
 ## Start
 
@@ -10,7 +10,7 @@ You are one session of a run. Each session is started by its skill (`/preflight`
 2. Follow your skill. Its "Session" section says what you read, write, must not do, and when you are done.
 3. Read a file from your "Reads" list when the step that needs it starts, never before, and nothing that is not on the list. *Why:* every file you read costs context for the rest of the session.
 
-`README.md`, `Run_Guide.md` and `system/` are for humans and the runner, not for you; you only run `node system/run.mjs --env-check` and `--leak-check` (`general/rules/secrets.md`), and `/release` runs `--summary`.
+`README.md`, `Run_Guide.md` and `system/` are for humans and the runner, not for you; you only run `node system/run.mjs --env-check` and `--leak-check` (`general/rules/secrets.md`), and `/sdd-release` runs `--summary`.
 
 ## Paths and precedence
 
@@ -24,7 +24,7 @@ You are one session of a run. Each session is started by its skill (`/preflight`
 ## Every session
 
 - **One frame:** ask (intake), generate (to-spec, plan, wireframes, implement, design, fix), criticise (clarify, review, verify) or measure (preflight, quality gate). A criticising session never fixes what it finds; the next session does. *Why:* a checker that also fixes starts defending its fixes.
-- **Blocking decision ends the session:** record it, ask all open questions in one message, set "Waiting for" and stop. The human answers by starting the same skill again with the answer (`/clarify D-03: 2`); record it as `Human response` and continue. An argument may hold the work item and answers together (`/implement US-022 D-59: 1`): record and apply the answers first, then do the whole job the argument names.
+- **Blocking decision ends the session:** record it, ask all open questions in one message, set "Waiting for" and stop. The human answers by starting the same skill again with the answer (`/sdd-clarify D-03: 2`); record it as `Human response` and continue. An argument may hold the work item and answers together (`/sdd-implement US-022 D-59: 1`): record and apply the answers first, then do the whole job the argument names.
 - **Hand over only through files.** Before ending, update `docs/00_progress.md` in the format below and commit everything you changed. Never rely on an earlier session's conversation, and do not start the next session's work. *Why:* only files survive; the next job deserves a fresh context.
 - **Notes from the developer:** an argument `note: …` is recorded as a non-blocking decision before anything else.
 - **Resume:** if your story, task or finding already has commits (`git log --oneline --grep <id>`), continue at the first item not done instead of starting over.
@@ -68,15 +68,15 @@ Next: </skill argument>
 
 The runner reads `Session`, `Result`, `Command`, `Waiting for` and the "Gates" table; keep these names.
 
-- **Gates:** when your session passes a phase gate (its skill's "Exit" names it), add one row: the phase number, your skill, the commit. Phase 2 is added by `/wireframes` (by `/plan` when there is no user interface); phase 4 by `/design`, once every story is done and no review finding Critical or High is open. Never add a row for a gate that did not pass. *Why:* the runner refuses every session whose earlier gates are missing, so no phase is skipped.
+- **Gates:** when your session passes a phase gate (its skill's "Exit" names it), add one row: the phase number, your skill, the commit. Phase 2 is added by `/sdd-wireframes` (by `/sdd-plan` when there is no user interface); phase 4 by `/sdd-design`, once every story is done and no review finding Critical or High is open. Never add a row for a gate that did not pass. *Why:* the runner refuses every session whose earlier gates are missing, so no phase is skipped.
 - **Long jobs:** a command that may run longer than your tool allows (a full mutation run, a long scan) is not yours to run. Write `out/logs/jobs/request.json` (`[{ "name", "cwd", "command" }]`, `name` in a-z, 0-9, -), set "Waiting for: runner jobs" and Command to your own skill, and end the session. The runner runs them one at a time without a time limit and starts your skill again; read `out/logs/jobs/<name>.result.json` and `<name>.log`.
 
 ## Never
 
-- From `/preflight` on: do not change anything under `01_input/` or `.claude/skills/`, or `AGENTS.md`, `CLAUDE.md`, `README.md`, `Run_Guide.md`, `system/`. Only `/grill-me`, `/to-spec` and `/run` (review answers) write `project/`, before the initial commit. *Why:* the inputs are the contract; a run that changes its own inputs can make anything pass.
+- From `/sdd-preflight` on: do not change anything under `01_input/` or `.claude/skills/`, or `AGENTS.md`, `CLAUDE.md`, `README.md`, `Run_Guide.md`, `system/`. Only `/sdd-grill-me`, `/sdd-to-spec` and `/sdd-run` (review answers) write `project/`, before the initial commit. *Why:* the inputs are the contract; a run that changes its own inputs can make anything pass.
 - Write only what your skill's "Writes" lists. *Why:* writing elsewhere mixes jobs and hides changes from the session that checks them.
-- Do not edit a file listed in `docs/03_acceptance-manifest.sha256`, and do not change `docs/00_input-manifest.sha256` after `/preflight`; raise a decision instead. *Why:* frozen tests are the judge, the manifest the proof that inputs did not change.
-- Do not read, list, search or run `02_output/hidden-tests/` or the hidden vault, unless your skill is `/acceptance-tests` (write only). The runner runs them; you see only `docs/06_hidden-evaluation.md`. *Why:* held-out tests measure generalisation only while the implementer has not seen them.
+- Do not edit a file listed in `docs/03_acceptance-manifest.sha256`, and do not change `docs/00_input-manifest.sha256` after `/sdd-preflight`; raise a decision instead. *Why:* frozen tests are the judge, the manifest the proof that inputs did not change.
+- Do not read, list, search or run `02_output/hidden-tests/` or the hidden vault, unless your skill is `/sdd-acceptance-tests` (write only). The runner runs them; you see only `docs/06_hidden-evaluation.md`. *Why:* held-out tests measure generalisation only while the implementer has not seen them.
 - Do not change a technology, version, service or secret of `project/00_setup/` without human approval, and do not install or upgrade software on the host. *Why:* the stack was checked; the host belongs to the human.
 - Do not read `.env` with a file tool, print, copy or log its values, commit secrets, or ask the human to paste one (`general/rules/secrets.md`). *Why:* whatever you read can end up in logs, commits or the conversation.
 - Do not decide a `Block` topic yourself (`general/rules/decisions.md`). *Why:* a plausible guess about money, rights or personal data is still a guess.

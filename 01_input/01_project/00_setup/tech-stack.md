@@ -14,7 +14,7 @@ Build manifests and lock files in `02_output/` (e.g. `pom.xml`, `package.json`, 
 - Every dependency's licence must be compatible with the project's licence.
 - A `platforms` or `tooling` entry may carry `version_check` (a command whose output contains the version) and, for `tooling`, `options` (flags, analysers or rule sets to enable or disable, for example analysers that need credentials not listed in `secrets.env.example`). Preflight uses them.
 - `tooling` must include at least one tool for each purpose required by `general/quality/` and `general/security/`: build, format, lint, type check (if the language has one), test, coverage, mutation, static analysis, dependency scan, secret scan; and for a component with a user interface: the UI stack of `general/design/ui-baseline.md` (UI-01), a browser test runner with screenshots, and an accessibility checker.
-- A version proposed by `/to-spec` and not yet verified is marked `[ASSUMPTION] verify in preflight`; `/preflight` confirms or replaces it through a decision.
+- A version proposed by `/sdd-to-spec` and not yet verified is marked `[ASSUMPTION] verify in preflight`; `/sdd-preflight` confirms or replaces it through a decision.
 
 Project licence: <licence>. Allowed dependency licences: <list>.
 

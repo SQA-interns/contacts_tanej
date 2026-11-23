@@ -1,6 +1,6 @@
 # Review checklist
 
-> For: agent (reads), human (reviews) · Owner: Developer · Written by: `/to-spec` · Agent: writes in intake only
+> For: agent (reads), human (reviews) · Owner: Developer · Written by: `/sdd-to-spec` · Agent: writes in intake only
 
 Everything the developer must confirm or answer before the run. Edit the project file named in each row, then mark the row done.
 

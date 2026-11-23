@@ -2,7 +2,7 @@
 
 > For: agent · Owner: QA lead · Agent: read-only
 
-Checked by `/review` for every increment in `docs/02_tasks.md`; evidence in `docs/04_review-<INC>.md`.
+Checked by `/sdd-review` for every increment in `docs/02_tasks.md`; evidence in `docs/04_review-<INC>.md`.
 
 | ID | Criterion |
 |---|---|
