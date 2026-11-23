@@ -34,7 +34,10 @@ Classify a failure before acting on it:
 |---|---|
 | Implementation defect | fix the code |
 | Defect in a non-frozen test | fix the test and say so in the commit message |
-| Frozen test appears wrong | blocking decision; do not touch the test |
+| Frozen test appears wrong | approval decision (`Type: approval`); do not touch the test |
+| Frozen test passes only if the app's text, label or layout differs from the wireframe or the inputs | approval decision: the test or the app is wrong; never bend the app silently |
+
+Where the inputs and the wireframe leave a text or label open, using the frozen test's wording is Allow; cite the test.
 
 ## UI checks
 

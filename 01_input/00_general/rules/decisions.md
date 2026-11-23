@@ -26,7 +26,7 @@ Record a decision in `docs/decisions-log.md` (format below), ask, and end the se
 - a technology, version or service from `project/00_setup/tech-stack.md` does not work or needs changing;
 - an input needs to change.
 
-**Approval** (the human must accept a result): the wireframes; a change to a frozen test or its manifest; lowering or accepting a Critical or High finding; a fourth verify/fix round.
+**Approval** (the human must accept a result): the wireframes; a change to a frozen test or its manifest; lowering or accepting a Critical or High finding; a fourth verify/fix round. Record each with `Type: approval`, also when the human's answer arrives in the same message as the question. *Why:* the run's numbers count approvals by this line.
 
 Ask all open questions of a session in one message, each with numbered options and a proposed default. *Why:* one round trip instead of many, and a default the human can accept with one word. While waiting, finish work that does not depend on the answer.
 

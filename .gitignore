@@ -1,0 +1,16 @@
+# Base entries of the template; /plan adds the stack's build output and dependencies (ES-03).
+
+# Secrets: only secrets.env.example is committed
+.env
+.env.*
+
+# The hidden suite stays out of git until /release commits it
+02_output/hidden-tests/
+
+# Local data that may hold personal data or keys
+02_output/backups/
+**/certs/
+
+# Tool sandboxes and dependencies
+**/.stryker-tmp/
+**/node_modules/

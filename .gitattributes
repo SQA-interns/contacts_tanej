@@ -1,0 +1,12 @@
+# Text files are stored and checked out with LF on every OS (ES-03): the manifests hash them.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.xlsx binary
+*.docx binary
+*.dump binary
+*.jar binary

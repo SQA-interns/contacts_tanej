@@ -53,12 +53,12 @@ Every file in `01_input/01_project/`: `00_intake/` (`customer_requirement/` with
 
 ## 2. Template files (change only when revising the template)
 
-`README.md`, `Run_Guide.md`, `AGENTS.md`, `CLAUDE.md`, `system/`, `.claude/skills/`, `.agents/`, and everything in `01_input/00_general/`.
+`README.md`, `Run_Guide.md`, `AGENTS.md`, `CLAUDE.md`, `system/`, `.claude/skills/`, `.agents/`, everything in `01_input/00_general/`, and the base `.gitattributes` and `.gitignore`.
 
 ## 3. Written during the run
 
 - `02_output/`: documents in `docs/`, logs in `logs/`, all source code and tests, the hidden suite (`01_input/00_general/testing/hidden-evaluation.md`).
-- Repository files at the root: `.gitattributes`, `.gitignore`, the CI pipeline, deployment files.
+- Repository files at the root: the stack's entries added to `.gitignore`, the CI pipeline, deployment files.
 
 Any change to sections 1 and 2 after `/preflight` is detected by `docs/00_input-manifest.sha256`.
 

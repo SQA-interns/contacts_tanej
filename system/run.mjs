@@ -12,6 +12,8 @@
 //   node system/run.mjs --vault               move the hidden suite out of the project
 //   node system/run.mjs --hidden-eval         run the hidden suite on a copy, write results
 //   node system/run.mjs --restore-hidden      copy the hidden suite back (before /release)
+//   node system/run.mjs --env-check           .env keys: filled, empty or missing (never a value)
+//   node system/run.mjs --leak-check          files and commit messages holding a .env value (names only)
 //   node system/run.mjs --once --force        run even though an earlier phase gate is missing
 //                                            (humans only, never the conductor on its own)
 //
@@ -173,10 +175,14 @@ function decisionsWaiting(waiting) {
   });
 }
 
+// The session's last message (its "Report" block, AGENTS.md), passed on to the conductor.
+let sessionReport = "";
+
 function report(status, extra = {}) {
   const p = progress();
   console.log("RUN_STATUS " + JSON.stringify({
     status, last: p.lastSession, result: p.result, gate: p.gate, next: p.command, waiting: p.waiting, ...extra,
+    report: sessionReport || undefined,
   }));
   process.exit(status === "failed" ? 1 : 0);
 }
@@ -234,6 +240,9 @@ function runSession(command) {
   let parsed = null;
   try { parsed = JSON.parse(res.stdout); } catch { /* not JSON: keep the raw text */ }
   const text = `${parsed ? parsed.result ?? "" : res.stdout ?? ""}\n${res.stderr ?? ""}`;
+  const last = String(parsed ? parsed.result ?? "" : res.stdout ?? "");
+  const block = last.lastIndexOf("Result:");
+  sessionReport = (block >= 0 ? last.slice(block) : last).trim().slice(0, 4000);
   const errored = res.status !== 0 || res.error || parsed?.is_error;
   const limitLine = errored ? (text.split("\n").find((l) => LIMIT_TEXT.test(l)) || "").trim() : "";
   writeFileSync(logFile, JSON.stringify({
@@ -429,6 +438,40 @@ function summary() {
   return { ok: true, note: rows.map(([a, b]) => `${a}: ${b}`).join("; ") };
 }
 
+// ---------- .env check (key names and filled or empty, never a value) ----------
+
+function envCheck() {
+  const example = read(join(ROOT, "01_input/01_project/00_setup/secrets.env.example"));
+  const env = read(join(ROOT, ".env"));
+  if (!existsSync(join(ROOT, ".env"))) return { ok: false, error: ".env does not exist in the project folder" };
+  const keys = (text) => new Map(text.split(/\r?\n/).map((l) => l.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=(.*)$/)).filter(Boolean)
+    .map((m) => [m[1], m[2].replace(/\s+#.*$/, "").trim().replace(/^["']|["']$/g, "").trim()]));
+  const have = keys(env);
+  const lines = [];
+  for (const [name] of keys(example)) lines.push(`${name}: ${!have.has(name) ? "missing" : have.get(name) ? "filled" : "empty"}`);
+  for (const [name, value] of have) if (!keys(example).has(name)) lines.push(`${name}: ${value ? "filled" : "empty"} (not in secrets.env.example)`);
+  return { ok: true, note: lines.join("; ") || "no keys" };
+}
+
+// Files (tracked and untracked, not ignored) and commit messages that contain a .env value of 6+ characters.
+function leakCheck() {
+  if (!existsSync(join(ROOT, ".env"))) return { ok: false, error: ".env does not exist in the project folder" };
+  const values = read(join(ROOT, ".env")).split(/\r?\n/).map((l) => l.match(/^\s*[A-Za-z_][A-Za-z0-9_]*\s*=(.*)$/)).filter(Boolean)
+    .map((m) => m[1].replace(/\s+#.*$/, "").trim().replace(/^["']|["']$/g, "").trim()).filter((v) => v.length >= 6);
+  if (!values.length) return { ok: true, note: "no .env value of 6 or more characters to look for" };
+  const git = (args) => spawnSync("git", args, { cwd: ROOT, encoding: "utf8", maxBuffer: 512 * 1024 * 1024 }).stdout || "";
+  const hits = git(["ls-files", "-co", "--exclude-standard", "-z"]).split("\0").filter((f) => f && f !== ".env").filter((f) => {
+    const p = join(ROOT, f);
+    if (!existsSync(p) || statSync(p).size > 20 * 1024 * 1024) return false;
+    const text = readFileSync(p, "latin1");
+    return values.some((v) => text.includes(v));
+  });
+  const messages = git(["log", "--all", "--format=%B"]);
+  const inCommits = values.filter((v) => messages.includes(v)).length;
+  const found = hits.length || inCommits;
+  return { ok: !found, note: `files with a .env value: ${hits.length ? hits.join(", ") : "none"}; commit messages with a .env value: ${inCommits}`, error: found ? "a .env value leaked (Critical)" : "" };
+}
+
 // ---------- template lint (structure, duplication and reference checks) ----------
 
 function lintTemplate() {
@@ -482,7 +525,7 @@ function main() {
   const ci = argv.indexOf("--command");
   const override = ci >= 0 ? argv[ci + 1] : "";
 
-  for (const [flag, fn] of [["--vault", vault], ["--hidden-eval", hiddenEval], ["--restore-hidden", restoreHidden], ["--summary", summary], ["--lint-template", lintTemplate]]) {
+  for (const [flag, fn] of [["--vault", vault], ["--hidden-eval", hiddenEval], ["--restore-hidden", restoreHidden], ["--summary", summary], ["--lint-template", lintTemplate], ["--env-check", envCheck], ["--leak-check", leakCheck]]) {
     if (has(flag)) { const r = fn(); report(r.ok ? "done" : "failed", { step: flag, note: r.note, error: r.error }); }
   }
 

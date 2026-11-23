@@ -10,7 +10,7 @@ You are one session of a run. Each session is started by its skill (`/preflight`
 2. Follow your skill. Its "Session" section says what you read, write, must not do, and when you are done.
 3. Read a file from your "Reads" list when the step that needs it starts, never before, and nothing that is not on the list. *Why:* every file you read costs context for the rest of the session.
 
-`README.md`, `Run_Guide.md` and `system/` are for humans and the runner, not for you.
+`README.md`, `Run_Guide.md` and `system/` are for humans and the runner, not for you; you only run `node system/run.mjs --env-check` and `--leak-check` (`general/rules/secrets.md`).
 
 ## Paths and precedence
 
@@ -29,6 +29,22 @@ You are one session of a run. Each session is started by its skill (`/preflight`
 - **Notes from the developer:** an argument `note: …` is recorded as a non-blocking decision before anything else.
 - **Resume:** if your story, task or finding already has commits (`git log --oneline --grep <id>`), continue at the first item not done instead of starting over.
 - Write command output longer than 50 lines to `out/logs/`; keep only a summary and the path. Use only the severity levels of `general/quality/severity-scale.md`.
+- **Commands:** one command per shell call, no `&&`, `;`, `cd`, here-documents, `$(…)` or shell variables; use `git -C <dir>` and the tool's own working directory. Create and change files only with the file tools (Write, Edit), never with `echo`, `cat >`, `sed -i` or scripts that patch files. Commit with `git commit -m "<subject>" -m "<body line>"`. Run a long command in the background and wait for its notification; never poll with `sleep`. *Why:* the session runs without a person to approve prompts, so a compound or generated command is refused, and a refused write is silently lost.
+- **Check your writes:** after adding a record or section to a document, confirm it is there (`grep -c`); after a commit, confirm `git status --porcelain` is empty. A write or commit you could not make is a problem in your report, never left for the next session to find.
+
+## Report (your last message)
+
+End every session with this block and nothing after it; the runner passes it to the developer. Same lines in every session, "none" where empty.
+
+```
+Result: done | blocked | failed: <one line>
+Changed: <number of files; up to 15 paths, then "and n more">
+Pages and endpoints: <new or changed, each with URL or route and the roles that reach it (docs/routes.md)>
+Problems: <what went wrong, what was not run and why, what must be fixed before the next step>
+Developer, do this: <numbered manual steps, each with the exact command or file; or "nothing">
+For you to review: <files to open, as paths; decisions waiting, as ids>
+Next: </skill argument>
+```
 
 ## Handover format (`docs/00_progress.md`)
 

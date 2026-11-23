@@ -23,9 +23,7 @@ disable-model-invocation: true
 5. NFR: run the check of every `NFR` from the specification and record the measured value against its pass value.
 6. UI: every screen at the three widths (UI-22), light and dark, against the approved wireframes and the baseline; the accessibility check on every screen.
 7. Security: for every `SB`, `SR` and every threat of the threat model, record where it is controlled and how it was checked. Run every security scanner of `tooling`; archive raw output. Lowering a Critical or High needs evidence and an approval decision.
-8. Check logs and error responses for personal data, secrets and internals; check that no `.env` value leaked, listing file names only (any name listed is Critical):
-   - files: `git ls-files -co --exclude-standard -z | xargs -0 grep -lF -f <(sed -n 's/^[A-Z_]*=//p' .env | tr -d '\r "'"'"'' | awk 'length>=6')`
-   - commits: `git log --all --format=%B | grep -cF -f <(sed -n 's/^[A-Z_]*=//p' .env | tr -d '\r "'"'"'' | awk 'length>=6')` (must print `0`)
+8. Check logs and error responses for personal data, secrets and internals; check that no `.env` value leaked with `node system/run.mjs --leak-check` (file names and a count only; any file listed or a count above 0 is Critical).
 9. CI and deployment: run the CI pipeline locally if a runner is pinned, else confirm its last result; build and start the production deployment files with production configuration.
 10. Traceability `R` / `AC` / `EX` → tests → commits; evidence or a finding for every `DoD-R` and `DoD-P`; every decision has a resolution or is pending review.
 11. State at the top of the section that it is a self-check in a separate session. Commit (`docs:`); hand over (next: `/fix` with an open finding, otherwise `/release`).
