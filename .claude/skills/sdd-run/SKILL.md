@@ -30,6 +30,7 @@ disable-model-invocation: true
 
 9. Run `node system/run.mjs --once` **in the background** and wait for it to finish; never poll. Read only its last line, `RUN_STATUS {…}`.
 10. Act on `status`:
+    - With every status that carries `alert` (a session's tool calls named the hidden suite or the vault): show it to the developer word for word before anything else, and start no further session until they say how to go on. Never open the vault or the transcript yourself.
     - With every status that carries `report` (the session's report block): show its "Pages and endpoints", "Problems", "Developer, do this" and "For you to review" lines unchanged when they are not "none"; wait for the developer to confirm each "Developer, do this" step before going on.
     - `done`: tell the developer in one line what finished (`last`, `gate`) and what is next. If `last` is the review of `INC-1`, ask once whether the customer has seen the grey MVP; pass the answer to the next session as a note: `node system/run.mjs --once --command "<next> note: customer saw MVP: <yes/no, remarks>"`, then act on its status. Otherwise go to step 9.
     - `waiting`: show each decision of `decisions` (title, trigger, numbered options, proposed default) in one message and ask for the answers. For the wireframe approval, list the image files in `docs/wireframes/` so the developer can open them. Then run `node system/run.mjs --once --command "<next> D-nn: <option>, …"` and continue with step 10.

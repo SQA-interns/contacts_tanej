@@ -32,9 +32,9 @@ import {
   statSync, cpSync, rmSync, mkdtempSync,
 } from "node:fs";
 import { spawnSync } from "node:child_process";
-import { createHash } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { join, dirname, basename, relative, resolve } from "node:path";
-import { tmpdir } from "node:os";
+import { tmpdir, homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -170,8 +170,63 @@ function runConfig() {
   }
   const allowed = section(text, "Allowed commands").split("\n")
     .map((l) => l.match(/^- `(.+)`/)).filter(Boolean).map((m) => m[1]).filter((r) => !r.includes("<"));
-  const vault = field(text, "Hidden vault") || `../${basename(ROOT)}.hidden-vault`;
-  return { sessions, agents, allowed, permission: field(text, "Permission mode") || "default", vault: resolve(ROOT, vault) };
+  const configured = field(text, "Hidden vault");
+  return { sessions, agents, allowed, permission: field(text, "Permission mode") || "default", vault: configured ? resolve(ROOT, configured) : defaultVault() };
+}
+
+// The default vault lies outside the project tree, under the user's local application data, in a
+// folder with a random part, so no session finds it by looking next to the project. The runner
+// remembers which folder belongs to which project in index.json there. A session that has `node`
+// can still reach it; sessionAudit() reports any attempt.
+const VAULT_HOME = join(process.env.LOCALAPPDATA || join(homedir(), ".local", "share"), "sdd-hidden-vaults");
+function defaultVault() {
+  const index = join(VAULT_HOME, "index.json");
+  let map = {};
+  try { map = JSON.parse(readFileSync(index, "utf8")); } catch { /* first use */ }
+  if (!map[ROOT]) {
+    map[ROOT] = `${basename(ROOT)}-${randomBytes(8).toString("hex")}`;
+    mkdirSync(VAULT_HOME, { recursive: true });
+    writeFileSync(index, JSON.stringify(map, null, 2));
+  }
+  return join(VAULT_HOME, map[ROOT]);
+}
+
+// ---------- session audit: did a session touch the hidden suite? ----------
+
+// Scans the session's transcript (and its subagents') for tool calls whose command or path names the
+// hidden suite or the vault. Written content (Edit/Write text) is not scanned, only what was run or opened.
+function sessionAudit(sessionId, skill) {
+  if (!sessionId) return { checked: false, hits: [] };
+  const projects = join(homedir(), ".claude", "projects");
+  const filesToScan = [];
+  if (existsSync(projects)) {
+    for (const dir of readdirSync(projects)) {
+      const main = join(projects, dir, `${sessionId}.jsonl`);
+      if (!existsSync(main)) continue;
+      filesToScan.push(main);
+      const subs = join(projects, dir, sessionId, "subagents");
+      if (existsSync(subs)) for (const f of readdirSync(subs)) if (f.endsWith(".jsonl")) filesToScan.push(join(subs, f));
+    }
+  }
+  if (!filesToScan.length) return { checked: false, hits: [] };
+  if (skill === "/sdd-acceptance-tests") return { checked: true, hits: [] }; // writes the suite by design
+  const vaultName = basename(runConfig().vault);
+  const pattern = new RegExp(`hidden-tests|hidden-vault|sdd-hidden-vaults|${vaultName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "i");
+  const skipKeys = new Set(["content", "old_string", "new_string", "description", "prompt", "todos"]);
+  const hits = [];
+  for (const f of filesToScan) {
+    for (const line of readFileSync(f, "utf8").split("\n")) {
+      if (!line.includes("tool_use")) continue;
+      let d; try { d = JSON.parse(line); } catch { continue; }
+      const blocks = Array.isArray(d.message?.content) ? d.message.content : [];
+      for (const b of blocks) {
+        if (b.type !== "tool_use" || !b.input) continue;
+        const text = Object.entries(b.input).filter(([k]) => !skipKeys.has(k)).map(([, v]) => (typeof v === "string" ? v : JSON.stringify(v))).join(" ").replace(/\\\\?/g, "/");
+        if (pattern.test(text)) hits.push(`${b.name}: ${text.slice(0, 200)}`);
+      }
+    }
+  }
+  return { checked: true, hits: hits.slice(0, 20) };
 }
 
 function decisionsWaiting(waiting) {
@@ -185,14 +240,16 @@ function decisionsWaiting(waiting) {
   });
 }
 
-// The session's last message (its "Report" block, AGENTS.md), passed on to the conductor.
+// The session's last message (its "Report" block, AGENTS.md), passed on to the conductor, and the
+// result of the audit of its transcript (any tool call that named the hidden suite or the vault).
 let sessionReport = "";
+let sessionAlert;
 
 function report(status, extra = {}) {
   const p = progress();
   console.log("RUN_STATUS " + JSON.stringify({
     status, last: p.lastSession, result: p.result, gate: p.gate, next: p.command, waiting: p.waiting, ...extra,
-    report: sessionReport || undefined,
+    report: sessionReport || undefined, alert: sessionAlert,
   }));
   process.exit(status === "failed" ? 1 : 0);
 }
@@ -255,6 +312,10 @@ function runSession(command) {
   sessionReport = (block >= 0 ? last.slice(block) : last).trim().slice(0, 4000);
   const errored = res.status !== 0 || res.error || parsed?.is_error;
   const limitLine = errored ? (text.split("\n").find((l) => LIMIT_TEXT.test(l)) || "").trim() : "";
+  const audit = sessionAudit(parsed?.session_id, skill);
+  sessionAlert = audit.hits.length
+    ? `CRITICAL: this session's tool calls named the hidden suite or the vault (${audit.hits.length}); the hidden score is not valid until a person checks them: ${audit.hits.slice(0, 3).join(" | ")}`
+    : undefined;
   writeFileSync(logFile, JSON.stringify({
     command, agent: row.agent, model: row.model, effort: row.effort, exitCode: res.status,
     error: res.error ? String(res.error) : undefined,
@@ -262,6 +323,7 @@ function runSession(command) {
     wall_ms: ended - started, duration_ms: parsed?.duration_ms, num_turns: parsed?.num_turns,
     usage: parsed?.usage, session_id: parsed?.session_id, total_cost_usd: parsed?.total_cost_usd,
     usage_limit: limitLine || undefined,
+    audit: { checked: audit.checked, hidden_access: audit.hits },
     result: parsed ? parsed.result : res.stdout, stderr: res.stderr,
   }, null, 2));
   return {
@@ -344,7 +406,7 @@ function vault() {
   rmSync(cfg.vault, { recursive: true, force: true });
   cpSync(HIDDEN_DIR, cfg.vault, { recursive: true });
   rmSync(HIDDEN_DIR, { recursive: true, force: true });
-  return { ok: true, note: `hidden suite moved to ${cfg.vault}` };
+  return { ok: true, note: "hidden suite moved to the hidden vault" }; // the path is never printed: the conductor relays this line
 }
 
 function manifestCheck(dir) {
@@ -373,7 +435,7 @@ function junitCases(xml) {
 function hiddenEval() {
   const cfg = runConfig();
   if (existsSync(HIDDEN_DIR)) { const v = vault(); if (!v.ok) return v; }
-  if (!existsSync(join(cfg.vault, "hidden.json"))) return { ok: false, error: `no hidden suite in ${cfg.vault}` };
+  if (!existsSync(join(cfg.vault, "hidden.json"))) return { ok: false, error: "no hidden suite in the hidden vault" };
   const spec = JSON.parse(read(join(cfg.vault, "hidden.json")));
   const head = spawnSync("git", ["rev-parse", "--short", "HEAD"], { cwd: ROOT, encoding: "utf8" }).stdout.trim() || "unknown";
   const bad = manifestCheck(cfg.vault);
@@ -427,7 +489,8 @@ function restoreHidden() {
 
 function summary() {
   const logs = existsSync(LOG_DIR) ? readdirSync(LOG_DIR).filter((f) => f.endsWith(".json")) : [];
-  let cost = 0, failed = 0, paused = 0, ms = 0, turns = 0;
+  let cost = 0, failed = 0, paused = 0, ms = 0, turns = 0, unaudited = 0;
+  const flagged = [];
   const tokens = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 };
   const bySkill = {};
   for (const f of logs) {
@@ -443,6 +506,8 @@ function summary() {
     tokens.cacheRead += u.cache_read_input_tokens || 0; tokens.cacheWrite += u.cache_creation_input_tokens || 0;
     if (typeof j.total_cost_usd === "number") cost += j.total_cost_usd;
     if (j.usage_limit) paused += 1; else if (j.exitCode) failed += 1;
+    if (j.audit?.hidden_access?.length) flagged.push(f);
+    if (j.audit && !j.audit.checked) unaudited += 1;
   }
   const hours = (x) => (x / 3600000).toFixed(1);
   const dlog = read(DECISIONS);
@@ -460,6 +525,8 @@ function summary() {
     ["Decisions", String(count(/^## D-\d+:/gm))],
     ["Decisions by class (allow / open / block)", `${count(/^- Class: allow/gm)} / ${count(/^- Class: open/gm)} / ${count(/^- Class: block/gm)}`],
     ["Approvals (incl. changes to frozen tests)", String(count(/^- Type: approval/gm))],
+    ["Sessions whose tool calls named the hidden suite or vault", flagged.length ? `${flagged.length} (${flagged.join(", ")}): hidden results not valid until checked` : "0"],
+    ["Sessions without a transcript to audit", String(unaudited)],
     ["Hidden suite, first run (main result)", hidden[0] || "not run"],
     ["Hidden suite, last run", hidden.length ? `${hidden[hidden.length - 1]} after ${hidden.length} run(s)` : "not run"],
     ["Verification runs", String(verifyRuns)], ["Commits", commits],

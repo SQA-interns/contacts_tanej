@@ -94,7 +94,7 @@ When the run reports that it is complete:
    git push -u origin <branch>
    ```
    Before pushing, check that `git status` does not list `.env`.
-6. The hidden tests are not in the repository: they stay in the hidden vault next to the project folder (`../<folder>.hidden-vault`, or the path in `run-config.md`). When the run, and any change after it, is over, publish the vault where agents of this project never work (its own repository, or a zip next to the results). Anyone can check it against `02_output/docs/03_hidden-manifest.sha256`.
+6. The hidden tests are not in the repository: they stay in the hidden vault, a folder with a random name under your local application data (on Windows `%LOCALAPPDATA%\sdd-hidden-vaults\`; `index.json` there says which folder belongs to which project), or the path in `run-config.md`. After every session the runner checks the session's transcript for any tool call that named the hidden suite or the vault; `--summary` reports the count, and the hidden results count only when it is 0. When the run, and any change after it, is over, publish the vault where agents of this project never work (its own repository, or a zip next to the results). Anyone can check it against `02_output/docs/03_hidden-manifest.sha256`.
 
 ### 7. Adding a feature or changing behaviour
 

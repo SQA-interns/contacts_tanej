@@ -16,7 +16,7 @@ Settings of the run. How to fill each line: the table below. Start each session 
 | Agent | the default agent of every session without its own in the table below: a name from "Agents" |
 | Permission mode | for Claude Code: `default` (every command not allowed below is refused in a `/sdd-run` session and asked for in a manual one), `acceptEdits` or `auto` |
 | Design round | `ask`: after the last increment, `/sdd-design` refines the final design with you; `skip`: `/sdd-design` applies the baseline final theme without questions |
-| Hidden vault | where `system/run.mjs` keeps the hidden suite, outside the project folder; empty means `../<folder>.hidden-vault` |
+| Hidden vault | where `system/run.mjs` keeps the hidden suite, outside the project folder; leave it empty: the runner then picks a folder with a random name under your local application data (`sdd-hidden-vaults`), which no session can guess |
 
 ## Sessions
 
