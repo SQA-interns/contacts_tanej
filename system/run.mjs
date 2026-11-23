@@ -221,8 +221,12 @@ function sessionAudit(sessionId, skill) {
       const blocks = Array.isArray(d.message?.content) ? d.message.content : [];
       for (const b of blocks) {
         if (b.type !== "tool_use" || !b.input) continue;
-        const text = Object.entries(b.input).filter(([k]) => !skipKeys.has(k)).map(([, v]) => (typeof v === "string" ? v : JSON.stringify(v))).join(" ").replace(/\\\\?/g, "/");
-        if (pattern.test(text)) hits.push(`${b.name}: ${text.slice(0, 200)}`);
+        const text = Object.entries(b.input)
+          .filter(([k, v]) => !skipKeys.has(k) && !(k === "glob" && String(v).startsWith("!"))) // a negated glob excludes the folder
+          .map(([, v]) => (typeof v === "string" ? v : JSON.stringify(v))).join(" ").replace(/\\\\?/g, "/");
+        const checked = /\bgit\b[^\n]*\bcommit\b/.test(text) ? "" // a commit message only names the folder
+          : text.replace(/-path\s+\S*hidden-tests\S*\s+-prune/g, ""); // find … -prune skips it
+        if (pattern.test(checked)) hits.push(`${b.name}: ${text.slice(0, 200)}`);
       }
     }
   }
