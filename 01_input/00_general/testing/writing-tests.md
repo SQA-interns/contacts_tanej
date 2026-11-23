@@ -22,6 +22,18 @@ How tests are written and run. Thresholds and figures: `general/testing/measurem
 - Test names contain the `AC`, `EX` or `R` id they verify. Every expected value has a source in the inputs. *Why:* traceability, and a test with an invented value checks the agent's assumption, not the requirement.
 - UI tests find elements by role, label or text, never by CSS class or layout, so a style change cannot break them. *Why:* the look changes after the tests are frozen (`/design`).
 
+## UI tests
+
+Each rule below comes from a frozen test that could not pass in an earlier run.
+
+- Match names exactly (for example Playwright `{ exact: true }`), or search inside a named region (a dialog, a form, a landmark). A substring match finds "Role" and "Role of Ana" alike.
+- Know the runner's role mapping: a password input is a `textbox` in Playwright; count fields by their type when the count matters.
+- A shared helper (sign in, verify an e-mail, open a dialog) waits until the page shows the state the step leads to, or the state of its failure (an alert, a "verify your e-mail" screen), before it returns; never only until the click is done.
+- After closing a dialog or confirming, wait until the dialog is gone before checking the page behind it.
+- Wait for a popup or a new page to load before acting on it.
+- A stub answers only API requests (`fetch`, `xhr`), never a page navigation whose path looks the same.
+- Run with one worker unless the suite is proven independent; many parallel browser tests against one local stack fail for load, not for behaviour.
+
 ## Test-driven implementation (phase 4)
 
 For every rule of a story: write a failing unit or integration test (red), write the least code that makes it pass (green), then refactor with the tests green (refactor). Production code changes only to make a failing test pass or during refactoring. Never add behaviour in the same step as a refactoring.

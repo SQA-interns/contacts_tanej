@@ -71,6 +71,9 @@ const BASE_TOOLS = [
   "Bash(git *)", "Bash(ls *)", "Bash(mkdir *)", "Bash(find *)", "Bash(grep *)",
   "Bash(sed -n *)", "Bash(wc *)", "Bash(sha256sum *)", "Bash(shasum *)",
   "Bash(node *)", "Bash(npm *)", "Bash(npx *)", "Bash(docker *)",
+  // Advisory and support-date sources for /preflight, /verify and /fix (v001 could not read them).
+  "WebFetch(domain:endoflife.date)", "WebFetch(domain:osv.dev)", "WebFetch(domain:api.osv.dev)",
+  "WebFetch(domain:nvd.nist.gov)", "WebFetch(domain:github.com)",
 ];
 
 // Used when run-config.md has no "Agents" table.
@@ -487,7 +490,7 @@ function lintTemplate() {
   })(ROOT);
   const md = all.filter((f) => f.endsWith(".md"));
   const alias = { "general/": "01_input/00_general/", "project/": "01_input/01_project/", "skills/": ".claude/skills/", "docs/": "02_output/docs/", "out/": "02_output/" };
-  const agentMade = /(manifest\.sha256|02_adr\/|02_contracts\/|logs\/|US-nnn|06_hidden-evaluation\.md|wireframe\.css|WF-nn)/;
+  const agentMade = /(manifest\.sha256|02_adr\/|02_contracts\/|logs\/|scripts\/|US-nnn|06_hidden-evaluation\.md|wireframe\.css|WF-nn)/;
   const defined = {};
   for (const f of md) {
     const text = read(join(ROOT, f));

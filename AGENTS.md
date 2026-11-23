@@ -10,7 +10,7 @@ You are one session of a run. Each session is started by its skill (`/preflight`
 2. Follow your skill. Its "Session" section says what you read, write, must not do, and when you are done.
 3. Read a file from your "Reads" list when the step that needs it starts, never before, and nothing that is not on the list. *Why:* every file you read costs context for the rest of the session.
 
-`README.md`, `Run_Guide.md` and `system/` are for humans and the runner, not for you; you only run `node system/run.mjs --env-check` and `--leak-check` (`general/rules/secrets.md`).
+`README.md`, `Run_Guide.md` and `system/` are for humans and the runner, not for you; you only run `node system/run.mjs --env-check` and `--leak-check` (`general/rules/secrets.md`), and `/release` runs `--summary`.
 
 ## Paths and precedence
 
@@ -24,7 +24,7 @@ You are one session of a run. Each session is started by its skill (`/preflight`
 ## Every session
 
 - **One frame:** ask (intake), generate (to-spec, plan, wireframes, implement, design, fix), criticise (clarify, review, verify) or measure (preflight, quality gate). A criticising session never fixes what it finds; the next session does. *Why:* a checker that also fixes starts defending its fixes.
-- **Blocking decision ends the session:** record it, ask all open questions in one message, set "Waiting for" and stop. The human answers by starting the same skill again with the answer (`/clarify D-03: 2`); record it as `Human response` and continue.
+- **Blocking decision ends the session:** record it, ask all open questions in one message, set "Waiting for" and stop. The human answers by starting the same skill again with the answer (`/clarify D-03: 2`); record it as `Human response` and continue. An argument may hold the work item and answers together (`/implement US-022 D-59: 1`): record and apply the answers first, then do the whole job the argument names.
 - **Hand over only through files.** Before ending, update `docs/00_progress.md` in the format below and commit everything you changed. Never rely on an earlier session's conversation, and do not start the next session's work. *Why:* only files survive; the next job deserves a fresh context.
 - **Notes from the developer:** an argument `note: …` is recorded as a non-blocking decision before anything else.
 - **Resume:** if your story, task or finding already has commits (`git log --oneline --grep <id>`), continue at the first item not done instead of starting over.

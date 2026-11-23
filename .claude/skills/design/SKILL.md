@@ -22,21 +22,20 @@ You change **presentation only**: tokens, style files, spacing, component varian
 1. Do not ask again what an earlier decision settled.
 2. Start the application with the seed data and take the "before" screenshots of every screen at the three widths (UI-22), light and dark, into `out/logs/screens/design-<round>/before/`.
 3. **Without the developer** (`run-config.md` "Design round: skip", or the argument `baseline`): switch to the final theme with the baseline defaults and the `ui-design.md` overrides, do steps 5 and 6 for the whole set without asking, and go to step 9.
-4. **With the developer:** ask about one topic at a time, in this order, skipping what is already settled:
+4. **With the developer:** build the design from its blocks, one block at a time, in this order, skipping what is already settled:
    1. overall impression and reference products the developer likes;
-   2. colour: primary accent, neutrals, light and dark;
-   3. typography: typeface, size, weight;
+   2. colour palette: primary, secondary and accent, neutrals, success, warning and error, light and dark;
+   3. typography: font families for headings and text, the heading scale, weights, line height;
    4. density and spacing, corner radius, borders and shadows;
-   5. mobile: navigation menu, sticky actions, how tables and forms collapse (UI-23);
-   6. tablet: two-column layouts, side bar (UI-24);
-   7. desktop: panels, column use, hover details (UI-25);
-   8. components: buttons, forms, tables, empty and error states;
-   9. icons, illustrations, logo;
-   10. motion and feedback;
-   11. tone of the copy (wording only, never meaning).
-   Give your recommendation and why. For a large choice (colour, typeface, a responsive pattern) show **two or three variants** as screenshots and let the developer pick; for a small one implement your recommendation directly.
+   5. buttons (primary, secondary, quiet, danger) and their hover, focus and disabled states;
+   6. form fields, tables and lists, cards, dialogs, empty and error states;
+   7. navigation and layout per width: mobile menu and sticky actions (UI-23), tablet columns and side bar (UI-24), desktop panels and hover details (UI-25);
+   8. icons, illustrations and graphics, logo;
+   9. motion and feedback (transitions, loading, toasts);
+   10. tone of the copy (wording only, never meaning).
+   For every block, render **three variants** as one comparison page (`out/logs/screens/design-<round>/<block>-options.html`: the same real screen, for example the contact list, three times side by side, each labelled A, B, C) and its screenshots at desktop and mobile width; say which you recommend and why, and let the developer pick a letter or ask for a mix. A block too small for three real variants (a single radius value) is implemented directly from your recommendation and shown in step 7.
 5. Implement the answer in the token and style files first, components only where a token cannot express it (UI-03).
 6. Run the UI tests and the accessibility check, and take the "after" screenshots at the three widths. If a choice would break WCAG 2.2 AA (UI-19..21), say so and propose the closest compliant option; never ship a violation.
 7. Show before and after and ask: "Is it right?" If not, ask what to change and repeat 5–7. If yes, commit (`refactor:`, style only) and record the decision: non-blocking, title `Design: <topic>`, the developer's answer as `Human response`, a line `Overrides: UI-nn` and the commit.
 8. A wish that changes structure or behaviour (a new field, a moved section, a removed screen) is not design: record it as a blocking decision for a changed story or wireframe and continue with the next topic.
-9. Run the full suite once; every test must pass. Update `docs/00_progress.md` (next: `/quality-gate`).
+9. Run the full suite once; every test must pass. With "Design round: skip", record one decision `Design: final theme (baseline)`. When every story is done and no review finding Critical or High is open, add the phase 4 row to "Gates". Restart the development stack (`node out/scripts/dev.mjs up`). Update `docs/00_progress.md` (next: `/quality-gate`).

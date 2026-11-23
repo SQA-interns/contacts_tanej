@@ -18,11 +18,16 @@ disable-model-invocation: true
 
 1. Before any test: write the measurement exclusions (generated code, entry point, style and token files) with a reason each in `docs/03_test-strategy.md`.
 2. Set up the harness per level (acceptance through the public interface; e2e through the real local stack, the seed data and the browser), using the local substitutes in `environments.md`.
-3. For every `AC` and `EX`, write at least one test through the public interface that checks the observable outcome; for a rejection also check that nothing changed. ID in the test name; every expected value from the story, a business rule or a project-wide fact. UI tests find elements by the role, label or text the wireframe shows.
+3. For every `AC` and `EX`, write at least one test through the public interface that checks the observable outcome; for a rejection also check that nothing changed. ID in the test name; every expected value from the story, a business rule or a project-wide fact. UI tests find elements by the role, label or text the wireframe shows, following "UI tests" in `general/testing/writing-tests.md`. Set up data through the API, not through another story's screens, and open only the screens of the story under test (plus the navigation that reaches them). *Why:* a test that needs another story's screen cannot pass until that story is built.
 4. For every e2e scenario, exactly one end-to-end test; no other, none split or merged.
 5. Run the suite: every test must fail because the behaviour is missing, not because of the build or harness. Record counts and one reason line per group in `docs/03_test-strategy.md`.
-6. Self-check every assertion and helper: a correct implementation can pass it; it cannot pass or fail for the wrong reason; no assertion contradicts another. *Why:* a defective frozen test costs an approval.
+6. Self-check every assertion and helper: a correct implementation can pass it; it cannot pass or fail for the wrong reason; no assertion contradicts another. *Why:* a defective frozen test costs an approval. In particular:
+   - check each assertion against **every** rule of its story and the business rules, not only the one it names (an edit entry that must hold the old value cannot be asserted absent; a member who leaves is also an actor);
+   - check each "Given" is a state the rules allow (no set-up the API must refuse);
+   - resolve every UI locator once against the wireframe page of its screen with a scratch script: it must find exactly one element; fix the locator (exact match, a named region) until it does;
+   - every count or size assertion uses the exact number the contract or rule gives, never "more than".
+   Record the result of these checks in `docs/03_test-strategy.md`.
 7. Format and lint the tests now; after the freeze they cannot change.
 8. Write the hidden suite as `general/testing/hidden-evaluation.md` describes, with the write tool only. Run it once: it must fail for behavioural reasons and write its JUnit report. Write `docs/03_hidden-manifest.sha256`. Record only the number of hidden tests per story, nowhere the cases.
 9. Commit the visible tests story by story (`test:`), then the e2e tests; then write `docs/03_acceptance-manifest.sha256` and commit both manifests alone as the freeze commit.
-10. Hand over (next: `/implement <first story of INC-1>`). The runner then moves the hidden suite out of the project.
+10. Add the phase 3 row to "Gates"; hand over (next: `/implement <first story of INC-1>`). The runner then moves the hidden suite out of the project.

@@ -34,7 +34,8 @@ You are a demanding requirements engineer, not a note taker. The developer relay
    - Record the answer immediately in `interview.md` (see "Notes format"), before asking the next question, so nothing is lost if the session ends.
 4. "You decide" on a `Block` topic: explain the consequence, propose a default, and record it as source `developer` with status `open — needs customer`. On any other topic record your recommendation as source `developer`.
 5. After each topic, summarise it in three lines and ask whether it is right before moving on.
-6. Stop when every topic is done, deferred with a reason or open, or when the developer says stop. Then list the open items and tell the developer the next command: `/to-spec`.
+6. **Validation round** before you stop, when the checklist is done: read the whole of `interview.md` once more and look for gaps and conflicts across topics: two answers that cannot both hold, a rule that makes another rule's example impossible, a feature whose role, limit, empty state or error is missing, a term used in two meanings. List what you found and ask follow-up questions, one at a time as in step 3, until each is resolved, deferred or open. Record the round under "Contradictions resolved". *Why:* conflicts found here cost one question; found at implementation they cost a blocked story and an approval.
+7. Stop when every topic is done, deferred with a reason or open, or when the developer says stop. Then list the open items and tell the developer the next command: `/to-spec`.
 
 ## Checklist (order, and the project file each topic feeds)
 
@@ -44,7 +45,7 @@ You are a demanding requirements engineer, not a note taker. The developer relay
 | 2 | Product: what we build, the core outcome, what success looks like (measurable) | `intent.md` |
 | 3 | Users and roles: primary, secondary, administrators; what each may do and must not do | `intent.md`, stories, `security-requirements.md` |
 | 4 | Features as user goals; for each: role, goal, benefit, priority (must / should / could / won't), MVP or later | stories, `intent.md` |
-| 5 | For each must and MVP feature: the main flow step by step, the rules, the exceptions, the boundaries, worked examples with real values | stories (rules, AC, edge cases) |
+| 5 | For each must and MVP feature: the main flow step by step, the rules, the exceptions, the boundaries, worked examples with real values; the texts the user sees (labels, confirmations, errors, empty states) in every UI language, and every input limit | stories (rules, AC, edge cases) |
 | 6 | Shared rules and data: entities, fields, required or optional, formats, uniqueness, lifecycle, shared terms | `business-rules.md` |
 | 7 | Project-wide facts: time zone, currency, tax, date and number format, languages, encoding | `business-rules.md` (project-wide facts) |
 | 8 | Out of scope and non-goals; principles the product must never break | `intent.md`, stories |
@@ -52,8 +53,8 @@ You are a demanding requirements engineer, not a note taker. The developer relay
 | 10 | Security: authentication, authorisation, sensitive operations, abuse to prevent | `security-requirements.md` |
 | 11 | Integrations and external services: which, what for, test or sandbox access | `environments.md`, `secrets.env.example` |
 | 12 | Quality: users and load, response times, availability, devices and browsers, accessibility, localisation | `quality-requirements.md` |
-| 13 | Technology: required or forbidden languages, frameworks, hosting, licence; existing systems | `tech-stack.md`, `architecture.md` |
-| 14 | Environments and deployment: where it runs, who operates it, backups | `environments.md` |
+| 13 | Technology: required or forbidden languages, frameworks, hosting, licence; existing systems. Recommend framework lines that still get free security fixes for the product's lifetime, not one whose open-source support has ended | `tech-stack.md`, `architecture.md` |
+| 14 | Environments and deployment: where it runs (a host or "local for now"), who operates it, staging or not, backups and how long they are kept. Ask for a concrete answer: `/plan` needs a target | `environments.md` |
 | 15 | Design constraints only: brand colours and logo, tone, target devices, light or dark, reference products the customer likes | `ui-design.md` |
 | 16 | End-to-end journeys that prove the product works | `e2e-scenarios.md` |
 | 17 | Project done: what the customer must see to accept the product | `intent.md` (DoD-P) |

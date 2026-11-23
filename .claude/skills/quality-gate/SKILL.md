@@ -16,10 +16,10 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. Configure coverage and mutation tools exactly to the scope and exclusions; commit the configuration alone (`build:`).
-2. Measure coverage per component (`unit`, `nonUnit`, `all`). Below the line threshold, add tests area by area (validation, security, persistence, business rules first), measuring after each area.
-3. Check once that the mutation tool works: a mutant in plainly covered code must be killed. A score far below line coverage means mutants are not activated: stop and raise a decision; record nothing.
-4. Run mutation testing **once** per component on the full scope with the full suite, in the background; read only the summary lines.
-5. Below the mutation threshold: up to **three** survivor rounds on the code that matters most, re-running only the mutated classes, then one confirming full run. Justify every equivalent mutant.
+1. Configure coverage and mutation tools exactly to the scope and exclusions, with settings that fit a slow suite: a time limit for the tool's first test run long enough for the whole suite; a fixed number of parallel test processes the host can carry (`docs/00_preflight-report.md`); temporary folders removed after every run; history or incremental mode, so a stopped run continues instead of starting over; the adapter the tool needs for the test framework (for example PIT needs its JUnit 5 plugin); the test profile or settings the normal test run uses. Commit the configuration alone (`build:`).
+2. Measure coverage per component (`unit`, `nonUnit`, `all`), after deleting coverage data left by earlier or stopped runs. Below the line threshold, add tests area by area (validation, security, persistence, business rules first), measuring after each area.
+3. Check once, on one small module, that the mutation tool works: it runs tests, and a mutant in plainly covered code is killed. A score far below line coverage means mutants are not activated: stop and raise a decision; record nothing.
+4. Full mutation runs are **runner jobs** (`AGENTS.md`, "Long jobs"): one job per component, full scope, full suite, each writing its report into `out/logs/`. End the session; when the runner starts you again, read only the reports' summary.
+5. Below the mutation threshold: up to **three** survivor rounds on the code that matters most, re-running only the mutated files or classes (a round that may take longer than your tool allows is a runner job too), then one confirming full run as a runner job. Justify every equivalent mutant. After writing tests in a round, run the type check, lint and format of the component on them before you commit. *Why:* v001's new tests broke the build.
 6. Stop each component at the gate; record a shortfall after the third round as a non-blocking decision and a finding.
-7. Fill the phase 5 sections of `docs/03_test-strategy.md`. Commit; hand over (next: `/verify`).
+7. Fill the phase 5 sections of `docs/03_test-strategy.md`; record each mutation score also with timed-out mutants counted as survived, next to the raw score. Commit; add the phase 5 row to "Gates" (also with a recorded shortfall); hand over (next: `/verify`).

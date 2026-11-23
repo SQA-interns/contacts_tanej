@@ -20,5 +20,5 @@ disable-model-invocation: true
 2. Follow every README from a clean clone in a temporary folder; fix the README until it works; log in `out/logs/`.
 3. `docs/release-notes.md`: delivered stories by increment; known limitations (accepted findings, shortfalls); manual tests (real external services, items without automated evidence); decisions pending review; data-retention duties; how to deploy.
 4. The runner has put the hidden suite back into `02_output/hidden-tests/`: remove it from `.gitignore` and commit it (`test:`); its hashes must match `docs/03_hidden-manifest.sha256`.
-5. `docs/07_retrospective.md`: the "Numbers" section is written by `node system/run.mjs --summary` (run it if it is empty); then what went well, what held the run back (with evidence), and at most five improvements, each marked for the project or the template.
-6. Commit each document; hand over (result: run complete).
+5. `docs/07_retrospective.md`: the "Numbers" section is written by `node system/run.mjs --summary` (run it if it is empty); then what went well, what held the run back (with evidence), and at most five improvements, each marked for the project or the template. Name the first hidden-suite run as the main result and the last one next to it.
+6. Commit each document; add the phase 7 row to "Gates"; hand over (result: run complete).
