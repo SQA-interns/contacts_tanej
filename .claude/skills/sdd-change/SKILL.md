@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 - Id: CR, between increments or after `/sdd-release`. Frame: ask, then generate the inputs of the change.
 - Reads: `docs/00_progress.md`; `project/01_requirements/intent.md`, `business-rules.md`, `e2e-scenarios.md`, the stories the change touches; `project/02_design/` files the change touches; `project/00_setup/tech-stack.md`; `docs/routes.md`; `docs/wireframes/README.md`; `docs/03_acceptance-manifest.sha256` (test file names only); `docs/release-notes.md` ("Known limitations"); `general/requirements-standard.md`; `general/rules/decisions.md`; `skills/sdd-grill-me/SKILL.md` ("Procedure" steps 3 to 6) and `skills/sdd-to-spec/SKILL.md` ("Rules").
-- Writes: `project/00_intake/changes/CR-nn.md`; the `project/` files the change needs; `docs/changes/CR-nn.md`; `docs/decisions-log.md`; `docs/00_progress.md`; `.gitignore` (step 7 only).
+- Writes: `project/00_intake/changes/CR-nn.md`; the `project/` files the change needs; `docs/changes/CR-nn.md`; `docs/decisions-log.md`; `docs/00_progress.md`; the heading `## Change CR-nn` in `docs/06_verification-report.md`; `.gitignore` (step 7 only).
 - Must not: change code or tests; delete an input entry (a removed rule is marked `Removed by CR-nn` and keeps its id); start while another session's work is in progress.
 - Exit: the change is approved, its inputs are committed, and the phases are reopened; or the developer drops it.
 
@@ -28,6 +28,7 @@ disable-model-invocation: true
 7. **On approval:**
    - if `02_output/hidden-tests/` is tracked by git (after a release), untrack it (`git rm -r --cached 02_output/hidden-tests`) and add it back to `.gitignore`, so the runner can hold the suite out again;
    - copy the rows of "Gates" into `docs/changes/CR-nn.md` ("Gates before the change") and leave the table empty; add the new stories to "Stories" as `ready` in a new increment `INC-n`, and set changed stories back to `in progress`;
-   - set Next to `/sdd-preflight` (it checks new versions and writes the new input manifest) and "Waiting for: nothing";
+   - replace "Last session" with this session (`Session: CR /sdd-change CR-nn`, `Result: done`, `Gate: change approved`) so no earlier "run complete" stays; set Next to `/sdd-preflight` (it checks new versions and writes the new input manifest) and "Waiting for: nothing";
+   - append the heading `## Change CR-nn` to `docs/06_verification-report.md`, so `/sdd-verify` counts the change's runs on their own;
    - commit the inputs (`docs: change request CR-nn inputs`) and the change record (`docs: change request CR-nn`).
 8. Report. Tell the developer the run continues with `/sdd-run resume` (or the manual steps), and that every later session works only on what `docs/changes/CR-nn.md` names, then checks the whole product.

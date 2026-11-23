@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 - Id: S6, phase 5. Frame: measure.
 - Reads: `general/testing/measurement.md`; `project/02_design/quality-requirements.md` ("Thresholds", "Mutation scope"); `docs/03_test-strategy.md` ("Measurement exclusions"); the production code and tests of the area being measured.
-- Writes: unit and integration tests, tool configuration, `docs/03_test-strategy.md`, `docs/00_progress.md`.
+- Writes: unit and integration tests, tool configuration, `docs/03_test-strategy.md`, `docs/00_progress.md`, `out/logs/` (reports, `jobs/request.json`).
 - Must not: change production code, except to fix a defect a new test proves (a finding with its own `fix:` commit).
 - Exit (phase 5 gate): the quality gate is met per component, or the shortfall after the third survivor round is recorded with a decision.
 

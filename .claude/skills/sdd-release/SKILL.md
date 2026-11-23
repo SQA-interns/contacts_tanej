@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 - Id: S9, phase 7. Frame: generate.
 - Reads: `general/engineering-standards.md` (ES-05, ES-06); `project/02_design/architecture.md`; `project/00_setup/environments.md`; `project/02_design/security-requirements.md` (retention); `docs/decisions-log.md`; the last section of `docs/06_verification-report.md`.
-- Writes: `out/README.md`, one README per component, `docs/release-notes.md`, `docs/07_retrospective.md`, the hidden suite commit, `docs/00_progress.md`.
+- Writes: `out/README.md`, one README per component, `docs/release-notes.md`, `docs/07_retrospective.md`, the hidden suite commit and its line in `.gitignore`, `docs/00_progress.md`, `out/logs/`.
 - Must not: change production code or tests.
 - Exit (phase 7 gate): every README works from a clean checkout; the release notes list the manual tests and every decision pending review; the retrospective is written.
 

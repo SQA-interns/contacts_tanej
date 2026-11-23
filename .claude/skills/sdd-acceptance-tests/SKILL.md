@@ -12,7 +12,8 @@ disable-model-invocation: true
 - Reads: in every story only "Rules", "Acceptance criteria" and "Edge cases"; `project/01_requirements/e2e-scenarios.md`; `project/01_requirements/business-rules.md`; `docs/02_contracts/`; the specification sections the stories cite; `docs/wireframes/README.md` and the wireframe HTML of each screen (for labels, roles and headings); `project/00_setup/environments.md`; `general/testing/writing-tests.md`; `general/testing/measurement.md` ("Measurement constraints"); `general/testing/hidden-evaluation.md`; `general/rules/commits.md`.
 - Writes: acceptance and e2e tests, the test harness, the hidden suite in `02_output/hidden-tests/`, `docs/03_test-strategy.md`, `docs/03_acceptance-manifest.sha256`, `docs/03_hidden-manifest.sha256`, `docs/00_progress.md`.
 - Must not: read or write production source code. *Why:* tests written from the code test what the code does, not what the customer asked for.
-- Exit (phase 3 gate): every AC and EX has a test; every `R` and `BR` has a hidden test; every e2e scenario has exactly one e2e test and there is no other; every test fails for a behavioural reason; the two manifests are committed last, alone, as the freeze commit.
+- Exit (phase 3 gate): every AC and EX has a test; every `R` and `BR` has a hidden test; every e2e scenario has exactly one e2e test and there is no other; every test of behaviour not yet built fails for a behavioural reason; the two manifests are committed last, alone, as the freeze commit.
+- In a change (`docs/changes/CR-nn.md`): write tests only for the change's new and changed AC, EX, rules and scenarios, and replace exactly the frozen test files its approved "Impact" lists; tests of built behaviour stay and keep passing. The runner has put the hidden suite back: add the change's hidden cases to it (you may read `hidden.json` and run the suite to check the new cases fail and the old ones pass), then write both manifests again.
 
 ## Procedure
 
@@ -30,4 +31,4 @@ disable-model-invocation: true
 7. Format and lint the tests now; after the freeze they cannot change.
 8. Write the hidden suite as `general/testing/hidden-evaluation.md` describes, with the write tool only. Run it once: it must fail for behavioural reasons and write its JUnit report. Write `docs/03_hidden-manifest.sha256`. Record only the number of hidden tests per story, nowhere the cases.
 9. Commit the visible tests story by story (`test:`), then the e2e tests; then write `docs/03_acceptance-manifest.sha256` and commit both manifests alone as the freeze commit.
-10. Add the phase 3 row to "Gates"; hand over (next: `/sdd-implement <first story of INC-1>`). The runner then moves the hidden suite out of the project.
+10. Add the phase 3 row to "Gates"; hand over (next: `/sdd-implement <first story not done, of the earliest increment with such a story>`). The runner then moves the hidden suite out of the project.

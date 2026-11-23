@@ -54,7 +54,7 @@ Every file in `01_input/01_project/`: `00_intake/` (`customer_requirement/` with
 
 ## 2. Template files (change only when revising the template)
 
-`README.md`, `Run_Guide.md`, `AGENTS.md`, `CLAUDE.md`, `system/`, `.claude/skills/`, `.agents/`, everything in `01_input/00_general/`, and the base `.gitattributes` and `.gitignore`.
+`README.md`, `Run_Guide.md`, `AGENTS.md`, `CLAUDE.md`, `system/`, `.claude/skills/`, `.agents/`, everything in `01_input/00_general/`, `.gitattributes`, and the base entries of `.gitignore` (the run adds the stack's entries, and `/sdd-release` and `/sdd-change` switch the hidden-suite line).
 
 ## 3. Written during the run
 

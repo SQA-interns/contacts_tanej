@@ -140,6 +140,12 @@ function progress() {
   };
 }
 
+// The run is complete when /sdd-release says so ("run complete", or "done (run complete)") or no
+// command is next; a result such as "failed: review not complete" must not end the run.
+function isComplete(p) {
+  return /^(done \()?(run )?complete\b/i.test(p.result) || /^(none|-|)$/i.test(p.command);
+}
+
 // The gate a command needs, if it is missing; "" when the command may start.
 function missingGate(command, gates) {
   const need = NEEDS_GATE[command.split(/\s+/)[0]];
@@ -266,14 +272,39 @@ function runSession(command) {
 
 // ---------- long jobs a session asks the runner to run (no time limit) ----------
 
+// A job command may run only if a session could run it too: one plain command (no shell
+// operators) that matches a Bash rule of the base tools or of run-config.md "Allowed commands".
+function jobAllowed(command, cfg) {
+  if (/[;&|<>`$\r\n]/.test(command)) return "shell operators are not allowed";
+  const rules = [...BASE_TOOLS, ...cfg.allowed].map((r) => r.match(/^Bash\((.+)\)$/)).filter(Boolean).map((m) => m[1]);
+  const ok = rules.some((r) => (r.endsWith(" *") ? command === r.slice(0, -2) || command.startsWith(r.slice(0, -1)) : command === r));
+  return ok ? "" : "not covered by the allowed commands";
+}
+
+// A request the runner cannot run is moved aside with the reason, so the session that wrote it
+// starts again, reads out/logs/jobs/rejected.txt and fixes it, instead of the run looping on it.
+function rejectJobs(reason) {
+  writeFileSync(join(JOBS_DIR, "rejected.txt"), `${new Date().toISOString()} request.json rejected: ${reason}\n`);
+  cpSync(JOBS_REQUEST, join(JOBS_DIR, "request.rejected.json"));
+  rmSync(JOBS_REQUEST, { force: true });
+  return { ok: true, note: `runner jobs rejected (${reason}); see 02_output/logs/jobs/rejected.txt` };
+}
+
 // request.json: [{ "name": "frontend-mutation", "cwd": "02_output/frontend", "command": "npx stryker run" }]
 function runJobs() {
-  if (!existsSync(JOBS_REQUEST)) return { ok: false, error: "02_output/logs/jobs/request.json is missing" };
+  if (!existsSync(JOBS_REQUEST)) return { ok: true, note: "no runner jobs requested (02_output/logs/jobs/request.json is missing)" };
   let jobs;
-  try { jobs = JSON.parse(read(JOBS_REQUEST)); } catch (e) { return { ok: false, error: `request.json is not valid JSON: ${e.message}` }; }
-  if (!Array.isArray(jobs) || !jobs.every((j) => /^[a-z0-9-]+$/.test(j.name || "") && j.command)) {
-    return { ok: false, error: "request.json must be a list of { name (a-z, 0-9, -), command, cwd }" };
+  try { jobs = JSON.parse(read(JOBS_REQUEST)); } catch (e) { return rejectJobs(`not valid JSON: ${e.message}`); }
+  if (!Array.isArray(jobs) || !jobs.length || !jobs.every((j) => /^[a-z0-9-]+$/.test(j.name || "") && typeof j.command === "string" && j.command)) {
+    return rejectJobs("it must be a list of { name (a-z, 0-9, -), command, cwd }");
   }
+  const cfg = runConfig();
+  for (const j of jobs) {
+    const why = jobAllowed(j.command.trim(), cfg);
+    if (why) return rejectJobs(`job ${j.name}: ${why}`);
+    if (relative(ROOT, resolve(ROOT, j.cwd || ".")).startsWith("..")) return rejectJobs(`job ${j.name}: cwd is outside the project`);
+  }
+  rmSync(join(JOBS_DIR, "rejected.txt"), { force: true });
   const requested = statSync(JOBS_REQUEST).mtimeMs;
   const results = [];
   for (const job of jobs) { // one at a time: two heavy jobs at once slow each other into timeouts
@@ -282,7 +313,8 @@ function runJobs() {
       results.push(JSON.parse(read(resultFile))); continue;
     }
     const started = new Date();
-    const res = spawnSync(job.command, { cwd: resolve(ROOT, job.cwd || "."), shell: true, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
+    // shell: true only so Windows finds npx.cmd and similar; jobAllowed() rejected every shell operator.
+    const res = spawnSync(job.command.trim(), { cwd: resolve(ROOT, job.cwd || "."), shell: true, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
     const ended = new Date();
     writeFileSync(join(JOBS_DIR, `${job.name}.log`), `${res.stdout ?? ""}\n${res.stderr ?? ""}`);
     const result = { name: job.name, command: job.command, cwd: job.cwd || ".", exitCode: res.status, error: res.error ? String(res.error) : undefined, started: started.toISOString(), ended: ended.toISOString(), minutes: Math.round((ended - started) / 60000) };
@@ -457,12 +489,17 @@ function envCheck() {
   return { ok: true, note: lines.join("; ") || "no keys" };
 }
 
-// Files (tracked and untracked, not ignored) and commit messages that contain a .env value of 6+ characters.
+// Files (tracked and untracked, not ignored) and commit messages that contain a secret value of .env:
+// the value of a key named like a secret (PASSWORD, SECRET, TOKEN, KEY, CREDENTIAL, PRIVATE), 8+
+// characters, and not a test value already written in secrets.env.example. Ordinary settings
+// (a user name, a host, a port) appear in compose files by design and are not looked for.
 function leakCheck() {
   if (!existsSync(join(ROOT, ".env"))) return { ok: false, error: ".env does not exist in the project folder" };
-  const values = read(join(ROOT, ".env")).split(/\r?\n/).map((l) => l.match(/^\s*[A-Za-z_][A-Za-z0-9_]*\s*=(.*)$/)).filter(Boolean)
-    .map((m) => m[1].replace(/\s+#.*$/, "").trim().replace(/^["']|["']$/g, "").trim()).filter((v) => v.length >= 6);
-  if (!values.length) return { ok: true, note: "no .env value of 6 or more characters to look for" };
+  const example = read(join(ROOT, "01_input/01_project/00_setup/secrets.env.example"));
+  const pairs = read(join(ROOT, ".env")).split(/\r?\n/).map((l) => l.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=(.*)$/)).filter(Boolean)
+    .map((m) => [m[1], m[2].replace(/\s+#.*$/, "").trim().replace(/^["']|["']$/g, "").trim()]);
+  const values = pairs.filter(([k, v]) => /PASSWORD|PASSWD|SECRET|TOKEN|KEY|CREDENTIAL|PRIVATE/i.test(k) && v.length >= 8 && !example.includes(v)).map(([, v]) => v);
+  if (!values.length) return { ok: true, note: "no secret .env value (8 or more characters) to look for" };
   const git = (args) => spawnSync("git", args, { cwd: ROOT, encoding: "utf8", maxBuffer: 512 * 1024 * 1024 }).stdout || "";
   const hits = git(["ls-files", "-co", "--exclude-standard", "-z"]).split("\0").filter((f) => f && f !== ".env").filter((f) => {
     const p = join(ROOT, f);
@@ -535,7 +572,7 @@ function main() {
 
   const before = progress();
   const jobsWaiting = /runner jobs/i.test(before.waiting);
-  if (!override && (/complete/i.test(before.result) || /^(none|-|)$/i.test(before.command))) report("complete");
+  if (!override && isComplete(before)) report("complete");
   if (!override && !jobsWaiting && before.waiting && !/^nothing$/i.test(before.waiting)) {
     report("waiting", { decisions: decisionsWaiting(before.waiting) });
   }
@@ -550,8 +587,18 @@ function main() {
   // Deterministic steps around the sessions: long jobs first, and the hidden suite never stays in the project.
   let jobsNote;
   if (jobsWaiting) { const r = runJobs(); if (!r.ok) report("failed", { step: "runner jobs", error: r.error }); jobsNote = r.note; }
-  if (skill === "/sdd-verify") { const r = hiddenEval(); if (!r.ok) report("failed", { step: "--hidden-eval", error: r.error }); }
+  if (skill === "/sdd-verify") {
+    // A verify restarted after runner jobs or a pause sees the same commit: evaluate it only once.
+    const head = spawnSync("git", ["rev-parse", "--short", "HEAD"], { cwd: ROOT, encoding: "utf8" }).stdout.trim();
+    const lastCommit = ([...read(HIDDEN_RESULTS).matchAll(/^- Commit: (\S+)/gm)].pop() || [])[1];
+    if (!head || lastCommit !== head) { const r = hiddenEval(); if (!r.ok) report("failed", { step: "--hidden-eval", error: r.error }); }
+  }
   if (skill === "/sdd-release") restoreHidden();
+  // Outside the two sessions that write or commit it, the hidden suite never stays in the project
+  // (after a release it is back on disk; a change run starts with it there).
+  if (!["/sdd-acceptance-tests", "/sdd-release"].includes(skill) && existsSync(HIDDEN_DIR) && existsSync(HIDDEN_MANIFEST)) {
+    const v = vault(); if (!v.ok) report("failed", { step: "--vault", error: v.error });
+  }
   // A change request adds hidden cases to the existing suite, so it needs the suite back first.
   if (skill === "/sdd-acceptance-tests" && !existsSync(HIDDEN_DIR) && existsSync(runConfig().vault)) restoreHidden();
 
@@ -564,7 +611,7 @@ function main() {
     const after = progress();
     if (outcome.ok && after.lastBlock !== before.lastBlock) {
       if (skill === "/sdd-acceptance-tests") { const v = vault(); if (!v.ok) report("failed", { step: "--vault", error: v.error, log: outcome.logFile }); }
-      if (/complete/i.test(after.result)) report("complete", { log: outcome.logFile });
+      if (isComplete(after)) report("complete", { log: outcome.logFile });
       if (/runner jobs/i.test(after.waiting)) report("done", { log: outcome.logFile, note: "runner jobs requested; the next --once runs them, then the next session" });
       if (after.waiting && !/^nothing$/i.test(after.waiting)) report("waiting", { log: outcome.logFile, decisions: decisionsWaiting(after.waiting) });
       if (/failed/i.test(after.result)) report("failed", { log: outcome.logFile, attempt });

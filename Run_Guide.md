@@ -71,10 +71,10 @@ Use this when you want to start every session yourself. Steps 1–3 stay the sam
 2. Open a **new** Claude Code session in the project folder, with the model and effort of that skill's row in `run-config.md`, and type the command. One session per command; close it when it ends.
 3. It ends with its report block. Do the "Developer, do this" steps. If it waits for decisions, start the same command again with your answers, for example `/sdd-clarify D-03: 2, D-04: 1`.
 4. Runner steps you now do yourself, in a terminal in the project folder:
-   - right after `/sdd-acceptance-tests`: `node system/run.mjs --vault` (moves the hidden tests out of the project);
+   - right after `/sdd-acceptance-tests`, and before any other session while `02_output/hidden-tests/` exists (for example after a release, at the start of a change): `node system/run.mjs --vault` (moves the hidden tests out of the project);
    - before every `/sdd-verify`: `node system/run.mjs --hidden-eval`;
    - when "Waiting for" says `runner jobs`: `node system/run.mjs --jobs`, then start the same command again;
-   - before `/sdd-release`: `node system/run.mjs --restore-hidden`;
+   - before `/sdd-release`, and before `/sdd-acceptance-tests` in a change: `node system/run.mjs --restore-hidden` (otherwise the change's hidden cases replace the old ones);
    - at the end: `node system/run.mjs --summary`.
 5. A session whose earlier phase gate is missing in "Gates" must not start: run the session that passes it first.
 

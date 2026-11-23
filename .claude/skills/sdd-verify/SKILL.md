@@ -16,7 +16,7 @@ disable-model-invocation: true
 
 ## Procedure
 
-1. If this is run 4 or later, or a finding has stayed open for three runs: record an approval decision with options (accept as a known limitation; show the human the failing hidden test; change the requirement) and end the session. *Why:* the loop must end with a person, not continue forever.
+1. Count the runs of this release only: the `## Run n` sections after the last `## Change CR-nn` heading of `docs/06_verification-report.md` (all of them when there is none); a change starts a new count with `## Change CR-nn` before its first run section. If this is run 4 or later of the release, or a finding has stayed open for three runs: record an approval decision with options (accept as a known limitation; show the human the failing hidden test; change the requirement) and end the session. *Why:* the loop must end with a person, not continue forever.
 2. Recompute every hash of the input, acceptance and hidden manifests. A mismatch is Critical.
 3. Run the full suite and every check command (ES-05). Read the latest hidden evaluation: if its commit is not `HEAD`, stop and ask for `node system/run.mjs --hidden-eval` (automatic with `/sdd-run`). Each failure is a High finding "`R-nnn-nn` fails a held-out case (category)". Re-measure coverage and mutation only for a component changed since phase 5, once (a full mutation run is a runner job).
 4. Runtime: start every component in its target configuration with the seed data; exercise the core flows; record what was run and seen.

@@ -1,10 +1,10 @@
-# Base entries of the template; /plan adds the stack's build output and dependencies (ES-03).
+# Base entries of the template; /sdd-plan adds the stack's build output and dependencies (ES-03).
 
 # Secrets: only secrets.env.example is committed
 .env
 .env.*
 
-# The hidden suite stays out of git until /release commits it
+# The hidden suite stays out of git until /sdd-release commits it (/sdd-change puts this line back)
 02_output/hidden-tests/
 
 # Local data that may hold personal data or keys

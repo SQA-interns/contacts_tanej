@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 - Id: R, phase 4, once per increment. Frame: criticise. You did not write this code; read it as a reviewer would.
 - Reads: the increment's stories; the specification sections they cite; `docs/wireframes/README.md` and the wireframe images of its screens; `git diff` and `git log` of the increment; `general/engineering-standards.md`; `general/security/security-baseline.md`; `general/quality/done-increment.md`; `general/quality/severity-scale.md`.
-- Writes: `docs/04_review-<INC>.md`, `docs/00_progress.md`.
+- Writes: `docs/04_review-<INC>.md`, `docs/00_progress.md`, `out/logs/` (screenshots, test output).
 - Must not: change code or tests.
 - Exit: every finding has a severity and a story; with none Critical or High open, the increment meets `DoD-I`. The review is complete only after step 3 ran in full: the application started, every acceptance and e2e browser test of the increment's stories run, every new screen captured. Whatever you could not do is in the report's "Problems", and the review is not complete. *Why:* a review that only reads the diff missed in v001 what the INC-1 review found by running the app.
 
@@ -27,4 +27,4 @@ disable-model-invocation: true
    - every value without a source is in the decision log.
 3. Start the application with the seed data (`node out/scripts/dev.mjs up`), run every acceptance and e2e browser test of the increment's stories (one worker), exercise the increment's flows, and take screenshots of its screens at the three widths (UI-22); compare structure, layout per width and wording with the approved wireframes.
 4. Write `docs/04_review-<INC>.md`: findings `F-nn` with severity, story, evidence (file and line, or screenshot) and what is wrong, and an empty "Resolution" column. No fixes.
-5. Commit (`docs:`). Hand over: with any finding, next is `/sdd-fix <INC>`, which fixes or accepts them; with none, the first story of the next increment, or `/sdd-design` after the last increment.
+5. Commit (`docs:`). Hand over: with any finding, next is `/sdd-fix <INC>`, which fixes or accepts them; with none, the first story of the next increment, or `/sdd-design` after the last increment (with no user interface: add the phase 4 row to "Gates", next `/sdd-quality-gate`).
