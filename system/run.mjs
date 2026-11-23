@@ -12,6 +12,7 @@
 //   node system/run.mjs --vault               move the hidden suite out of the project
 //   node system/run.mjs --hidden-eval         run the hidden suite on a copy, write results
 //   node system/run.mjs --restore-hidden      copy the hidden suite back (before /release)
+//   node system/run.mjs --jobs                run the requested long jobs only (manual runs)
 //   node system/run.mjs --env-check           .env keys: filled, empty or missing (never a value)
 //   node system/run.mjs --leak-check          files and commit messages holding a .env value (names only)
 //   node system/run.mjs --once --force        run even though an earlier phase gate is missing
@@ -528,7 +529,7 @@ function main() {
   const ci = argv.indexOf("--command");
   const override = ci >= 0 ? argv[ci + 1] : "";
 
-  for (const [flag, fn] of [["--vault", vault], ["--hidden-eval", hiddenEval], ["--restore-hidden", restoreHidden], ["--summary", summary], ["--lint-template", lintTemplate], ["--env-check", envCheck], ["--leak-check", leakCheck]]) {
+  for (const [flag, fn] of [["--vault", vault], ["--hidden-eval", hiddenEval], ["--restore-hidden", restoreHidden], ["--summary", summary], ["--lint-template", lintTemplate], ["--env-check", envCheck], ["--leak-check", leakCheck], ["--jobs", runJobs]]) {
     if (has(flag)) { const r = fn(); report(r.ok ? "done" : "failed", { step: flag, note: r.note, error: r.error }); }
   }
 

@@ -14,7 +14,7 @@ A reusable structure that takes a project from the customer's requirements to a 
 | `01_input/00_general/` | agent | rules read only by the sessions that list them: `rules/`, `testing/`, `quality/`, `security/`, `design/`, standards |
 | `01_input/01_project/` | agent reads, human reviews | the project: intake notes, setup, requirements, design |
 | `02_output/` | agent writes, human reads | documents, code, logs; `docs/wireframes/` for the approved wireframes |
-| `system/run.mjs` | system | the runner: starts sessions, keeps and runs the hidden tests, `--summary`, `--lint-template`; nobody reads it during a run |
+| `system/run.mjs` | system | the runner: starts sessions in phase order (it refuses a session whose earlier gate is missing), keeps and runs the hidden tests, runs long jobs, `--summary`, `--env-check`, `--leak-check`, `--lint-template`; nobody reads it during a run |
 
 Every Markdown file states its audience in the line `> For: …`. A session reads `AGENTS.md`, `docs/00_progress.md`, its skill and only the files its skill lists. *Why:* less reading means less cost, a smaller context and fewer chances to follow the wrong rule.
 
@@ -28,7 +28,7 @@ Every Markdown file states its audience in the line `> For: …`. A session read
 | 1 Clarify | S2 | `/clarify` | every story meets the Definition of Ready |
 | 2 Plan | S3, W | `/plan`, `/wireframes` | specification, contracts, ADRs, skeletons, CI, tasks; wireframes approved |
 | 3 Acceptance tests | S4 | `/acceptance-tests` | visible and hidden tests frozen |
-| 4 Implement | S5, R, D | `/implement US-nnn` per story, `/review INC-n` per increment, then `/design` | every story done; the grey app matches the wireframes (milestone); final design applied |
+| 4 Implement | S5, R, S8, D | `/implement US-nnn` per story, `/review INC-n` per increment and `/fix INC-n` for its findings, then `/design` | every story done; the grey app matches the wireframes (milestone); final design applied |
 | 5 Quality gate | S6 | `/quality-gate` | coverage and mutation thresholds met |
 | 6 Verify | S7, S8 | `/verify`, `/fix` (at most three rounds) | release Definition of Done holds |
 | 7 Release | S9 | `/release` | READMEs work, release notes and retrospective written |

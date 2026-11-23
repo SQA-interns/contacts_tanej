@@ -43,14 +43,18 @@ Open a **new** session in the project folder and type `/run`. Keep this session 
 
 ### 4. During the run
 
-The agent works through the sessions on its own and reports each one in one line. You only act when it asks:
+The agent works through the sessions on its own and reports each one in one line, plus the lines of the session's report that need you: new pages and endpoints, problems, **"Developer, do this"** steps (do them, then reply "done") and files to review. You only act when it asks:
 
+- **Trying the application**: from `/plan` on, the development stack keeps running after every `/implement`. URLs, roles and the development accounts to sign in with are in `02_output/docs/routes.md`; `node 02_output/scripts/dev.mjs up | down | status` starts, stops or checks it.
 - **Decisions**: numbered options with a suggested one. Reply with the numbers, for example `D-03: 2, D-04: 1`, or "ok" for the suggestions. You are asked only about business consequences, missing tools or versions, and approvals.
 - **Missing tools**: install what it names, then reply "done".
 - **Wireframes**: grey drawings of every screen for mobile, tablet and desktop in `02_output/docs/wireframes/` (the `*_mobile.png`, `*_tablet.png`, `*_desktop.png` files). Show them to the customer if you can, then reply `1` (approved with the customer), `2` (approved by you only) or `3` with the changes per screen, for example `3: WF-03 move filters to the left`.
 - **After the first version (MVP)**: whether the customer has seen the grey application, and their remarks.
 - **Design** (only with design round `ask`): when every story is built, the application looks like the wireframes, complete but grey. Open a **second** session in the project folder, type `/design`, and answer its questions (colours, typeface, mobile, tablet and desktop layout, motion); after each change it shows before and after and asks if it is right. When it is finished, reply "done" in the `/run` session.
 - **A session failed**: it shows the error. Reply "again" to retry or "stop".
+- **Usage limit** ("paused"): the session stopped at your plan's limit; it tells you when the limit resets. Reply "continue" after that time.
+- **Refused**: a session would skip a phase whose gate has not passed; the runner does not start it. The conductor names the missing gate and the session that passes it.
+- **Long jobs**: full mutation runs take hours and run in the runner without a time limit; the conductor reports when they start and end. Keep the computer awake and do not start another heavy job meanwhile.
 - **Verification rounds**: after three rounds of fixes it asks you to accept, change or inspect the remaining problem.
 
 Answer within about an hour. If you must stop, close the session; nothing is lost.
@@ -58,6 +62,23 @@ Answer within about an hour. If you must stop, close the session; nothing is los
 ### 5. Continue after a stop
 
 Open a new session in the project folder and type `/run resume`. It continues exactly where the run stopped.
+
+### 5a. Running the sessions by hand (without `/run`)
+
+Use this when you want to start every session yourself. Steps 1–3 stay the same, except that you do the review and settings of step 3 yourself: generate the inputs with `/to-spec`, answer `01_input/01_project/00_intake/review-checklist.md` by editing the project files, fill `run-config.md`, create `.env` (check it with `node system/run.mjs --env-check`) and make the initial commit. Then repeat:
+
+1. `node system/run.mjs --status` shows the next command (or `02_output/docs/00_progress.md`, "Next").
+2. Open a **new** Claude Code session in the project folder, with the model and effort of that skill's row in `run-config.md`, and type the command. One session per command; close it when it ends.
+3. It ends with its report block. Do the "Developer, do this" steps. If it waits for decisions, start the same command again with your answers, for example `/clarify D-03: 2, D-04: 1`.
+4. Runner steps you now do yourself, in a terminal in the project folder:
+   - right after `/acceptance-tests`: `node system/run.mjs --vault` (moves the hidden tests out of the project);
+   - before every `/verify`: `node system/run.mjs --hidden-eval`;
+   - when "Waiting for" says `runner jobs`: `node system/run.mjs --jobs`, then start the same command again;
+   - before `/release`: `node system/run.mjs --restore-hidden`;
+   - at the end: `node system/run.mjs --summary`.
+5. A session whose earlier phase gate is missing in "Gates" must not start: run the session that passes it first.
+
+Without the runner there are no session logs, so the summary has no time, tokens or cost.
 
 ### 6. After the run
 
