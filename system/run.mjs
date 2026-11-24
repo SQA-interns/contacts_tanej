@@ -592,7 +592,7 @@ function lintTemplate() {
   const all = [];
   (function walk(dir) {
     for (const name of readdirSync(dir)) {
-      const p = join(dir, name), rel = relative(ROOT, p);
+      const p = join(dir, name), rel = relative(ROOT, p).replace(/\\/g, "/"); // Windows paths use backslashes
       if (skip(rel)) continue;
       if (statSync(p).isDirectory()) walk(p); else all.push(rel);
     }
