@@ -853,3 +853,13 @@
 - Notes: System font stack kept (no new dependency). `--text-2xl` 24 -> 28 px (page titles), `table` text 16 -> 15 px; both only in `frontend/src/styles/index.css`. The recommended 13 px tag chips were not done: chips and form labels share the `text-sm` token. Screenshots `out/logs/screens/design-2/after-typography/`: no Critical or Serious axe violation, no overflow (the Members-on-mobile overflow of D-73 is gone, most likely through the smaller table text).
 - Human response: yes (28 px titles, 15 px table text), "Is it right?": yes
 - Overrides: UI-06 (scale 12/14/16/20/24/32: 28 px titles and 15 px table text)
+
+## D-75: Design: density, spacing, borders and shadows
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 4.
+- Notes: Radii (8/12 px) and 1 px borders kept (softer borders would lower the contrast of input outlines). `--card-shadow` now `0 1px 3px rgb(15 23 42 / 0.08)` (still one level); header padding `py-3` -> `py-4`, page body `py-6` -> `py-8` in `AppShell.tsx` (class names only). Screenshots `out/logs/screens/design-2/after-density/`: no Critical or Serious axe violation, no overflow.
+- Human response: yes, "Is it right?": yes
+- Overrides: UI-07 (shadow tint and strength; the 4 px grid and radii are unchanged)

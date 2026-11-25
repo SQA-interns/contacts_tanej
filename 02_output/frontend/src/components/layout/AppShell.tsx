@@ -27,7 +27,7 @@ export function AppShell() {
   return (
     <div className="flex min-h-screen flex-col bg-background text-text">
       <header className="border-b border-border bg-surface">
-        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6">
+        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-4 md:px-6">
           {/* The product name as text, no logo (interview Q-34); the empty logo box looked like a checkbox. */}
           <Link to="/" className="flex min-h-11 items-center gap-2 text-xl font-semibold">
             {t('app.name')}
@@ -76,7 +76,7 @@ export function AppShell() {
           </div>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-[1200px] flex-1 px-4 py-6 md:px-6">
+      <main className="mx-auto w-full max-w-[1200px] flex-1 px-4 py-8 md:px-6">
         <Outlet />
       </main>
       <footer className="border-t border-border bg-surface">

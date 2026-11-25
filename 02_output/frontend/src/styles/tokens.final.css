@@ -14,7 +14,7 @@
   --warning: #b45309;
   --danger: #b91c1c;
   --focus-ring: #0f766e;
-  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+  --card-shadow: 0 1px 3px rgb(15 23 42 / 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
