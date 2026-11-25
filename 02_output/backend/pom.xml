@@ -139,6 +139,10 @@
         <configuration>
           <failBuildOnCVSS>7.0</failBuildOnCVSS>
           <outputDirectory>${project.basedir}/../logs/dependency-check</outputDirectory>
+          <!-- the findings accepted in the run (D-56 c, D-70), each by CVE and exact version -->
+          <suppressionFile>${project.basedir}/dependency-check-suppressions.xml</suppressionFile>
+          <!-- NVD API key from the environment (CI secret NVD_API_KEY); without it the download is very slow -->
+          <nvdApiKeyEnvironmentVariable>NVD_API_KEY</nvdApiKeyEnvironmentVariable>
         </configuration>
       </plugin>
     </plugins>
