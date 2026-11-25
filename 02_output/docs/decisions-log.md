@@ -843,3 +843,13 @@
 - Notes: Primary accent teal-700 `#0f766e` (white text 5.5:1), dark mode teal-400 `#2dd4bf`; light surface `#f6f8f8`; focus ring follows the accent. Only `tokens.final.css` changed. Before/after at the three widths, light and dark: `out/logs/screens/design-2/before`, `after` with `axe-summary.json`: no Critical or Serious violation. Members on mobile overflows horizontally in before and after alike (not caused by colour; structure, not design).
 - Human response: C (teal), "Is it right?": yes
 - Overrides: UI-04 (default accent indigo-600 replaced by teal-700; the customer named no colour)
+
+## D-74: Design: typography
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 3.
+- Notes: System font stack kept (no new dependency). `--text-2xl` 24 -> 28 px (page titles), `table` text 16 -> 15 px; both only in `frontend/src/styles/index.css`. The recommended 13 px tag chips were not done: chips and form labels share the `text-sm` token. Screenshots `out/logs/screens/design-2/after-typography/`: no Critical or Serious axe violation, no overflow (the Members-on-mobile overflow of D-73 is gone, most likely through the smaller table text).
+- Human response: yes (28 px titles, 15 px table text), "Is it right?": yes
+- Overrides: UI-06 (scale 12/14/16/20/24/32: 28 px titles and 15 px table text)

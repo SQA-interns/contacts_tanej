@@ -23,7 +23,7 @@
   --text-sm: 14px;
   --text-base: 16px;
   --text-xl: 20px;
-  --text-2xl: 24px;
+  --text-2xl: 28px; /* D-74: page titles a step larger than the 24 px baseline */
   --text-3xl: 32px;
 
   /* UI-07: 8 px controls, 12 px cards, one subtle shadow level */
@@ -41,6 +41,10 @@
     line-height: 1.5;
     background: var(--background);
     color: var(--text);
+  }
+  /* D-74: table text 15 px for easier scanning of long lists */
+  table {
+    font-size: 15px;
   }
   /* UI-20: a visible focus ring on every interactive element */
   :focus-visible {
