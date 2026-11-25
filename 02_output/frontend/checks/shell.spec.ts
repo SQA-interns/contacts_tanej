@@ -31,6 +31,24 @@ for (const screen of SCREENS) {
       );
       expect(overflow).toBe(false);
 
+      // The D-82 fades (150-200 ms) make text half transparent while they run; scan the settled screen.
+      await page.evaluate(
+        () =>
+          new Promise<void>((resolve) => {
+            // Resolve after 300 ms without a running fade; spinners (endless) do not count.
+            let quietSince = performance.now();
+            const tick = () => {
+              const now = performance.now();
+              const fading = document
+                .getAnimations()
+                .some((a) => a.playState === 'running' && a.effect?.getComputedTiming().endTime !== Infinity);
+              if (fading) quietSince = now;
+              if (now - quietSince >= 300) resolve();
+              else requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          }),
+      );
       const result = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
         .analyze();

@@ -12,6 +12,25 @@ const LANGUAGES = ['sl', 'en'] as const;
 const SCHEMES = ['light', 'dark'] as const;
 
 async function violations(page: Page): Promise<string[]> {
+  // The D-82 fades (150-200 ms) make text half transparent while they run; axe would measure that
+  // contrast. Scan the settled screen (post-run: CI runners are slow enough to hit the fade).
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        // Resolve after 300 ms without a running fade; spinners (endless) do not count.
+        let quietSince = performance.now();
+        const tick = () => {
+          const now = performance.now();
+          const fading = document
+            .getAnimations()
+            .some((a) => a.playState === 'running' && a.effect?.getComputedTiming().endTime !== Infinity);
+          if (fading) quietSince = now;
+          if (now - quietSince >= 300) resolve();
+          else requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }),
+  );
   const result = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();
@@ -29,6 +48,7 @@ for (const language of LANGUAGES) {
         await page.evaluate((l) => localStorage.setItem('language', l), language);
         await page.goto(screen.path);
         await page.getByRole('main').waitFor();
+        await page.getByRole('heading', { level: 1 }).first().waitFor();
         found.push(...(await violations(page)).map((v) => `${screen.name}: ${v}`));
       }
       await page.evaluate(() => localStorage.setItem('language', 'en'));
