@@ -11,8 +11,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 /** AR-12, NFR-12: the API refuses to start when a required variable is missing. */
 class RequiredConfigurationTest {
 
+  // DB_URL, or its parts DB_HOST, DB_PORT, DB_NAME (hosted deployments, post-run): with neither,
+  // the start fails and the error names the first missing part.
   @Test
-  void refusesToStartWithoutDatabaseUrl() {
+  void refusesToStartWithoutDatabaseUrlOrItsParts() {
     assertThatThrownBy(
             () ->
                 new SpringApplicationBuilder(ContactGroupsApplication.class)
@@ -24,7 +26,7 @@ class RequiredConfigurationTest {
                         "FIREBASE_PROJECT_ID=demo-contacts",
                         "APP_ALLOWED_ORIGIN=http://localhost:5173")
                     .run())
-        .hasStackTraceContaining("DB_URL");
+        .hasStackTraceContaining("DB_HOST");
   }
 
   @Test
