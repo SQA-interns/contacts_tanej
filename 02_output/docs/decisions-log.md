@@ -873,3 +873,13 @@
 - Notes: Below 768 px the stacked cards are tighter (card padding `px-3 py-2`, cell `py-0.5`, `text-sm`, label width `min-w-20`), and empty cells are hidden on the card with `empty:hidden` and `has-[ul:empty]:hidden` (no content or `data-label` changed; the desktop table is unchanged). Files: `ContactTable.tsx` (class names), `components/ui/stacked-table.ts` (same tightening for Groups, Trash and Members cards). Contact list at 375 px: 4403 -> 3095 px. Screenshots `out/logs/screens/design-2/after-mobile/`: no Critical or Serious axe violation, no overflow. Sticky Add-contact bar not chosen.
 - Human response: compact cards (recommended); "Is it right?": yes
 - Overrides: UI-23 (one column, stacked cards stay; density and hiding of empty fields added)
+
+## D-77: Design: tablet
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 6.
+- Notes: The tablet layout (768 px: visible navigation, table with the key columns, no overflow) already meets UI-24 where content allows. A list-and-detail pane would change structure and is not design. No code change.
+- Human response: keep as it is
+- Overrides: none
