@@ -19,6 +19,12 @@ services:
     branch: tanej/sdd-workflow/v001-deploy
     dockerfilePath: ./02_output/backend/Dockerfile
     dockerContext: ./02_output/backend
+    # Deploy on every push to the branch, but only when the backend changed (a frontend-only push
+    # does not restart the sleeping-prone backend).
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - 02_output/backend/**
     healthCheckPath: /health
     envVars:
       - key: PORT
@@ -48,6 +54,10 @@ services:
     branch: tanej/sdd-workflow/v001-deploy
     dockerfilePath: ./02_output/frontend/Dockerfile
     dockerContext: ./02_output/frontend
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - 02_output/frontend/**
     healthCheckPath: /
     envVars:
       - key: PORT
