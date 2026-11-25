@@ -27,7 +27,15 @@ interface ContactTableProps {
   sort: Sort | undefined;
   onSort: (field: SortField) => void;
   /** Tick boxes of the export selection; absent for a Viewer (R-011-10). */
-  ticks?: { isTicked: (id: string) => boolean; onTick: (id: string, checked: boolean) => void };
+  ticks?: {
+    isTicked: (id: string) => boolean;
+    onTick: (id: string, checked: boolean) => void;
+    /**
+     * Post-run: while another page loads, the rows still shown are the old page; they get no tick box,
+     * so nobody ticks (or seems to have ticked) a row of the page they just left.
+     */
+    loading?: boolean;
+  };
 }
 
 function ariaSort(sort: Sort | undefined, field: string) {
@@ -124,13 +132,17 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
           >
             {ticks && (
               <td className="px-3 py-2">
-                <input
-                  type="checkbox"
-                  className="size-5"
-                  aria-label={t('export.selectContact')}
-                  checked={ticks.isTicked(row.id)}
-                  onChange={(event) => ticks.onTick(row.id, event.target.checked)}
-                />
+                {ticks.loading ? (
+                  <span className="block size-5" />
+                ) : (
+                  <input
+                    type="checkbox"
+                    className="size-5"
+                    aria-label={t('export.selectContact')}
+                    checked={ticks.isTicked(row.id)}
+                    onChange={(event) => ticks.onTick(row.id, event.target.checked)}
+                  />
+                )}
               </td>
             )}
             {COLUMNS.map(({ field, hideTablet }) => (
