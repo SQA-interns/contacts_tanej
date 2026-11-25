@@ -70,6 +70,7 @@ export function createApiClient(
       for (;;) {
         const response = await attempt(method, path, body);
         if (wake && backendAsleep(response, method) && Date.now() < deadline) {
+          await response.text().catch(() => undefined); // close the refused response before the next try
           if (!waiting) wake.onWaiting(1);
           waiting = true;
           await new Promise((resolve) => setTimeout(resolve, wake.pauseMs ?? 3000));

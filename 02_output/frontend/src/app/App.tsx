@@ -21,7 +21,10 @@ function createServices(): AppServices {
   // Post-run: the free hosting plan stops the backend after 15 minutes without traffic, and its start
   // took from 1 to 5 minutes. One health request as soon as the page opens starts the wake-up while the
   // person signs in; the API client then waits up to 5 minutes instead of showing an error.
-  void fetch(`${config.apiBaseUrl}/health`).catch(() => undefined);
+  // The body is read: Chromium counts a response whose body is never read as a request still open.
+  void fetch(`${config.apiBaseUrl}/health`)
+    .then((response) => response.text())
+    .catch(() => undefined);
   const api = createApiClient(config.apiBaseUrl, auth.token, fetch, {
     maxWaitMs: 300_000,
     onWaiting: wakeTracker.change,
