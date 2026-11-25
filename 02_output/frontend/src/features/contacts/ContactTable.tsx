@@ -68,8 +68,15 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
     if (field === 'country') return text && countryName(text, language);
     if (field !== 'lastName') return text;
     const label = text || row.firstName || row.email || row.company || '';
+    // D-80 (post-run): below 768 px the link is the card title with the full name. The first name is
+    // shown before the last name by CSS, so the markup and the desktop table stay as they are.
+    const first = text && row.firstName ? `${row.firstName} ` : undefined;
     return (
-      <Link to={`/groups/${groupId}/contacts/${row.id}`} className="underline">
+      <Link
+        to={`/groups/${groupId}/contacts/${row.id}`}
+        data-first={first}
+        className={cn('underline', first && 'max-md:before:content-[attr(data-first)]')}
+      >
         {label}
       </Link>
     );
@@ -135,6 +142,9 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
                   field === 'phone' && 'whitespace-nowrap',
                   hideTablet && 'max-lg:hidden',
                   'max-md:flex max-md:gap-2 max-md:px-0 max-md:py-0.5 max-md:text-sm max-md:empty:hidden max-md:has-[ul:empty]:hidden max-md:before:min-w-20 max-md:before:font-semibold max-md:before:content-[attr(data-label)]',
+                  field === 'lastName' &&
+                    'max-md:pb-1 max-md:text-base max-md:font-semibold max-md:before:content-none',
+                  field === 'firstName' && 'max-md:hidden',
                 )}
               >
                 {value(row, field)}

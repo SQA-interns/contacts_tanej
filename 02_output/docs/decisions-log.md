@@ -911,7 +911,7 @@
 - Type: blocking (a change to structure; wireframe WF-08 mobile)
 - Trigger: the developer's wish in `/design` topic 8: on the contact cards below 768 px, show the full name (first and last) as the card title, linked to the contact, instead of separate "Last name" and "First name" rows. This moves and merges content (markup, and the frozen tests find the link by last name), so it is not design (`/design` step 8).
 - Options: (1) Changed story or wireframe for the mobile card (a new `/wireframes` and `/implement` round, with a test decision for the frozen tests that expect the last-name link). (2) Keep the current cards. (3) Presentation-only variant: keep both rows and the link on the last name, but show the first name above it in the same row (no markup change); the developer says if that is enough.
-- Human response: pending
+- Human response (post-run): implement it. Done presentation-only (close to option 3, no markup change): below 768 px the last-name link is the card title in bold and shows the first name before the last name by CSS (`data-first` and `::before`, part of the accessible name), the "Last name" label and the First name row are hidden. The desktop table and the frozen tests are unchanged. `ContactTable.tsx`.
 - Overrides: none
 
 ## D-81: Design: icons and logo

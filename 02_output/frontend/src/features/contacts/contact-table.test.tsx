@@ -112,7 +112,17 @@ describe('ContactTable headers', () => {
       true,
       false,
     ]);
-    expect(cells.every((c) => c.className.includes('max-md:flex'))).toBe(true);
+    // Every cell is a flex line on phones, except the first name, which D-80 hides there (own test below).
+    expect(cells.map((c) => c.className.includes('max-md:flex'))).toEqual([
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+    ]);
     expect(cells.every((c) => c.className.includes('px-3'))).toBe(true);
     expect(heads.every((h) => h.className.includes('px-3 py-2'))).toBe(true);
   });
@@ -188,6 +198,21 @@ describe('ContactTable rows', () => {
     ]);
     expect(screen.getAllByRole('row')).toHaveLength(3);
     expect(screen.getAllByRole('link').map((l) => l.textContent)).toEqual(['A', 'B']);
+  });
+
+  it('D-80: on phones the link is the card title with the full name, the first-name row is hidden', () => {
+    mount([full, { id: 'b', firstName: 'Bor', tags: [] }]);
+    const [both, onlyFirst] = screen.getAllByRole('link');
+    expect(both).toHaveTextContent('Novak');
+    expect(both).toHaveAttribute('data-first', 'Ana ');
+    expect(both).toHaveClass('max-md:before:content-[attr(data-first)]');
+    // Without a last name the link already shows the first name: no second copy before it.
+    expect(onlyFirst).toHaveTextContent('Bor');
+    expect(onlyFirst).not.toHaveAttribute('data-first');
+    const [lastCell, firstCell] = screen.getAllByRole('cell');
+    expect(lastCell).toHaveClass('max-md:before:content-none');
+    expect(lastCell).not.toHaveClass('max-md:before:content-[attr(data-label)]');
+    expect(firstCell).toHaveClass('max-md:hidden');
   });
 });
 
