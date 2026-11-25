@@ -26,7 +26,16 @@ jobs:
         run: ./mvnw -B -ntp spotless:check pmd:check pmd:cpd-check
       - name: Build, test and integration test (Testcontainers needs Docker, present on the runner)
         run: ./mvnw -B -ntp verify
-      - name: Dependency scan (SB-08, SR-19)
+      # The NVD database is large: keep it between runs, refreshed at least once a week.
+      - name: Week number for the NVD cache
+        id: week
+        run: echo "week=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4.2.3
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check-data
+          key: nvd-${{ steps.week.outputs.week }}
+          restore-keys: nvd-
+      - name: Dependency scan (SB-08, SR-19; accepted findings in dependency-check-suppressions.xml)
         run: ./mvnw -B -ntp org.owasp:dependency-check-maven:12.1.6:check
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
@@ -70,10 +79,24 @@ jobs:
         run: npm run scan
       - name: Licences, forbidden imports, SCM search (NFR-14, SR-19)
         run: node ../scripts/licence-check.mjs
+      # The acceptance and end-to-end tests need the whole local stack (database, backend, Firebase
+      # Authentication Emulator, web app) with the seed data, as in the README quick start.
+      - name: Start the local stack with the emulator and load the seed data
+        working-directory: 02_output
+        run: |
+          printf 'DB_PASSWORD=ci-only\nFIREBASE_WEB_API_KEY=fake-api-key\n' > ../.env
+          docker compose --env-file ../.env up --build -d --wait
+          bash scripts/seed.sh
       - name: Browser tests (NFR-07, NFR-08, NFR-09)
         run: |
           npx playwright install --with-deps chromium firefox webkit
           npm run test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:5173
+      - name: Stack logs on failure
+        if: failure()
+        working-directory: 02_output
+        run: docker compose --env-file ../.env logs --no-color --tail 200
       - uses: actions/upload-artifact@v4.6.2
         if: always()
         with:
