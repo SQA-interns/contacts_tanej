@@ -39,7 +39,10 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <Services value={services}>
         <ToastProvider>
-          <RouterProvider router={router} />
+          {/* Post-run: no React transitions for navigations. With them (the default), the old screen
+              stayed for a moment after a click on a slow machine, and text typed at once went into
+              its fields (CI: the "Forgot password" form was sent empty). */}
+          <RouterProvider router={router} useTransitions={false} />
           <WakeBanner />
         </ToastProvider>
       </Services>
