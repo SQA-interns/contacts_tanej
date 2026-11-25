@@ -1,0 +1,18 @@
+# CI only (post-run), used as a second file: docker compose -f docker-compose.yml -f docker-compose.ci.yml
+# The image builds keep their layers in the GitHub Actions cache. The backend's Maven dependencies are
+# then downloaded once and reused until pom.xml changes: Maven Central answers GitHub's shared runners
+# with 429 Too Many Requests when every run downloads them again. Needs a BuildKit builder with the
+# docker-container driver and the Actions runtime variables (both set up in ci.yml).
+services:
+  emulator:
+    build:
+      cache_from: ["type=gha,scope=emulator"]
+      cache_to: ["type=gha,scope=emulator,mode=max"]
+  backend:
+    build:
+      cache_from: ["type=gha,scope=backend"]
+      cache_to: ["type=gha,scope=backend,mode=max"]
+  frontend:
+    build:
+      cache_from: ["type=gha,scope=frontend"]
+      cache_to: ["type=gha,scope=frontend,mode=max"]

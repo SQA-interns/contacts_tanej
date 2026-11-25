@@ -81,11 +81,15 @@ jobs:
         run: node ../scripts/licence-check.mjs
       # The acceptance and end-to-end tests need the whole local stack (database, backend, Firebase
       # Authentication Emulator, web app) with the seed data, as in the README quick start.
+      # Post-run: a BuildKit builder that can keep image layers in the Actions cache, and the runtime
+      # variables it needs (docker-compose.ci.yml; Maven Central rate-limits shared runners).
+      - uses: docker/setup-buildx-action@v3.11.1
+      - uses: crazy-max/ghaction-github-runtime@v3.1.0
       - name: Start the local stack with the emulator and load the seed data
         working-directory: 02_output
         run: |
           printf 'DB_PASSWORD=ci-only\nFIREBASE_WEB_API_KEY=fake-api-key\n' > ../.env
-          docker compose --env-file ../.env up --build -d --wait
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml --env-file ../.env up --build -d --wait
           bash scripts/seed.sh
       - name: Browser tests (NFR-07, NFR-08, NFR-09)
         run: |
@@ -118,7 +122,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4.2.2
+      # Post-run: a BuildKit builder that can keep image layers in the Actions cache, and the runtime
+      # variables it needs (docker-compose.ci.yml; Maven Central rate-limits shared runners).
+      - uses: docker/setup-buildx-action@v3.11.1
+      - uses: crazy-max/ghaction-github-runtime@v3.1.0
       - name: Build the delivered images once (ADR-10)
         run: |
           printf 'DB_PASSWORD=ci-only\n' > /tmp/ci.env
-          docker compose -f 02_output/docker-compose.yml --project-directory 02_output --env-file /tmp/ci.env build
+          docker compose -f 02_output/docker-compose.yml -f 02_output/docker-compose.ci.yml --project-directory 02_output --env-file /tmp/ci.env build
