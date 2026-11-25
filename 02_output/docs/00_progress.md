@@ -5,7 +5,11 @@
 The handover between sessions. Every session reads it first and updates it last.
 
 ## Last session
-- Session: S9 release (run complete)
+- Session: D design round 2 (Design round: ask; with the developer)
+- Result: done
+- Gate: design exit met: all 11 topics decided or recorded (D-72 to D-84); final theme refined (teal accent, 28 px titles, compact mobile cards, icons, motion, component states); axe: no Critical or Serious violation and no overflow in 66 captures per phase (three widths, light and dark; `out/logs/screens/design-2/`). Full suite: prettier, eslint, tsc clean, jscpd 3.02 %; unit tests 376 of 377 (the one, `contact-page.test.tsx`, is the load timeout F-V07 and passes alone, 33 of 33); Chromium acceptance and e2e 123 of 123. Firefox, WebKit and backend tests not re-run (no backend change).
+- Notes for the next session: Two wishes are not design and wait for the developer: D-80 (full name as the mobile card title, changed wireframe WF-08) and D-83 (toast notifications, changed story; the frozen tests read inline messages by text). Next is `/quality-gate` as before; D-80 and D-83 need the developer to answer first, then and D-83 would go through a changed wireframe or story and `/implement`, if the developer wants them. Run vitest from PowerShell with an upper-case drive letter (`C:...`): from a lower-case `c:...` path every suite fails with "failed to find the current suite". Playwright runs reset the dev database; `scripts/seed.sh` reloads it (done). The compose frontend image was rebuilt with the new theme.
+- Previous session: S9 release (run complete)
 - Result: done (run complete)
 - Gate: phase 7 passed: READMEs (root and both components, with "Deploy") work from a clean clone (`npm ci`, `npm run build`, `npm run check`, both Compose files valid, production images build; log `out/logs/release-clean-clone.log`; the stack scripts passed earlier at the same code, `clean-host-test.log`); `release-notes.md` lists manual tests and pending decisions; retrospective written; hidden suite committed (`2768dd1`, 12 of 12 hashes match).
 - Notes for the next session: none; the run is complete. The human reads `docs/release-notes.md` ("Must be tested manually", "Decisions pending review") and `docs/07_retrospective.md`. Backend tests and the full compose start were not repeated in the clean clone (no code change since run 3). `certs/` is not in `.gitignore`: keep the TLS key out of Git.
@@ -47,8 +51,8 @@ The handover between sessions. Every session reads it first and updates it last.
 - Older per-story notes: see `git log -p -- 02_output/docs/00_progress.md`.
 
 ## Next
-- Command: none (run complete)
-- Waiting for: nothing
+- Command: /quality-gate
+- Waiting for: D-80, D-83 (optional: they change a wireframe and a story)
 
 ## Stories
 | Story | Increment | Status (ready, in progress, done) | DoD-S |

@@ -1,0 +1,328 @@
+﻿
+ RUN  v4.1.11 C:/Users/tanej/Documents/LAB/tanej_sdd-workflow_contacts_v001/02_output/frontend
+
+node.exe : Not implemented: navigation to another Document
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\tanej\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Not implemented...nother Document:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Not implemented: navigation to another Document
+ ❯ src/features/contacts/contact-page.test.tsx (33 tests | 1 failed) 44456ms
+     × is offered to an Owner and an Editor and not to a Viewer 1502ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/contacts/contact-page.test.tsx > the Add contact button (R-005-01, R-005-09) > is offered to an 
+Owner and an Editor and not to a Viewer
+TestingLibraryElementError: Unable to find role="button" and name "Add contact"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-4 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-transparent 
+bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-transparent 
+bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-border bg-surface 
+text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-transparent 
+bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</di...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex min-h-screen flex-col bg-background text-text"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"border-b border-border bg-surface"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-4 md:px-6"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"flex min-h-11 items-center gap-2 text-xl font-semibold"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mContact Groups[0m
+          [36m</a>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"main-nav"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-transparent 
+bg-transparent text-text hover:bg-surface ml-auto md:hidden"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu size-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mMenu[0m
+          [36m</button>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Menu"[39m
+            [33mclass[39m=[32m"w-full flex-col gap-1 md:ml-4 md:flex md:w-auto md:flex-1 md:flex-row hidden"[39m
+            [33mid[39m=[32m"main-nav"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/"[39m
+            [36m>[39m
+              [0mGroups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/deleted-groups"[39m
+            [36m>[39m
+              [0mDeleted groups[0m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"flex min-h-11 items-center rounded-control px-3 hover:bg-surface-raised"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</nav>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Language"[39m
+              [33mclass[39m=[32m"flex gap-1"[39m
+              [33mrole[39m=[32m"group"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-transparent 
+bg-transparent text-text hover:bg-surface"[39m
+                [33mlang[39m=[32m"sl"[39m
+              [36m>[39m
+                [0mSL[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-border bg-surface 
+text-text hover:bg-surface-raised"[39m
+                [33mlang[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEN[0m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-expanded[39m=[32m"false"[39m
+              [33maria-haspopup[39m=[32m"menu"[39m
+              [33maria-label[39m=[32m"User menu"[39m
+              [33mclass[39m=[32m"inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control 
+border px-4 text-base font-semibold transition-colors disabled:pointer-events-none disabled:border-border 
+disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px border-transparent 
+bg-transparent text-text hover:bg-surface"[39m
+              [33mdata-state[39m=[32m"closed"[39m
+              [33mid[39m=[32m"radix-«r0»"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-user size-5"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"12"[39m
+                  [33mcy[39m=[32m"7"[39m
+                  [33mr[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+
+ Test Files  1 failed | 36 passed (37)
+      Tests  1 failed | 376 passed (377)
+   Start at  14:42:41
+   Duration  59.30s (transform 17.05s, setup 55.54s, import 134.08s, tests 268.97s, environment 216.06s)
+
+          [36m</di...
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/features/contacts/contact-page.test.tsx:64:25
+     62|     const { api } = contactsApi(() => undefined);
+     63|     renderApp('/groups/g-1', { auth: signedIn(), api });
+     64|     expect(await screen.findByRole('button', { name: 'Add contact' }))…
+       |                         ^
+     65|   });
+     66|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
