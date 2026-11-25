@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate, useOutletContext, useParams } from 'react-router';
 import { useServices } from '@/app/services';
@@ -57,6 +57,30 @@ export function ContactPage() {
   return <ContactScreen group={group} contact={contact.data} title={contactTitle(valuesOf(contact.data))} />;
 }
 
+/**
+ * The outcome of a save, shown above the form. It appears after every save and scrolls itself into
+ * view, so the user sees it even when the Save button is far below it (feedback after the run).
+ */
+function Notice({
+  role,
+  className,
+  children,
+}: {
+  role: 'status' | 'alert';
+  className: string;
+  children: ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    ref.current?.scrollIntoView?.({ block: 'center', behavior: 'smooth' });
+  }, []);
+  return (
+    <div ref={ref} role={role} className={className}>
+      {children}
+    </div>
+  );
+}
+
 /** A save refused as a conflict: the contact as it is now and what the user entered. */
 interface Conflict {
   current: Contact;
@@ -107,14 +131,14 @@ function ContactScreen({ group, contact, title }: ContactScreenProps) {
         </div>
       )}
       {save.saved && (
-        <p role="status" className="mb-4 rounded-card border border-border bg-surface-raised p-3">
+        <Notice role="status" className="mb-4 rounded-card border border-border bg-surface-raised p-3">
           {t('contact.saved')}
-        </p>
+        </Notice>
       )}
       {save.failure && (
-        <div role="alert" className="mb-4 rounded-card border border-danger bg-surface-raised p-4">
+        <Notice role="alert" className="mb-4 rounded-card border border-danger bg-surface-raised p-4">
           {save.failure}
-        </div>
+        </Notice>
       )}
       {conflict ? (
         <ConflictPanel
