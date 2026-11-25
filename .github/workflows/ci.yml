@@ -97,6 +97,17 @@ jobs:
           npm run test:e2e
         env:
           PLAYWRIGHT_BASE_URL: http://localhost:5173
+      # Post-run: what the page showed when a browser test failed (Playwright's error-context.md),
+      # so a failure on CI can be read in the log without downloading the traces.
+      - name: Page state of failed browser tests (also of a first try that passed on the retry)
+        if: always()
+        run: |
+          for f in test-results/*/error-context.md; do
+            [ -f "$f" ] || continue
+            echo "::group::$f"
+            head -n 120 "$f"
+            echo "::endgroup::"
+          done
       - name: Stack logs on failure
         if: failure()
         working-directory: 02_output

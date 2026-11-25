@@ -17,6 +17,9 @@ export default defineConfig({
   testMatch: ['checks/**/*.spec.ts', 'acceptance/**/*.spec.ts', 'e2e/**/*.spec.ts'],
   outputDir: './test-results',
   reporter: [['list']],
+  // Post-run, approved by the developer: on CI (slow shared runners) a failed test is tried once more.
+  // A test that passes only on the retry is still reported as "flaky" in the summary; locally no retry.
+  retries: process.env.CI ? 1 : 0,
   workers: 1,
   fullyParallel: false,
   use: { baseURL, trace: 'retain-on-failure' },
