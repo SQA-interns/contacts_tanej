@@ -7,7 +7,7 @@ Settings of the run. How to fill each line: the table below. Start each session 
 - Run label: tanej_sdd-workflow_contacts_v001
 - Agent: claude
 - Permission mode: default
-- Design round: skip
+- Design round: ask
 - Hidden vault:
 
 | Line | What to write |
