@@ -523,5 +523,8 @@
     "memberRemoved": "Član je odstranjen iz skupine.",
     "tagRenamed": "Novo ime oznake je shranjeno.",
     "tagDeleted": "Oznaka je izbrisana."
+  },
+  "wake": {
+    "text": "Strežnik se prebuja po premoru. To lahko traja do ene minute; stran nadaljuje sama."
   }
 }

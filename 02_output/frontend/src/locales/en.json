@@ -523,5 +523,8 @@
     "memberRemoved": "The member is removed from the group.",
     "tagRenamed": "The new tag name is saved.",
     "tagDeleted": "The tag is deleted."
+  },
+  "wake": {
+    "text": "The server is waking up after a pause. This can take up to a minute; the page continues by itself."
   }
 }

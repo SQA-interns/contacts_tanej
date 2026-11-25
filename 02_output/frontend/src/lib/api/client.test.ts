@@ -89,3 +89,60 @@ describe('API client', () => {
     expect(put.method).toBe('PUT');
   });
 });
+
+describe('API client waiting for a sleeping backend (post-run)', () => {
+  const html = (status: number) =>
+    Promise.resolve(new Response('<html>502</html>', { status, headers: { 'Content-Type': 'text/html' } }));
+
+  function client(answers: Array<() => Promise<Response>>, maxWaitMs = 60_000) {
+    const fetcher = vi.fn(() => (answers.shift() ?? (() => respond(200, { ok: true })))());
+    const onWaiting = vi.fn();
+    const api = createApiClient('/api', async () => 't', fetcher as unknown as typeof fetch, {
+      maxWaitMs,
+      onWaiting,
+      pauseMs: 1,
+    });
+    return { api, fetcher, onWaiting };
+  }
+
+  it('retries an HTML 502, 503 or 504 of a read until the backend answers, and reports the wait', async () => {
+    const { api, fetcher, onWaiting } = client([() => html(502), () => html(503), () => html(504)]);
+    expect(await api.request('GET', '/groups')).toEqual({ ok: true });
+    expect(fetcher).toHaveBeenCalledTimes(4);
+    expect(onWaiting.mock.calls).toEqual([[1], [-1]]);
+  });
+
+  it('retries a change on 502 and 503, never on 504 (the backend may have done the work)', async () => {
+    const first = client([() => html(502)]);
+    expect(await first.api.request('POST', '/groups', {})).toEqual({ ok: true });
+    const second = client([() => html(504)]);
+    const error = (await second.api.request('POST', '/groups', {}).catch((e: unknown) => e)) as ApiError;
+    expect(error.status).toBe(504);
+    expect(second.fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not retry the backend's own JSON errors, such as its 503", async () => {
+    const { api, fetcher, onWaiting } = client([
+      () =>
+        respond(
+          503,
+          { status: 503, code: 'UNAVAILABLE', message: 'x' },
+          { 'Content-Type': 'application/json' },
+        ),
+    ]);
+    const error = (await api.request('GET', '/x').catch((e: unknown) => e)) as ApiError;
+    expect(error.code).toBe('UNAVAILABLE');
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(onWaiting).not.toHaveBeenCalled();
+  });
+
+  it('gives up after the longest wait with the last error', async () => {
+    const { api, onWaiting } = client(
+      Array.from({ length: 1000 }, () => () => html(502)),
+      20,
+    );
+    const error = (await api.request('GET', '/x').catch((e: unknown) => e)) as ApiError;
+    expect(error.status).toBe(502);
+    expect(onWaiting.mock.calls).toEqual([[1], [-1]]);
+  });
+});

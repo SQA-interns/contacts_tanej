@@ -2,8 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { createApiClient } from '@/lib/api/client';
+import { WakeBanner } from '@/components/layout/WakeBanner';
 import { ToastProvider } from '@/components/ui/toast';
 import { createAuthApi } from '@/lib/auth';
+import { wakeTracker } from '@/lib/api/waking';
 import { loadConfig } from '@/lib/config';
 import { createAuth } from '@/lib/firebase';
 import { routes } from './routes';
@@ -16,7 +18,12 @@ const queryClient = new QueryClient({
 function createServices(): AppServices {
   const config = loadConfig();
   const auth = createAuthApi(createAuth(config));
-  return { auth, api: createApiClient(config.apiBaseUrl, auth.token), demoTools: config.demoTools };
+  // Post-run: wait up to 150 s for a sleeping backend (free hosting plan) instead of showing an error.
+  const api = createApiClient(config.apiBaseUrl, auth.token, fetch, {
+    maxWaitMs: 150_000,
+    onWaiting: wakeTracker.change,
+  });
+  return { auth, api, demoTools: config.demoTools };
 }
 
 export function App() {
@@ -27,6 +34,7 @@ export function App() {
       <Services value={services}>
         <ToastProvider>
           <RouterProvider router={router} />
+          <WakeBanner />
         </ToastProvider>
       </Services>
     </QueryClientProvider>

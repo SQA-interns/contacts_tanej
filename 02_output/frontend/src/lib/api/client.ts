@@ -26,27 +26,64 @@ export interface ApiClient {
   download(path: string, body: unknown): Promise<{ blob: Blob; fileName: string }>;
 }
 
+/**
+ * Post-run: waiting for a sleeping backend. While the backend starts, the proxies in front of it answer
+ * 502, 503 or 504 with an HTML page (the backend's own errors are always JSON). Such an answer is
+ * retried until `maxWaitMs` is over: a read always, a change only on 502 and 503, where the backend
+ * never received it (a 504 may come after the backend did the work).
+ */
+export interface WakeOptions {
+  maxWaitMs: number;
+  onWaiting: (delta: 1 | -1) => void;
+  pauseMs?: number;
+}
+
+function backendAsleep(response: Response, method: string): boolean {
+  if (![502, 503, 504].includes(response.status)) return false;
+  if ((response.headers.get('Content-Type') ?? '').includes('json')) return false;
+  return method === 'GET' || response.status !== 504;
+}
+
 /** The web app reaches the backend only through this client and the generated types (AR-07, AR-13). */
 export function createApiClient(
   baseUrl: string,
   token: TokenProvider,
   fetcher: typeof fetch = fetch,
+  wake?: WakeOptions,
 ): ApiClient {
-  async function send(method: string, path: string, body?: unknown): Promise<Response> {
+  async function attempt(method: string, path: string, body?: unknown): Promise<Response> {
     const headers: Record<string, string> = { Accept: 'application/json' };
     const bearer = await token();
     if (bearer) headers.Authorization = `Bearer ${bearer}`;
     if (body !== undefined) headers['Content-Type'] = 'application/json';
-    const response = await fetcher(`${baseUrl}${path}`, {
+    return fetcher(`${baseUrl}${path}`, {
       method,
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-    if (!response.ok) {
-      const retry = response.headers.get('Retry-After');
-      throw new ApiError(response.status, await errorBody(response), retry ? Number(retry) : undefined);
+  }
+
+  async function send(method: string, path: string, body?: unknown): Promise<Response> {
+    const deadline = Date.now() + (wake?.maxWaitMs ?? 0);
+    let waiting = false;
+    try {
+      for (;;) {
+        const response = await attempt(method, path, body);
+        if (wake && backendAsleep(response, method) && Date.now() < deadline) {
+          if (!waiting) wake.onWaiting(1);
+          waiting = true;
+          await new Promise((resolve) => setTimeout(resolve, wake.pauseMs ?? 3000));
+          continue;
+        }
+        if (!response.ok) {
+          const retry = response.headers.get('Retry-After');
+          throw new ApiError(response.status, await errorBody(response), retry ? Number(retry) : undefined);
+        }
+        return response;
+      }
+    } finally {
+      if (waiting) wake?.onWaiting(-1);
     }
-    return response;
   }
 
   return {
