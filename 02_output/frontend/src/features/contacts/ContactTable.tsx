@@ -86,7 +86,7 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
               key={field}
               scope="col"
               aria-sort={field === 'tags' ? undefined : ariaSort(sort, field)}
-              className={cn('px-3 py-2', hideTablet && 'max-lg:hidden')}
+              className={cn('px-3 py-2 md:sticky md:top-0 md:bg-background', hideTablet && 'max-lg:hidden')}
             >
               {field === 'tags' ? (
                 t('list.column.tags')
@@ -108,7 +108,7 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
         {rows.map((row) => (
           <tr
             key={row.id}
-            className="border-b border-border max-md:mb-3 max-md:block max-md:rounded-card max-md:border max-md:px-3 max-md:py-2"
+            className="border-b border-border md:hover:bg-surface max-md:mb-3 max-md:block max-md:rounded-card max-md:border max-md:px-3 max-md:py-2"
           >
             {ticks && (
               <td className="px-3 py-2">

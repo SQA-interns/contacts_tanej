@@ -883,3 +883,13 @@
 - Notes: The tablet layout (768 px: visible navigation, table with the key columns, no overflow) already meets UI-24 where content allows. A list-and-detail pane would change structure and is not design. No code change.
 - Human response: keep as it is
 - Overrides: none
+
+## D-78: Design: desktop
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 7.
+- Notes: Contact table, from 768 px: row hover highlight (`md:hover:bg-surface`) and a sticky header row (`md:sticky md:top-0 md:bg-background`); `ContactTable.tsx`, class names only. Hover carries no information (UI-25); content width stays 1200 px (UI-09). Screenshots `out/logs/screens/design-2/after-desktop/`: no Critical or Serious axe violation, no overflow; hover and sticky behaviour are not visible in static captures and were tried by the developer in the running app.
+- Human response: row hover and sticky header; "Is it right?": yes
+- Overrides: none (additions to UI-25, no rule replaced)
