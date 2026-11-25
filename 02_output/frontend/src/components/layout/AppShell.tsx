@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useSession } from '@/features/auth/session';
 import { cn } from '@/lib/utils';
 import { LanguageSwitch } from './LanguageSwitch';
+import { ThemeSwitch } from './ThemeSwitch';
 import { UserMenu } from './UserMenu';
 
 const NAV = [
@@ -71,6 +72,7 @@ export function AppShell() {
             </>
           )}
           <div className={cn('flex items-center gap-1', !verified && 'ml-auto')}>
+            <ThemeSwitch />
             <LanguageSwitch />
             {session.status === 'signedIn' && verified && <UserMenu email={session.user.email} />}
           </div>

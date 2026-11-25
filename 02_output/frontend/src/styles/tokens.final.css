@@ -1,7 +1,10 @@
 /* Final theme (UI-04, UI-05): neutral greys with one primary accent; light and dark from the same
-   tokens, following the system setting. The accent is teal-700 (D-73, chosen in the design round);
-   the customer named no colour (ui-design.md); the customer's colour replaces --primary only. */
+   tokens. The accent is teal-700 (D-73, chosen in the design round); the customer named no colour
+   (ui-design.md); the customer's colour replaces --primary only.
+   Light or dark follows the system setting unless the user chose one with the theme switch in the
+   header (post-run): data-mode="light" or "dark" on the root element, absent for "system". */
 :root[data-theme='final'] {
+  color-scheme: light;
   --background: #ffffff;
   --surface: #f6f8f8;
   --surface-raised: #ffffff;
@@ -17,8 +20,28 @@
   --card-shadow: 0 1px 3px rgb(15 23 42 / 0.08);
 }
 
+/* Dark: chosen with the switch, or the system is dark and the user did not choose light. The two
+   rule sets hold the same values; keep them equal. */
+:root[data-theme='final'][data-mode='dark'] {
+  color-scheme: dark;
+  --background: #0b0f19;
+  --surface: #111827;
+  --surface-raised: #1f2937;
+  --border: #374151;
+  --text: #f9fafb;
+  --text-muted: #d1d5db;
+  --primary: #2dd4bf;
+  --primary-foreground: #0b0f19;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --focus-ring: #5eead4;
+  --card-shadow: none;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root[data-theme='final'] {
+  :root[data-theme='final']:not([data-mode='light']) {
+    color-scheme: dark;
     --background: #0b0f19;
     --surface: #111827;
     --surface-raised: #1f2937;

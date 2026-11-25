@@ -12,7 +12,13 @@
     "language": "Language",
     "menu": "Menu",
     "userMenu": "User menu",
-    "search": "Search"
+    "search": "Search",
+    "theme": "Appearance: {{mode}}"
+  },
+  "theme": {
+    "system": "system",
+    "light": "light",
+    "dark": "dark"
   },
   "language": {
     "sl": "Slovenščina",
