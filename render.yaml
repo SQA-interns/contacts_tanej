@@ -19,12 +19,9 @@ services:
     branch: tanej/sdd-workflow/v001-deploy
     dockerfilePath: ./02_output/backend/Dockerfile
     dockerContext: ./02_output/backend
-    # Deploy on every push to the branch, but only when the backend changed (a frontend-only push
-    # does not restart the sleeping-prone backend).
-    autoDeploy: true
-    buildFilter:
-      paths:
-        - 02_output/backend/**
+    # Deployed by CI (deploy job in .github/workflows/ci.yml, deploy hook) after a green run, only when
+    # 02_output/backend changed; Render's own auto-deploy gets no push events from this organisation repo.
+    autoDeploy: false
     healthCheckPath: /health
     envVars:
       - key: PORT
@@ -54,10 +51,8 @@ services:
     branch: tanej/sdd-workflow/v001-deploy
     dockerfilePath: ./02_output/frontend/Dockerfile
     dockerContext: ./02_output/frontend
-    autoDeploy: true
-    buildFilter:
-      paths:
-        - 02_output/frontend/**
+    # Deployed by CI after a green run, only when 02_output/frontend changed (see the API service).
+    autoDeploy: false
     healthCheckPath: /
     envVars:
       - key: PORT

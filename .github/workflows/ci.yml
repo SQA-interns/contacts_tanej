@@ -141,3 +141,41 @@ jobs:
         run: |
           printf 'DB_PASSWORD=ci-only\n' > /tmp/ci.env
           docker compose -f 02_output/docker-compose.yml -f 02_output/docker-compose.ci.yml --project-directory 02_output --env-file /tmp/ci.env build
+
+  # Post-run: deploys the Render demo, only after every job above is green. Render's own auto-deploy
+  # does not receive push events from this organisation repository, so CI calls the services' deploy
+  # hooks (repository secrets). A service is deployed when its folder changed since the last green run
+  # of this workflow on the branch (so changes of a failed run are not skipped).
+  deploy:
+    needs: [backend, frontend, secrets, images]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/tanej/sdd-workflow/v001-deploy'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+      - name: Deploy the changed services to Render
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HOOK_WEB: ${{ secrets.RENDER_DEPLOY_HOOK_WEB }}
+          HOOK_API: ${{ secrets.RENDER_DEPLOY_HOOK_API }}
+        run: |
+          last=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?branch=$GITHUB_REF_NAME&status=success&per_page=1" --jq '.workflow_runs[0].head_sha // empty')
+          if [ -n "$last" ] && git cat-file -e "$last^{commit}" 2>/dev/null; then
+            echo "Changes since the last green run ($last):"
+            changed=$(git diff --name-only "$last" HEAD)
+          else
+            echo "No earlier green run found: deploying both services."
+            changed=$(git ls-files)
+          fi
+          deploy() {
+            if [ -z "$2" ]; then echo "::error::The secret for $1 is missing"; return 1; fi
+            curl -fsS -X POST "$2" -o /dev/null && echo "$1: deploy started"
+          }
+          status=0
+          if echo "$changed" | grep -q '^02_output/frontend/'; then deploy web "$HOOK_WEB" || status=1; else echo "web: no change"; fi
+          if echo "$changed" | grep -q '^02_output/backend/'; then deploy api "$HOOK_API" || status=1; else echo "api: no change"; fi
+          exit $status
