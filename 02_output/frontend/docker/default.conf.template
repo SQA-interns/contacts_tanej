@@ -1,6 +1,8 @@
-# Web app server (ADR-07, ADR-10, SR-06). Only ${CSP_CONNECT_EXTRA} and ${CSP_FRAME_EXTRA} are
-# substituted at start: empty in production, the Authentication Emulator address in the local stack
-# (the Google sign-in popup relays its result through an emulator iframe).
+# Web app server (ADR-07, ADR-10, SR-06). Only ${CSP_CONNECT_EXTRA}, ${CSP_FRAME_EXTRA} and
+# ${API_UPSTREAM} are substituted at start: the CSP extras are empty in production and the
+# Authentication Emulator address in the local stack (the Google sign-in popup relays its result
+# through an emulator iframe); API_UPSTREAM is http://backend:8080 in Compose and the backend's
+# public HTTPS address on a host such as Render.
 server {
   listen 8080;
   server_name _;
@@ -10,8 +12,13 @@ server {
   # The API is on the same origin; the prefix is removed (the contract's server URL is /api).
   # The API sets its own security headers (SecurityConfig), so none are added here.
   location /api/ {
-    proxy_pass http://backend:8080/;
-    proxy_set_header Host $host;
+    proxy_pass ${API_UPSTREAM}/;
+    # the upstream's own host name: a hosted backend is routed by it (and gets it as TLS SNI)
+    proxy_set_header Host $proxy_host;
+    proxy_ssl_server_name on;
+    # a sleeping free-tier backend needs about a minute to wake up
+    proxy_connect_timeout 90s;
+    proxy_read_timeout 120s;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-For $remote_addr;
     client_max_body_size 1m;

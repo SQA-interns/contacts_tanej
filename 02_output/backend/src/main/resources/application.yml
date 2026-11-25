@@ -5,7 +5,8 @@ spring:
   application:
     name: contact-groups-backend
   datasource:
-    url: ${DB_URL}
+    # DB_URL, or its parts (DB_HOST, DB_PORT, DB_NAME) as some hosts such as Render provide them
+    url: ${DB_URL:jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     hikari:
