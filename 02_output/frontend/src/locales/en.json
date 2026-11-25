@@ -525,7 +525,7 @@
     "tagDeleted": "The tag is deleted."
   },
   "wake": {
-    "text": "The server is waking up after a pause. This can take up to a minute; the page continues by itself."
+    "text": "The server is waking up after a pause. This can take a few minutes; the page continues by itself."
   },
   "bulkTrash": {
     "button": "Move to trash",

@@ -525,7 +525,7 @@
     "tagDeleted": "Oznaka je izbrisana."
   },
   "wake": {
-    "text": "Strežnik se prebuja po premoru. To lahko traja do ene minute; stran nadaljuje sama."
+    "text": "Strežnik se prebuja po premoru. To lahko traja nekaj minut; stran nadaljuje sama."
   },
   "bulkTrash": {
     "button": "Premakni v koš",

@@ -18,9 +18,12 @@ const queryClient = new QueryClient({
 function createServices(): AppServices {
   const config = loadConfig();
   const auth = createAuthApi(createAuth(config));
-  // Post-run: wait up to 150 s for a sleeping backend (free hosting plan) instead of showing an error.
+  // Post-run: the free hosting plan stops the backend after 15 minutes without traffic, and its start
+  // took from 1 to 5 minutes. One health request as soon as the page opens starts the wake-up while the
+  // person signs in; the API client then waits up to 5 minutes instead of showing an error.
+  void fetch(`${config.apiBaseUrl}/health`).catch(() => undefined);
   const api = createApiClient(config.apiBaseUrl, auth.token, fetch, {
-    maxWaitMs: 150_000,
+    maxWaitMs: 300_000,
     onWaiting: wakeTracker.change,
   });
   return { auth, api, demoTools: config.demoTools };
