@@ -28,11 +28,8 @@ export function AppShell() {
     <div className="flex min-h-screen flex-col bg-background text-text">
       <header className="border-b border-border bg-surface">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-4 px-4 py-3 md:px-6">
+          {/* The product name as text, no logo (interview Q-34); the empty logo box looked like a checkbox. */}
           <Link to="/" className="flex min-h-11 items-center gap-2 text-xl font-semibold">
-            <span
-              aria-hidden="true"
-              className="size-8 rounded-control border border-border bg-surface-raised"
-            />
             {t('app.name')}
           </Link>
           {verified && (
