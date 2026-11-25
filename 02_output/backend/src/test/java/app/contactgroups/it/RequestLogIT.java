@@ -29,7 +29,18 @@ class RequestLogIT extends AcceptanceBase {
     request("GET", "/me", "Bearer " + token, null).expect(200);
     request("GET", "/me", "Bearer broken-" + SECRET, null).expect(401);
 
+    // Post-run: the filter logs after the chain (finally), when a refusal is already sent to the
+    // client; wait up to 5 s for both lines instead of reading the log at once (flaky on CI).
     String log = output.getAll();
+    for (int i = 0; i < 50 && !(log.contains("status=404") && log.contains("status=401")); i++) {
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        break;
+      }
+      log = output.getAll();
+    }
     assertThat(log).contains("status=404").contains("status=401");
     assertThat(log).contains("method=GET");
     assertThat(log).contains("user=" + ANA.uid());
