@@ -913,3 +913,13 @@
 - Options: (1) Changed story or wireframe for the mobile card (a new `/wireframes` and `/implement` round, with a test decision for the frozen tests that expect the last-name link). (2) Keep the current cards. (3) Presentation-only variant: keep both rows and the link on the last name, but show the first name above it in the same row (no markup change); the developer says if that is enough.
 - Human response: pending
 - Overrides: none
+
+## D-81: Design: icons and logo
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 9.
+- Notes: No logo (product name as text, `ui-design.md`). Lucide icons (`aria-hidden`, text label kept, `size-4`) before the group tabs (Contacts `Users`, Trash `Trash2`, Tags `Tag`, History `History`, Members `UserRound`, Duplicates `Copy`) and on the actions: Add contact `Plus`, Filter `Funnel`, Export `Download`, Delete contact `Trash2`, Restore `RotateCcw` (Trash and Deleted groups), Delete forever `TriangleAlert`, Save `Check`, Merge `Merge`, Invite `UserPlus`, Find duplicates `Search`. On busy buttons (Export, Save, Find duplicates) the spinner replaces the icon. No Edit button exists in the app, so no pencil. Files: `GroupPage.tsx`, `ContactListPage.tsx`, `ExportBar.tsx`, `ContactPage.tsx`, `ContactForm.tsx`, `TrashPage.tsx`, `DeletedGroupsPage.tsx`, `DuplicatesPage.tsx`, `InviteForm.tsx` (icons and `gap` only; no text, route or logic). Screenshots `out/logs/screens/design-2/after-icons/`: no Critical or Serious axe violation, no overflow. Unit tests of `src/features`, `src/app`: 326 of 330 in one run; the four failures (export, contact-filter, contact-page) are load timeouts (F-V07) and pass alone, 48 of 48.
+- Human response: no logo; icons as listed; "Is it right?": yes
+- Overrides: none (adds icons within UI-17)

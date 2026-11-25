@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import { useId, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -173,6 +174,7 @@ export function ContactForm({
       </Card>
       <div className="sticky bottom-0 flex gap-3 border-t border-border bg-background py-3">
         <Button type="submit" busy={busy}>
+          {!busy && <Check aria-hidden="true" className="size-4 shrink-0" />}
           {busy ? t('contact.saving') : t('contact.save')}
         </Button>
         <Button type="button" variant="secondary" disabled={busy} onClick={onCancel}>

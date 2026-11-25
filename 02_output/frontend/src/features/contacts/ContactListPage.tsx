@@ -1,3 +1,4 @@
+import { Funnel, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -101,7 +102,10 @@ export function ContactListPage() {
   }
 
   const addContact = canEdit && (
-    <Button onClick={() => navigate(`/groups/${group.id}/contacts/new`)}>{t('contact.add')}</Button>
+    <Button onClick={() => navigate(`/groups/${group.id}/contacts/new`)}>
+      <Plus aria-hidden="true" className="size-4 shrink-0" />
+      {t('contact.add')}
+    </Button>
   );
   const searching = q.trim() !== '' || text.trim() !== '' || conditions.length > 0;
 
@@ -180,6 +184,7 @@ export function ContactListPage() {
           />
         </div>
         <Button variant="secondary" onClick={() => setFiltering(true)}>
+          <Funnel aria-hidden="true" className="size-4 shrink-0" />
           {t('list.filter.button')}
         </Button>
         {canEdit && list.data && list.data.total > 0 && addContact}

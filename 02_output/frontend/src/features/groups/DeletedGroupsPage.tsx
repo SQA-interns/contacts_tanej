@@ -1,3 +1,4 @@
+import { RotateCcw } from 'lucide-react';
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -87,6 +88,7 @@ export function DeletedGroupsPage() {
                   <td className="px-4 py-2">{group.daysLeft}</td>
                   <td className="px-4 py-2 text-right">
                     <Button variant="secondary" onClick={() => void restore(group)}>
+                      <RotateCcw aria-hidden="true" className="size-4 shrink-0" />
                       {t('trash.restore')}
                     </Button>
                   </td>

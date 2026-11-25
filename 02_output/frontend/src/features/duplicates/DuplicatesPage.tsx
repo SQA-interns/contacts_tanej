@@ -1,3 +1,4 @@
+import { Merge, Search } from 'lucide-react';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -61,6 +62,7 @@ export function DuplicatesPage() {
 
   const find = (
     <Button busy={search.isPending} onClick={() => search.mutate()}>
+      {!search.isPending && <Search aria-hidden="true" className="size-4 shrink-0" />}
       {search.isPending ? t('duplicates.searching') : t('duplicates.find')}
     </Button>
   );
@@ -136,6 +138,7 @@ function SetItem({ set, onDismiss }: { set: DuplicateSet; onDismiss: () => void 
       </div>
       <div className="flex flex-wrap gap-2">
         <Button disabled={picked.size < 2} onClick={() => void navigate(mergeUrl)}>
+          <Merge aria-hidden="true" className="size-4 shrink-0" />
           {t('duplicates.merge')}
         </Button>
         <Button variant="ghost" onClick={onDismiss}>

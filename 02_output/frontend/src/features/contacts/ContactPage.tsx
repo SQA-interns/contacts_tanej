@@ -1,3 +1,4 @@
+import { Trash2 } from 'lucide-react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -203,6 +204,7 @@ function DeleteContact({ groupId, contactId }: { groupId: string; contactId: str
   return (
     <div className="mt-6">
       <Button type="button" variant="secondary" onClick={() => setAsking(true)}>
+        <Trash2 aria-hidden="true" className="size-4 shrink-0" />
         {t('contact.delete')}
       </Button>
       {asking && (

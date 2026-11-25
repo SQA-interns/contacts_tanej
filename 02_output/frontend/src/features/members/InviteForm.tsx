@@ -1,3 +1,4 @@
+import { UserPlus } from 'lucide-react';
 import { useId, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -100,6 +101,7 @@ export function InviteForm({ onInvite }: InviteFormProps) {
           </div>
           <div>
             <Button type="submit" busy={busy}>
+              <UserPlus aria-hidden="true" className="size-4 shrink-0" />
               {t('members.invite.submit')}
             </Button>
           </div>

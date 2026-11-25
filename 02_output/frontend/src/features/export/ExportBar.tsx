@@ -1,3 +1,4 @@
+import { Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import type { ExportState } from './useExport';
@@ -42,6 +43,7 @@ export function ExportBar(props: ExportBarProps) {
         </span>
         <span className="grow" />
         <Button variant="secondary" disabled={count === 0} busy={state === 'busy'} onClick={onExport}>
+          {state !== 'busy' && <Download aria-hidden="true" className="size-4 shrink-0" />}
           {state === 'busy' ? t('export.busy') : t('export.button')}
         </Button>
       </div>

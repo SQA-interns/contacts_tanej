@@ -1,3 +1,4 @@
+import { Copy, History, Tag, Trash2, UserRound, Users, type LucideIcon } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router';
@@ -25,18 +26,29 @@ function GroupNotFound() {
   );
 }
 
-function GroupTab({ to, end, label }: { to: string; end?: boolean; label: string }) {
+function GroupTab({
+  to,
+  end,
+  label,
+  icon: Icon,
+}: {
+  to: string;
+  end?: boolean;
+  label: string;
+  icon: LucideIcon;
+}) {
   return (
     <NavLink
       to={to}
       end={end}
       className={({ isActive }) =>
         cn(
-          'flex min-h-11 items-center px-3',
+          'flex min-h-11 items-center gap-2 px-3',
           isActive ? 'border-b-2 border-primary font-semibold' : 'hover:bg-surface-raised',
         )
       }
     >
+      <Icon aria-hidden="true" className="size-4 shrink-0" />
       {label}
     </NavLink>
   );
@@ -70,20 +82,28 @@ export function GroupPage() {
         <RoleBadge role={group.data.role} />
       </div>
       <nav aria-label={t('groups.tabs.label')} className="mb-4 flex flex-wrap gap-1 border-b border-border">
-        <GroupTab to={`/groups/${group.data.id}`} end label={t('groups.tabs.contacts')} />
+        <GroupTab to={`/groups/${group.data.id}`} end icon={Users} label={t('groups.tabs.contacts')} />
         {group.data.role !== 'VIEWER' && (
           <>
-            <GroupTab to={`/groups/${group.data.id}/trash`} label={t('groups.tabs.trash')} />
-            <GroupTab to={`/groups/${group.data.id}/tags`} label={t('groups.tabs.tags')} />
+            <GroupTab to={`/groups/${group.data.id}/trash`} icon={Trash2} label={t('groups.tabs.trash')} />
+            <GroupTab to={`/groups/${group.data.id}/tags`} icon={Tag} label={t('groups.tabs.tags')} />
             {/* On a contact page "History" is the contact's own tab; one link of that name per page. */}
             {!onContact && (
-              <GroupTab to={`/groups/${group.data.id}/history`} label={t('groups.tabs.history')} />
+              <GroupTab
+                to={`/groups/${group.data.id}/history`}
+                icon={History}
+                label={t('groups.tabs.history')}
+              />
             )}
           </>
         )}
-        <GroupTab to={`/groups/${group.data.id}/members`} label={t('groups.tabs.members')} />
+        <GroupTab to={`/groups/${group.data.id}/members`} icon={UserRound} label={t('groups.tabs.members')} />
         {group.data.role !== 'VIEWER' && (
-          <GroupTab to={`/groups/${group.data.id}/duplicates`} label={t('groups.tabs.duplicates')} />
+          <GroupTab
+            to={`/groups/${group.data.id}/duplicates`}
+            icon={Copy}
+            label={t('groups.tabs.duplicates')}
+          />
         )}
       </nav>
       <Outlet context={group.data} />

@@ -1,3 +1,4 @@
+import { RotateCcw, TriangleAlert } from 'lucide-react';
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -115,10 +116,12 @@ export function TrashPage() {
                           )
                         }
                       >
+                        <RotateCcw aria-hidden="true" className="size-4 shrink-0" />
                         {t('trash.restore')}
                       </Button>
                       {group.role === 'OWNER' && (
                         <Button variant="secondary" onClick={() => setErasing(item)}>
+                          <TriangleAlert aria-hidden="true" className="size-4 shrink-0" />
                           {t('trash.erase')}
                         </Button>
                       )}
