@@ -58,6 +58,9 @@ services:
         value: scm-test-70a1a
       - key: FIREBASE_AUTH_DOMAIN
         value: scm-test-70a1a.firebaseapp.com
+      # the professor's demo: "Fill with test data" in every group (never in a customer installation)
+      - key: DEMO_TOOLS
+        value: "true"
       # the web API key of scm-test-70a1a: entered once in the Render dashboard, never in git
       - key: FIREBASE_WEB_API_KEY
         sync: false

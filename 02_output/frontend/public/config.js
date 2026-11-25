@@ -8,4 +8,6 @@ window.__APP_CONFIG__ = {
   firebaseAuthDomain: 'localhost',
   firebaseAuthEmulatorUrl: 'http://localhost:9099',
   apiBaseUrl: '/api',
+  // demo deployments only (DEMO_TOOLS): "Fill with test data"
+  demoTools: false,
 };

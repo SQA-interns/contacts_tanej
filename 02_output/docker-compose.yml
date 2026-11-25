@@ -49,6 +49,8 @@ services:
       FIREBASE_WEB_API_KEY: ${FIREBASE_WEB_API_KEY:-fake-api-key}
       FIREBASE_AUTH_DOMAIN: localhost
       FIREBASE_AUTH_EMULATOR_URL: http://localhost:9099
+      # "Fill with test data" (demo only): off unless DEMO_TOOLS=true; CI and the frozen tests keep it off
+      DEMO_TOOLS: ${DEMO_TOOLS:-false}
       CSP_CONNECT_EXTRA: http://localhost:9099 http://127.0.0.1:9099
       CSP_FRAME_EXTRA: http://localhost:9099 http://127.0.0.1:9099
     ports:

@@ -7,6 +7,11 @@ set -eu
 : "${FIREBASE_WEB_API_KEY:?FIREBASE_WEB_API_KEY is required}"
 : "${FIREBASE_AUTH_DOMAIN:?FIREBASE_AUTH_DOMAIN is required}"
 FIREBASE_AUTH_EMULATOR_URL="${FIREBASE_AUTH_EMULATOR_URL:-}"
+# Demo deployments only ("Fill with test data", post-run): true or false, false when unset.
+case "${DEMO_TOOLS:-false}" in
+  true) DEMO_TOOLS=true ;;
+  *) DEMO_TOOLS=false ;;
+esac
 
 for value in "$FIREBASE_PROJECT_ID" "$FIREBASE_WEB_API_KEY" "$FIREBASE_AUTH_DOMAIN" "$FIREBASE_AUTH_EMULATOR_URL"; do
   case "$value" in
@@ -21,5 +26,6 @@ window.__APP_CONFIG__ = {
   firebaseAuthDomain: "${FIREBASE_AUTH_DOMAIN}",
   firebaseAuthEmulatorUrl: "${FIREBASE_AUTH_EMULATOR_URL}",
   apiBaseUrl: "/api",
+  demoTools: ${DEMO_TOOLS},
 };
 EOF
