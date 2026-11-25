@@ -1,0 +1,464 @@
+[
+ {
+  "screen": "sign-in",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "register",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "groups",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "contacts",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "members",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": true
+ },
+ {
+  "screen": "duplicates",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "history",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "tags",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "trash",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "new-contact",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "account",
+  "size": "mobile",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "sign-in",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "register",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "groups",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "contacts",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "members",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "duplicates",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "history",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "tags",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "trash",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "new-contact",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "account",
+  "size": "tablet",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "sign-in",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "register",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "groups",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "contacts",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "members",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "duplicates",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "history",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "tags",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "trash",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "new-contact",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "account",
+  "size": "desktop",
+  "scheme": "light",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "sign-in",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "register",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "groups",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "contacts",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "members",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": true
+ },
+ {
+  "screen": "duplicates",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "history",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "tags",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "trash",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "new-contact",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "account",
+  "size": "mobile",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "sign-in",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "register",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "groups",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "contacts",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "members",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "duplicates",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "history",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "tags",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "trash",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "new-contact",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "account",
+  "size": "tablet",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "sign-in",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "register",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "groups",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "contacts",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "members",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "duplicates",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "history",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "tags",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "trash",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "new-contact",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ },
+ {
+  "screen": "account",
+  "size": "desktop",
+  "scheme": "dark",
+  "violations": [],
+  "overflow": false
+ }
+]

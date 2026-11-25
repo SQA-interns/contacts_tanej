@@ -1,19 +1,19 @@
 /* Final theme (UI-04, UI-05): neutral greys with one primary accent; light and dark from the same
-   tokens, following the system setting. The accent is the baseline default (indigo-600) because the
-   customer named no colour (ui-design.md); the customer's colour replaces --primary only. */
+   tokens, following the system setting. The accent is teal-700 (D-73, chosen in the design round);
+   the customer named no colour (ui-design.md); the customer's colour replaces --primary only. */
 :root[data-theme='final'] {
   --background: #ffffff;
-  --surface: #f9fafb;
+  --surface: #f6f8f8;
   --surface-raised: #ffffff;
   --border: #d1d5db;
   --text: #111827;
   --text-muted: #4b5563;
-  --primary: #4f46e5;
+  --primary: #0f766e;
   --primary-foreground: #ffffff;
   --success: #15803d;
   --warning: #b45309;
   --danger: #b91c1c;
-  --focus-ring: #4f46e5;
+  --focus-ring: #0f766e;
   --card-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
 }
 
@@ -25,12 +25,12 @@
     --border: #374151;
     --text: #f9fafb;
     --text-muted: #d1d5db;
-    --primary: #818cf8;
+    --primary: #2dd4bf;
     --primary-foreground: #0b0f19;
     --success: #4ade80;
     --warning: #fbbf24;
     --danger: #f87171;
-    --focus-ring: #a5b4fc;
+    --focus-ring: #5eead4;
     --card-shadow: none;
   }
 }

@@ -823,3 +823,23 @@
 - Human response: 1 (accept F-V01 as a known limitation with the drafted release-note text, then continue to `/release`), given as `/verify D-71: 1`, 2026-11-16
 - Resolution: option 1 applied in `/verify` run 4. F-V01 and F-V04 closed as accepted. `/release` puts the release-note text above into `release-notes.md` ("Known limitations").
 - Overrides: none
+
+## D-72: Design: overall impression
+- Timestamp: 2026-11-25
+- Session: D design round 2 (Design round: ask)
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 1. D-62 had applied the baseline without asking.
+- Notes: Recommendation "calm and professional" (light neutral base, softer greys, current spacing). No reference products named. No code change by itself.
+- Human response: calm and professional
+- Overrides: none
+
+## D-73: Design: colour
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 2, after three variants as screenshots (`out/logs/screens/design-2/variants-colour/`).
+- Notes: Primary accent teal-700 `#0f766e` (white text 5.5:1), dark mode teal-400 `#2dd4bf`; light surface `#f6f8f8`; focus ring follows the accent. Only `tokens.final.css` changed. Before/after at the three widths, light and dark: `out/logs/screens/design-2/before`, `after` with `axe-summary.json`: no Critical or Serious violation. Members on mobile overflows horizontally in before and after alike (not caused by colour; structure, not design).
+- Human response: C (teal), "Is it right?": yes
+- Overrides: UI-04 (default accent indigo-600 replaced by teal-700; the customer named no colour)
