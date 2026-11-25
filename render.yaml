@@ -1,0 +1,63 @@
+# Render Blueprint: a free demo deployment of Contact Groups (post-run, for the professor's review).
+# Not part of the measured run. Free tier: the two web services sleep after 15 minutes without
+# traffic (the first request then takes about a minute) and the free database expires after 30 days.
+# Sign-in uses the real Firebase project scm-test-70a1a (never the emulator on the internet).
+# If a name below is taken on Render, change it here and in APP_ALLOWED_ORIGIN / API_UPSTREAM.
+
+databases:
+  - name: contacts-tanej-db
+    plan: free
+    databaseName: contacts
+    user: contacts
+    postgresMajorVersion: "17"
+
+services:
+  - type: web
+    name: contacts-tanej-api
+    runtime: docker
+    plan: free
+    branch: tanej/sdd-workflow/v001-deploy
+    dockerfilePath: ./02_output/backend/Dockerfile
+    dockerContext: ./02_output/backend
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: DB_HOST
+        fromDatabase: { name: contacts-tanej-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: contacts-tanej-db, property: port }
+      - key: DB_NAME
+        fromDatabase: { name: contacts-tanej-db, property: database }
+      - key: DB_USER
+        fromDatabase: { name: contacts-tanej-db, property: user }
+      - key: DB_PASSWORD
+        fromDatabase: { name: contacts-tanej-db, property: password }
+      - key: FIREBASE_PROJECT_ID
+        value: scm-test-70a1a
+      - key: APP_ALLOWED_ORIGIN
+        value: https://contacts-tanej-web.onrender.com
+      # 512 MB on the free plan: a lean garbage collector and smaller JVM areas
+      - key: JAVA_TOOL_OPTIONS
+        value: "-XX:+UseSerialGC -Xss512k -XX:ReservedCodeCacheSize=64m -XX:MaxMetaspaceSize=160m"
+
+  - type: web
+    name: contacts-tanej-web
+    runtime: docker
+    plan: free
+    branch: tanej/sdd-workflow/v001-deploy
+    dockerfilePath: ./02_output/frontend/Dockerfile
+    dockerContext: ./02_output/frontend
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: API_UPSTREAM
+        value: https://contacts-tanej-api.onrender.com
+      - key: FIREBASE_PROJECT_ID
+        value: scm-test-70a1a
+      - key: FIREBASE_AUTH_DOMAIN
+        value: scm-test-70a1a.firebaseapp.com
+      # the web API key of scm-test-70a1a: entered once in the Render dashboard, never in git
+      - key: FIREBASE_WEB_API_KEY
+        sync: false
