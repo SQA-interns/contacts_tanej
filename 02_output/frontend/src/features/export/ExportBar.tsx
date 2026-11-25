@@ -1,4 +1,5 @@
 import { Download } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import type { ExportState } from './useExport';
@@ -14,11 +15,14 @@ interface ExportBarProps {
   onTogglePage: (checked: boolean) => void;
   onSelectAll: () => void;
   onExport: () => void;
+  /** Post-run: more actions on the selection, before Export ("Move to trash"). */
+  actions?: ReactNode;
 }
 
 /** WF-08: select all on this page, select all results, the count and the Export button (R-011-01, R-011-03). */
 export function ExportBar(props: ExportBarProps) {
-  const { total, count, pageAllTicked, allResults, state, onTogglePage, onSelectAll, onExport } = props;
+  const { total, count, pageAllTicked, allResults, state, onTogglePage, onSelectAll, onExport, actions } =
+    props;
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2">
@@ -42,6 +46,7 @@ export function ExportBar(props: ExportBarProps) {
           {count === 0 ? t('export.none') : t('export.selected', { count })}
         </span>
         <span className="grow" />
+        {actions}
         <Button variant="secondary" disabled={count === 0} busy={state === 'busy'} onClick={onExport}>
           {state !== 'busy' && <Download aria-hidden="true" className="size-4 shrink-0" />}
           {state === 'busy' ? t('export.busy') : t('export.button')}

@@ -19,6 +19,7 @@ import { ContactTable, type Sort } from './ContactTable';
 import { FilterChips } from './FilterChips';
 import { FilterDialog } from './FilterDialog';
 import { Pager } from './Pager';
+import { TrashSelected } from './TrashSelected';
 
 type GroupSummary = components['schemas']['GroupSummary'];
 type ContactPage = components['schemas']['ContactPage'];
@@ -102,6 +103,21 @@ export function ContactListPage() {
     );
   }
 
+  /** The ids to trash: the ticked ones, or every contact of the current filter for "all results". */
+  async function selectedIds(): Promise<string[]> {
+    if (!selection.all) return [...selection.ids];
+    const ids: string[] = [];
+    for (let next = 1; ; next += 1) {
+      const found = await api.request<ContactPage>(
+        'POST',
+        `/groups/${encodeURIComponent(group.id)}/contacts/search`,
+        { q, sort, page: next, conditions },
+      );
+      ids.push(...found.items.map((row) => row.id));
+      if (found.items.length === 0 || ids.length >= found.total) return ids;
+    }
+  }
+
   const addContact = canEdit && (
     <Button onClick={() => navigate(`/groups/${group.id}/contacts/new`)}>
       <Plus aria-hidden="true" className="size-4 shrink-0" />
@@ -150,6 +166,17 @@ export function ContactListPage() {
             onTogglePage={(checked) => selection.set(pageIds, checked, pageIds)}
             onSelectAll={selection.selectAll}
             onExport={exportSelection}
+            actions={
+              <TrashSelected
+                groupId={group.id}
+                count={selection.all ? data.total : selection.ids.size}
+                collectIds={selectedIds}
+                onDone={() => {
+                  selection.clear();
+                  setPage(1);
+                }}
+              />
+            }
           />
         )}
         <ContactTable
@@ -162,6 +189,7 @@ export function ContactListPage() {
               ? {
                   isTicked: (id) => selection.all || selection.ids.has(id),
                   onTick: (id, checked) => selection.set([id], checked, pageIds),
+                  loading: list.isPlaceholderData,
                 }
               : undefined
           }

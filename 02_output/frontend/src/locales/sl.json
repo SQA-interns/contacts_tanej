@@ -526,5 +526,12 @@
   },
   "wake": {
     "text": "Strežnik se prebuja po premoru. To lahko traja do ene minute; stran nadaljuje sama."
+  },
+  "bulkTrash": {
+    "button": "Premakni v koš",
+    "busy": "Premikanje v koš: {{done}} od {{total}} …",
+    "text": "Izbrani kontakti: {{count}}. Premaknejo se v koš, kjer jih lahko obnovite 30 dni.",
+    "done": "Premaknjeno v koš: {{count}}.",
+    "failed": "V koš ni bilo mogoče premakniti: {{count}}. Poskusite znova."
   }
 }

@@ -526,5 +526,12 @@
   },
   "wake": {
     "text": "The server is waking up after a pause. This can take up to a minute; the page continues by itself."
+  },
+  "bulkTrash": {
+    "button": "Move to trash",
+    "busy": "Moving to trash: {{done}} of {{total}} …",
+    "text": "Selected contacts: {{count}}. They move to Trash, where you can restore them for 30 days.",
+    "done": "Moved to the trash: {{count}}.",
+    "failed": "Could not be moved to the trash: {{count}}. Please try again."
   }
 }
