@@ -43,7 +43,7 @@ function GroupTab({
       end={end}
       className={({ isActive }) =>
         cn(
-          'flex min-h-11 items-center gap-2 px-3',
+          'flex min-h-11 items-center gap-2 px-3 transition-colors',
           isActive ? 'border-b-2 border-primary font-semibold' : 'hover:bg-surface-raised',
         )
       }

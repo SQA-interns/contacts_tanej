@@ -113,7 +113,7 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
         {rows.map((row) => (
           <tr
             key={row.id}
-            className="border-b border-border md:hover:bg-surface max-md:mb-3 max-md:block max-md:rounded-card max-md:border max-md:px-3 max-md:py-2"
+            className="border-b border-border transition-colors md:hover:bg-surface max-md:mb-3 max-md:block max-md:rounded-card max-md:border max-md:px-3 max-md:py-2"
           >
             {ticks && (
               <td className="px-3 py-2">

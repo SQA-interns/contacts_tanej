@@ -923,3 +923,24 @@
 - Notes: No logo (product name as text, `ui-design.md`). Lucide icons (`aria-hidden`, text label kept, `size-4`) before the group tabs (Contacts `Users`, Trash `Trash2`, Tags `Tag`, History `History`, Members `UserRound`, Duplicates `Copy`) and on the actions: Add contact `Plus`, Filter `Funnel`, Export `Download`, Delete contact `Trash2`, Restore `RotateCcw` (Trash and Deleted groups), Delete forever `TriangleAlert`, Save `Check`, Merge `Merge`, Invite `UserPlus`, Find duplicates `Search`. On busy buttons (Export, Save, Find duplicates) the spinner replaces the icon. No Edit button exists in the app, so no pencil. Files: `GroupPage.tsx`, `ContactListPage.tsx`, `ExportBar.tsx`, `ContactPage.tsx`, `ContactForm.tsx`, `TrashPage.tsx`, `DeletedGroupsPage.tsx`, `DuplicatesPage.tsx`, `InviteForm.tsx` (icons and `gap` only; no text, route or logic). Screenshots `out/logs/screens/design-2/after-icons/`: no Critical or Serious axe violation, no overflow. Unit tests of `src/features`, `src/app`: 326 of 330 in one run; the four failures (export, contact-filter, contact-page) are load timeouts (F-V07) and pass alone, 48 of 48.
 - Human response: no logo; icons as listed; "Is it right?": yes
 - Overrides: none (adds icons within UI-17)
+
+## D-82: Design: motion
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 10.
+- Notes: Fade-in keyframes in `frontend/src/styles/index.css`: page content under `main` 150 ms, open dialogs and their overlay 180 ms, `role="alert"` and `role="status"` elements 200 ms; `transition-colors` on the group tabs and the contact rows (class names in `GroupPage.tsx`, `ContactTable.tsx`). Under `prefers-reduced-motion: reduce` the existing rule in `tokens.final.css` sets durations to about zero (checked: 0.2 s normally, 0.00001 s reduced). Screenshots `out/logs/screens/design-2/after-motion/`: no Critical or Serious axe violation, no overflow.
+- Human response: subtle motion (recommended); "Is it right?": yes
+- Overrides: none (within UI-21)
+
+## D-83: Toast notifications for completed actions
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: open
+- Type: blocking (new behaviour and new texts; `/design` step 8)
+- Trigger: the developer's wish in `/design` topic 10: short toast notifications (bottom corner, announced to screen readers as a status, a few seconds, with a close button; an error toast stays until closed) for: contact created, saved, moved to the trash; contact restored and deleted for good; export done (with the number of contacts); invitation sent and cancelled; role changed; member removed; group deleted and restored; tag renamed and deleted. The inline save confirmation on the contact page stays as it is.
+- Why it is not design: it adds a component, state and calls in about 14 action handlers, and new texts in the message catalogs (en and sl, UI-30). Frozen tests find confirmations by text (for example "The contact was saved."); a toast with the same text makes those queries ambiguous, so a story change with a test decision is needed. `/design` must not change behaviour, structure or tests.
+- Options: (1) A changed story (for UI-15 feedback) with an updated list of messages and a decision on the frozen tests; then `/implement`. (2) Keep the current inline confirmations. (3) A smaller step: toasts only for the actions that have no visible confirmation today (the developer names them).
+- Human response: pending
+- Overrides: none
