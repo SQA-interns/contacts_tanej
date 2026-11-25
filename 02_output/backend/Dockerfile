@@ -1,6 +1,8 @@
 # Backend image (ADR-10). Build stage: the pinned Maven image; runtime: the pinned Temurin JRE image.
 FROM maven:3.9.11-eclipse-temurin-21 AS build
 WORKDIR /w
+# Post-run: .mvn/maven.config retries Maven Central 429 rate limits on shared CI runners
+COPY .mvn .mvn
 COPY pom.xml ./
 RUN mvn -B -ntp -q dependency:go-offline
 COPY src src
