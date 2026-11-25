@@ -944,3 +944,13 @@
 - Options: (1) A changed story (for UI-15 feedback) with an updated list of messages and a decision on the frozen tests; then `/implement`. (2) Keep the current inline confirmations. (3) A smaller step: toasts only for the actions that have no visible confirmation today (the developer names them).
 - Human response: pending
 - Overrides: none
+
+## D-84: Design: tone of the copy
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 11.
+- Notes: The texts already follow the project tone (plain, short, friendly; formal "vi" in Slovenian, `ui-design.md`). Wording stays, because the message catalogs are read by frozen tests. No code change.
+- Human response: keep the wording
+- Overrides: none
