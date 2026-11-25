@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
 function createServices(): AppServices {
   const config = loadConfig();
   const auth = createAuthApi(createAuth(config));
-  return { auth, api: createApiClient(config.apiBaseUrl, auth.token) };
+  return { auth, api: createApiClient(config.apiBaseUrl, auth.token), demoTools: config.demoTools };
 }
 
 export function App() {

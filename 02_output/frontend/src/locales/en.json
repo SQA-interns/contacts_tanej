@@ -494,5 +494,14 @@
     "revertHint": "You can revert a merge later from the contact’s Versions tab.",
     "confirm": "Confirm merge",
     "merging": "Merging …"
+  },
+  "demo": {
+    "fill": "Fill with test data",
+    "progress": "Adding test contacts: {{done}} of {{total}}",
+    "done": "{{count}} test contacts added.",
+    "partly": "{{count}} test contacts added, {{failed}} could not be added.",
+    "confirmTitle": "Fill with test data",
+    "confirmText": "This adds 50 made-up contacts to this group, with tags, attributes and a few duplicates. They are recorded in the history like any other contact and can be deleted like any other.",
+    "confirm": "Add test contacts"
   }
 }

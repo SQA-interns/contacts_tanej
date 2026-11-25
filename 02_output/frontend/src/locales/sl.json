@@ -494,5 +494,14 @@
     "revertHint": "Združitev lahko pozneje razveljavite v zavihku Različice kontakta.",
     "confirm": "Potrdi združitev",
     "merging": "Združevanje …"
+  },
+  "demo": {
+    "fill": "Napolni testne podatke",
+    "progress": "Dodajanje testnih kontaktov: {{done}} od {{total}}",
+    "done": "Dodanih testnih kontaktov: {{count}}.",
+    "partly": "Dodanih testnih kontaktov: {{count}}; {{failed}} jih ni bilo mogoče dodati.",
+    "confirmTitle": "Napolni testne podatke",
+    "confirmText": "V to skupino bo dodanih 50 izmišljenih kontaktov z značkami, atributi in nekaj dvojniki. V zgodovino se zapišejo kot vsi drugi kontakti in jih lahko izbrišete kot vse druge.",
+    "confirm": "Dodaj testne kontakte"
   }
 }

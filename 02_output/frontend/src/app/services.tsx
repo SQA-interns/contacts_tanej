@@ -6,6 +6,8 @@ import type { AuthApi } from '@/lib/auth';
 export interface AppServices {
   auth: AuthApi;
   api: ApiClient;
+  /** Demo deployments only (config demoTools): shows "Fill with test data". */
+  demoTools?: boolean;
 }
 
 const ServicesContext = createContext<AppServices | null>(null);

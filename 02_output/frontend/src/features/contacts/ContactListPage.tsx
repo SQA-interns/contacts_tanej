@@ -13,6 +13,7 @@ import type { components } from '@/lib/api/schema';
 import { ExportBar } from '@/features/export/ExportBar';
 import { useExport } from '@/features/export/useExport';
 import { useSelection } from '@/features/export/useSelection';
+import { FillTestData } from '@/features/demo/FillTestData';
 import { type Condition } from './conditions';
 import { ContactTable, type Sort } from './ContactTable';
 import { FilterChips } from './FilterChips';
@@ -42,7 +43,7 @@ function useDebounced(value: string): string {
  */
 export function ContactListPage() {
   const { t, i18n } = useTranslation();
-  const { api } = useServices();
+  const { api, demoTools } = useServices();
   const group = useOutletContext<GroupSummary>();
   const navigate = useNavigate();
   const [text, setText] = useState('');
@@ -188,6 +189,7 @@ export function ContactListPage() {
           {t('list.filter.button')}
         </Button>
         {canEdit && list.data && list.data.total > 0 && addContact}
+        {canEdit && demoTools && <FillTestData groupId={group.id} />}
       </div>
       <FilterChips
         conditions={conditions}

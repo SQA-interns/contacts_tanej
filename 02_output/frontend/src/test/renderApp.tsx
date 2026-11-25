@@ -19,10 +19,10 @@ export function fakeApi(groups: unknown[] = []): ApiClient {
 /** Renders the whole route table at an address with a fake Firebase; the language is English unless told. */
 export function renderApp(
   path: string,
-  options: { auth?: FakeAuth; api?: ApiClient; language?: string } = {},
+  options: { auth?: FakeAuth; api?: ApiClient; language?: string; demoTools?: boolean } = {},
 ) {
   const auth = options.auth ?? createFakeAuth();
-  const services: AppServices = { auth, api: options.api ?? fakeApi() };
+  const services: AppServices = { auth, api: options.api ?? fakeApi(), demoTools: options.demoTools };
   const i18n = setupI18n(options.language ?? 'en');
   render(
     <I18nextProvider i18n={i18n}>

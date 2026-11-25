@@ -6,6 +6,8 @@ export interface AppConfig {
   /** Empty in production (environments.md): the Authentication Emulator exists only in test and local. */
   firebaseAuthEmulatorUrl: string;
   apiBaseUrl: string;
+  /** Demo deployments only: shows "Fill with test data" (post-run). False in every customer installation. */
+  demoTools: boolean;
 }
 
 declare global {
@@ -26,5 +28,5 @@ export function loadConfig(source: Partial<AppConfig> | undefined = window.__APP
   if (missing.length > 0) {
     throw new Error(`Missing configuration: ${missing.join(', ')}`);
   }
-  return { firebaseAuthEmulatorUrl: '', ...source } as AppConfig;
+  return { firebaseAuthEmulatorUrl: '', ...source, demoTools: source?.demoTools === true } as AppConfig;
 }
