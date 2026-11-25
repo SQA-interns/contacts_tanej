@@ -893,3 +893,23 @@
 - Notes: Contact table, from 768 px: row hover highlight (`md:hover:bg-surface`) and a sticky header row (`md:sticky md:top-0 md:bg-background`); `ContactTable.tsx`, class names only. Hover carries no information (UI-25); content width stays 1200 px (UI-09). Screenshots `out/logs/screens/design-2/after-desktop/`: no Critical or Serious axe violation, no overflow; hover and sticky behaviour are not visible in static captures and were tried by the developer in the running app.
 - Human response: row hover and sticky header; "Is it right?": yes
 - Overrides: none (additions to UI-25, no rule replaced)
+
+## D-79: Design: components
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 8.
+- Notes: Buttons: disabled look is a greyed fill (`bg-border/50`, muted text, 60 % opacity; after the developer's correction that Export without a selection looked active), primary hover `brightness-110`, active `brightness-95`. Inputs: focus border in the focus-ring colour. `StatePanel`: error panel tinted (`danger/10`, border, `CircleAlert` icon), empty panel dashed with `Inbox` icon; both icons `aria-hidden` next to the text. Contact table: tag chips with a border and `surface` fill in light mode too, sort arrows in the text colour with `font-variant-emoji: text`, column headers and phone numbers `whitespace-nowrap`. Files: `button.tsx`, `input.tsx`, `state-panel.tsx`, `ContactTable.tsx` (class names and two icons only). Screenshots `out/logs/screens/design-2/after-components/`: no Critical or Serious axe violation, no overflow. The empty and error panels are not visible in the seed data (not captured). Unit tests of `src/features`, `src/components`, `src/app`: 329 of 330 pass, the one failure (`contact-page.test.tsx`, a timeout under load, F-V07) passes alone, 33 of 33.
+- Human response: polish states plus five fixes (1 to 4 applied; 5 is D-80); Export disabled look corrected; "Is it right?": yes
+- Overrides: UI-12 (disabled and hover look), UI-14 (empty and error panels get a tint and an icon)
+
+## D-80: Mobile card title: full name as link instead of "Last name" and "First name" rows
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: open
+- Type: blocking (a change to structure; wireframe WF-08 mobile)
+- Trigger: the developer's wish in `/design` topic 8: on the contact cards below 768 px, show the full name (first and last) as the card title, linked to the contact, instead of separate "Last name" and "First name" rows. This moves and merges content (markup, and the frozen tests find the link by last name), so it is not design (`/design` step 8).
+- Options: (1) Changed story or wireframe for the mobile card (a new `/wireframes` and `/implement` round, with a test decision for the frozen tests that expect the last-name link). (2) Keep the current cards. (3) Presentation-only variant: keep both rows and the link on the last name, but show the first name above it in the same row (no markup change); the developer says if that is enough.
+- Human response: pending
+- Overrides: none

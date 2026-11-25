@@ -1,3 +1,4 @@
+import { CircleAlert, Inbox } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from './button';
 import { Skeleton } from './skeleton';
@@ -28,8 +29,14 @@ export function StatePanel({ state, emptyText, action, onRetry }: StatePanelProp
   }
   if (state === 'error') {
     return (
-      <div role="alert" className="flex flex-col items-start gap-3">
-        <p>{t('state.error')}</p>
+      <div
+        role="alert"
+        className="flex flex-col items-start gap-3 rounded-card border border-danger/40 bg-danger/10 p-4"
+      >
+        <p className="flex items-center gap-2">
+          <CircleAlert aria-hidden="true" className="size-5 shrink-0 text-danger" />
+          {t('state.error')}
+        </p>
         {onRetry && (
           <Button variant="secondary" onClick={onRetry}>
             {t('state.retry')}
@@ -39,8 +46,11 @@ export function StatePanel({ state, emptyText, action, onRetry }: StatePanelProp
     );
   }
   return (
-    <div className="flex flex-col items-start gap-3">
-      <p className="text-text-muted">{emptyText ?? t('state.empty')}</p>
+    <div className="flex flex-col items-start gap-3 rounded-card border border-dashed border-border bg-surface p-6">
+      <p className="flex items-center gap-2 text-text-muted">
+        <Inbox aria-hidden="true" className="size-5 shrink-0" />
+        {emptyText ?? t('state.empty')}
+      </p>
       {action}
     </div>
   );

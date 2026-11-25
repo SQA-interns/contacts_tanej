@@ -7,11 +7,12 @@ import { cn } from '@/lib/utils';
 /** UI-12: three levels, visible hover, active, focus and disabled states, and a busy state. */
 const buttonVariants = cva(
   'inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border px-4 text-base font-semibold ' +
-    'transition-colors disabled:pointer-events-none disabled:opacity-50 active:translate-y-px',
+    'transition-colors disabled:pointer-events-none disabled:border-border disabled:bg-border/50 disabled:text-text-muted disabled:opacity-60 active:translate-y-px',
   {
     variants: {
       variant: {
-        primary: 'border-primary bg-primary text-primary-foreground hover:opacity-90',
+        primary:
+          'border-primary bg-primary text-primary-foreground hover:brightness-110 active:brightness-95',
         secondary: 'border-border bg-surface text-text hover:bg-surface-raised',
         ghost: 'border-transparent bg-transparent text-text hover:bg-surface',
       },

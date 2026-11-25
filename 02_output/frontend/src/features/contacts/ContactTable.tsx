@@ -54,7 +54,10 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
       return (
         <ul className="flex flex-wrap gap-1">
           {row.tags.map((tag) => (
-            <li key={tag} className="rounded-control bg-surface-raised px-2 py-0.5 text-sm break-all">
+            <li
+              key={tag}
+              className="rounded-control border border-border bg-surface px-2 py-0.5 text-sm break-all"
+            >
               {tag}
             </li>
           ))}
@@ -94,10 +97,12 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
                 <button
                   type="button"
                   onClick={() => onSort(field)}
-                  className="flex min-h-11 w-full items-center gap-1 text-left font-semibold"
+                  className="flex min-h-11 w-full items-center gap-1 text-left font-semibold whitespace-nowrap"
                 >
                   {t(`list.column.${field}`)}
-                  <span aria-hidden="true">{arrow(sort, field)}</span>
+                  <span aria-hidden="true" className="text-text [font-variant-emoji:text]">
+                    {arrow(sort, field)}
+                  </span>
                 </button>
               )}
             </th>
@@ -127,6 +132,7 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
                 data-label={t(`list.column.${field}`)}
                 className={cn(
                   'px-3 py-2 break-words',
+                  field === 'phone' && 'whitespace-nowrap',
                   hideTablet && 'max-lg:hidden',
                   'max-md:flex max-md:gap-2 max-md:px-0 max-md:py-0.5 max-md:text-sm max-md:empty:hidden max-md:has-[ul:empty]:hidden max-md:before:min-w-20 max-md:before:font-semibold max-md:before:content-[attr(data-label)]',
                 )}
