@@ -108,7 +108,7 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
         {rows.map((row) => (
           <tr
             key={row.id}
-            className="border-b border-border max-md:mb-3 max-md:block max-md:rounded-card max-md:border max-md:p-3"
+            className="border-b border-border max-md:mb-3 max-md:block max-md:rounded-card max-md:border max-md:px-3 max-md:py-2"
           >
             {ticks && (
               <td className="px-3 py-2">
@@ -128,7 +128,7 @@ export function ContactTable({ rows, groupId, sort, onSort, ticks }: ContactTabl
                 className={cn(
                   'px-3 py-2 break-words',
                   hideTablet && 'max-lg:hidden',
-                  'max-md:flex max-md:gap-2 max-md:px-0 max-md:py-1 max-md:before:min-w-24 max-md:before:font-semibold max-md:before:content-[attr(data-label)]',
+                  'max-md:flex max-md:gap-2 max-md:px-0 max-md:py-0.5 max-md:text-sm max-md:empty:hidden max-md:has-[ul:empty]:hidden max-md:before:min-w-20 max-md:before:font-semibold max-md:before:content-[attr(data-label)]',
                 )}
               >
                 {value(row, field)}

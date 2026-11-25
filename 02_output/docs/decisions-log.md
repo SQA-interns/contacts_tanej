@@ -863,3 +863,13 @@
 - Notes: Radii (8/12 px) and 1 px borders kept (softer borders would lower the contrast of input outlines). `--card-shadow` now `0 1px 3px rgb(15 23 42 / 0.08)` (still one level); header padding `py-3` -> `py-4`, page body `py-6` -> `py-8` in `AppShell.tsx` (class names only). Screenshots `out/logs/screens/design-2/after-density/`: no Critical or Serious axe violation, no overflow.
 - Human response: yes, "Is it right?": yes
 - Overrides: UI-07 (shadow tint and strength; the 4 px grid and radii are unchanged)
+
+## D-76: Design: mobile (compact cards)
+- Timestamp: 2026-11-25
+- Session: D design round 2
+- Class: assumption
+- Type: non-blocking
+- Trigger: `/design` topic 5.
+- Notes: Below 768 px the stacked cards are tighter (card padding `px-3 py-2`, cell `py-0.5`, `text-sm`, label width `min-w-20`), and empty cells are hidden on the card with `empty:hidden` and `has-[ul:empty]:hidden` (no content or `data-label` changed; the desktop table is unchanged). Files: `ContactTable.tsx` (class names), `components/ui/stacked-table.ts` (same tightening for Groups, Trash and Members cards). Contact list at 375 px: 4403 -> 3095 px. Screenshots `out/logs/screens/design-2/after-mobile/`: no Critical or Serious axe violation, no overflow. Sticky Add-contact bar not chosen.
+- Human response: compact cards (recommended); "Is it right?": yes
+- Overrides: UI-23 (one column, stacked cards stay; density and hiding of empty fields added)
