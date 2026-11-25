@@ -4,6 +4,7 @@ import { MemberSection } from './MemberSection';
 import { useOutletContext } from 'react-router';
 import { useServices } from '@/app/services';
 import { StatePanel } from '@/components/ui/state-panel';
+import { useToast } from '@/components/ui/toast';
 import type { components } from '@/lib/api/schema';
 import { InviteForm } from './InviteForm';
 import { PendingInvitations } from './PendingInvitations';
@@ -36,16 +37,19 @@ function OwnerInvitations({ groupId }: { groupId: string }) {
   const queryClient = useQueryClient();
   const base = `/groups/${encodeURIComponent(groupId)}/invitations`;
   const key = ['invitations', groupId];
+  const toast = useToast();
   const pending = useQuery({ queryKey: key, queryFn: () => api.request<Invitation[]>('GET', base) });
 
   async function invite(email: string, role: Role) {
     await api.request<Invitation>('POST', base, { email, role });
     await queryClient.invalidateQueries({ queryKey: key });
+    toast(t('toast.invitationSent'));
   }
 
   async function cancel(invitation: Invitation) {
     await api.request<void>('DELETE', `${base}/${encodeURIComponent(invitation.id)}`);
     await queryClient.invalidateQueries({ queryKey: key });
+    toast(t('toast.invitationCancelled'));
   }
 
   if (pending.isPending) return <StatePanel state="loading" />;

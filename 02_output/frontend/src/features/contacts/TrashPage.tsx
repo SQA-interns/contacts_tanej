@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
 import { stacked } from '@/components/ui/stacked-table';
+import { useToast } from '@/components/ui/toast';
 import { ConfirmDialog } from '@/features/members/ConfirmDialog';
 import { ApiError } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -27,6 +28,7 @@ type Item = TrashPageData['items'][number];
  */
 export function TrashPage() {
   const { t, i18n } = useTranslation();
+  const toast = useToast();
   const { api } = useServices();
   const group = useOutletContext<GroupSummary>();
   const queryClient = useQueryClient();
@@ -40,12 +42,13 @@ export function TrashPage() {
     queryFn: () => api.request<TrashPageData>('GET', `${base}/trash-contacts?page=${page}`),
   });
 
-  async function run(action: () => Promise<void>, done: string | null) {
+  async function run(action: () => Promise<void>, done: string | null, toastText?: string) {
     setNotice(null);
     setFailure(null);
     try {
       await action();
       setNotice(done);
+      if (toastText) toast(toastText);
     } catch (error) {
       setFailure(errorText(t, error instanceof ApiError ? error.code : 'INTERNAL_ERROR'));
     } finally {
@@ -139,7 +142,13 @@ export function TrashPage() {
           title={t('trash.erase')}
           text={t('trash.eraseText')}
           confirm={t('trash.erase')}
-          onConfirm={() => run(() => api.request<void>('DELETE', `${base}/contacts/${erasing.id}`), null)}
+          onConfirm={() =>
+            run(
+              () => api.request<void>('DELETE', `${base}/contacts/${erasing.id}`),
+              null,
+              t('toast.contactErased'),
+            )
+          }
           onClose={() => setErasing(null)}
         />
       )}

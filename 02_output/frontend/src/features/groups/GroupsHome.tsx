@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
 import { stacked } from '@/components/ui/stacked-table';
+import { useToast } from '@/components/ui/toast';
 import type { components } from '@/lib/api/schema';
 import { EmptyState } from './EmptyState';
 import { DeleteGroupDialog } from './DeleteGroupDialog';
@@ -27,6 +28,7 @@ type Dialog =
  */
 export function GroupsHome() {
   const { t } = useTranslation();
+  const toast = useToast();
   const { api } = useServices();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -48,6 +50,7 @@ export function GroupsHome() {
     await queryClient.invalidateQueries({ queryKey: ['groups'] });
     await queryClient.invalidateQueries({ queryKey: ['group', group.id] });
     setDialog(null);
+    toast(t('toast.groupRenamed'));
   }
 
   async function remove(group: GroupSummary, typedName: string) {
@@ -55,6 +58,7 @@ export function GroupsHome() {
     await queryClient.invalidateQueries({ queryKey: ['groups'] });
     await queryClient.invalidateQueries({ queryKey: ['deleted-groups'] });
     setDialog(null);
+    toast(t('toast.groupDeleted'));
   }
 
   if (groups.isPending) return <StatePanel state="loading" />;

@@ -509,5 +509,19 @@
     "confirmTitle": "Napolni testne podatke",
     "confirmText": "V to skupino bo dodanih 50 izmišljenih kontaktov z značkami, atributi in nekaj dvojniki. V zgodovino se zapišejo kot vsi drugi kontakti in jih lahko izbrišete kot vse druge.",
     "confirm": "Dodaj testne kontakte"
+  },
+  "toast": {
+    "region": "Obvestila",
+    "close": "Zapri obvestilo",
+    "contactTrashed": "Stik je zdaj v košu.",
+    "contactErased": "Stik je izbrisan za vedno.",
+    "groupRenamed": "Novo ime skupine je shranjeno.",
+    "groupDeleted": "Skupina je izbrisana. Obnovite jo lahko v 30 dneh.",
+    "invitationSent": "Vabilo je shranjeno. E-pošta se ne pošlje: oseba se pridruži, ko se v 14 dneh prijavi s tem naslovom.",
+    "invitationCancelled": "Vabilo je preklicano.",
+    "roleChanged": "Nova vloga je shranjena.",
+    "memberRemoved": "Član je odstranjen iz skupine.",
+    "tagRenamed": "Novo ime oznake je shranjeno.",
+    "tagDeleted": "Oznaka je izbrisana."
   }
 }

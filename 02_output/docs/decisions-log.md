@@ -942,7 +942,7 @@
 - Trigger: the developer's wish in `/design` topic 10: short toast notifications (bottom corner, announced to screen readers as a status, a few seconds, with a close button; an error toast stays until closed) for: contact created, saved, moved to the trash; contact restored and deleted for good; export done (with the number of contacts); invitation sent and cancelled; role changed; member removed; group deleted and restored; tag renamed and deleted. The inline save confirmation on the contact page stays as it is.
 - Why it is not design: it adds a component, state and calls in about 14 action handlers, and new texts in the message catalogs (en and sl, UI-30). Frozen tests find confirmations by text (for example "The contact was saved."); a toast with the same text makes those queries ambiguous, so a story change with a test decision is needed. `/design` must not change behaviour, structure or tests.
 - Options: (1) A changed story (for UI-15 feedback) with an updated list of messages and a decision on the frozen tests; then `/implement`. (2) Keep the current inline confirmations. (3) A smaller step: toasts only for the actions that have no visible confirmation today (the developer names them).
-- Human response: pending
+- Human response (post-run): implement it. Done as option 3: success toasts only where no visible confirmation exists (contact to Trash, contact deleted for good, group renamed, group deleted, invitation saved and cancelled, role changed, member removed, tag renamed and deleted); inline confirmations and inline errors stay; toast texts share no text with any frozen-test query. `components/ui/toast.tsx`, texts under `toast` in the catalogs.
 - Overrides: none
 
 ## D-84: Design: tone of the copy

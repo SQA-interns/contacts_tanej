@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { createApiClient } from '@/lib/api/client';
+import { ToastProvider } from '@/components/ui/toast';
 import { createAuthApi } from '@/lib/auth';
 import { loadConfig } from '@/lib/config';
 import { createAuth } from '@/lib/firebase';
@@ -24,7 +25,9 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Services value={services}>
-        <RouterProvider router={router} />
+        <ToastProvider>
+          <RouterProvider router={router} />
+        </ToastProvider>
       </Services>
     </QueryClientProvider>
   );

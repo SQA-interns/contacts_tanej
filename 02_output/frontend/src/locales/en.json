@@ -509,5 +509,19 @@
     "confirmTitle": "Fill with test data",
     "confirmText": "This adds 50 made-up contacts to this group, with tags, attributes and a few duplicates. They are recorded in the history like any other contact and can be deleted like any other.",
     "confirm": "Add test contacts"
+  },
+  "toast": {
+    "region": "Notifications",
+    "close": "Close notification",
+    "contactTrashed": "The contact is now in the trash.",
+    "contactErased": "The contact is erased.",
+    "groupRenamed": "The new group name is saved.",
+    "groupDeleted": "The group is deleted. You can restore it for 30 days.",
+    "invitationSent": "The invitation is saved. No e-mail is sent: the person joins when they sign in with this address within 14 days.",
+    "invitationCancelled": "The invitation is cancelled.",
+    "roleChanged": "The new role is saved.",
+    "memberRemoved": "The member is removed from the group.",
+    "tagRenamed": "The new tag name is saved.",
+    "tagDeleted": "The tag is deleted."
   }
 }

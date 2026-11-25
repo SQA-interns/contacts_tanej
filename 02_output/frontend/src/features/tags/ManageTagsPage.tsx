@@ -6,6 +6,7 @@ import { useServices } from '@/app/services';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { StatePanel } from '@/components/ui/state-panel';
+import { useToast } from '@/components/ui/toast';
 import { ConfirmDialog } from '@/features/members/ConfirmDialog';
 import type { components } from '@/lib/api/schema';
 import { RenameTagDialog } from './RenameTagDialog';
@@ -21,6 +22,7 @@ type Pending = { kind: 'rename'; tag: Tag } | { kind: 'delete'; tag: Tag } | nul
  */
 export function ManageTagsPage() {
   const { t } = useTranslation();
+  const toast = useToast();
   const { api } = useServices();
   const group = useOutletContext<GroupSummary>();
   const queryClient = useQueryClient();
@@ -40,12 +42,14 @@ export function ManageTagsPage() {
   async function rename(tag: Tag, name: string) {
     await api.request<Tag>('PATCH', `${base}/${encodeURIComponent(tag.id)}`, { name });
     setPending(null);
+    toast(t('toast.tagRenamed'));
     await refresh();
   }
 
   async function remove(tag: Tag) {
     try {
       await api.request<void>('DELETE', `${base}/${encodeURIComponent(tag.id)}`);
+      toast(t('toast.tagDeleted'));
     } finally {
       await refresh();
     }

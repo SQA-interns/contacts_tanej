@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ConfirmDialog } from '@/features/members/ConfirmDialog';
 import { StatePanel } from '@/components/ui/state-panel';
+import { useToast } from '@/components/ui/toast';
 import { ApiError } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
 import { errorText } from '@/lib/i18n';
@@ -183,6 +184,7 @@ function DeleteContact({ groupId, contactId }: { groupId: string; contactId: str
   const { api } = useServices();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const toast = useToast();
   const [asking, setAsking] = useState(false);
 
   async function trash() {
@@ -191,6 +193,7 @@ function DeleteContact({ groupId, contactId }: { groupId: string; contactId: str
         'POST',
         `/groups/${encodeURIComponent(groupId)}/contacts/${encodeURIComponent(contactId)}/trash`,
       );
+      toast(t('toast.contactTrashed'));
       navigate(`/groups/${groupId}`);
     } catch {
       // Already in Trash or no longer allowed: the screen below shows the contact as it is now.

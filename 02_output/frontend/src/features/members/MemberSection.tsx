@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useServices } from '@/app/services';
 import { StatePanel } from '@/components/ui/state-panel';
+import { useToast } from '@/components/ui/toast';
 import { useSession } from '@/features/auth/session';
 import { ApiError } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -28,6 +29,7 @@ interface MemberSectionProps {
  */
 export function MemberSection({ groupId, isOwner }: MemberSectionProps) {
   const { t } = useTranslation();
+  const toast = useToast();
   const { api } = useServices();
   const session = useSession();
   const queryClient = useQueryClient();
@@ -38,10 +40,11 @@ export function MemberSection({ groupId, isOwner }: MemberSectionProps) {
   const key = ['members', groupId];
   const members = useQuery({ queryKey: key, queryFn: () => api.request<Member[]>('GET', `${base}/members`) });
 
-  async function attempt(action: () => Promise<unknown>) {
+  async function attempt(action: () => Promise<unknown>, doneText?: string) {
     setNotice(null);
     try {
       await action();
+      if (doneText) toast(doneText);
     } catch (failure) {
       if (failure instanceof ApiError && failure.status === 404) {
         await queryClient.invalidateQueries({ queryKey: ['groups'] });
@@ -57,12 +60,16 @@ export function MemberSection({ groupId, isOwner }: MemberSectionProps) {
   }
 
   const changeRole = (member: Member, role: Role) =>
-    attempt(() => api.request('PUT', `${base}/members/${encodeURIComponent(member.userId)}`, { role }));
+    attempt(
+      () => api.request('PUT', `${base}/members/${encodeURIComponent(member.userId)}`, { role }),
+      t('toast.roleChanged'),
+    );
 
   async function confirm() {
     if (pending?.kind === 'remove') {
-      await attempt(() =>
-        api.request('DELETE', `${base}/members/${encodeURIComponent(pending.member.userId)}`),
+      await attempt(
+        () => api.request('DELETE', `${base}/members/${encodeURIComponent(pending.member.userId)}`),
+        t('toast.memberRemoved'),
       );
     } else {
       await attempt(async () => {
